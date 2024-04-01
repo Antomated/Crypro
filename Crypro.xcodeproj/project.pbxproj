@@ -7,16 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A27B6C82BBB5C3200FCC327 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A27B6C72BBB5C3200FCC327 /* HomeView.swift */; };
+		3A27B6CB2BBB622500FCC327 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A27B6CA2BBB622500FCC327 /* CircleButtonView.swift */; };
+		3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A27B6CD2BBB680E00FCC327 /* CircleButtonAnimationView.swift */; };
+		3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740062BBB6D54004D1BCB /* Coin.swift */; };
+		3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740082BBB71CB004D1BCB /* CoinRowView.swift */; };
+		3A87400C2BBB721D004D1BCB /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */; };
 		3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC51A1A2BBB539A004E643B /* CryproApp.swift */; };
-		3AC51A1D2BBB539A004E643B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC51A1C2BBB539A004E643B /* ContentView.swift */; };
 		3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A1E2BBB539B004E643B /* Assets.xcassets */; };
 		3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A212BBB539B004E643B /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A27B6C72BBB5C3200FCC327 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3A27B6CA2BBB622500FCC327 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
+		3A27B6CD2BBB680E00FCC327 /* CircleButtonAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonAnimationView.swift; sourceTree = "<group>"; };
+		3A8740062BBB6D54004D1BCB /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		3A8740082BBB71CB004D1BCB /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
+		3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		3AC51A172BBB539A004E643B /* Crypro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC51A1A2BBB539A004E643B /* CryproApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryproApp.swift; sourceTree = "<group>"; };
-		3AC51A1C2BBB539A004E643B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3AC51A1E2BBB539B004E643B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC51A212BBB539B004E643B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +42,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A27B6C32BBB5C0D00FCC327 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3A27B6C92BBB621000FCC327 /* Components */,
+				3A27B6C42BBB5C1700FCC327 /* Home */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		3A27B6C42BBB5C1700FCC327 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3A27B6C62BBB5C2300FCC327 /* ViewModels */,
+				3A27B6C52BBB5C1E00FCC327 /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3A27B6C52BBB5C1E00FCC327 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A27B6C72BBB5C3200FCC327 /* HomeView.swift */,
+				3A8740082BBB71CB004D1BCB /* CoinRowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A27B6C62BBB5C2300FCC327 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3A27B6C92BBB621000FCC327 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3A27B6CC2BBB622A00FCC327 /* CircleButton */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3A27B6CC2BBB622A00FCC327 /* CircleButton */ = {
+			isa = PBXGroup;
+			children = (
+				3A27B6CA2BBB622500FCC327 /* CircleButtonView.swift */,
+				3A27B6CD2BBB680E00FCC327 /* CircleButtonAnimationView.swift */,
+			);
+			path = CircleButton;
+			sourceTree = "<group>";
+		};
+		3A8740052BBB6D35004D1BCB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A8740062BBB6D54004D1BCB /* Coin.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A87400A2BBB720F004D1BCB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		3AC51A0E2BBB539A004E643B = {
 			isa = PBXGroup;
 			children = (
@@ -52,7 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				3AC51A1A2BBB539A004E643B /* CryproApp.swift */,
-				3AC51A1C2BBB539A004E643B /* ContentView.swift */,
+				3A87400A2BBB720F004D1BCB /* Extensions */,
+				3A8740052BBB6D35004D1BCB /* Models */,
+				3A27B6C32BBB5C0D00FCC327 /* Core */,
 				3AC51A1E2BBB539B004E643B /* Assets.xcassets */,
 				3AC51A202BBB539B004E643B /* Preview Content */,
 			);
@@ -151,7 +230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if [ -f \"${PROJECT_DIR}/swiftlint/swiftlint\" ]; then\n#  \"${PROJECT_DIR}/swiftlint/swiftlint\"\n#\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint; then\n    swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -160,8 +239,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AC51A1D2BBB539A004E643B /* ContentView.swift in Sources */,
+				3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */,
+				3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */,
+				3A87400C2BBB721D004D1BCB /* PreviewProvider.swift in Sources */,
+				3A27B6C82BBB5C3200FCC327 /* HomeView.swift in Sources */,
 				3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */,
+				3A27B6CB2BBB622500FCC327 /* CircleButtonView.swift in Sources */,
+				3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +381,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Crypro/Preview Content\"";
 				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crypro;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -304,6 +389,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -327,6 +413,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Crypro/Preview Content\"";
 				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Crypro;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -334,6 +421,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
