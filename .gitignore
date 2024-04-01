@@ -1,0 +1,10 @@
+.DS_Store
+xcuserdata/
+*.ipa
+*.dSYM.zip
+*.dSYM
+timeline.xctimeline
+playground.xcworkspace
+.build/
+Dependencies/
+.accio/
