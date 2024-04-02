@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CircleButtonAnimationView: View {
-
     @Binding var animate: Bool
 
     var body: some View {
@@ -28,6 +27,6 @@ struct CircleButtonAnimationView: View {
 
 #Preview {
     CircleButtonAnimationView(animate: .constant(false))
-        .foregroundColor(.red)
+        .foregroundColor(Color.theme.red)
         .frame(width: 100, height: 100, alignment: .center)
 }

@@ -12,7 +12,10 @@
 		3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A27B6CD2BBB680E00FCC327 /* CircleButtonAnimationView.swift */; };
 		3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740062BBB6D54004D1BCB /* Coin.swift */; };
 		3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740082BBB71CB004D1BCB /* CoinRowView.swift */; };
-		3A87400C2BBB721D004D1BCB /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */; };
+		3A87400C2BBB721D004D1BCB /* PreviewProvider+Development.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* PreviewProvider+Development.swift */; };
+		3A87400E2BBB7659004D1BCB /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400D2BBB7659004D1BCB /* Color+Theme.swift */; };
+		3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */; };
+		3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */; };
 		3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC51A1A2BBB539A004E643B /* CryproApp.swift */; };
 		3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A1E2BBB539B004E643B /* Assets.xcassets */; };
 		3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A212BBB539B004E643B /* Preview Assets.xcassets */; };
@@ -24,7 +27,10 @@
 		3A27B6CD2BBB680E00FCC327 /* CircleButtonAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonAnimationView.swift; sourceTree = "<group>"; };
 		3A8740062BBB6D54004D1BCB /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		3A8740082BBB71CB004D1BCB /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
-		3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
+		3A87400B2BBB721D004D1BCB /* PreviewProvider+Development.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewProvider+Development.swift"; sourceTree = "<group>"; };
+		3A87400D2BBB7659004D1BCB /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
+		3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatter.swift"; sourceTree = "<group>"; };
+		3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3AC51A172BBB539A004E643B /* Crypro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC51A1A2BBB539A004E643B /* CryproApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryproApp.swift; sourceTree = "<group>"; };
 		3AC51A1E2BBB539B004E643B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 		3A27B6C62BBB5C2300FCC327 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -104,7 +111,9 @@
 		3A87400A2BBB720F004D1BCB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3A87400B2BBB721D004D1BCB /* PreviewProvider.swift */,
+				3A87400B2BBB721D004D1BCB /* PreviewProvider+Development.swift */,
+				3A87400D2BBB7659004D1BCB /* Color+Theme.swift */,
+				3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -241,10 +250,13 @@
 			files = (
 				3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */,
 				3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */,
-				3A87400C2BBB721D004D1BCB /* PreviewProvider.swift in Sources */,
+				3A87400C2BBB721D004D1BCB /* PreviewProvider+Development.swift in Sources */,
+				3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */,
 				3A27B6C82BBB5C3200FCC327 /* HomeView.swift in Sources */,
 				3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */,
+				3A87400E2BBB7659004D1BCB /* Color+Theme.swift in Sources */,
 				3A27B6CB2BBB622500FCC327 /* CircleButtonView.swift in Sources */,
+				3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */,
 				3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

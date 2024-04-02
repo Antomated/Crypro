@@ -9,18 +9,10 @@
 import Foundation
 import SwiftUI
 
-extension PreviewProvider {
-    static var dev: DeveloperPreview {
-        DeveloperPreview.shared
-    }
-}
+enum Development {
+    static let homeViewModel = HomeViewModel()
 
-class DeveloperPreview {
-    static let shared = DeveloperPreview()
-
-    private init() { }
-
-    let coin = Coin(
+    static let coin = Coin(
         id: "bitcoin",
         symbol: "btc",
         name: "Bitcoin",
