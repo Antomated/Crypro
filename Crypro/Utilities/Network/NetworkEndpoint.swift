@@ -9,7 +9,9 @@ import Foundation
 
 enum NetworkEndpoint {
     case allCoins
+}
 
+extension NetworkEndpoint {
     var baseURL: String { Constants.baseURL }
 
     var path: String {

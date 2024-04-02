@@ -22,6 +22,10 @@
 		3A9B6BCC2BBCAADB00CD40D1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BCB2BBCAADB00CD40D1 /* NetworkError.swift */; };
 		3A9B6BCE2BBCB05100CD40D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BCD2BBCB05100CD40D1 /* Constants.swift */; };
 		3A9B6BD02BBCB68600CD40D1 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BCF2BBCB68600CD40D1 /* HTTPMethod.swift */; };
+		3A9B6BD42BBCC23A00CD40D1 /* CoinImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BD32BBCC23A00CD40D1 /* CoinImageView.swift */; };
+		3A9B6BD62BBCC25F00CD40D1 /* CoinImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BD52BBCC25F00CD40D1 /* CoinImageViewModel.swift */; };
+		3A9B6BD82BBCC2A500CD40D1 /* CoinImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BD72BBCC2A500CD40D1 /* CoinImageService.swift */; };
+		3A9B6BDB2BBCC3FA00CD40D1 /* FilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BDA2BBCC3FA00CD40D1 /* FilesManager.swift */; };
 		3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC51A1A2BBB539A004E643B /* CryproApp.swift */; };
 		3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A1E2BBB539B004E643B /* Assets.xcassets */; };
 		3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A212BBB539B004E643B /* Preview Assets.xcassets */; };
@@ -43,6 +47,10 @@
 		3A9B6BCB2BBCAADB00CD40D1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		3A9B6BCD2BBCB05100CD40D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3A9B6BCF2BBCB68600CD40D1 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		3A9B6BD32BBCC23A00CD40D1 /* CoinImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinImageView.swift; sourceTree = "<group>"; };
+		3A9B6BD52BBCC25F00CD40D1 /* CoinImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinImageViewModel.swift; sourceTree = "<group>"; };
+		3A9B6BD72BBCC2A500CD40D1 /* CoinImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinImageService.swift; sourceTree = "<group>"; };
+		3A9B6BDA2BBCC3FA00CD40D1 /* FilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesManager.swift; sourceTree = "<group>"; };
 		3AC51A172BBB539A004E643B /* Crypro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC51A1A2BBB539A004E643B /* CryproApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryproApp.swift; sourceTree = "<group>"; };
 		3AC51A1E2BBB539B004E643B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +106,7 @@
 		3A27B6C92BBB621000FCC327 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3A9B6BD22BBCC22F00CD40D1 /* CoinImage */,
 				3A27B6CC2BBB622A00FCC327 /* CircleButton */,
 			);
 			path = Components;
@@ -134,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9B6BC42BBCA7CD00CD40D1 /* CoinDataService.swift */,
+				3A9B6BD72BBCC2A500CD40D1 /* CoinImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -141,12 +151,13 @@
 		3A9B6BC62BBCAA2900CD40D1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3A9B6BD12BBCB69900CD40D1 /* Networking */,
+				3A9B6BD12BBCB69900CD40D1 /* Network */,
+				3A9B6BD92BBCC3E500CD40D1 /* Files */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		3A9B6BD12BBCB69900CD40D1 /* Networking */ = {
+		3A9B6BD12BBCB69900CD40D1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				3A9B6BCF2BBCB68600CD40D1 /* HTTPMethod.swift */,
@@ -154,7 +165,24 @@
 				3A9B6BC92BBCAA7F00CD40D1 /* NetworkManager.swift */,
 				3A9B6BCB2BBCAADB00CD40D1 /* NetworkError.swift */,
 			);
-			path = Networking;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3A9B6BD22BBCC22F00CD40D1 /* CoinImage */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B6BD32BBCC23A00CD40D1 /* CoinImageView.swift */,
+				3A9B6BD52BBCC25F00CD40D1 /* CoinImageViewModel.swift */,
+			);
+			path = CoinImage;
+			sourceTree = "<group>";
+		};
+		3A9B6BD92BBCC3E500CD40D1 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B6BDA2BBCC3FA00CD40D1 /* FilesManager.swift */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 		3AC51A0E2BBB539A004E643B = {
@@ -299,9 +327,13 @@
 				3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */,
 				3A27B6C82BBB5C3200FCC327 /* HomeView.swift in Sources */,
 				3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */,
+				3A9B6BD62BBCC25F00CD40D1 /* CoinImageViewModel.swift in Sources */,
 				3A9B6BD02BBCB68600CD40D1 /* HTTPMethod.swift in Sources */,
 				3A87400E2BBB7659004D1BCB /* Color+Theme.swift in Sources */,
+				3A9B6BD82BBCC2A500CD40D1 /* CoinImageService.swift in Sources */,
 				3A27B6CB2BBB622500FCC327 /* CircleButtonView.swift in Sources */,
+				3A9B6BD42BBCC23A00CD40D1 /* CoinImageView.swift in Sources */,
+				3A9B6BDB2BBCC3FA00CD40D1 /* FilesManager.swift in Sources */,
 				3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */,
 				3A9B6BC82BBCAA3F00CD40D1 /* NetworkEndpoint.swift in Sources */,
 				3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */,

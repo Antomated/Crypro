@@ -32,7 +32,8 @@ private extension CoinRowView {
                 .font(.caption)
                 .foregroundStyle(Color.theme.secondaryText)
                 .frame(minWidth: 30)
-            // TODO: CoinImageView
+            CoinImageView(coin: coin)
+                .frame(width: 30, height: 30)
             VStack(alignment: .leading) {
                 Text(coin.symbol.uppercased())
                     .font(.subheadline)
