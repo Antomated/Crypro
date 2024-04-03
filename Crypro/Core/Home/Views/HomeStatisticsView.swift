@@ -16,6 +16,7 @@ struct HomeStatisticsView: View {
         HStack {
             ForEach(viewModel.statistics) { stat in
                 StatisticView(stat: stat)
+                // TODO: Geometry reader on UIScreen.main.bounds.width
                     .frame(width: UIScreen.main.bounds.width / 3)
             }
         }
