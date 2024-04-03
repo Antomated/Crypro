@@ -94,24 +94,23 @@ extension Double {
     /// Convert 12345678901234 to 12.34Tr
     /// ```
     func formattedWithAbbreviations() -> String {
-        let num = abs(self)
-        let sign = self < 0 ? "-" : ""
-
-        switch num {
-        case 1000000000000...:
-            let formatted = num / 1000000000000
+        let number = abs(Double(self))
+        let sign = (self < 0) ? "-" : ""
+        switch number {
+        case 1_000_000_000_000...:
+            let formatted = number / 1_000_000_000_000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)Tr"
-        case 1000000000...:
-            let formatted = num / 1000000000
+        case 1_000_000_000...:
+            let formatted = number / 1_000_000_000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)Bn"
-        case 1000000...:
-            let formatted = num / 1000000
+        case 1_000_000...:
+            let formatted = number / 1_000_000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)M"
-        case 1000...:
-            let formatted = num / 1000
+        case 1_000...:
+            let formatted = number / 1_000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)K"
         case 0...:

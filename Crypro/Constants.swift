@@ -5,6 +5,15 @@
 //  Created by Anton Petrov on 02.04.2024.
 //
 
+// TODO: remove foundation
+// TODO: Naming
+// TODO: private
+// TODO: final
+// TODO: Marks
+// TODO: Extension splits
+// TODO: Private
+// TODO: Periphery
+
 import Foundation
 
 enum Constants {

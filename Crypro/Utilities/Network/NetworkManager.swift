@@ -4,6 +4,7 @@
 //
 //  Created by Anton Petrov on 02.04.2024.
 //
+// TODO: Localize
 
 import Foundation
 import Combine

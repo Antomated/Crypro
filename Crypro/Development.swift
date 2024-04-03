@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Development.swift
 //  Crypro
 //
 //  Created by Anton Petrov on 02.04.2024.
@@ -11,6 +11,10 @@ import SwiftUI
 
 enum Development {
     static let homeViewModel = HomeViewModel()
+
+    static let stat1 = Statistic(title: "Market Cap", value: "$12.99Bn", percentageChange: 0.42)
+    static let stat2 = Statistic(title: "Total Volume", value: "$0.95Tr")
+    static let stat3 = Statistic(title: "Portfolio", value: "$9.01K", percentageChange: -0.42)
 
     static let coin = Coin(
         id: "bitcoin",

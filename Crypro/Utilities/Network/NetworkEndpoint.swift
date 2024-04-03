@@ -9,48 +9,61 @@ import Foundation
 
 enum NetworkEndpoint {
     case allCoins
+    case global
 }
 
 extension NetworkEndpoint {
     var baseURL: String { Constants.baseURL }
 
-    var path: String {
-        switch self {
-        case .allCoins: return Constants.apiPath + "/coins/markets"
-        }
-    }
-
     var method: HTTPMethod {
         switch self {
-        case .allCoins: return .get
+        case .allCoins:
+                .get
+        case .global:
+                .get
         }
     }
 
     var headers: [String: String] {
         switch self {
-        case .allCoins:
-            return ["x-cg-demo-api-key": Constants.apiKey]
-        }
-    }
-
-    var queryItems: [URLQueryItem] {
-        switch self {
-        case .allCoins:
-            return [
-                URLQueryItem(name: "vs_currency", value: "usd"),
-                URLQueryItem(name: "order", value: "market_cap_desc"),
-                URLQueryItem(name: "per_page", value: "250"),
-                URLQueryItem(name: "page", value: "1"),
-                URLQueryItem(name: "sparkline", value: "true"),
-                URLQueryItem(name: "price_change_percentage", value: "24h")
-            ]
+        case .allCoins, .global:
+            ["x-cg-demo-api-key": Constants.apiKey]
         }
     }
 
     var url: URL? {
         var components = URLComponents(string: baseURL)
-        components?.path = path
+        components?.path = fullPath
         components?.queryItems = queryItems
         return components?.url
+    }
+
+    private var path: String {
+        switch self {
+        case .allCoins:
+            "/coins/markets"
+        case .global:
+            "/global"
+        }
+    }
+
+    private var fullPath: String {
+        Constants.apiPath + path
+    }
+
+    private var queryItems: [URLQueryItem] {
+        switch self {
+        case .allCoins:
+            [
+                .init(name: "vs_currency", value: "usd"),
+                .init(name: "order", value: "market_cap_desc"),
+                .init(name: "per_page", value: "250"),
+                .init(name: "page", value: "1"),
+                .init(name: "sparkline", value: "true"),
+                .init(name: "price_change_percentage", value: "24h")
+            ]
+        case .global:
+            []
+        }
     }
 }
