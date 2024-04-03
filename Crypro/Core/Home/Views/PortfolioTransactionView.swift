@@ -101,19 +101,13 @@ private extension PortfolioTransactionView {
     }
 
     func saveButtonPressed() {
-        guard
-            let coin = viewModel.selectedCoin,
-            let amount = Double(quantityText)
+        guard let coin = viewModel.selectedCoin,
+              let amount = Double(quantityText)
         else { return }
-
-        // save to portfolio
         viewModel.updatePortfolio(coin: coin, amount: amount)
-
-        // update fields
         withAnimation(.easeIn) {
             removeSelectedCoin()
         }
-
         UIApplication.shared.endEditing()
     }
 

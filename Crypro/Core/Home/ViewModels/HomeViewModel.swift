@@ -10,6 +10,8 @@ import Combine
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
+    @Published var statistics: [Statistic] = []
+    @Published var detailStatistics: [Statistic] = []
     @Published var allCoins: [Coin] = []
     @Published var portfolioCoins: [Coin] = []
     @Published var searchText: String = ""
@@ -18,19 +20,24 @@ class HomeViewModel: ObservableObject {
     @Published var sortOption: SortOption = .rank
 
     private let coinDataService = CoinDataService()
-    private var cancellables = Set<AnyCancellable>()
+    private let marketDataService = MarketDataService()
+    
 
-    enum SortOption {
-        case rank
-        case rankReversed
-        case holdings
-        case holdingsReversed
-        case price
-        case priceReversed
-    }
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
         addSubscribers()
+    }
+
+    func updatePortfolio(coin: Coin, amount: Double) {
+        // TODO: Update portfolio
+    }
+
+    func reloadData() {
+        isLoading = true
+        coinDataService.getCoins()
+        marketDataService.getData()
+        // TODO: Heptics
     }
 }
 
@@ -46,6 +53,16 @@ private extension HomeViewModel {
                 self?.allCoins = coins
             }
             .store(in: &cancellables)
+
+        marketDataService.$marketData
+            .combineLatest($portfolioCoins)
+            .map(mapGlobalMarketData)
+            .sink { [weak self] stats in
+                self?.statistics = stats
+                self?.isLoading = false
+            }
+            .store(in: &cancellables)
+
     }
 
     func filterAndSortCoins(text: String, coins: [Coin], sortOption: SortOption) -> [Coin] {
@@ -74,6 +91,40 @@ private extension HomeViewModel {
         case .holdingsReversed: return coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
         default: return coins
         }
+    }
+
+    // TODO: Refactor Statistics into enum?
+
+    func mapGlobalMarketData(data: MarketData?, portfolioCoins: [Coin]) -> [Statistic] {
+        var stats: [Statistic] = []
+
+        guard let data else {
+            return stats
+        }
+
+        let marketCap = Statistic(title: "Market Cap", value: data.marketCap,
+                                  percentageChange: data.marketCapChangePercentage24HUsd)
+        let volume = Statistic(title: "24h Volume", value: data.volume)
+        let btcDominance = Statistic(title: "BTC Dominance", value: data.btcDominance)
+
+        let portfolioValue = portfolioCoins
+            .map { $0.currentHoldingsValue }
+            .reduce(0, +)
+
+        let previosValue = portfolioCoins
+            .map { $0.currentHoldingsValue / (1 + ($0.priceChangePercentage24H ?? 0) / 100) }
+            .reduce(0, +)
+
+        let percentageChange = ((portfolioValue - previosValue) / previosValue) * 100
+
+        let portfolio = Statistic(
+            title: "Portfolio Value",
+            value: portfolioValue.asCurrencyWith2Decimals(),
+            percentageChange: percentageChange
+        )
+
+        stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
+        return stats
     }
 
     func sortCoins(sort: SortOption, coins: inout [Coin]) {

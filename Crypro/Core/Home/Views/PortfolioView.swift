@@ -18,12 +18,9 @@ struct PortfolioView: View {
                     SearchBarView(searchText: $viewModel.searchText)
                         .padding()
                     coinLogoList
-                        .padding(.leading)
-
                     if viewModel.selectedCoin != nil {
                         PortfolioTransactionView(quantityText: $quantityText)
                             .padding()
-                            .padding(.vertical)
                             .animation(.none, value: UUID())
                     }
                 }
@@ -46,12 +43,20 @@ struct PortfolioView: View {
 // MARK: - Components
 
 private extension PortfolioView {
+    private var searchListCoins: [Coin] {
+        viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
+        ? viewModel.portfolioCoins
+        : viewModel.allCoins
+    }
+
     var coinLogoList: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 10) {
-                ForEach(viewModel.searchText.isEmpty ? viewModel.portfolioCoins : viewModel.allCoins) { coin in
+                ForEach(searchListCoins) { coin in
                     CoinLogoView(coin: coin)
-                        .onTapGesture() {
+                        .frame(width: 75)
+                        .padding(4)
+                        .onTapGesture {
                             withAnimation(.easeIn) {
                                 updateSelectedCoin(coin: coin)
                             }
@@ -66,6 +71,8 @@ private extension PortfolioView {
                         )
                 }
             }
+            .padding(.vertical, 4)
+            .padding(.leading)
         }
     }
 }
@@ -88,5 +95,4 @@ private extension PortfolioView {
 #Preview {
     PortfolioView()
         .environmentObject(HomeViewModel())
-    //        .preferredColorScheme(.dark)
 }

@@ -5,6 +5,9 @@
 //  Created by Anton Petrov on 02.04.2024.
 //
 
+// TODO: if to guard
+// TODO: each view + preview
+// TODO: light and dark theme to all previews
 // TODO: remove foundation
 // TODO: Naming
 // TODO: private
