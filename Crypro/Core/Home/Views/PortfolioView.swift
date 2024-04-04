@@ -34,7 +34,9 @@ struct PortfolioView: View {
                 )
             }
             .onChange(of: viewModel.searchText, perform: { value in
-                if value == "" { viewModel.selectedCoin = nil }
+                if value.isEmpty {
+                    viewModel.selectedCoin = nil
+                }
             })
         }
     }
