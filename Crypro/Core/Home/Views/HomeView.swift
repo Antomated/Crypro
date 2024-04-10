@@ -55,7 +55,11 @@ struct HomeView: View {
             })
         }
         .background(
-            // TODO: implement details
+            NavigationLink(
+                destination: DetailLoadingView(coin: $selectCoin),
+                isActive: $showDetailView,
+                label: { EmptyView() }
+            )
         )
     }
 }

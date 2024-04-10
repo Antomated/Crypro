@@ -24,7 +24,7 @@ final class MarketDataService {
     }
 
     func getData() {
-        marketDataSubscription = NetworkManager.download(from: .global)
+        marketDataSubscription = NetworkManager.download(from: .globalData)
             .decode(type: GlobalData.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(

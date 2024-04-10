@@ -14,8 +14,6 @@ struct PortfolioTransactionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            nameSection
-            Divider()
             coinDetailStatView
             Divider()
             coinInputAmountView
@@ -27,23 +25,11 @@ struct PortfolioTransactionView: View {
 // MARK: - COMPONENTS
 
 private extension PortfolioTransactionView {
-    var nameSection: some View {
-        HStack {
-            Text(viewModel.selectedCoin?.name.uppercased() ?? "")
-                .bold()
-                .font(.title2)
-            Text(viewModel.selectedCoin?.symbol.uppercased() ?? "")
-                .font(.caption)
-                .foregroundStyle(Color.theme.secondaryText)
-            Spacer()
-        }
-    }
-
     var coinDetailStatView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(viewModel.detailStatistics) { stat in
-                    // TODO: Statistic details
+                    StatisticView(stat: stat)
                 }
             }
             .frame(maxHeight: 60)

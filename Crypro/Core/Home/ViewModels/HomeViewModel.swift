@@ -37,7 +37,7 @@ class HomeViewModel: ObservableObject {
         isLoading = true
         coinDataService.getCoins()
         marketDataService.getData()
-        // TODO: Haptics
+        HapticManager.notification(type: .success)
     }
 }
 
@@ -64,16 +64,6 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        // updates statistics
-        marketDataService.$marketData
-            .combineLatest($portfolioCoins)
-            .map(mapGlobalMarketData)
-            .sink { [weak self] stats in
-                self?.statistics = stats
-                self?.isLoading = false
-            }
-            .store(in: &cancellables)
-
         // updates detail statistics
         $selectedCoin
             .map(getCoinDetailStatistics)
@@ -89,6 +79,16 @@ private extension HomeViewModel {
             .sink { [weak self] coins in
                 guard let self else { return }
                 self.portfolioCoins = self.sortPortfolioCoinsIfNeeded(coins: coins)
+            }
+            .store(in: &cancellables)
+
+        // updates statistics
+        marketDataService.$marketData
+            .combineLatest($portfolioCoins)
+            .map(mapGlobalMarketData)
+            .sink { [weak self] stats in
+                self?.statistics = stats
+                self?.isLoading = false
             }
             .store(in: &cancellables)
     }
@@ -136,11 +136,11 @@ private extension HomeViewModel {
             .map { $0.currentHoldingsValue }
             .reduce(0, +)
 
-        let previosValue = portfolioCoins
+        let previousValue = portfolioCoins
             .map { $0.currentHoldingsValue / (1 + ($0.priceChangePercentage24H ?? 0) / 100) }
             .reduce(0, +)
 
-        let percentageChange = ((portfolioValue - previosValue) / previosValue) * 100
+        let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
 
         let portfolio = Statistic(
             title: "Portfolio Value",
@@ -158,7 +158,7 @@ private extension HomeViewModel {
             Statistic(title: "Market Cap:", value: coin.marketCap?.formattedWithAbbreviations() ?? ""),
             Statistic(title: "Current Price:", value: (coin.currentPrice ?? 0.0).formattedWithAbbreviations()),
             Statistic(title: "All Time Hight:", value: coin.ath?.formattedWithAbbreviations() ?? ""),
-            Statistic(title: "All Time Low:", value: coin.atl?.formattedWithAbbreviations() ?? ""),
+            Statistic(title: "All Time Low:", value: coin.atl?.formattedWithAbbreviations() ?? "")
         ]
     }
 
