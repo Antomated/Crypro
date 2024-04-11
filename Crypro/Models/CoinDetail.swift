@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CoinDetail
 struct CoinDetails: Decodable {
     let id, symbol, name: String?
     let blockTimeInMinutes: Int?
@@ -22,12 +21,10 @@ struct CoinDetails: Decodable {
     }
 }
 
-// MARK: - Description
 struct Description: Decodable {
     let en: String?
 }
 
-// MARK: - Links
 struct Links: Decodable {
     let homepage: [String]?
     let twitterScreenName, facebookUsername: String?

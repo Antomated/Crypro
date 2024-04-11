@@ -55,25 +55,21 @@ extension NetworkEndpoint {
     private var queryItems: [URLQueryItem] {
         switch self {
         case .allCoins:
-            [
-                .init(name: "vs_currency", value: "usd"),
-                .init(name: "order", value: "market_cap_desc"),
-                .init(name: "per_page", value: "250"),
-                .init(name: "page", value: "1"),
-                .init(name: "sparkline", value: "true"),
-                .init(name: "price_change_percentage", value: "24h")
-            ]
+            [.init(name: "vs_currency", value: "usd"),
+             .init(name: "order", value: "market_cap_desc"),
+             .init(name: "per_page", value: "250"),
+             .init(name: "page", value: "1"),
+             .init(name: "sparkline", value: "true"),
+             .init(name: "price_change_percentage", value: "24h")]
         case .globalData:
             []
         case .coinDetails:
-            [
-                URLQueryItem(name: "localization", value: "false"),
-                URLQueryItem(name: "tickers", value: "false"),
-                URLQueryItem(name: "market_data", value: "false"),
-                URLQueryItem(name: "community_data", value: "false"),
-                URLQueryItem(name: "developer_data", value: "false"),
-                URLQueryItem(name: "sparkline", value: "false")
-            ]
+            [.init(name: "localization", value: "false"),
+             .init(name: "tickers", value: "false"),
+             .init(name: "market_data", value: "false"),
+             .init(name: "community_data", value: "false"),
+             .init(name: "developer_data", value: "false"),
+             .init(name: "sparkline", value: "false")]
         }
     }
 }

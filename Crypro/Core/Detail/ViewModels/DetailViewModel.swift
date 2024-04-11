@@ -4,14 +4,14 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
+// TODO: Url to enum
 
 import Foundation
 import Combine
 
-class DetailViewModel: ObservableObject {
-
-    @Published var overviewStatistics: [Statistic] = []
-    @Published var additionalStatistics: [Statistic] = []
+final class DetailViewModel: ObservableObject {
+    @Published var overviewStatistics = [Statistic]()
+    @Published var additionalStatistics = [Statistic]()
     @Published var coin: Coin
     @Published var coinDescription: String?
     @Published var websiteURL: String?
@@ -28,7 +28,6 @@ class DetailViewModel: ObservableObject {
         self.coinDetailService = CoinDetailsService(coin: coin)
         addSubscribers()
     }
-
 }
 
 // MARK: - ADD SUBSCRIBERS

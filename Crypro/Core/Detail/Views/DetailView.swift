@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
-// TODO: DetailLoadingView
 
 import SwiftUI
 
@@ -39,7 +38,7 @@ struct DetailView: View {
         ScrollView {
             VStack {
                 // TODO: chart
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     overviewHeader
                     linkSection
                     Divider()
@@ -142,7 +141,7 @@ private extension DetailView {
             spacing: spacing,
             pinnedViews: []) {
                 ForEach(stat) { stat in
-                    // TODO: statistics
+                    StatisticView(stat: stat)
                 }
             }
     }

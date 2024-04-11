@@ -15,6 +15,8 @@
 // TODO: Marks
 // TODO: Extension splits
 // TODO: Private
+// TODO: Final
+// TODO: Empty lines
 // TODO: Periphery
 
 import Foundation
