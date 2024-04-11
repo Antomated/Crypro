@@ -29,6 +29,8 @@
 		3A4E46642BBE14F3002B0687 /* PortfolioTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46632BBE14F3002B0687 /* PortfolioTransactionView.swift */; };
 		3A4E46662BBE1568002B0687 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46652BBE1568002B0687 /* SortOption.swift */; };
 		3A4E46692BBE1EA4002B0687 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46682BBE1EA4002B0687 /* LaunchView.swift */; };
+		3A85F8B82BC89C4600E18F26 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F8B72BC89C4600E18F26 /* ChartView.swift */; };
+		3A85F8BA2BC89CA800E18F26 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F8B92BC89CA800E18F26 /* Date+String.swift */; };
 		3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740062BBB6D54004D1BCB /* Coin.swift */; };
 		3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740082BBB71CB004D1BCB /* CoinRowView.swift */; };
 		3A87400C2BBB721D004D1BCB /* Development.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* Development.swift */; };
@@ -75,6 +77,8 @@
 		3A4E46632BBE14F3002B0687 /* PortfolioTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTransactionView.swift; sourceTree = "<group>"; };
 		3A4E46652BBE1568002B0687 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		3A4E46682BBE1EA4002B0687 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		3A85F8B72BC89C4600E18F26 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		3A85F8B92BC89CA800E18F26 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		3A8740062BBB6D54004D1BCB /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		3A8740082BBB71CB004D1BCB /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
 		3A87400B2BBB721D004D1BCB /* Development.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Development.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2AFB162BC0B3C40001277F /* DetailView.swift */,
+				3A85F8B72BC89C4600E18F26 /* ChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */,
 				3A9B6BDF2BBCCE7300CD40D1 /* UIApplication+EndEditing.swift */,
 				3A2AFB1E2BC0B4C40001277F /* String+HTML.swift */,
+				3A85F8B92BC89CA800E18F26 /* Date+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 				3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */,
 				3A27B6C82BBB5C3200FCC327 /* HomeView.swift in Sources */,
 				3A4E465B2BBE05BF002B0687 /* MarketDataService.swift in Sources */,
+				3A85F8B82BC89C4600E18F26 /* ChartView.swift in Sources */,
 				3A4E46662BBE1568002B0687 /* SortOption.swift in Sources */,
 				3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */,
 				3A4E46602BBE0D9A002B0687 /* CrossButton.swift in Sources */,
@@ -482,6 +489,7 @@
 				3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */,
 				3A4E46622BBE0EAE002B0687 /* CoinLogoView.swift in Sources */,
 				3A9B6BC82BBCAA3F00CD40D1 /* NetworkEndpoint.swift in Sources */,
+				3A85F8BA2BC89CA800E18F26 /* Date+String.swift in Sources */,
 				3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */,
 				3A9B6BC52BBCA7CD00CD40D1 /* CoinDataService.swift in Sources */,
 				3A3A09692BC7475F00379204 /* HapticManager.swift in Sources */,

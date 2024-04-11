@@ -31,13 +31,15 @@ struct DetailView: View {
     private let spacing: CGFloat = 20
 
     init(coin: Coin) {
-        _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin))
+        _viewModel = .init(wrappedValue: DetailViewModel(coin: coin))
     }
 
     var body: some View {
         ScrollView {
             VStack {
-                // TODO: chart
+                ChartView(coin: viewModel.coin)
+                    .padding(.horizontal)
+                    .padding(.vertical)
                 VStack(spacing: 16) {
                     overviewHeader
                     linkSection
@@ -53,6 +55,7 @@ struct DetailView: View {
         }
         .background(Color.theme.background.ignoresSafeArea())
         .navigationTitle(viewModel.coin.name)
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
