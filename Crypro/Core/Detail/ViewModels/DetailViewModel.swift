@@ -10,8 +10,8 @@ import Combine
 
 class DetailViewModel: ObservableObject {
 
-    @Published var overviewStatisctics: [Statistic] = []
-    @Published var additionalStatisctics: [Statistic] = []
+    @Published var overviewStatistics: [Statistic] = []
+    @Published var additionalStatistics: [Statistic] = []
     @Published var coin: Coin
     @Published var coinDescription: String?
     @Published var websiteURL: String?
@@ -39,8 +39,8 @@ private extension DetailViewModel {
             .combineLatest($coin)
             .map(mapDataToStatistics)
             .sink { [weak self] returnedArrays in
-                self?.overviewStatisctics = returnedArrays.overview
-                self?.additionalStatisctics = returnedArrays.additional
+                self?.overviewStatistics = returnedArrays.overview
+                self?.additionalStatistics = returnedArrays.additional
             }
             .store(in: &cancellables)
 

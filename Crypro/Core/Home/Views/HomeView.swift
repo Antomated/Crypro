@@ -55,6 +55,7 @@ struct HomeView: View {
             })
         }
         .background(
+            // TODO: Lazy navigation
             NavigationLink(
                 destination: DetailLoadingView(coin: $selectCoin),
                 isActive: $showDetailView,

@@ -4,6 +4,7 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
+// TODO: DetailLoadingView
 
 import SwiftUI
 
@@ -21,17 +22,17 @@ struct DetailLoadingView: View {
 
 struct DetailView: View {
 
-    @StateObject private var vm: DetailViewModel
+    @StateObject private var viewModel: DetailViewModel
     @State private var showFullDescription: Bool = false
 
     private let columns: [GridItem] = [
         GridItem(.flexible()),
-        GridItem(.flexible()),
+        GridItem(.flexible())
     ]
     private let spacing: CGFloat = 20
 
     init(coin: Coin) {
-        _vm = StateObject(wrappedValue: DetailViewModel(coin: coin))
+        _viewModel = StateObject(wrappedValue: DetailViewModel(coin: coin))
     }
 
     var body: some View {
@@ -52,7 +53,7 @@ struct DetailView: View {
             }
         }
         .background(Color.theme.background.ignoresSafeArea())
-        .navigationTitle(vm.coin.name)
+        .navigationTitle(viewModel.coin.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
@@ -73,26 +74,26 @@ private extension DetailView {
     }
 
     var overviewGrid: some View {
-        getStatDetail(with: vm.overviewStatisctics)
+        getStatDetail(with: viewModel.overviewStatistics)
     }
 
     var additionalGrid: some View {
-        getStatDetail(with: vm.additionalStatisctics)
+        getStatDetail(with: viewModel.additionalStatistics)
     }
 
     var navigationBarTrailingItems: some View {
         HStack {
-            Text(vm.coin.symbol.uppercased())
+            Text(viewModel.coin.symbol.uppercased())
                 .font(.headline)
                 .foregroundStyle(Color.theme.secondaryText)
-            CoinImageView(coin: vm.coin)
+            CoinImageView(coin: viewModel.coin)
                 .frame(width: 25, height: 25)
         }
     }
 
     var descriptionSection: some View {
         ZStack {
-            if let coinDescription = vm.coinDescription, !coinDescription.isEmpty {
+            if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
                 VStack(alignment: .leading) {
                     Text(coinDescription)
                         .lineLimit(showFullDescription ? nil : 3)
