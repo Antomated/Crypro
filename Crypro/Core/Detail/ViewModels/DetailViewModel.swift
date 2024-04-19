@@ -93,7 +93,7 @@ private extension DetailViewModel {
         let low = coin.low24H?.asCurrencyWith6Decimals() ?? "n/a"
         let lowStat = Statistic(title: "24H Low", value: low)
 
-        let priceChange = coin.priceChange24?.asCurrencyWith6Decimals() ?? "n/a"
+        let priceChange = coin.priceChange24?.asCurrencyWith6Decimals() ?? "n/a" 
         let pricePercentChange = coin.priceChangePercentage24H
         let priceChangeStat = Statistic(title: "24H Price Change", value: priceChange, percentageChange: pricePercentChange)
 

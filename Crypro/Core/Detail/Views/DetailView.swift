@@ -117,10 +117,31 @@ private extension DetailView {
         }
     }
 
+    // TODO: Caseiterable enum
     var linkSection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                // TODO: links
+                if let homeURL = viewModel.websiteURL,
+                   let url = URL(string: homeURL) {
+                    LinkView(title: "Home", url: url)
+                }
+                if let twitterURL = viewModel.twitterURL,
+                   let url = URL(string: twitterURL) {
+                    LinkView(title: "Twitter", url: url)
+                }
+                if let telegramURL = viewModel.telegramURL,
+                   let url = URL(string: telegramURL) {
+                    LinkView(title: "Telegram", url: url)
+                }
+                if let redditURL = viewModel.redditURL,
+                   let url = URL(string: redditURL) {
+                    LinkView(title: "Reddit", url: url)
+                }
+                if let facebookURL = viewModel.facebookURL,
+                   let url = URL(string: facebookURL) {
+                    LinkView(title: "Facebook", url: url)
+                }
+                Spacer()
             }
         }
     }

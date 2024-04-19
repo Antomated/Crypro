@@ -4,11 +4,14 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
+// TODO: Add real links to socials
 
 import Foundation
 
 struct CoinDetails: Decodable {
-    let id, symbol, name: String?
+    let id: String?
+    let symbol: String?
+    let name: String?
     let blockTimeInMinutes: Int?
     let hashingAlgorithm: String?
     let categories: [String]?
@@ -27,7 +30,8 @@ struct Description: Decodable {
 
 struct Links: Decodable {
     let homepage: [String]?
-    let twitterScreenName, facebookUsername: String?
+    let twitterScreenName: String?
+    let facebookUsername: String?
     let telegramChannelIdentifier: String?
     let subredditURL: String?
 }
