@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeStatisticsView: View {
-
     @EnvironmentObject private var viewModel: HomeViewModel
     @Binding var showPortfolio: Bool
 

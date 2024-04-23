@@ -4,17 +4,18 @@
 //
 //  Created by Anton Petrov on 01.04.2024.
 //
+// TODO: List animation
+// TODO: Fix paddings
 
 import SwiftUI
 
 struct HomeView: View {
-
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showPortfolio: Bool = false
     @State private var showPortfolioView: Bool = false
-    @State private var selectCoin: Coin?
     @State private var showDetailView: Bool = false
     @State private var showSettingsView: Bool = false
+    @State private var selectedCoin: Coin?
 
     var body: some View {
         ZStack {
@@ -47,17 +48,16 @@ struct HomeView: View {
                     }
                     .transition(.move(edge: .trailing))
                 }
-
                 Spacer(minLength: 0)
             }
             .sheet(isPresented: $showSettingsView, content: {
-                // TODO: implement settings
+                SettingsView()
             })
         }
         .background(
             // TODO: Lazy navigation
             NavigationLink(
-                destination: DetailLoadingView(coin: $selectCoin),
+                destination: DetailLoadingView(coin: $selectedCoin),
                 isActive: $showDetailView,
                 label: { EmptyView() }
             )
@@ -68,7 +68,6 @@ struct HomeView: View {
 // MARK: COMPONENTS
 
 private extension HomeView {
-
     var homeHeader: some View {
         HStack {
             ZStack {
@@ -202,7 +201,7 @@ private extension HomeView {
     }
 
     var portfolioEmptyText: some View {
-        Text("You haven't added any coins to your portfolio yet. Click the + button in the top of the right left corner to get started! 🧐")
+        Text("You haven't added any coins to your portfolio yet. Click the + button in the top of the ↖ right left corner to get started! ")
             .font(.callout.weight(.medium))
             .foregroundStyle(Color.theme.secondaryText)
             .multilineTextAlignment(.center)
@@ -214,7 +213,7 @@ private extension HomeView {
 
 private extension HomeView {
     func segue(coin: Coin) {
-        selectCoin = coin
+        selectedCoin = coin
         showDetailView.toggle()
     }
 }

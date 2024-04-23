@@ -24,5 +24,5 @@ struct ColorTheme {
 
 struct LaunchTheme {
     let accent = Color(.accent)
-    let background = Color.black
+    let background = Color(.launchBackground)
 }

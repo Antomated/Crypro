@@ -9,12 +9,10 @@
 import SwiftUI
 
 struct LaunchView: View {
-
-    @State private var loadingText: [String] = "C R Y P R 0".map { String($0) }
+    @State private var loadingText: [String] = "CRYPRO".map { String($0) }
     @State private var showLoadingText: Bool = false
     @State private var counter: Int = 0
     @State private var loops: Int = 0
-
     @Binding var showLaunchView: Bool
 
     private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -30,7 +28,7 @@ struct LaunchView: View {
 
             ZStack {
                 if showLoadingText {
-                    HStack(spacing: 0) {
+                    HStack(spacing: 4) {
                         ForEach(loadingText.indices, id: \.self) { index in
                             Text(loadingText[index])
                                 .font(.headline.weight(.heavy))
@@ -38,12 +36,12 @@ struct LaunchView: View {
                                 .offset(y: counter == index ? -5 : 0)
                         }
                     }
-                    .transition(AnyTransition.scale.animation(.easeIn))
+                    .transition(.scale.animation(.easeIn))
                 }
-
             }
             .offset(y: 70)
         }
+        .ignoresSafeArea()
         .onAppear {
             showLoadingText.toggle()
         }

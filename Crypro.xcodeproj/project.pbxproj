@@ -50,6 +50,8 @@
 		3A9B6BDE2BBCCE4600CD40D1 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BDD2BBCCE4600CD40D1 /* SearchBarView.swift */; };
 		3A9B6BE02BBCCE7300CD40D1 /* UIApplication+EndEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BDF2BBCCE7300CD40D1 /* UIApplication+EndEditing.swift */; };
 		3ABC9F4B2BD3236D002D944F /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC9F4A2BD3236D002D944F /* LinkView.swift */; };
+		3ABC9F4F2BD4692D002D944F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC9F4E2BD4692D002D944F /* SettingsView.swift */; };
+		3ABC9F512BD480B8002D944F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */; };
 		3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC51A1A2BBB539A004E643B /* CryproApp.swift */; };
 		3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A1E2BBB539B004E643B /* Assets.xcassets */; };
 		3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A212BBB539B004E643B /* Preview Assets.xcassets */; };
@@ -99,6 +101,8 @@
 		3A9B6BDD2BBCCE4600CD40D1 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		3A9B6BDF2BBCCE7300CD40D1 /* UIApplication+EndEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+EndEditing.swift"; sourceTree = "<group>"; };
 		3ABC9F4A2BD3236D002D944F /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		3ABC9F4E2BD4692D002D944F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AC51A172BBB539A004E643B /* Crypro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC51A1A2BBB539A004E643B /* CryproApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryproApp.swift; sourceTree = "<group>"; };
 		3AC51A1E2BBB539B004E643B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				3A4E46672BBE1E97002B0687 /* Launch */,
 				3A27B6C42BBB5C1700FCC327 /* Home */,
 				3A2AFB132BC0B3970001277F /* Detail */,
+				3ABC9F4C2BD468EE002D944F /* Settings */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4E46682BBE1EA4002B0687 /* LaunchView.swift */,
+				3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -286,9 +292,9 @@
 		3A9B6BD12BBCB69900CD40D1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3A9B6BC92BBCAA7F00CD40D1 /* NetworkManager.swift */,
 				3A9B6BCF2BBCB68600CD40D1 /* HTTPMethod.swift */,
 				3A9B6BC72BBCAA3F00CD40D1 /* NetworkEndpoint.swift */,
-				3A9B6BC92BBCAA7F00CD40D1 /* NetworkManager.swift */,
 				3A9B6BCB2BBCAADB00CD40D1 /* NetworkError.swift */,
 			);
 			path = Network;
@@ -326,6 +332,22 @@
 				3ABC9F4A2BD3236D002D944F /* LinkView.swift */,
 			);
 			path = Link;
+			sourceTree = "<group>";
+		};
+		3ABC9F4C2BD468EE002D944F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3ABC9F4D2BD46924002D944F /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3ABC9F4D2BD46924002D944F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3ABC9F4E2BD4692D002D944F /* SettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3AC51A0E2BBB539A004E643B = {
@@ -428,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ABC9F512BD480B8002D944F /* LaunchScreen.storyboard in Resources */,
 				3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */,
 				3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */,
 			);
@@ -492,6 +515,7 @@
 				3A4E46592BBE0308002B0687 /* MarketData.swift in Sources */,
 				3A2AFB192BC0B3E30001277F /* DetailViewModel.swift in Sources */,
 				3A27B6CB2BBB622500FCC327 /* CircleButtonView.swift in Sources */,
+				3ABC9F4F2BD4692D002D944F /* SettingsView.swift in Sources */,
 				3A2AFB122BBF54590001277F /* PortfolioDataService.swift in Sources */,
 				3ABC9F4B2BD3236D002D944F /* LinkView.swift in Sources */,
 				3A9B6BD42BBCC23A00CD40D1 /* CoinImageView.swift in Sources */,
@@ -647,6 +671,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -679,6 +704,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
