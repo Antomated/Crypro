@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
-// TODO: Add real links to socials
 
 import Foundation
 
@@ -30,8 +29,17 @@ struct Description: Decodable {
 
 struct Links: Decodable {
     let homepage: [String]?
-    let twitterScreenName: String?
-    let facebookUsername: String?
-    let telegramChannelIdentifier: String?
     let subredditURL: String?
+    private let twitterScreenName: String?
+    private let telegramChannelIdentifier: String?
+
+    var twitterURL: String? {
+        guard let screenName = twitterScreenName, !screenName.isEmpty else { return nil }
+        return "https://twitter.com/\(screenName)"
+    }
+
+    var telegramURL: String? {
+        guard let identifier = telegramChannelIdentifier, !identifier.isEmpty else { return nil }
+        return "https://t.me/\(identifier)"
+    }
 }

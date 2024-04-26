@@ -9,35 +9,43 @@ import SwiftUI
 
 struct PortfolioView: View {
     @EnvironmentObject private var viewModel: HomeViewModel
+    @FocusState private var searchIsFocused: Bool
     @State private var quantityText: String = ""
+    @State private var keyboardHeight: CGFloat = 0
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    SearchBarView(searchText: $viewModel.searchText)
-                        .padding()
-                    coinLogoList
-                    if viewModel.selectedCoin != nil {
-                        PortfolioTransactionView(quantityText: $quantityText)
+            ScrollViewReader { scrollViewReader in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        SearchBarView(searchText: $viewModel.searchText)
                             .padding()
-                            .animation(.none, value: UUID())
+                            .focused($searchIsFocused)
+                        coinLogoList
+                        if viewModel.selectedCoin != nil {
+                            PortfolioTransactionView(quantityText: $quantityText)
+                                .padding()
+                                .animation(.none, value: UUID())
+                                .id("test")
+                        }
                     }
                 }
-            }
-            .background(Color.theme.background.ignoresSafeArea())
-            .navigationTitle("Edit Portfolio")
-            .toolbar {
-                ToolbarItem(
-                    placement: .topBarLeading,
-                    content: { CrossButton().environmentObject(viewModel) }
-                )
-            }
-            .onChange(of: viewModel.searchText, perform: { value in
-                if value.isEmpty {
-                    viewModel.selectedCoin = nil
+                .background(Color.theme.background.ignoresSafeArea())
+                .navigationTitle("Edit Portfolio")
+                .toolbar {
+                    ToolbarItem(
+                        placement: .topBarLeading,
+                        content: { CrossButton().environmentObject(viewModel) }
+                    )
                 }
-            })
+                .onChange(of: viewModel.searchText, perform: { value in
+                    if value.isEmpty {
+                        viewModel.selectedCoin = nil
+                    }
+                })
+                .keyboardHeight($keyboardHeight)
+                .animation(.easeOut(duration: 0.16), value: UUID())
+            }
         }
     }
 }
@@ -61,6 +69,7 @@ private extension PortfolioView {
                         .onTapGesture {
                             withAnimation(.easeIn) {
                                 updateSelectedCoin(coin: coin)
+                                searchIsFocused = false
                             }
                         }
                         .background(

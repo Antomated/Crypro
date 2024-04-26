@@ -18,7 +18,6 @@ final class DetailViewModel: ObservableObject {
     @Published var redditURL: String?
     @Published var twitterURL: String?
     @Published var telegramURL: String?
-    @Published var facebookURL: String?
 
     private let coinDetailService: CoinDetailsService
     private var cancellables = Set<AnyCancellable>()
@@ -48,9 +47,8 @@ private extension DetailViewModel {
                 self?.coinDescription = coinDetail?.readableDescription
                 self?.websiteURL = coinDetail?.links?.homepage?.first
                 self?.redditURL = coinDetail?.links?.subredditURL
-                self?.twitterURL = coinDetail?.links?.twitterScreenName
-                self?.telegramURL = coinDetail?.links?.telegramChannelIdentifier
-                self?.facebookURL = coinDetail?.links?.facebookUsername
+                self?.twitterURL = coinDetail?.links?.twitterURL
+                self?.telegramURL = coinDetail?.links?.telegramURL
             }
             .store(in: &cancellables)
     }

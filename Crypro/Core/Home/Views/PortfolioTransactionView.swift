@@ -13,9 +13,9 @@ struct PortfolioTransactionView: View {
     @Binding var quantityText: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            coinDetailStatView
+        VStack(alignment: .leading, spacing: 10) {
             Divider()
+            coinDetailStatView
             coinInputAmountView
             saveButtonView
         }
@@ -32,7 +32,7 @@ private extension PortfolioTransactionView {
                     StatisticView(stat: stat)
                 }
             }
-            .frame(maxHeight: 60)
+            .frame(maxHeight: 54)
         }
     }
 
@@ -40,16 +40,15 @@ private extension PortfolioTransactionView {
         HStack {
             TextField("Amount holding...", text: $quantityText)
                 .font(.callout)
-                .multilineTextAlignment(.center)
                 .padding(12)
-                .frame(width: UIScreen.main.bounds.width / 1.9)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(Color.theme.secondaryText)
+                        .strokeBorder(Color.theme.accent)
                 )
                 .keyboardType(.decimalPad)
             Text("= \(getCurrentValue().asCurrencyWith2Decimals())")
                 .padding(12)
+                .layoutPriority(1)
                 .lineLimit(1)
                 .foregroundStyle(Color.theme.accent)
                 .background(
@@ -66,7 +65,7 @@ private extension PortfolioTransactionView {
             Text("Save")
                 .foregroundStyle(Color.theme.background)
                 .padding()
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: 40)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.theme.accent)

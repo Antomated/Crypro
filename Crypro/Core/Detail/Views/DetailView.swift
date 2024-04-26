@@ -137,10 +137,6 @@ private extension DetailView {
                    let url = URL(string: redditURL) {
                     LinkView(title: "Reddit", url: url)
                 }
-                if let facebookURL = viewModel.facebookURL,
-                   let url = URL(string: facebookURL) {
-                    LinkView(title: "Facebook", url: url)
-                }
                 Spacer()
             }
         }

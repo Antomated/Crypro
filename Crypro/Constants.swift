@@ -13,6 +13,7 @@
 // TODO: Naming
 // TODO: private
 // TODO: final
+// TODO: prints
 // TODO: Marks
 // TODO: Extension splits
 // TODO: Private
@@ -20,6 +21,7 @@
 // TODO: Empty lines
 // TODO: Periphery
 // TODO: Folder tree & namings
+// TODO: AsyncImage
 
 import Foundation
 
