@@ -13,19 +13,12 @@ final class MarketDataService {
     @Published var marketData: MarketData?
     private var marketDataSubscription: AnyCancellable?
 
-    private var decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
-
-    init() { 
+    init() {
         getData()
     }
 
     func getData() {
-        marketDataSubscription = NetworkManager.download(from: .globalData)
-            .decode(type: GlobalData.self, decoder: decoder)
+        marketDataSubscription = NetworkManager.download(from: .globalData, convertTo: GlobalData.self)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: NetworkManager.handleCompletion,

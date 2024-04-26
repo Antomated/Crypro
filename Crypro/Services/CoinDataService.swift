@@ -14,19 +14,12 @@ final class CoinDataService {
     @Published var allCoins: [Coin] = []
     private var coinSubscription: AnyCancellable?
 
-    private var decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
-
     init() {
         getCoins()
     }
 
     func getCoins() {
-        coinSubscription = NetworkManager.download(from: .allCoins)
-            .decode(type: [Coin].self, decoder: decoder)
+        coinSubscription = NetworkManager.download(from: .allCoins, convertTo: [Coin].self)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: NetworkManager.handleCompletion,

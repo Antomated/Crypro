@@ -10,7 +10,14 @@ import Foundation
 import Combine
 
 final class NetworkManager {
-    static func download(from endpoint: NetworkEndpoint) -> AnyPublisher<Data, Error> {
+    static var decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
+
+    static func download<T>(from endpoint: NetworkEndpoint,
+                            convertTo type: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
         guard let url = endpoint.url else {
             return Fail(error: NetworkError.invalidEndpoint).eraseToAnyPublisher()
         }
@@ -27,6 +34,7 @@ final class NetworkManager {
                 }
                 return Fail(error: error).eraseToAnyPublisher()
             }
+            .decode(type: T.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
 
