@@ -10,6 +10,7 @@ import SwiftUI
 struct PortfolioView: View {
     @EnvironmentObject private var viewModel: HomeViewModel
     @FocusState private var searchIsFocused: Bool
+    @Environment(\.dismiss) var dismiss
     @State private var quantityText: String = ""
     @State private var keyboardHeight: CGFloat = 0
 
@@ -35,7 +36,16 @@ struct PortfolioView: View {
                 .toolbar {
                     ToolbarItem(
                         placement: .topBarLeading,
-                        content: { CrossButton().environmentObject(viewModel) }
+                        content: {
+                            Button {
+                                dismiss()
+                                viewModel.selectedCoin = nil
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.headline)
+                            }
+                            .foregroundColor(.theme.accent)
+                        }
                     )
                 }
                 .onChange(of: viewModel.searchText, perform: { value in
@@ -43,7 +53,6 @@ struct PortfolioView: View {
                         viewModel.selectedCoin = nil
                     }
                 })
-                .keyboardHeight($keyboardHeight)
                 .animation(.easeOut(duration: 0.16), value: UUID())
             }
         }

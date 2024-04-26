@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     let personalURL = URL(string: "https://github.com/beavean")!
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
@@ -25,7 +25,7 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Image(systemName: "xmark")
                             .font(.headline)

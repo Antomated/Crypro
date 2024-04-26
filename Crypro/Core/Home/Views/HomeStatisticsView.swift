@@ -17,6 +17,7 @@ struct HomeStatisticsView: View {
                 StatisticView(stat: stat)
                 // TODO: Geometry reader on UIScreen.main.bounds.width
                     .frame(width: UIScreen.main.bounds.width / 3)
+                    .offset(x: showPortfolio ? 0 : -12)
             }
         }
         .frame(
