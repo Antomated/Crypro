@@ -98,13 +98,11 @@ private extension DetailView {
             if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
                 VStack(alignment: .leading) {
                     Text(coinDescription)
-                        .lineLimit(showFullDescription ? nil : 3)
+                        .lineLimit(showFullDescription ? .max : 3)
                         .font(.callout)
                         .foregroundStyle(Color.theme.secondaryText)
                     Button {
-                        withAnimation {
-                            showFullDescription.toggle()
-                        }
+                        showFullDescription.toggle()
                     } label: {
                         Text(showFullDescription ? "Collapse ↑" : "Read more ↓")
                     }
@@ -113,6 +111,7 @@ private extension DetailView {
                     .padding(.vertical, 1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.none, value: showFullDescription)
             }
         }
     }

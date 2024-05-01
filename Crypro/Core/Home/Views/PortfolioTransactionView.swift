@@ -11,6 +11,7 @@ struct PortfolioTransactionView: View {
 
     @EnvironmentObject private var viewModel: HomeViewModel
     @Binding var quantityText: String
+    @FocusState var quantityIsFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -46,6 +47,7 @@ private extension PortfolioTransactionView {
                         .strokeBorder(Color.theme.accent)
                 )
                 .keyboardType(.decimalPad)
+                .focused($quantityIsFocused)
             Text("= \(getCurrentValue().asCurrencyWith2Decimals())")
                 .padding(12)
                 .layoutPriority(1)
@@ -93,7 +95,7 @@ private extension PortfolioTransactionView {
         withAnimation(.easeIn) {
             removeSelectedCoin()
         }
-        UIApplication.shared.endEditing()
+        quantityIsFocused = false
     }
 
     func removeSelectedCoin() {

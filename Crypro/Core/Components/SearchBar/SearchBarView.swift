@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchBarView: View {
     @Binding var searchText: String
+    @FocusState private var textFieldIsFocused: Bool
 
     var body: some View {
         HStack {
@@ -21,6 +22,7 @@ struct SearchBarView: View {
                 .foregroundStyle(Color.theme.accent)
                 .autocorrectionDisabled()
                 .keyboardType(.alphabet)
+                .focused($textFieldIsFocused)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding()
@@ -28,7 +30,7 @@ struct SearchBarView: View {
                         .foregroundStyle(Color.theme.accent)
                         .opacity(searchText.isEmpty ? 0.0 : 1.0)
                         .onTapGesture {
-                            UIApplication.shared.endEditing()
+                            textFieldIsFocused = false
                             searchText = ""
                         }
                     , alignment: .trailing
