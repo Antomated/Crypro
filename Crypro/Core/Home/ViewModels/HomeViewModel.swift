@@ -128,7 +128,9 @@ private extension HomeViewModel {
             return stats
         }
 
-        let marketCap = Statistic(title: "Market Cap", value: data.marketCap, percentageChange: data.marketCapChangePercentage24HUsd)
+        let marketCap = Statistic(title: "Market Cap",
+                                  value: data.marketCap,
+                                  percentageChange: data.marketCapChangePercentage24HUsd)
         let volume = Statistic(title: "24h Volume", value: data.volume)
         let btcDominance = Statistic(title: "BTC Dominance", value: data.btcDominance)
 

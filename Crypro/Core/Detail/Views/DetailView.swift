@@ -106,7 +106,7 @@ private extension DetailView {
                     } label: {
                         Text(showFullDescription ? "Collapse ↑" : "Read more ↓")
                     }
-                    .tint(.blue)
+                    .tint(ColorTheme().green)
                     .font(.footnote.weight(.bold))
                     .padding(.vertical, 1)
                 }
@@ -168,7 +168,7 @@ private extension DetailView {
 
 #Preview {
     NavigationView {
-        DetailView(coin: Coin.coin)
+        DetailView(coin: Development.coin)
             .preferredColorScheme(.dark)
     }
 }

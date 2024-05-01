@@ -28,27 +28,34 @@ struct HomeView: View {
 
             // content layer
             VStack {
-                homeHeader
+                Text(showPortfolio ? "Portfolio" : "Live Prices")
+                    .font(.headline.weight(.heavy))
+                    .foregroundStyle(Color.theme.accent)
+                    .animation(.none, value: showPortfolio)
+                    .padding(.top)
                 HomeStatisticsView(showPortfolio: $showPortfolio)
                     .padding(.top)
                 SearchBarView(searchText: $viewModel.searchText)
                     .padding(.horizontal)
                     .padding(.vertical, 8)
                 columnTitles
-
-                if !showPortfolio {
-                    allCoinsList.transition(.move(edge: .leading))
-                } else {
-                    ZStack(alignment: .top) {
-                        if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
-                            portfolioEmptyText
-                        } else {
-                            allPortfolioCoinsList
+                ZStack {
+                    if !showPortfolio {
+                        allCoinsList.transition(.move(edge: .leading))
+                    } else {
+                        ZStack(alignment: .top) {
+                            if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
+                                portfolioEmptyText
+                            } else {
+                                allPortfolioCoinsList
+                            }
                         }
+                        .transition(.move(edge: .trailing))
                     }
-                    .transition(.move(edge: .trailing))
+                    homeFooter
+                        .zIndex(1)
+                        .shadow(color: ColorTheme().background, radius: 20)
                 }
-                Spacer(minLength: 0)
             }
             .sheet(isPresented: $showSettingsView, content: {
                 SettingsView()
@@ -68,36 +75,34 @@ struct HomeView: View {
 // MARK: COMPONENTS
 
 private extension HomeView {
-    var homeHeader: some View {
-        HStack {
-            ZStack {
-                CircleButtonView(iconName: showPortfolio ? "plus" : "info")
-                    .animation(.none, value: showPortfolio)
+    var homeFooter: some View {
+        VStack {
+            Spacer()
+            HStack {
+                ZStack {
+                    CircleButtonView(iconName: showPortfolio ? "plus" : "info")
+                        .animation(.none, value: showPortfolio)
+                        .onTapGesture {
+                            if showPortfolio {
+                                showPortfolioView.toggle()
+                            } else {
+                                showSettingsView.toggle()
+                            }
+                        }
+                    CircleButtonAnimationView(animate: $showPortfolio)
+                }
+                .frame(maxWidth: 60, maxHeight: 60)
+                Spacer()
+                CircleButtonView(iconName: "chevron.right")
+                    .rotationEffect(.degrees(showPortfolio ? 180 : 0))
                     .onTapGesture {
-                        if showPortfolio {
-                            showPortfolioView.toggle()
-                        } else {
-                            showSettingsView.toggle()
+                        withAnimation(.spring()) {
+                            showPortfolio.toggle()
                         }
                     }
-                CircleButtonAnimationView(animate: $showPortfolio)
             }
-            .frame(maxWidth: 50, maxHeight: 50)
-            Spacer()
-            Text(showPortfolio ? "Portfolio" : "Live Prices")
-                .font(.headline.weight(.heavy))
-                .foregroundStyle(Color.theme.accent)
-                .animation(.none, value: showPortfolio)
-            Spacer()
-            CircleButtonView(iconName: "chevron.right")
-                .rotationEffect(.degrees(showPortfolio ? 180 : 0))
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        showPortfolio.toggle()
-                    }
-                }
+            .padding([.leading, .trailing], 24)
         }
-        .padding(.horizontal)
     }
 
     var allCoinsList: some View {
@@ -112,8 +117,17 @@ private extension HomeView {
                     .listRowBackground(Color.theme.background)
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            Spacer()
+                .frame(height: 100)
+        }
         .padding(.horizontal, 12)
         .listStyle(.plain)
+        .mask(LinearGradient(gradient: Gradient(colors: [ColorTheme().black,
+                                                         ColorTheme().black,
+                                                         ColorTheme().black,
+                                                         .clear]),
+                             startPoint: .top, endPoint: .bottom))
     }
 
     var allPortfolioCoinsList: some View {
@@ -128,8 +142,17 @@ private extension HomeView {
                     .listRowBackground(Color.theme.background)
             }
         }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            Spacer()
+                .frame(height: 100)
+        }
         .padding(.horizontal, 12)
         .listStyle(.plain)
+        .mask(LinearGradient(gradient: Gradient(colors: [ColorTheme().black,
+                                                         ColorTheme().black,
+                                                         ColorTheme().black,
+                                                         .clear]),
+                             startPoint: .top, endPoint: .bottom))
     }
 
     var columnTitles: some View {

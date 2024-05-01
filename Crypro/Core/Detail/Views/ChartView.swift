@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 12.04.2024.
 //
-// TODO: Update chart UI
 
 import SwiftUI
 
@@ -131,6 +130,6 @@ private extension ChartView {
 }
 
 #Preview {
-    ChartView(coin: Coin.coin)
+    ChartView(coin: Development.coin)
         .preferredColorScheme(.dark)
 }

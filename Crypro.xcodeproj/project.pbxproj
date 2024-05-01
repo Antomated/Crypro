@@ -17,6 +17,7 @@
 		3A2AFB1B2BC0B4640001277F /* CoinDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AFB1A2BC0B4640001277F /* CoinDetailsService.swift */; };
 		3A2AFB1D2BC0B48F0001277F /* CoinDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AFB1C2BC0B48F0001277F /* CoinDetail.swift */; };
 		3A2AFB1F2BC0B4C40001277F /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AFB1E2BC0B4C40001277F /* String+HTML.swift */; };
+		3A3689052BE2FD0700C3B652 /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3689042BE2FD0700C3B652 /* SparkLine.swift */; };
 		3A3A09692BC7475F00379204 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A09682BC7475F00379204 /* HapticManager.swift */; };
 		3A4E46522BBDFCF1002B0687 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46512BBDFCF1002B0687 /* Statistic.swift */; };
 		3A4E46552BBDFE06002B0687 /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46542BBDFE06002B0687 /* StatisticView.swift */; };
@@ -66,6 +67,7 @@
 		3A2AFB1A2BC0B4640001277F /* CoinDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsService.swift; sourceTree = "<group>"; };
 		3A2AFB1C2BC0B48F0001277F /* CoinDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetail.swift; sourceTree = "<group>"; };
 		3A2AFB1E2BC0B4C40001277F /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
+		3A3689042BE2FD0700C3B652 /* SparkLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkLine.swift; sourceTree = "<group>"; };
 		3A3A09682BC7475F00379204 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		3A4E46512BBDFCF1002B0687 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		3A4E46542BBDFE06002B0687 /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
@@ -131,8 +133,9 @@
 		3A27B6C42BBB5C1700FCC327 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3A27B6C62BBB5C2300FCC327 /* ViewModels */,
+				3A3689032BE2FB7600C3B652 /* Models */,
 				3A27B6C52BBB5C1E00FCC327 /* Views */,
+				3A27B6C62BBB5C2300FCC327 /* ViewModels */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -153,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */,
-				3A4E46652BBE1568002B0687 /* SortOption.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -182,8 +184,8 @@
 		3A2AFB132BC0B3970001277F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				3A2AFB142BC0B3A70001277F /* ViewModels */,
 				3A2AFB152BC0B3AB0001277F /* Views */,
+				3A2AFB142BC0B3A70001277F /* ViewModels */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -203,6 +205,14 @@
 				3A85F8B72BC89C4600E18F26 /* ChartView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3A3689032BE2FB7600C3B652 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A4E46652BBE1568002B0687 /* SortOption.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		3A3A09672BC7475500379204 /* Haptic */ = {
@@ -234,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8740062BBB6D54004D1BCB /* Coin.swift */,
+				3A3689042BE2FD0700C3B652 /* SparkLine.swift */,
 				3A2AFB1C2BC0B48F0001277F /* CoinDetail.swift */,
 				3A4E46512BBDFCF1002B0687 /* Statistic.swift */,
 				3A4E46582BBE0308002B0687 /* MarketData.swift */,
@@ -482,6 +493,7 @@
 				3A87400C2BBB721D004D1BCB /* Development.swift in Sources */,
 				3A2AFB1D2BC0B48F0001277F /* CoinDetail.swift in Sources */,
 				3A2AFB1F2BC0B4C40001277F /* String+HTML.swift in Sources */,
+				3A3689052BE2FD0700C3B652 /* SparkLine.swift in Sources */,
 				3A9B6BCA2BBCAA7F00CD40D1 /* NetworkManager.swift in Sources */,
 				3A9B6BCE2BBCB05100CD40D1 /* Constants.swift in Sources */,
 				3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */,

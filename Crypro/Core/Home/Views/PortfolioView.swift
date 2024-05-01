@@ -16,19 +16,17 @@ struct PortfolioView: View {
 
     var body: some View {
         NavigationView {
-            ScrollViewReader { scrollViewReader in
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        SearchBarView(searchText: $viewModel.searchText)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    SearchBarView(searchText: $viewModel.searchText)
+                        .padding()
+                        .focused($searchIsFocused)
+                    coinLogoList
+                    if viewModel.selectedCoin != nil {
+                        PortfolioTransactionView(quantityText: $quantityText)
                             .padding()
-                            .focused($searchIsFocused)
-                        coinLogoList
-                        if viewModel.selectedCoin != nil {
-                            PortfolioTransactionView(quantityText: $quantityText)
-                                .padding()
-                                .animation(.none, value: UUID())
-                                .id("test")
-                        }
+                            .animation(.none, value: UUID())
+                            .id("test")
                     }
                 }
                 .background(Color.theme.background.ignoresSafeArea())

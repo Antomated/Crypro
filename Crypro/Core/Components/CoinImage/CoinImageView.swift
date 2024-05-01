@@ -32,5 +32,5 @@ struct CoinImageView: View {
 }
 
 #Preview {
-    CoinImageView(coin: Coin.coin)
+    CoinImageView(coin: Development.coin)
 }

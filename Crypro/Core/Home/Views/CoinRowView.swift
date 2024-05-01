@@ -73,11 +73,10 @@ private extension CoinRowView {
                 )
         }
         .font(.footnote)
-        // TODO: Geometry reader for iPad?
         .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
     }
 }
 
 #Preview {
-    CoinRowView(coin: Coin.coin, showHoldingsColumn: true)
+    CoinRowView(coin: Development.coin, showHoldingsColumn: true)
 }

@@ -28,7 +28,7 @@ struct CryproApp: App {
                 }
                 .navigationViewStyle(.stack)
                 .environmentObject(homeViewModel)
-
+                .accentColor(ColorTheme().green)
                 ZStack {
                     if showLaunchView {
                         LaunchView(showLaunchView: $showLaunchView)

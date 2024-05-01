@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 03.04.2024.
 //
-// TODO: folderName
 
 import Foundation
 import SwiftUI
@@ -12,10 +11,9 @@ import Combine
 
 final class CoinImageService {
     @Published var image: UIImage?
-
     private let coin: Coin
     private let fileManager = FilesManager.shared
-    private let folderName = "coin_images"
+    private let coinImagesFolder = #function
     private var imageSubscription: AnyCancellable?
     private let imageName: String
 
@@ -26,7 +24,7 @@ final class CoinImageService {
     }
 
     private func getCoinImage() {
-        if let savedImage = fileManager.getImage(imageName: imageName, folderName: folderName) {
+        if let savedImage = fileManager.getImage(imageName: imageName, folderName: coinImagesFolder) {
             image = savedImage
         } else {
             downloadCoinImage()
@@ -48,7 +46,7 @@ final class CoinImageService {
                     self.imageSubscription?.cancel()
                     self.fileManager.saveImage(image: downloadedImage,
                                                imageName: self.imageName,
-                                               folderName: self.folderName)
+                                               folderName: self.coinImagesFolder)
                 }
             )
     }

@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 03.04.2024.
 //
-// TODO: refactor computed vars
 
 import Foundation
 
@@ -19,23 +18,17 @@ struct MarketData: Decodable {
     let marketCapChangePercentage24HUsd: Double
 
     var marketCap: String {
-        if let item = totalMarketCap.first(where: { $0.key == "usd" }) {
-            return "$" + item.value.formattedWithAbbreviations()
-        }
-        return ""
+        guard let item = totalMarketCap.first(where: { $0.key == "usd" }) else { return "" }
+        return "$" + item.value.formattedWithAbbreviations()
     }
 
     var volume: String {
-        if let item = totalVolume.first(where: { $0.key == "usd" }) {
-            return "$" + item.value.formattedWithAbbreviations()
-        }
-        return ""
+        guard let item = totalVolume.first(where: { $0.key == "usd" }) else { return "" }
+        return "$" + item.value.formattedWithAbbreviations()
     }
 
     var btcDominance: String {
-        if let item = marketCapPercentage.first(where: { $0.key == "btc" }) {
-            return item.value.asPercentString()
-        }
-        return ""
+        guard let item = marketCapPercentage.first(where: { $0.key == "btc" }) else { return "" }
+        return item.value.asPercentString()
     }
 }
