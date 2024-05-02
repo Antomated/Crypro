@@ -14,7 +14,7 @@ enum NetworkEndpoint {
 }
 
 extension NetworkEndpoint {
-    var baseURL: String { Constants.baseURL }
+    var baseURL: String { Constants.apiBaseURL }
 
     var method: HTTPMethod {
         switch self {

@@ -24,7 +24,7 @@ struct ChartView: View {
         let priceChange = (data.last ?? 0) - (data.first ?? 0)
         lineColor = priceChange > 0 ? Color.theme.green : Color.theme.red
 
-        endingDate = Date(dateString: coin.lastUpdated ?? "")
+        endingDate = Date(dateString: coin.lastUpdated ?? "") ?? .now
         startingDate = endingDate.addingTimeInterval(-7 * 24 * 60 * 60)
     }
 
@@ -118,7 +118,7 @@ private extension ChartView {
         HStack {
             Text(startingDate.asShortDateString())
             Spacer()
-            Text("7 days chart")
+            Text(LocalizationKey.sevenDaysChart.localizedString)
             Spacer()
             Text(endingDate.asShortDateString())
         }
@@ -130,6 +130,6 @@ private extension ChartView {
 }
 
 #Preview {
-    ChartView(coin: Development.coin)
+    ChartView(coin: PreviewData.stubCoin)
         .preferredColorScheme(.dark)
 }

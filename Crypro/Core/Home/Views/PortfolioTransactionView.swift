@@ -39,7 +39,7 @@ private extension PortfolioTransactionView {
 
     var coinInputAmountView: some View {
         HStack {
-            TextField("Amount holding...", text: $quantityText)
+            TextField(LocalizationKey.amountHolding.localizedString, text: $quantityText)
                 .font(.callout)
                 .padding(12)
                 .background(
@@ -64,7 +64,7 @@ private extension PortfolioTransactionView {
         Button {
             saveButtonPressed()
         } label: {
-            Text("Save")
+            Text(LocalizationKey.saveButton.localizedString)
                 .foregroundStyle(Color.theme.background)
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: 40)

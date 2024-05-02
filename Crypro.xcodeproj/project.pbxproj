@@ -18,6 +18,8 @@
 		3A2AFB1D2BC0B48F0001277F /* CoinDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AFB1C2BC0B48F0001277F /* CoinDetail.swift */; };
 		3A2AFB1F2BC0B4C40001277F /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2AFB1E2BC0B4C40001277F /* String+HTML.swift */; };
 		3A3689052BE2FD0700C3B652 /* SparkLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3689042BE2FD0700C3B652 /* SparkLine.swift */; };
+		3A3689092BE445C900C3B652 /* LocalizationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3689082BE445C900C3B652 /* LocalizationKey.swift */; };
+		3A36890C2BE4489200C3B652 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A36890B2BE4489200C3B652 /* Localizable.strings */; };
 		3A3A09692BC7475F00379204 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A09682BC7475F00379204 /* HapticManager.swift */; };
 		3A4E46522BBDFCF1002B0687 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46512BBDFCF1002B0687 /* Statistic.swift */; };
 		3A4E46552BBDFE06002B0687 /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46542BBDFE06002B0687 /* StatisticView.swift */; };
@@ -33,7 +35,7 @@
 		3A85F8BA2BC89CA800E18F26 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F8B92BC89CA800E18F26 /* Date+String.swift */; };
 		3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740062BBB6D54004D1BCB /* Coin.swift */; };
 		3A8740092BBB71CB004D1BCB /* CoinRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740082BBB71CB004D1BCB /* CoinRowView.swift */; };
-		3A87400C2BBB721D004D1BCB /* Development.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* Development.swift */; };
+		3A87400C2BBB721D004D1BCB /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400B2BBB721D004D1BCB /* PreviewData.swift */; };
 		3A87400E2BBB7659004D1BCB /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87400D2BBB7659004D1BCB /* Color+Theme.swift */; };
 		3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */; };
 		3A8740152BBB7D83004D1BCB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */; };
@@ -68,6 +70,8 @@
 		3A2AFB1C2BC0B48F0001277F /* CoinDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetail.swift; sourceTree = "<group>"; };
 		3A2AFB1E2BC0B4C40001277F /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		3A3689042BE2FD0700C3B652 /* SparkLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparkLine.swift; sourceTree = "<group>"; };
+		3A3689082BE445C900C3B652 /* LocalizationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKey.swift; sourceTree = "<group>"; };
+		3A36890B2BE4489200C3B652 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3A3A09682BC7475F00379204 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		3A4E46512BBDFCF1002B0687 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		3A4E46542BBDFE06002B0687 /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
@@ -83,7 +87,7 @@
 		3A85F8B92BC89CA800E18F26 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		3A8740062BBB6D54004D1BCB /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		3A8740082BBB71CB004D1BCB /* CoinRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowView.swift; sourceTree = "<group>"; };
-		3A87400B2BBB721D004D1BCB /* Development.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Development.swift; sourceTree = "<group>"; };
+		3A87400B2BBB721D004D1BCB /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		3A87400D2BBB7659004D1BCB /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
 		3A8740122BBB77BB004D1BCB /* Double+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatter.swift"; sourceTree = "<group>"; };
 		3A8740142BBB7D83004D1BCB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -213,6 +217,33 @@
 				3A4E46652BBE1568002B0687 /* SortOption.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3A3689062BE444D200C3B652 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3AC51A1E2BBB539B004E643B /* Assets.xcassets */,
+				3A36890A2BE4487300C3B652 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3A3689072BE4450B00C3B652 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3AC51A1A2BBB539A004E643B /* CryproApp.swift */,
+				3A9B6BCD2BBCB05100CD40D1 /* Constants.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3A36890A2BE4487300C3B652 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				3A3689082BE445C900C3B652 /* LocalizationKey.swift */,
+				3A36890B2BE4489200C3B652 /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		3A3A09672BC7475500379204 /* Haptic */ = {
@@ -366,15 +397,13 @@
 		3AC51A192BBB539A004E643B /* Crypro */ = {
 			isa = PBXGroup;
 			children = (
-				3AC51A1A2BBB539A004E643B /* CryproApp.swift */,
-				3A9B6BCD2BBCB05100CD40D1 /* Constants.swift */,
-				3A87400B2BBB721D004D1BCB /* Development.swift */,
+				3A3689072BE4450B00C3B652 /* App */,
 				3A9B6BC62BBCAA2900CD40D1 /* Utilities */,
 				3A87400A2BBB720F004D1BCB /* Extensions */,
 				3A9B6BC32BBCA7AC00CD40D1 /* Services */,
 				3A8740052BBB6D35004D1BCB /* Models */,
 				3A27B6C32BBB5C0D00FCC327 /* Core */,
-				3AC51A1E2BBB539B004E643B /* Assets.xcassets */,
+				3A3689062BE444D200C3B652 /* Resources */,
 				3AC51A202BBB539B004E643B /* Preview Content */,
 			);
 			path = Crypro;
@@ -384,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				3AC51A212BBB539B004E643B /* Preview Assets.xcassets */,
+				3A87400B2BBB721D004D1BCB /* PreviewData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -448,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABC9F512BD480B8002D944F /* LaunchScreen.storyboard in Resources */,
+				3A36890C2BE4489200C3B652 /* Localizable.strings in Resources */,
 				3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */,
 				3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */,
 			);
@@ -490,7 +521,7 @@
 				3A9B6BCC2BBCAADB00CD40D1 /* NetworkError.swift in Sources */,
 				3A4E46572BBE013A002B0687 /* HomeStatisticsView.swift in Sources */,
 				3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */,
-				3A87400C2BBB721D004D1BCB /* Development.swift in Sources */,
+				3A87400C2BBB721D004D1BCB /* PreviewData.swift in Sources */,
 				3A2AFB1D2BC0B48F0001277F /* CoinDetail.swift in Sources */,
 				3A2AFB1F2BC0B4C40001277F /* String+HTML.swift in Sources */,
 				3A3689052BE2FD0700C3B652 /* SparkLine.swift in Sources */,
@@ -502,6 +533,7 @@
 				3A85F8B82BC89C4600E18F26 /* ChartView.swift in Sources */,
 				3A4E46662BBE1568002B0687 /* SortOption.swift in Sources */,
 				3AC51A1B2BBB539A004E643B /* CryproApp.swift in Sources */,
+				3A3689092BE445C900C3B652 /* LocalizationKey.swift in Sources */,
 				3A9B6BD62BBCC25F00CD40D1 /* CoinImageViewModel.swift in Sources */,
 				3A9B6BDE2BBCCE4600CD40D1 /* SearchBarView.swift in Sources */,
 				3A9B6BD02BBCB68600CD40D1 /* HTTPMethod.swift in Sources */,

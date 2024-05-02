@@ -78,5 +78,5 @@ private extension CoinRowView {
 }
 
 #Preview {
-    CoinRowView(coin: Development.coin, showHoldingsColumn: true)
+    CoinRowView(coin: PreviewData.stubCoin, showHoldingsColumn: true)
 }

@@ -68,11 +68,11 @@ struct DetailView: View {
 
 private extension DetailView {
     var overviewHeader: some View {
-        getStatDetailsHeader(with: "Overview")
+        getStatDetailsHeader(with: LocalizationKey.overview.localizedString)
     }
 
     var additionalHeader: some View {
-        getStatDetailsHeader(with: "Additional Details")
+        getStatDetailsHeader(with: LocalizationKey.additionalDetails.localizedString)
     }
 
     var overviewGrid: some View {
@@ -104,7 +104,9 @@ private extension DetailView {
                     Button {
                         showFullDescription.toggle()
                     } label: {
-                        Text(showFullDescription ? "Collapse ↑" : "Read more ↓")
+                        Text(showFullDescription
+                             ? LocalizationKey.collapse.localizedString
+                             : LocalizationKey.readMore.localizedString)
                     }
                     .tint(ColorTheme().green)
                     .font(.footnote.weight(.bold))
@@ -116,25 +118,24 @@ private extension DetailView {
         }
     }
 
-    // TODO: Caseiterable enum
     var linkSection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if let homeURL = viewModel.websiteURL,
                    let url = URL(string: homeURL) {
-                    LinkView(title: "Home", url: url)
+                    LinkView(title: LocalizationKey.website.localizedString, url: url)
                 }
                 if let twitterURL = viewModel.twitterURL,
                    let url = URL(string: twitterURL) {
-                    LinkView(title: "Twitter", url: url)
+                    LinkView(title: LocalizationKey.twitter.localizedString, url: url)
                 }
                 if let telegramURL = viewModel.telegramURL,
                    let url = URL(string: telegramURL) {
-                    LinkView(title: "Telegram", url: url)
+                    LinkView(title: LocalizationKey.telegram.localizedString, url: url)
                 }
                 if let redditURL = viewModel.redditURL,
                    let url = URL(string: redditURL) {
-                    LinkView(title: "Reddit", url: url)
+                    LinkView(title: LocalizationKey.reddit.localizedString, url: url)
                 }
                 Spacer()
             }
@@ -168,7 +169,7 @@ private extension DetailView {
 
 #Preview {
     NavigationView {
-        DetailView(coin: Development.coin)
+        DetailView(coin: PreviewData.stubCoin)
             .preferredColorScheme(.dark)
     }
 }

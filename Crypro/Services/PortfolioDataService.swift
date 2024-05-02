@@ -11,8 +11,8 @@ import CoreData
 class PortfolioDataService {
 
     private let container: NSPersistentContainer
-    private let containerName: String = "PortfolioContainer"
-    private let entityName: String = "Portfolio"
+    private let containerName = "PortfolioContainer"
+    private let entityName = "Portfolio"
 
     @Published var savedEntities = [Portfolio]()
 

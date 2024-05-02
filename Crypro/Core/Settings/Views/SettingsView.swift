@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    let personalURL = URL(string: "https://github.com/beavean")!
+    let personalURL = URL(string: Constants.gitHubUrl)!
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -48,23 +48,21 @@ private extension SettingsView {
                         .resizable()
                         .frame(width: 120, height: 120)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
-                    Text("CRYPRO")
+                    Text(Constants.appName)
                         .font(.headline.weight(.heavy))
                         .foregroundStyle(Color.launch.accent)
                 })
                 VStack(alignment: .center) {
                     Spacer()
-                    Text("The application displays information and statistics for top crypto coins with portfolio tracking functionality.")
+                    Text(LocalizationKey.appDescription.localizedString)
                         .font(.caption2.weight(.medium))
                     .foregroundStyle(Color.theme.accent)
                     Spacer()
-                    Text("""
-                        Developed by @beavean
-                        """)
+                    Text(LocalizationKey.developedBy.localizedString + Constants.gitHubNickname)
                     .font(.caption.weight(.medium))
                     .foregroundStyle(Color.theme.accent)
                     Link(destination: personalURL) {
-                        Text("Visit GitHub")
+                        Text(LocalizationKey.visitGitHub.localizedString)
                             .frame(maxWidth: .infinity)
                             .font(.caption)
                             .foregroundStyle(Color.theme.accent)

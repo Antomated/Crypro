@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct LaunchView: View {
-    @State private var loadingText: [String] = "CRYPRO".map { String($0) }
+    @State private var loadingText: [String] = Constants.appName.map { String($0) }
     @State private var showLoadingText: Bool = false
     @State private var counter: Int = 0
     @State private var loops: Int = 0
     @Binding var showLaunchView: Bool
 
-    private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ZStack {
@@ -50,7 +50,7 @@ struct LaunchView: View {
                 if counter == loadingText.count - 1 {
                     loops += 1
                     counter = 0
-                    if loops >= 2 {
+                    if loops >= 3 {
                         showLaunchView = false
                     }
                 } else {

@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 04.04.2024.
 //
-// TODO: Move
 
 import Foundation
 

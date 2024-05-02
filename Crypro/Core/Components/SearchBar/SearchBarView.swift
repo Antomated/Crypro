@@ -18,7 +18,7 @@ struct SearchBarView: View {
                     searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent
                 )
 
-            TextField("Search by name or symbol...", text: $searchText)
+            TextField(LocalizationKey.searchByNameOrSymbol.localizedString, text: $searchText)
                 .foregroundStyle(Color.theme.accent)
                 .autocorrectionDisabled()
                 .keyboardType(.alphabet)

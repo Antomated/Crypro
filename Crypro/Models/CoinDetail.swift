@@ -34,12 +34,12 @@ struct Links: Decodable {
     private let telegramChannelIdentifier: String?
 
     var twitterURL: String? {
-        guard let screenName = twitterScreenName, !screenName.isEmpty else { return nil }
-        return "https://twitter.com/\(screenName)"
+        guard let twitterName = twitterScreenName, !twitterName.isEmpty else { return nil }
+        return Constants.twitterBaseUrl + twitterName
     }
 
     var telegramURL: String? {
-        guard let identifier = telegramChannelIdentifier, !identifier.isEmpty else { return nil }
-        return "https://t.me/\(identifier)"
+        guard let telegramIdentifier = telegramChannelIdentifier, !telegramIdentifier.isEmpty else { return nil }
+        return Constants.telegramBaseUrl + telegramIdentifier
     }
 }

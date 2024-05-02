@@ -26,11 +26,10 @@ struct PortfolioView: View {
                         PortfolioTransactionView(quantityText: $quantityText)
                             .padding()
                             .animation(.none, value: UUID())
-                            .id("test")
                     }
                 }
                 .background(Color.theme.background.ignoresSafeArea())
-                .navigationTitle("Edit Portfolio")
+                .navigationTitle(LocalizationKey.editPortfolio.localizedString)
                 .toolbar {
                     ToolbarItem(
                         placement: .topBarLeading,

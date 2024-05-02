@@ -128,11 +128,11 @@ private extension HomeViewModel {
             return stats
         }
 
-        let marketCap = Statistic(title: "Market Cap",
+        let marketCap = Statistic(title: LocalizationKey.marketCap.localizedString,
                                   value: data.marketCap,
                                   percentageChange: data.marketCapChangePercentage24HUsd)
-        let volume = Statistic(title: "24h Volume", value: data.volume)
-        let btcDominance = Statistic(title: "BTC Dominance", value: data.btcDominance)
+        let volume = Statistic(title: LocalizationKey.volume24h.localizedString, value: data.volume)
+        let btcDominance = Statistic(title: LocalizationKey.btcDominance.localizedString, value: data.btcDominance)
 
         let portfolioValue = portfolioCoins
             .map { $0.currentHoldingsValue }
@@ -145,7 +145,7 @@ private extension HomeViewModel {
         let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
 
         let portfolio = Statistic(
-            title: "Portfolio Value",
+            title: LocalizationKey.portfolioValue.localizedString,
             value: portfolioValue.asCurrencyWith2Decimals(),
             percentageChange: percentageChange
         )
@@ -157,10 +157,14 @@ private extension HomeViewModel {
     func getCoinDetailStatistics(coin: Coin?) -> [Statistic] {
         guard let coin else { return [] }
         return [
-            Statistic(title: "Market Cap:", value: coin.marketCap?.formattedWithAbbreviations() ?? ""),
-            Statistic(title: "Current Price:", value: (coin.currentPrice ?? 0.0).formattedWithAbbreviations()),
-            Statistic(title: "All Time Hight:", value: coin.ath?.formattedWithAbbreviations() ?? ""),
-            Statistic(title: "All Time Low:", value: coin.atl?.formattedWithAbbreviations() ?? "")
+            Statistic(title: LocalizationKey.marketCap.localizedString + ":", 
+                      value: coin.marketCap?.formattedWithAbbreviations() ?? ""),
+            Statistic(title: LocalizationKey.currentPrice.localizedString + ":",
+                      value: (coin.currentPrice ?? 0.0).formattedWithAbbreviations()),
+            Statistic(title: LocalizationKey.allTimeHigh.localizedString + ":",
+                      value: coin.ath?.formattedWithAbbreviations() ?? ""),
+            Statistic(title: LocalizationKey.allTimeLow.localizedString + ":",
+                      value: coin.atl?.formattedWithAbbreviations() ?? "")
         ]
     }
 

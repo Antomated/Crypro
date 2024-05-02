@@ -1,0 +1,73 @@
+/* 
+  Localizable.strings
+  Crypro
+
+  Created by Anton Petrov on 03.05.2024.
+  
+*/
+
+// MARK: - Home
+
+"portfolio" = "Portfolio";
+"livePrices" = "Live Prices";
+"searchByNameOrSymbol" = "Search by name or symbol...";
+"coinRow" = "Coin";
+"priceRow" = "Price";
+
+// MARK: - Portfolio
+
+"portfolioTip" = "You haven't added any coins to your portfolio yet. Click the + button in the ↙ bottom left corner to get started!";
+"editPortfolio" = "Edit Portfolio";
+"amountHolding" = "Amount holding...";
+"saveButton" = "Save";
+"holdingsRow" = "Holdings";
+
+// MARK: - Portfolio
+
+"marketCap" = "Market Cap";
+"volume24h" = "24h Volume";
+"btcDominance" = "BTC Dominance";
+"portfolioValue" = "Portfolio Value";
+"currentPrice" = "Current Price:";
+"allTimeHigh" = "All Time Hight:";
+"allTimeLow" = "All Time Low:";
+
+// MARK: - Details
+
+"sevenDaysChart" = "7 days chart";
+"overview" = "Overview";
+"additionalDetails" = "Additional Details";
+"collapse" = "Collapse ↑";
+"readMore" = "Read more ↓";
+
+"detailsCurrentPrice" = "Current Price";
+"marketCapitalization" = "Market Capitalization";
+"rank" = "Rank";
+"volume" = "Volume";
+"high24h" = "24H Hight";
+"low24h" = "24H Low";
+"priceChange24h" = "24H Price Change";
+"marketCapChange24h" = "24H Market Cap Change";
+"blockTime" = "Block Time";
+"hashingAlgorithm" = "Hashing Algorithm";
+"notAvailable" = "n/a";
+
+"website" = "Website";
+"twitter" = "Twitter";
+"telegram" = "Telegram";
+"reddit" = "Reddit";
+
+// MARK: - Information
+
+"information" = "Information";
+"appDescription" = "The application displays information and statistics for top crypto coins with portfolio tracking functionality.";
+"developedBy" = "Developed by ";
+"visitGitHub" = "Visit GitHub";
+
+// MARK: - Network Errors
+
+"badResponseFromUrlError" = "Portfolio";
+"retryLimitReachedError" = "Retry limit reached";
+"unknownErrorOccurredError" = "Unknown error occurred";
+"invalidEndpointError" = "Invalid endpoint";
+"decodingResponseError" = "Error decoding response";

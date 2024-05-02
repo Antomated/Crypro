@@ -37,11 +37,11 @@ struct StatisticView: View {
 
 #Preview {
     Group {
-        StatisticView(stat: Development.stat1)
+        StatisticView(stat: PreviewData.stubStatistic1)
             .padding()
-        StatisticView(stat: Development.stat2)
+        StatisticView(stat: PreviewData.stubStatistic2)
             .padding()
-        StatisticView(stat: Development.stat3)
+        StatisticView(stat: PreviewData.stubStatistic3)
             .padding()
     }
 }

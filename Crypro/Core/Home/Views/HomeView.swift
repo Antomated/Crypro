@@ -4,8 +4,6 @@
 //
 //  Created by Anton Petrov on 01.04.2024.
 //
-// TODO: List animation
-// TODO: Fix paddings
 
 import SwiftUI
 
@@ -28,7 +26,9 @@ struct HomeView: View {
 
             // content layer
             VStack {
-                Text(showPortfolio ? "Portfolio" : "Live Prices")
+                Text(showPortfolio
+                     ? LocalizationKey.portfolio.localizedString
+                     : LocalizationKey.livePrices.localizedString)
                     .font(.headline.weight(.heavy))
                     .foregroundStyle(Color.theme.accent)
                     .animation(.none, value: showPortfolio)
@@ -80,6 +80,7 @@ private extension HomeView {
             Spacer()
             HStack {
                 ZStack {
+                    // TODO: To image
                     CircleButtonView(iconName: showPortfolio ? "plus" : "info")
                         .animation(.none, value: showPortfolio)
                         .onTapGesture {
@@ -115,13 +116,13 @@ private extension HomeView {
                         segue(coin: coin)
                     }
                     .listRowBackground(Color.theme.background)
+                    .padding(.horizontal, 12)
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Spacer()
                 .frame(height: 100)
         }
-        .padding(.horizontal, 12)
         .listStyle(.plain)
         .mask(LinearGradient(gradient: Gradient(colors: [ColorTheme().black,
                                                          ColorTheme().black,
@@ -160,7 +161,7 @@ private extension HomeView {
 
             HStack {
                 Text("#")
-                Text("Coin")
+                Text(LocalizationKey.coinRow.localizedString)
                     .padding(.leading, 4)
                 Image(systemName: "chevron.down")
                     .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankReversed
@@ -178,7 +179,7 @@ private extension HomeView {
 
             if showPortfolio {
                 HStack {
-                    Text("Holdings")
+                    Text(LocalizationKey.holdingsRow.localizedString)
                     Image(systemName: "chevron.down")
                         .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsReversed
                                          ? Color.theme.green
@@ -193,7 +194,7 @@ private extension HomeView {
             }
 
             HStack {
-                Text("Price")
+                Text(LocalizationKey.priceRow.localizedString)
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 Image(systemName: "chevron.down")
                     .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceReversed
@@ -224,7 +225,7 @@ private extension HomeView {
     }
 
     var portfolioEmptyText: some View {
-        Text("You haven't added any coins to your portfolio yet. Click the + button in the top of the ↖ right left corner to get started! ")
+        Text(LocalizationKey.portfolioTip.localizedString)
             .font(.callout.weight(.medium))
             .foregroundStyle(Color.theme.secondaryText)
             .multilineTextAlignment(.center)
@@ -246,5 +247,5 @@ private extension HomeView {
         HomeView()
             .navigationBarHidden(true)
     }
-    .environmentObject(Development.homeViewModel)
+    .environmentObject(PreviewData.homeViewModel)
 }

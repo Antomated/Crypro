@@ -54,6 +54,7 @@ final class NetworkManager {
         return output.data
     }
 
+    // TODO: Improve
     static func handleCompletion(completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:

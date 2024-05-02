@@ -5,7 +5,6 @@
 //  Created by Anton Petrov on 01.04.2024.
 //
 // TODO: Update to navigation link?
-// TODO: Delete coins
 
 import SwiftUI
 

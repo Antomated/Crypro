@@ -38,5 +38,6 @@ struct LinkView: View {
 }
 
 #Preview {
-    LinkView(title: "Home", url: URL(string: "https://twitter.com")!)
+    LinkView(title: LocalizationKey.website.localizedString,
+             url: URL(string: Constants.twitterBaseUrl)!)
 }

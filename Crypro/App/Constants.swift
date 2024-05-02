@@ -26,7 +26,14 @@
 import Foundation
 
 enum Constants {
-    static let baseURL = "https://api.coingecko.com"
+    static let appName = "CRYPRO"
+    static let apiBaseURL = "https://api.coingecko.com"
     static let apiPath = "/api/v3"
     static let apiKey = "CG-tE4W8rqW6Kwk9vcaNwYXxyej"
+
+    static let gitHubUrl = "https://github.com/beavean"
+    static let gitHubNickname = "@beavean"
+
+    static let twitterBaseUrl = "https://twitter.com/"
+    static let telegramBaseUrl = "https://t.me/"
 }
