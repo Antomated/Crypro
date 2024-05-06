@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 01.04.2024.
 //
-// TODO: Update to navigation link?
 
 import SwiftUI
 
@@ -27,7 +26,7 @@ struct CryproApp: App {
                 }
                 .navigationViewStyle(.stack)
                 .environmentObject(homeViewModel)
-                .accentColor(ColorTheme().green)
+                .accentColor(.theme.green)
                 ZStack {
                     if showLaunchView {
                         LaunchView(showLaunchView: $showLaunchView)

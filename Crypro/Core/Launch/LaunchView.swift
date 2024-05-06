@@ -49,7 +49,7 @@ struct LaunchView: View {
                 if counter == loadingText.count - 1 {
                     loops += 1
                     counter = 0
-                    if loops >= 3 {
+                    if loops >= 2 {
                         showLaunchView = false
                     }
                 } else {

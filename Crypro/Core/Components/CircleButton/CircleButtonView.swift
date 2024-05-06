@@ -16,8 +16,8 @@ struct CircleButtonView: View {
             .frame(width: 60, height: 60)
             .background(
                 Circle()
-                    .strokeBorder(ColorTheme().green, lineWidth: 2)
-                    .background(Circle().fill(ColorTheme().background))
+                    .strokeBorder(Color.theme.green, lineWidth: 2)
+                    .background(Circle().fill(Color.theme.background))
             )
             .shadow(color: .green.opacity(1), radius: 5)
     }

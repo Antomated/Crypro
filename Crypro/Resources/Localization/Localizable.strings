@@ -17,22 +17,24 @@
 // MARK: - Portfolio
 
 "portfolioTip" = "You haven't added any coins to your portfolio yet. Click the + button in the bottom left corner to get started!\n↙";
-"editPortfolio" = "Edit Portfolio";
-"amountHolding" = "Amount holding...";
-"saveButton" = "Save";
 "holdingsRow" = "Holdings";
-
-// MARK: - Portfolio
-
 "marketCap" = "Market Cap";
 "volume24h" = "24h Volume";
 "btcDominance" = "BTC Dominance";
-"portfolioValue" = "Portfolio Value";
-"currentPrice" = "Current Price:";
-"allTimeHigh" = "All Time Hight:";
-"allTimeLow" = "All Time Low:";
 
-// MARK: - Details
+// MARK: - Edit Portfolio
+
+"editPortfolio" = "Edit Portfolio";
+"amountHolding" = "Amount holding...";
+"saveButton" = "Save";
+"marketCap" = "Market Cap";
+"portfolioValue" = "Portfolio Value";
+"currentPrice" = "Current Price";
+"currentPrice" = "Current Price";
+"allTimeHigh" = "All Time Hight";
+"allTimeLow" = "All Time Low";
+
+// MARK: - Coin Details
 
 "sevenDaysChart" = "7 days chart";
 "overview" = "Overview";

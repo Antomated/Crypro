@@ -16,60 +16,57 @@ struct HomeView: View {
     @State private var selectedCoin: Coin?
 
     var body: some View {
-        ZStack {
-            // background
-            Color.theme.background
-                .ignoresSafeArea()
-                .sheet(isPresented: $showPortfolioView, content: {
-                    PortfolioView()
-                })
+        NavigationStack {
+            ZStack {
+                // background
+                Color.theme.background
+                    .ignoresSafeArea()
+                    .sheet(isPresented: $showPortfolioView, content: {
+                        PortfolioView()
+                    })
 
-            // content layer
-            VStack {
-                Text(showPortfolio
-                     ? LocalizationKey.portfolio.localizedString
-                     : LocalizationKey.livePrices.localizedString)
+                // content layer
+                VStack {
+                    Text(showPortfolio
+                         ? LocalizationKey.portfolio.localizedString
+                         : LocalizationKey.livePrices.localizedString)
                     .font(.headline.weight(.heavy))
                     .foregroundStyle(Color.theme.accent)
                     .animation(.none, value: showPortfolio)
                     .padding(.top)
-                HomeStatisticsView(showPortfolio: $showPortfolio)
-                    .padding(.top)
-                    .frame(height: 70)
-                SearchBarView(searchText: $viewModel.searchText)
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                columnTitles
-                ZStack {
-                    if !showPortfolio {
-                        allCoinsList.transition(.move(edge: .leading))
-                    } else {
-                        ZStack(alignment: .top) {
-                            if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
-                                portfolioEmptyText
-                            } else {
-                                allPortfolioCoinsList
+                    HomeStatisticsView(showPortfolio: $showPortfolio)
+                        .padding(.top)
+                        .frame(height: 70)
+                    SearchBarView(searchText: $viewModel.searchText)
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                    columnTitles
+                    ZStack {
+                        if !showPortfolio {
+                            allCoinsList.transition(.move(edge: .leading))
+                        } else {
+                            ZStack(alignment: .top) {
+                                if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
+                                    portfolioEmptyText
+                                } else {
+                                    allPortfolioCoinsList
+                                }
                             }
+                            .transition(.move(edge: .trailing))
                         }
-                        .transition(.move(edge: .trailing))
+                        homeFooter
+                            .zIndex(1)
+                            .shadow(color: .theme.background, radius: 20)
                     }
-                    homeFooter
-                        .zIndex(1)
-                        .shadow(color: ColorTheme().background, radius: 20)
                 }
+                .sheet(isPresented: $showSettingsView, content: {
+                    SettingsView()
+                })
             }
-            .sheet(isPresented: $showSettingsView, content: {
-                SettingsView()
-            })
+            .navigationDestination(isPresented: $showDetailView) {
+                DetailLoadingView(coin: $selectedCoin)
+            }
         }
-        .background(
-            // TODO: Lazy navigation
-            NavigationLink(
-                destination: DetailLoadingView(coin: $selectedCoin),
-                isActive: $showDetailView,
-                label: { EmptyView() }
-            )
-        )
     }
 }
 
@@ -124,9 +121,9 @@ private extension HomeView {
                 .frame(height: 100)
         }
         .listStyle(.plain)
-        .mask(LinearGradient(gradient: Gradient(colors: [ColorTheme().black,
-                                                         ColorTheme().black,
-                                                         ColorTheme().black,
+        .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
+                                                         .theme.black,
+                                                         .theme.black,
                                                          .clear]),
                              startPoint: .top, endPoint: .bottom))
     }
@@ -149,9 +146,9 @@ private extension HomeView {
         }
         .padding(.horizontal, 12)
         .listStyle(.plain)
-        .mask(LinearGradient(gradient: Gradient(colors: [ColorTheme().black,
-                                                         ColorTheme().black,
-                                                         ColorTheme().black,
+        .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
+                                                         .theme.black,
+                                                         .theme.black,
                                                          .clear]),
                              startPoint: .top, endPoint: .bottom))
     }

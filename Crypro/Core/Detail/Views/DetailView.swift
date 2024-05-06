@@ -108,7 +108,7 @@ private extension DetailView {
                              ? LocalizationKey.collapse.localizedString
                              : LocalizationKey.readMore.localizedString)
                     }
-                    .tint(ColorTheme().green)
+                    .tint(.theme.green)
                     .font(.footnote.weight(.bold))
                     .padding(.vertical, 1)
                 }
