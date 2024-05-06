@@ -2,7 +2,7 @@
 //  PortfolioView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 04.04.2024.
+//  Created by Beavean on 04.04.2024.
 //
 
 import SwiftUI
@@ -12,7 +12,6 @@ struct PortfolioView: View {
     @FocusState private var searchIsFocused: Bool
     @Environment(\.dismiss) var dismiss
     @State private var quantityText: String = ""
-    @State private var keyboardHeight: CGFloat = 0
 
     var body: some View {
         NavigationView {
@@ -56,13 +55,13 @@ struct PortfolioView: View {
     }
 }
 
-// MARK: - Components
+// MARK: - UI Components
 
 private extension PortfolioView {
     private var searchListCoins: [Coin] {
         viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
-        ? viewModel.portfolioCoins
-        : viewModel.allCoins
+            ? viewModel.portfolioCoins
+            : viewModel.allCoins
     }
 
     var coinLogoList: some View {
@@ -82,8 +81,8 @@ private extension PortfolioView {
                             RoundedRectangle(cornerRadius: 8)
                                 .strokeBorder(
                                     (viewModel.selectedCoin?.id == coin.id)
-                                    ? Color.theme.green
-                                    : Color.clear
+                                        ? Color.theme.green
+                                        : Color.clear
                                 )
                         )
                 }
@@ -94,7 +93,7 @@ private extension PortfolioView {
     }
 }
 
-// MARK: - Private Functions
+// MARK: - Private methods
 
 private extension PortfolioView {
     func updateSelectedCoin(coin: Coin) {

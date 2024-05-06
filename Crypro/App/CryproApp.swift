@@ -2,7 +2,7 @@
 //  CryproApp.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 01.04.2024.
+//  Created by Beavean on 01.04.2024.
 //
 
 import SwiftUI

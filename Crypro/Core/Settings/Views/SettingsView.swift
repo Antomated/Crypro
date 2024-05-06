@@ -2,13 +2,13 @@
 //  SettingsView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 20.04.2024.
+//  Created by Beavean on 20.04.2024.
 //
 
 import SwiftUI
 
 struct SettingsView: View {
-    let personalURL = URL(string: Constants.gitHubUrl)!
+    private let personalURL = URL(string: Constants.gitHubUrl)!
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
@@ -36,7 +36,7 @@ struct SettingsView: View {
     }
 }
 
-// MARK: - COMPONENTS
+// MARK: - UI Components
 
 private extension SettingsView {
     var appSection: some View {
@@ -55,11 +55,11 @@ private extension SettingsView {
                     Spacer()
                     Text(LocalizationKey.appDescription.localizedString)
                         .font(.caption2.weight(.medium))
-                    .foregroundStyle(Color.theme.accent)
+                        .foregroundStyle(Color.theme.accent)
                     Spacer()
                     Text(LocalizationKey.developedBy.localizedString + Constants.gitHubNickname)
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(Color.theme.accent)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Color.theme.accent)
                     Link(destination: personalURL) {
                         Text(LocalizationKey.visitGitHub.localizedString)
                             .frame(maxWidth: .infinity)
@@ -78,8 +78,6 @@ private extension SettingsView {
         }
     }
 }
-
-// MARK: - PREVIEW
 
 #Preview {
     SettingsView()

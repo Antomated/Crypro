@@ -2,10 +2,9 @@
 //  FilesManager.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
-import Foundation
 import SwiftUI
 
 final class FilesManager {
@@ -19,7 +18,7 @@ final class FilesManager {
         else { return }
         do {
             try data.write(to: url)
-        } catch let error {
+        } catch {
             print("Error saving image. ImageName: \(imageName). \(error)")
         }
     }
@@ -31,17 +30,17 @@ final class FilesManager {
     }
 }
 
-// MARK: - Private Functions
+// MARK: - Private methods
 
 private extension FilesManager {
     func createFolderIfNeeded(folderName: String) {
-        guard let url = getURLForFolder(folderName: folderName) else { return }
-        if !FileManager.default.fileExists(atPath: url.path) {
-            do {
-                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-            } catch let error {
-                print("Error creating directory. FolderName: \(folderName). \(error)")
-            }
+        guard let url = getURLForFolder(folderName: folderName),
+              !FileManager.default.fileExists(atPath: url.path)
+        else { return }
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        } catch {
+            print("Error creating directory. FolderName: \(folderName). \(error)")
         }
     }
 

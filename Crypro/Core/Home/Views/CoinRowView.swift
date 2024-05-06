@@ -2,7 +2,7 @@
 //  CoinRowView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
 import SwiftUI
@@ -23,7 +23,7 @@ struct CoinRowView: View {
     }
 }
 
-// MARK: - COMPONENTS
+// MARK: - UI Components
 
 private extension CoinRowView {
     var leftColumn: some View {
@@ -52,9 +52,9 @@ private extension CoinRowView {
             Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
                 .bold()
             Text(
-                (coin.currentHoldings ?? 0) > 1000000
-                ? (coin.currentHoldings ?? 0).formattedWithAbbreviations()
-                : (coin.currentHoldings ?? 0).asNumberString()
+                (coin.currentHoldings ?? 0) > 1_000_000
+                    ? (coin.currentHoldings ?? 0).formattedWithAbbreviations()
+                    : (coin.currentHoldings ?? 0).asNumberString()
             )
         }
         .font(.footnote)
@@ -69,7 +69,7 @@ private extension CoinRowView {
             Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
                 .foregroundStyle(
                     (coin.priceChangePercentage24H ?? 0) >= 0 ?
-                    Color.theme.green : Color.theme.red
+                        Color.theme.green : Color.theme.red
                 )
         }
         .font(.footnote)

@@ -2,20 +2,14 @@
 //  LinkView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 20.04.2024.
+//  Created by Beavean on 20.04.2024.
 //
 
 import SwiftUI
 
 struct LinkView: View {
-    private let title: String
-    private let url: URL
-
-    init(title: String, url: URL) {
-        print("DEBUG! url: \(url)")
-        self.title = title
-        self.url = url
-    }
+    let title: String
+    let url: URL
 
     var body: some View {
         Link(destination: url) {

@@ -2,14 +2,13 @@
 //  MarketDataService.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 final class MarketDataService {
-
     @Published var marketData: MarketData?
     private var marketDataSubscription: AnyCancellable?
 

@@ -2,13 +2,14 @@
 //  CircleButtonView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 01.04.2024.
+//  Created by Beavean on 01.04.2024.
 //
 
 import SwiftUI
 
 struct CircleButtonView: View {
     let icon: SystemImage
+
     var body: some View {
         icon.image
             .font(.headline)

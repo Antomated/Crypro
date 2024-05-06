@@ -2,11 +2,11 @@
 //  NetworkManager.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
-import Foundation
 import Combine
+import SwiftUI
 
 final class NetworkManager {
     static var decoder: JSONDecoder = {
@@ -16,7 +16,7 @@ final class NetworkManager {
     }()
 
     static func download<T>(from endpoint: NetworkEndpoint,
-                            convertTo type: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
+                            convertTo _: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
         guard let url = endpoint.url else {
             return Fail(error: NetworkError.invalidEndpoint).eraseToAnyPublisher()
         }
@@ -28,7 +28,7 @@ final class NetworkManager {
                 try handleURLResponse(output: output, url: url)
             }
             .catch { error -> AnyPublisher<Data, Error> in
-                if (error as? NetworkError) == .badURLResponse(url: url) {
+                guard (error as? NetworkError) != .badURLResponse(url: url) else {
                     return Fail(error: NetworkError.retryLimitReached).eraseToAnyPublisher()
                 }
                 return Fail(error: error).eraseToAnyPublisher()
@@ -39,14 +39,15 @@ final class NetworkManager {
 
     static func download(url: URL) -> AnyPublisher<Data, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap({ try handleURLResponse(output: $0, url: url) })
+            .tryMap { try handleURLResponse(output: $0, url: url) }
             .retry(3)
             .eraseToAnyPublisher()
     }
 
     static func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
-              response.statusCode >= 200 && response.statusCode < 300 else {
+              response.statusCode >= 200 && response.statusCode < 300
+        else {
             print("no response or bad response")
             throw NetworkError.badURLResponse(url: url)
         }
@@ -57,7 +58,7 @@ final class NetworkManager {
         switch completion {
         case .finished:
             print("Request completed successfully.")
-        case .failure(let error):
+        case let .failure(error):
             print("Request failed with error: \(error.localizedDescription)")
         }
     }

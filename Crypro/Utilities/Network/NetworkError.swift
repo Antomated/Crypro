@@ -2,7 +2,7 @@
 //  NetworkError.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
 import Foundation
@@ -16,7 +16,7 @@ enum NetworkError: LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case .badURLResponse(url: let url): return LocalizationKey.badResponseFromUrlError.localizedString + "\(url)"
+        case let .badURLResponse(url: url): return LocalizationKey.badResponseFromUrlError.localizedString + "\(url)"
         case .retryLimitReached: return LocalizationKey.retryLimitReachedError.localizedString
         case .unknown: return LocalizationKey.unknownErrorOccurredError.localizedString
         case .invalidEndpoint: return LocalizationKey.invalidEndpointError.localizedString

@@ -2,13 +2,12 @@
 //  CoinImageView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
 import SwiftUI
 
 struct CoinImageView: View {
-
     @StateObject var viewModel: CoinImageViewModel
 
     init(coin: Coin) {
@@ -25,7 +24,7 @@ struct CoinImageView: View {
                 ProgressView()
             } else {
                 SystemImage.questionMark.image
-                    .foregroundStyle(Color.theme.secondaryText )
+                    .foregroundStyle(Color.theme.secondaryText)
             }
         }
     }

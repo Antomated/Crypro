@@ -2,10 +2,9 @@
 //  PreviewData.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
-import Foundation
 import SwiftUI
 
 enum PreviewData {
@@ -21,19 +20,19 @@ enum PreviewData {
         name: "Bitcoin",
         image: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
         currentPrice: 61408,
-        marketCap: 1141731099010,
+        marketCap: 1_141_731_099_010,
         marketCapRank: 1,
-        fullyDilutedValuation: 1285385611303,
-        totalVolume: 67190952980,
+        fullyDilutedValuation: 1_285_385_611_303,
+        totalVolume: 67_190_952_980,
         high24H: 61712,
         low24H: 56220,
         priceChange24: 3952.64,
         priceChangePercentage24H: 6.87944,
-        marketCapChange24H: 72110681879,
+        marketCapChange24H: 72_110_681_879,
         marketCapChangePercentage24H: 6.74171,
-        circulatingSupply: 18653043,
-        totalSupply: 21000000,
-        maxSupply: 21000000,
+        circulatingSupply: 18_653_043,
+        totalSupply: 21_000_000,
+        maxSupply: 21_000_000,
         ath: 61712,
         athChangePercentage: -0.97589,
         athDate: "2021-03-13T20:49:26.606Z",
@@ -212,5 +211,6 @@ enum PreviewData {
             57336.828870254896
         ]),
         priceChangePercentage24HInCurrency: 3952.64,
-        currentHoldings: 1.5)
+        currentHoldings: 1.5
+    )
 }

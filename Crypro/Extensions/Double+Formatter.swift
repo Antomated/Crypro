@@ -1,14 +1,13 @@
 //
-//  Double.swift
+//  Double+Formatter.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
 import Foundation
 
 extension Double {
-
     /// Converts a Double into a Currency with 2 decimal places
     ///  ```
     ///   Convert 1234.56 to $1,234.56
@@ -109,12 +108,12 @@ extension Double {
             let formatted = number / 1_000_000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)M"
-        case 1_000...:
-            let formatted = number / 1_000
+        case 1000...:
+            let formatted = number / 1000
             let stringFormatted = formatted.asNumberString()
             return "\(sign)\(stringFormatted)K"
         case 0...:
-            return self.asNumberString()
+            return asNumberString()
         default:
             return "\(sign)\(self)"
         }

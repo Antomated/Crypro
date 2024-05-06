@@ -2,7 +2,7 @@
 //  ChartView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 12.04.2024.
+//  Created by Beavean on 12.04.2024.
 //
 
 import SwiftUI
@@ -38,8 +38,8 @@ struct ChartView: View {
                 .overlay(
                     chartYAxis
                         .padding(.horizontal, 4)
-                        .font(.caption2)
-                    , alignment: .leading
+                        .font(.caption2),
+                    alignment: .leading
                 )
         }
         .font(.caption)
@@ -53,6 +53,8 @@ struct ChartView: View {
         }
     }
 }
+
+// MARK: - UI Components
 
 private extension ChartView {
     var chartView: some View {
@@ -80,7 +82,7 @@ private extension ChartView {
 
     var chartBackground: some View {
         VStack {
-            ForEach(0..<9) { _ in
+            ForEach(0 ..< 9) { _ in
                 Divider()
                 Spacer()
             }

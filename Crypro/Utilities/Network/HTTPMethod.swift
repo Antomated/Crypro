@@ -2,7 +2,7 @@
 //  HTTPMethod.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
 import Foundation

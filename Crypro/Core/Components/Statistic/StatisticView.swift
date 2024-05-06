@@ -2,13 +2,12 @@
 //  StatisticView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
 import SwiftUI
 
 struct StatisticView: View {
-
     let stat: Statistic
 
     var body: some View {

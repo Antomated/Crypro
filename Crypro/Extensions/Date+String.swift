@@ -2,7 +2,7 @@
 //  Date+String.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 12.04.2024.
+//  Created by Beavean on 12.04.2024.
 //
 
 import Foundation

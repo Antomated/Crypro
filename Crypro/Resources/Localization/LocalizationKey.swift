@@ -2,7 +2,7 @@
 //  LocalizationKey.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.05.2024.
+//  Created by Beavean on 03.05.2024.
 //
 
 import Foundation
@@ -24,7 +24,7 @@ enum LocalizationKey: String {
     case saveButton
     case holdingsRow
 
-    // MARK: - Portfolio
+    // MARK: - Edit Portfolio
 
     case marketCap
     case volume24h

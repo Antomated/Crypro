@@ -2,7 +2,7 @@
 //  SearchBarView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
 import SwiftUI
@@ -32,8 +32,8 @@ struct SearchBarView: View {
                         .onTapGesture {
                             textFieldIsFocused = false
                             searchText = ""
-                        }
-                    , alignment: .trailing
+                        },
+                    alignment: .trailing
                 )
         }
         .font(.callout)

@@ -2,14 +2,13 @@
 //  PortfolioDataService.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 04.04.2024.
+//  Created by Beavean on 04.04.2024.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-class PortfolioDataService {
-
+final class PortfolioDataService {
     private let container: NSPersistentContainer
     private let containerName = "PortfolioContainer"
     private let entityName = "Portfolio"
@@ -25,10 +24,9 @@ class PortfolioDataService {
             self.getPortfolio()
         }
     }
-
 }
 
-// MARK: - Public methods
+// MARK: - Internal methods
 
 extension PortfolioDataService {
     func updatePortfolio(coin: Coin, amount: Double) {
@@ -51,7 +49,7 @@ private extension PortfolioDataService {
         let request = NSFetchRequest<Portfolio>(entityName: entityName)
         do {
             savedEntities = try container.viewContext.fetch(request)
-        } catch let error {
+        } catch {
             print("Error Fetching Portfolio Entities: \(error)")
         }
     }
@@ -71,7 +69,7 @@ private extension PortfolioDataService {
     func save() {
         do {
             try container.viewContext.save()
-        } catch let error {
+        } catch {
             print("Error Saving to Core Data: \(error)")
         }
     }

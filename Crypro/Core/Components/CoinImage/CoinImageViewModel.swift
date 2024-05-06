@@ -2,24 +2,21 @@
 //  CoinImageViewModel.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
-import Foundation
-import SwiftUI
 import Combine
+import SwiftUI
 
-class CoinImageViewModel: ObservableObject {
+final class CoinImageViewModel: ObservableObject {
     @Published var image: UIImage?
     @Published var isLoading: Bool = true
 
-    private let coin: Coin
     private let dataService: CoinImageService
     private var cancellables = Set<AnyCancellable>()
 
     init(coin: Coin) {
-        self.coin = coin
-        self.dataService = CoinImageService(coin: coin)
+        dataService = CoinImageService(coin: coin)
         isLoading = true
         addSubscribers()
     }

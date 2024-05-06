@@ -2,13 +2,12 @@
 //  PortfolioTransactionView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 04.04.2024.
+//  Created by Beavean on 04.04.2024.
 //
 
 import SwiftUI
 
 struct PortfolioTransactionView: View {
-
     @EnvironmentObject private var viewModel: HomeViewModel
     @Binding var quantityText: String
     @FocusState var quantityIsFocused: Bool
@@ -23,7 +22,7 @@ struct PortfolioTransactionView: View {
     }
 }
 
-// MARK: - COMPONENTS
+// MARK: - UI Components
 
 private extension PortfolioTransactionView {
     var coinDetailStatView: some View {
@@ -77,14 +76,12 @@ private extension PortfolioTransactionView {
     }
 }
 
-// MARK: - PRIVATE METHODS
+// MARK: - Private methods
 
 private extension PortfolioTransactionView {
     func getCurrentValue() -> Double {
-        if let quantity = Double(quantityText) {
-            return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
-        }
-        return 0
+        guard let quantity = Double(quantityText) else { return 0 }
+        return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
     }
 
     func saveButtonPressed() {

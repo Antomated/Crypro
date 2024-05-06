@@ -2,7 +2,7 @@
 //  DetailView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 06.04.2024.
+//  Created by Beavean on 06.04.2024.
 //
 
 import SwiftUI
@@ -20,7 +20,6 @@ struct DetailLoadingView: View {
 }
 
 struct DetailView: View {
-
     @StateObject private var viewModel: DetailViewModel
     @State private var showFullDescription: Bool = false
 
@@ -64,7 +63,7 @@ struct DetailView: View {
     }
 }
 
-// MARK: - COMPONENTS
+// MARK: - UI Components
 
 private extension DetailView {
     var overviewHeader: some View {
@@ -105,8 +104,8 @@ private extension DetailView {
                         showFullDescription.toggle()
                     } label: {
                         Text(showFullDescription
-                             ? LocalizationKey.collapse.localizedString
-                             : LocalizationKey.readMore.localizedString)
+                            ? LocalizationKey.collapse.localizedString
+                            : LocalizationKey.readMore.localizedString)
                     }
                     .tint(.theme.green)
                     .font(.footnote.weight(.bold))
@@ -143,7 +142,7 @@ private extension DetailView {
     }
 }
 
-// MARK: - PRIVATE METHODS
+// MARK: - Private methods
 
 private extension DetailView {
     func getStatDetailsHeader(with title: String) -> some View {
@@ -159,11 +158,12 @@ private extension DetailView {
             columns: columns,
             alignment: .leading,
             spacing: spacing,
-            pinnedViews: []) {
-                ForEach(stat) { stat in
-                    StatisticView(stat: stat)
-                }
+            pinnedViews: []
+        ) {
+            ForEach(stat) { stat in
+                StatisticView(stat: stat)
             }
+        }
     }
 }
 

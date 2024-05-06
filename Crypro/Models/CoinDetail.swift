@@ -2,7 +2,7 @@
 //  CoinDetail.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 06.04.2024.
+//  Created by Beavean on 06.04.2024.
 //
 
 import Foundation
@@ -13,8 +13,6 @@ struct CoinDetails: Decodable {
     let name: String?
     let blockTimeInMinutes: Int?
     let hashingAlgorithm: String?
-    let categories: [String]?
-    let previewListing: Bool?
     let description: Description?
     let links: Links?
 

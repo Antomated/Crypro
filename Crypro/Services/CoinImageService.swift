@@ -2,12 +2,11 @@
 //  CoinImageService.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 03.04.2024.
+//  Created by Beavean on 03.04.2024.
 //
 
-import Foundation
-import SwiftUI
 import Combine
+import SwiftUI
 
 final class CoinImageService {
     @Published var image: UIImage?
@@ -19,7 +18,7 @@ final class CoinImageService {
 
     init(coin: Coin) {
         self.coin = coin
-        self.imageName = coin.id
+        imageName = coin.id
         getCoinImage()
     }
 
@@ -34,9 +33,9 @@ final class CoinImageService {
     private func downloadCoinImage() {
         guard let url = URL(string: coin.image) else { return }
         imageSubscription = NetworkManager.download(url: url)
-            .tryMap({ data in
-                return UIImage(data: data)
-            })
+            .tryMap { data in
+                UIImage(data: data)
+            }
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: NetworkManager.handleCompletion,

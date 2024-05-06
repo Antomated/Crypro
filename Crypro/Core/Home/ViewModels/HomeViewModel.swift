@@ -2,14 +2,13 @@
 //  HomeViewModel.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 02.04.2024.
+//  Created by Beavean on 02.04.2024.
 //
 
-import Foundation
 import Combine
 import SwiftUI
 
-class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     @Published var statistics: [Statistic] = []
     @Published var detailStatistics: [Statistic] = []
     @Published var allCoins: [Coin] = []
@@ -45,7 +44,6 @@ class HomeViewModel: ObservableObject {
 
 private extension HomeViewModel {
     func addSubscribers() {
-
         // updates allCoins
         $searchText
             .combineLatest(coinDataService.$allCoins, $sortOption)
@@ -107,9 +105,9 @@ private extension HomeViewModel {
         let lowerCasedText = text.lowercased()
 
         return coins.filter { coin in
-            return coin.name.lowercased().contains(lowerCasedText) ||
-            coin.symbol.lowercased().contains(lowerCasedText) ||
-            coin.id.lowercased().contains(lowerCasedText)
+            coin.name.lowercased().contains(lowerCasedText) ||
+                coin.symbol.lowercased().contains(lowerCasedText) ||
+                coin.id.lowercased().contains(lowerCasedText)
         }
     }
 

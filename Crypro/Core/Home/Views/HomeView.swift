@@ -2,7 +2,7 @@
 //  HomeView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 01.04.2024.
+//  Created by Beavean on 01.04.2024.
 //
 
 import SwiftUI
@@ -28,12 +28,12 @@ struct HomeView: View {
                 // content layer
                 VStack {
                     Text(showPortfolio
-                         ? LocalizationKey.portfolio.localizedString
-                         : LocalizationKey.livePrices.localizedString)
-                    .font(.headline.weight(.heavy))
-                    .foregroundStyle(Color.theme.accent)
-                    .animation(.none, value: showPortfolio)
-                    .padding(.top)
+                        ? LocalizationKey.portfolio.localizedString
+                        : LocalizationKey.livePrices.localizedString)
+                        .font(.headline.weight(.heavy))
+                        .foregroundStyle(Color.theme.accent)
+                        .animation(.none, value: showPortfolio)
+                        .padding(.top)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
                         .padding(.top)
                         .frame(height: 70)
@@ -70,7 +70,7 @@ struct HomeView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: - UI Components
 
 private extension HomeView {
     var homeFooter: some View {
@@ -155,15 +155,14 @@ private extension HomeView {
 
     var columnTitles: some View {
         HStack {
-
             HStack {
                 Text("#")
                 Text(LocalizationKey.coinRow.localizedString)
                     .padding(.leading, 4)
                 SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankReversed
-                                     ? Color.theme.green
-                                     : Color.theme.secondaryText)
+                        ? Color.theme.green
+                        : Color.theme.secondaryText)
                     .rotationEffect(.init(degrees: viewModel.sortOption == .rank ? 0 : 180))
             }
             .onTapGesture {
@@ -179,8 +178,8 @@ private extension HomeView {
                     Text(LocalizationKey.holdingsRow.localizedString)
                     SystemImage.chevronDown.image
                         .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsReversed
-                                         ? Color.theme.green
-                                         : Color.theme.secondaryText)
+                            ? Color.theme.green
+                            : Color.theme.secondaryText)
                         .rotationEffect(.init(degrees: viewModel.sortOption == .holdings ? 0 : 180))
                 }
                 .onTapGesture {
@@ -195,8 +194,8 @@ private extension HomeView {
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceReversed
-                                     ? Color.theme.green
-                                     : Color.theme.secondaryText)
+                        ? Color.theme.green
+                        : Color.theme.secondaryText)
                     .rotationEffect(.init(degrees: viewModel.sortOption == .price ? 0 : 180))
             }
             .onTapGesture {
@@ -213,7 +212,6 @@ private extension HomeView {
                 SystemImage.goForward.image
             }
             .rotationEffect(.init(degrees: viewModel.isLoading ? 360 : 0), anchor: .center)
-
         }
         .font(.caption)
         .foregroundStyle(Color.theme.secondaryText)
@@ -230,7 +228,7 @@ private extension HomeView {
     }
 }
 
-// MARK: - PRIVATE METHODS
+// MARK: - Private methods
 
 private extension HomeView {
     func segue(coin: Coin) {
