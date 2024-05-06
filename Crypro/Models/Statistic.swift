@@ -13,8 +13,6 @@ struct Statistic: Identifiable {
     let value: String
     let percentageChange: Double?
 
-    // TODO: Temporary
-
     init(title: String, value: String, percentageChange: Double? = nil) {
         self.title = title
         self.value = value

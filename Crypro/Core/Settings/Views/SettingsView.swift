@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 20.04.2024.
 //
-// TODO: Constants
 
 import SwiftUI
 
@@ -21,13 +20,13 @@ struct SettingsView: View {
                     appSection
                 }
             }
-            .navigationTitle("Information")
+            .navigationTitle(LocalizationKey.information.localizedString)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "xmark")
+                        SystemImage.xMark.image
                             .font(.headline)
                     }
                 }
@@ -44,7 +43,7 @@ private extension SettingsView {
         Section {
             HStack(spacing: 16) {
                 VStack(alignment: .center, content: {
-                    Image("logo")
+                    Image(.logo)
                         .resizable()
                         .frame(width: 120, height: 120)
                         .clipShape(RoundedRectangle(cornerRadius: 10))

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CircleButtonView: View {
-    let iconName: String
+    let icon: SystemImage
     var body: some View {
-        Image(systemName: iconName)
+        icon.image
             .font(.headline)
             .foregroundColor(Color.theme.accent)
             .frame(width: 60, height: 60)
@@ -25,10 +25,10 @@ struct CircleButtonView: View {
 
 #Preview {
     Group {
-        CircleButtonView(iconName: "plus")
+        CircleButtonView(icon: .plus)
             .previewLayout(.sizeThatFits)
 
-        CircleButtonView(iconName: "info")
+        CircleButtonView(icon: .info)
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
     }

@@ -38,7 +38,7 @@ struct PortfolioView: View {
                                 dismiss()
                                 viewModel.selectedCoin = nil
                             } label: {
-                                Image(systemName: "xmark")
+                                SystemImage.xMark.image
                                     .font(.headline)
                             }
                             .foregroundColor(.theme.accent)

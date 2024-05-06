@@ -13,7 +13,7 @@ struct SearchBarView: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
+            SystemImage.magnifyingGlass.image
                 .foregroundStyle(
                     searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent
                 )
@@ -24,7 +24,7 @@ struct SearchBarView: View {
                 .keyboardType(.alphabet)
                 .focused($textFieldIsFocused)
                 .overlay(
-                    Image(systemName: "xmark.circle.fill")
+                    SystemImage.xMarkCircleFill.image
                         .padding()
                         .offset(x: 10)
                         .foregroundStyle(Color.theme.accent)

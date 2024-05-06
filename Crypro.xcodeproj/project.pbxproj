@@ -50,6 +50,7 @@
 		3A9B6BD82BBCC2A500CD40D1 /* CoinImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BD72BBCC2A500CD40D1 /* CoinImageService.swift */; };
 		3A9B6BDB2BBCC3FA00CD40D1 /* FilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BDA2BBCC3FA00CD40D1 /* FilesManager.swift */; };
 		3A9B6BDE2BBCCE4600CD40D1 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B6BDD2BBCCE4600CD40D1 /* SearchBarView.swift */; };
+		3AB38A2E2BE83EBE007BA587 /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB38A2D2BE83EBE007BA587 /* SystemImage.swift */; };
 		3ABC9F4B2BD3236D002D944F /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC9F4A2BD3236D002D944F /* LinkView.swift */; };
 		3ABC9F4F2BD4692D002D944F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC9F4E2BD4692D002D944F /* SettingsView.swift */; };
 		3ABC9F512BD480B8002D944F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */; };
@@ -102,6 +103,7 @@
 		3A9B6BD72BBCC2A500CD40D1 /* CoinImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinImageService.swift; sourceTree = "<group>"; };
 		3A9B6BDA2BBCC3FA00CD40D1 /* FilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesManager.swift; sourceTree = "<group>"; };
 		3A9B6BDD2BBCCE4600CD40D1 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		3AB38A2D2BE83EBE007BA587 /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
 		3ABC9F4A2BD3236D002D944F /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		3ABC9F4E2BD4692D002D944F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				3AC51A1A2BBB539A004E643B /* CryproApp.swift */,
 				3A9B6BCD2BBCB05100CD40D1 /* Constants.swift */,
+				3AB38A2D2BE83EBE007BA587 /* SystemImage.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				3A9B6BDB2BBCC3FA00CD40D1 /* FilesManager.swift in Sources */,
 				3A4E465D2BBE0BAA002B0687 /* PortfolioView.swift in Sources */,
 				3A8740132BBB77BB004D1BCB /* Double+Formatter.swift in Sources */,
+				3AB38A2E2BE83EBE007BA587 /* SystemImage.swift in Sources */,
 				3A4E46622BBE0EAE002B0687 /* CoinLogoView.swift in Sources */,
 				3A9B6BC82BBCAA3F00CD40D1 /* NetworkEndpoint.swift in Sources */,
 				3A85F8BA2BC89CA800E18F26 /* Date+String.swift in Sources */,

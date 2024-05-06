@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 06.04.2024.
 //
-// TODO: Url to enum
 
 import Foundation
 import Combine
@@ -57,7 +56,8 @@ private extension DetailViewModel {
 // MARK: - ADD SUBSCRIBERS METHODS
 
 private extension DetailViewModel {
-    func mapDataToStatistics(coinDetails: CoinDetails?, coin: Coin) -> (overview: [Statistic], additional: [Statistic]) {
+    func mapDataToStatistics(coinDetails: CoinDetails?,
+                             coin: Coin) -> (overview: [Statistic], additional: [Statistic]) {
         let overviewArray = createOverviewArray(coin: coin)
         let additionalArray = createAdditionalArray(coin: coin, coinDetails: coinDetails)
         return (overviewArray, additionalArray)
@@ -67,7 +67,8 @@ private extension DetailViewModel {
         var overviewArray: [Statistic] = []
         let price = (coin.currentPrice ?? 0.0).asCurrencyWith6Decimals()
         let pricePercentChange = coin.priceChangePercentage24H
-        let priceStat = Statistic(title: LocalizationKey.detailsCurrentPrice.localizedString, value: price, percentageChange: pricePercentChange)
+        let priceStat = Statistic(title: LocalizationKey.detailsCurrentPrice.localizedString,
+                                  value: price, percentageChange: pricePercentChange)
 
         let marketCap = "$" + (coin.marketCap?.formattedWithAbbreviations() ?? "")
         let marketCapChangePercentage =  coin.marketCapChangePercentage24H
@@ -75,10 +76,12 @@ private extension DetailViewModel {
                                       value: marketCap, percentageChange: marketCapChangePercentage)
 
         let rank = "# \(coin.rank)"
-        let rankStat = Statistic(title: LocalizationKey.rank.localizedString, value: rank)
+        let rankStat = Statistic(title: LocalizationKey.rank.localizedString,
+                                            value: rank)
 
         let volume = "$" + (coin.totalVolume?.formattedWithAbbreviations() ?? "")
-        let volumeStat = Statistic(title: LocalizationKey.volume.localizedString, value: volume)
+        let volumeStat = Statistic(title: LocalizationKey.volume.localizedString,
+                                            value: volume)
 
         overviewArray.append(contentsOf: [priceStat, marketCapStat, rankStat, volumeStat])
         return overviewArray
@@ -87,27 +90,38 @@ private extension DetailViewModel {
     func createAdditionalArray(coin: Coin, coinDetails: CoinDetails?) -> [Statistic] {
         var additionalArray: [Statistic] = []
         let hight = coin.high24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
-        let hightStat = Statistic(title: LocalizationKey.high24h.localizedString, value: hight)
+        let hightStat = Statistic(title: LocalizationKey.high24h.localizedString,
+                                            value: hight)
 
         let low = coin.low24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
-        let lowStat = Statistic(title: LocalizationKey.low24h.localizedString, value: low)
+        let lowStat = Statistic(title: LocalizationKey.low24h.localizedString,
+                                            value: low)
 
         let priceChange = coin.priceChange24?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
         let pricePercentChange = coin.priceChangePercentage24H
-        let priceChangeStat = Statistic(title: LocalizationKey.priceChange24h.localizedString, value: priceChange, percentageChange: pricePercentChange)
+        let priceChangeStat = Statistic(title: LocalizationKey.priceChange24h.localizedString,
+                                        value: priceChange, percentageChange: pricePercentChange)
 
         let marketCapChange = "$" + (coin.marketCapChange24H?.formattedWithAbbreviations() ?? "")
         let marketCapChangePercentage =  coin.marketCapChangePercentage24H
-        let marketCapChangeStat = Statistic(title: LocalizationKey.marketCapChange24h.localizedString, value: marketCapChange, percentageChange: marketCapChangePercentage)
+        let marketCapChangeStat = Statistic(title: LocalizationKey.marketCapChange24h.localizedString,
+                                            value: marketCapChange, percentageChange: marketCapChangePercentage)
 
         let blockTime = coinDetails?.blockTimeInMinutes ?? 0
         let blockTimeString = blockTime == 0 ? LocalizationKey.notAvailable.localizedString : "\(blockTime)"
-        let blockStat = Statistic(title: LocalizationKey.blockTime.localizedString, value: blockTimeString)
+        let blockStat = Statistic(title: LocalizationKey.blockTime.localizedString,
+                                            value: blockTimeString)
 
         let hashing = coinDetails?.hashingAlgorithm ?? LocalizationKey.notAvailable.localizedString
-        let hashingStat = Statistic(title: LocalizationKey.hashingAlgorithm.localizedString, value: hashing)
+        let hashingStat = Statistic(title: LocalizationKey.hashingAlgorithm.localizedString,
+                                            value: hashing)
 
-        additionalArray.append(contentsOf: [hightStat, lowStat, priceChangeStat, marketCapChangeStat, blockStat, hashingStat])
+        additionalArray.append(contentsOf: [hightStat,
+                                            lowStat,
+                                            priceChangeStat,
+                                            marketCapChangeStat,
+                                            blockStat,
+                                            hashingStat])
         return additionalArray
     }
 }

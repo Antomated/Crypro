@@ -20,7 +20,7 @@ struct LinkView: View {
     var body: some View {
         Link(destination: url) {
             HStack(spacing: 0) {
-                Image(systemName: "arrow.up.right.square")
+                SystemImage.linkIcon.image
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 14, height: 14)

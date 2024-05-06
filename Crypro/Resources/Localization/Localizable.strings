@@ -16,7 +16,7 @@
 
 // MARK: - Portfolio
 
-"portfolioTip" = "You haven't added any coins to your portfolio yet. Click the + button in the ↙ bottom left corner to get started!";
+"portfolioTip" = "You haven't added any coins to your portfolio yet. Click the + button in the bottom left corner to get started!\n↙";
 "editPortfolio" = "Edit Portfolio";
 "amountHolding" = "Amount holding...";
 "saveButton" = "Save";

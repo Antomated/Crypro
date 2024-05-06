@@ -35,6 +35,7 @@ struct HomeView: View {
                     .padding(.top)
                 HomeStatisticsView(showPortfolio: $showPortfolio)
                     .padding(.top)
+                    .frame(height: 70)
                 SearchBarView(searchText: $viewModel.searchText)
                     .padding(.horizontal)
                     .padding(.vertical, 8)
@@ -80,8 +81,7 @@ private extension HomeView {
             Spacer()
             HStack {
                 ZStack {
-                    // TODO: To image
-                    CircleButtonView(iconName: showPortfolio ? "plus" : "info")
+                    CircleButtonView(icon: showPortfolio ? .plus : .info)
                         .animation(.none, value: showPortfolio)
                         .onTapGesture {
                             if showPortfolio {
@@ -94,7 +94,7 @@ private extension HomeView {
                 }
                 .frame(maxWidth: 60, maxHeight: 60)
                 Spacer()
-                CircleButtonView(iconName: "chevron.right")
+                CircleButtonView(icon: .chevronRight)
                     .rotationEffect(.degrees(showPortfolio ? 180 : 0))
                     .onTapGesture {
                         withAnimation(.spring()) {
@@ -163,7 +163,7 @@ private extension HomeView {
                 Text("#")
                 Text(LocalizationKey.coinRow.localizedString)
                     .padding(.leading, 4)
-                Image(systemName: "chevron.down")
+                SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankReversed
                                      ? Color.theme.green
                                      : Color.theme.secondaryText)
@@ -180,7 +180,7 @@ private extension HomeView {
             if showPortfolio {
                 HStack {
                     Text(LocalizationKey.holdingsRow.localizedString)
-                    Image(systemName: "chevron.down")
+                    SystemImage.chevronDown.image
                         .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsReversed
                                          ? Color.theme.green
                                          : Color.theme.secondaryText)
@@ -196,7 +196,7 @@ private extension HomeView {
             HStack {
                 Text(LocalizationKey.priceRow.localizedString)
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
-                Image(systemName: "chevron.down")
+                SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceReversed
                                      ? Color.theme.green
                                      : Color.theme.secondaryText)
@@ -213,7 +213,7 @@ private extension HomeView {
                     viewModel.reloadData()
                 }
             } label: {
-                Image(systemName: "goforward")
+                SystemImage.goForward.image
             }
             .rotationEffect(.init(degrees: viewModel.isLoading ? 360 : 0), anchor: .center)
 

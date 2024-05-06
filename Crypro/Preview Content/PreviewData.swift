@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 02.04.2024.
 //
-// TODO: Consider removing
 
 import Foundation
 import SwiftUI

@@ -12,18 +12,19 @@ struct HomeStatisticsView: View {
     @Binding var showPortfolio: Bool
 
     var body: some View {
-        HStack {
-            ForEach(viewModel.statistics) { stat in
-                StatisticView(stat: stat)
-                // TODO: Geometry reader on UIScreen.main.bounds.width
-                    .frame(width: (UIScreen.main.bounds.width - 12) / 3)
-                    .offset(x: showPortfolio ? 0 : -12)
+        GeometryReader { geometry in
+            HStack {
+                ForEach(viewModel.statistics) { stat in
+                    StatisticView(stat: stat)
+                        .frame(width: (geometry.size.width - 12) / 3)
+                        .offset(x: showPortfolio ? 0 : -12)
+                }
             }
+            .frame(
+                width: geometry.size.width,
+                alignment: showPortfolio ? .trailing : .leading
+            )
         }
-        .frame(
-            width: UIScreen.main.bounds.width,
-            alignment: showPortfolio ? .trailing : .leading
-        )
     }
 }
 

@@ -5,24 +5,6 @@
 //  Created by Anton Petrov on 02.04.2024.
 //
 
-// TODO: Launch screen?
-// TODO: if to guard
-// TODO: each view + preview
-// TODO: light and dark theme to all previews
-// TODO: remove foundation
-// TODO: Naming
-// TODO: private
-// TODO: final
-// TODO: prints
-// TODO: Marks
-// TODO: Extension splits
-// TODO: Private
-// TODO: Final
-// TODO: Empty lines
-// TODO: Periphery
-// TODO: Folder tree & namings
-// TODO: AsyncImage
-
 import Foundation
 
 enum Constants {

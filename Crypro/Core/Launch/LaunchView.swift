@@ -4,7 +4,6 @@
 //
 //  Created by Anton Petrov on 04.04.2024.
 //
-// TODO: WIP
 
 import SwiftUI
 
@@ -22,7 +21,7 @@ struct LaunchView: View {
             Color.launch.background
                 .ignoresSafeArea()
 
-            Image("logo")
+            Image(.logo)
                 .resizable()
                 .frame(width: 100, height: 100)
 

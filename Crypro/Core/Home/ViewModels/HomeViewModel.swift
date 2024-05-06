@@ -157,7 +157,7 @@ private extension HomeViewModel {
     func getCoinDetailStatistics(coin: Coin?) -> [Statistic] {
         guard let coin else { return [] }
         return [
-            Statistic(title: LocalizationKey.marketCap.localizedString + ":", 
+            Statistic(title: LocalizationKey.marketCap.localizedString + ":",
                       value: coin.marketCap?.formattedWithAbbreviations() ?? ""),
             Statistic(title: LocalizationKey.currentPrice.localizedString + ":",
                       value: (coin.currentPrice ?? 0.0).formattedWithAbbreviations()),
