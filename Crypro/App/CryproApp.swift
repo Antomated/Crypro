@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct CryproApp: App {
     @StateObject private var homeViewModel = HomeViewModel()
-    @State private var showLaunchView: Bool = true
+    @State private var showLaunchView = true
 
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
@@ -29,7 +29,7 @@ struct CryproApp: App {
                 .accentColor(.theme.green)
                 ZStack {
                     if showLaunchView {
-                        LaunchView(showLaunchView: $showLaunchView)
+                        LaunchView(showLaunchView: $showLaunchView, loadingData: $homeViewModel.showLaunchView)
                             .transition(.move(edge: .leading))
                     }
                 }

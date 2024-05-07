@@ -16,7 +16,7 @@ struct CoinImageView: View {
 
     var body: some View {
         ZStack {
-            if let image = viewModel.image {
+            if let image = viewModel.coinImage {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()

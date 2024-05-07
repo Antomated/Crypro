@@ -36,18 +36,20 @@ private extension DetailViewModel {
             .combineLatest($coin)
             .map(mapDataToStatistics)
             .sink { [weak self] returnedArrays in
-                self?.overviewStatistics = returnedArrays.overview
-                self?.additionalStatistics = returnedArrays.additional
+                guard let self else { return }
+                overviewStatistics = returnedArrays.overview
+                additionalStatistics = returnedArrays.additional
             }
             .store(in: &cancellables)
 
         coinDetailService.$coinDetails
             .sink { [weak self] coinDetail in
-                self?.coinDescription = coinDetail?.readableDescription
-                self?.websiteURL = coinDetail?.links?.homepage?.first
-                self?.redditURL = coinDetail?.links?.subredditURL
-                self?.twitterURL = coinDetail?.links?.twitterURL
-                self?.telegramURL = coinDetail?.links?.telegramURL
+                guard let self else { return }
+                coinDescription = coinDetail?.readableDescription
+                websiteURL = coinDetail?.links?.homepage?.first
+                redditURL = coinDetail?.links?.subredditURL
+                twitterURL = coinDetail?.links?.twitterURL
+                telegramURL = coinDetail?.links?.telegramURL
             }
             .store(in: &cancellables)
     }

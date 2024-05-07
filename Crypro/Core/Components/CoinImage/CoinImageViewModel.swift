@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 final class CoinImageViewModel: ObservableObject {
-    @Published var image: UIImage?
+    @Published var coinImage: UIImage?
     @Published var isLoading: Bool = true
 
     private let dataService: CoinImageService
@@ -24,8 +24,9 @@ final class CoinImageViewModel: ObservableObject {
     private func addSubscribers() {
         dataService.$image
             .sink(receiveValue: { [weak self] image in
-                self?.isLoading = false
-                self?.image = image
+                guard let self else { return }
+                isLoading = false
+                coinImage = image
             })
             .store(in: &cancellables)
     }

@@ -22,8 +22,9 @@ final class MarketDataService {
             .sink(
                 receiveCompletion: NetworkManager.handleCompletion,
                 receiveValue: { [weak self] globalData in
-                    self?.marketData = globalData.data
-                    self?.marketDataSubscription?.cancel()
+                    guard let self else { return }
+                    marketData = globalData.data
+                    marketDataSubscription?.cancel()
                 }
             )
     }

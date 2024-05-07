@@ -13,6 +13,7 @@ struct LaunchView: View {
     @State private var counter: Int = 0
     @State private var loops: Int = 0
     @Binding var showLaunchView: Bool
+    @Binding var loadingData: Bool
 
     private let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
 
@@ -45,15 +46,17 @@ struct LaunchView: View {
             showLoadingText.toggle()
         }
         .onReceive(timer) { _ in
-            withAnimation(.spring()) {
-                if counter == loadingText.count - 1 {
-                    loops += 1
-                    counter = 0
-                    if loops >= 2 {
-                        showLaunchView = false
+            DispatchQueue.main.async {
+                withAnimation(.spring()) {
+                    if counter == loadingText.count - 1 {
+                        loops += 1
+                        counter = 0
+                        if loops >= 2 && !loadingData {
+                            showLaunchView = false
+                        }
+                    } else {
+                        counter += 1
                     }
-                } else {
-                    counter += 1
                 }
             }
         }
@@ -61,5 +64,5 @@ struct LaunchView: View {
 }
 
 #Preview {
-    LaunchView(showLaunchView: .constant(true))
+    LaunchView(showLaunchView: .constant(true), loadingData: .constant(true))
 }

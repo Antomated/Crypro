@@ -23,9 +23,10 @@ final class CoinDetailsService {
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: NetworkManager.handleCompletion,
-                receiveValue: { [weak self] coinDetails in
-                    self?.coinDetails = coinDetails
-                    self?.coinSubscription?.cancel()
+                receiveValue: { [weak self] details in
+                    guard let self else { return }
+                    coinDetails = details
+                    coinSubscription?.cancel()
                 }
             )
     }

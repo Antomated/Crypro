@@ -17,6 +17,9 @@ final class HomeViewModel: ObservableObject {
     @Published var selectedCoin: Coin?
     @Published var isLoading: Bool = false
     @Published var sortOption: SortOption = .rank
+    @Published var showLaunchView = true {
+        didSet { print("DEBUG! showLaunchView: \(showLaunchView)") }
+    }
 
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
@@ -44,13 +47,25 @@ final class HomeViewModel: ObservableObject {
 
 private extension HomeViewModel {
     func addSubscribers() {
-        // updates allCoins
+
+        coinDataService.$allCoins
+            .combineLatest(marketDataService.$marketData)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] allCoins, marketData in
+                guard let self, !allCoins.isEmpty, let marketData else { return }
+                self.allCoins = allCoins
+                self.statistics = self.mapGlobalMarketData(data: marketData, portfolioCoins: self.portfolioCoins)
+                self.showLaunchView = false
+            }
+            .store(in: &cancellables)
+
         $searchText
             .combineLatest(coinDataService.$allCoins, $sortOption)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .map(filterAndSortCoins)
             .sink { [weak self] coins in
-                self?.allCoins = coins
+                guard let self else { return }
+                allCoins = coins
             }
             .store(in: &cancellables)
 
@@ -58,19 +73,19 @@ private extension HomeViewModel {
             .combineLatest(portfolioDataService.$savedEntities)
             .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] returnedCoins in
-                self?.portfolioCoins = returnedCoins
+                guard let self else { return }
+                portfolioCoins = returnedCoins
             }
             .store(in: &cancellables)
 
-        // updates detail statistics
         $selectedCoin
             .map(getCoinDetailStatistics)
             .sink { [weak self] stats in
-                self?.detailStatistics = stats
+                guard let self else { return }
+                detailStatistics = stats
             }
             .store(in: &cancellables)
 
-        // updates portfolioCoins
         $allCoins
             .combineLatest(portfolioDataService.$savedEntities)
             .map(mapAllCoinsToPortfolioCoins)
@@ -80,13 +95,13 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        // updates statistics
         marketDataService.$marketData
             .combineLatest($portfolioCoins)
             .map(mapGlobalMarketData)
             .sink { [weak self] stats in
-                self?.statistics = stats
-                self?.isLoading = false
+                guard let self else { return }
+                statistics = stats
+                isLoading = false
             }
             .store(in: &cancellables)
     }
