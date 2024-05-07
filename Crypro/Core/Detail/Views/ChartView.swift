@@ -14,16 +14,16 @@ struct ChartView: View {
     private let lineColor: Color
     private let startingDate: Date
     private let endingDate: Date
+    @Binding var startAnimation: Bool
     @State private var percentage: CGFloat = 0
 
-    init(coin: Coin) {
+    init(coin: Coin, startAnimation: Binding<Bool>) {
+        _startAnimation = startAnimation
         data = coin.sparklineIn7D?.price ?? []
         maxY = data.max() ?? 0
         minY = data.min() ?? 0
-
         let priceChange = (data.last ?? 0) - (data.first ?? 0)
         lineColor = priceChange > 0 ? Color.theme.green : Color.theme.red
-
         endingDate = Date(dateString: coin.lastUpdated ?? "") ?? .now
         startingDate = endingDate.addingTimeInterval(-7 * 24 * 60 * 60)
     }
@@ -44,10 +44,12 @@ struct ChartView: View {
         }
         .font(.caption)
         .foregroundStyle(Color.theme.secondaryText)
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation(.linear(duration: 2)) {
-                    percentage = 1.0
+        .onChange(of: startAnimation) { newValue in
+            if newValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.linear(duration: 2)) {
+                        percentage = 1.0
+                    }
                 }
             }
         }
@@ -132,6 +134,6 @@ private extension ChartView {
 }
 
 #Preview {
-    ChartView(coin: PreviewData.stubCoin)
+    ChartView(coin: PreviewData.stubCoin, startAnimation: .constant(true))
         .preferredColorScheme(.dark)
 }

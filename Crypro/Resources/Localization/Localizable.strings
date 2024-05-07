@@ -9,7 +9,7 @@
 // MARK: - Home
 
 "portfolio" = "Portfolio";
-"livePrices" = "Live Prices";
+"livePrices" = "Current Prices";
 "searchByNameOrSymbol" = "Search by name or symbol...";
 "coinRow" = "Coin";
 "priceRow" = "Price";

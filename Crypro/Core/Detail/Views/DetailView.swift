@@ -21,6 +21,8 @@ struct DetailLoadingView: View {
 
 struct DetailView: View {
     @StateObject private var viewModel: DetailViewModel
+    @State private var showLoader: Bool = true
+    @State private var startAnimation: Bool = false
     @State private var showFullDescription: Bool = false
 
     private let columns: [GridItem] = [
@@ -36,7 +38,7 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ChartView(coin: viewModel.coin)
+                ChartView(coin: viewModel.coin, startAnimation: $startAnimation)
                     .padding(.horizontal)
                     .padding(.vertical)
                 VStack(spacing: 16) {
@@ -59,6 +61,19 @@ struct DetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
             }
+        }
+        .overlay(
+            Group {
+                if showLoader {
+                    LoaderView()
+                        .ignoresSafeArea()
+                }
+            }
+                .animation(.easeInOut, value: showLoader)
+                .transition(.opacity)        )
+        .onReceive(viewModel.$hasLoadedData) { hasLoadedData in
+            showLoader = !hasLoadedData
+            startAnimation = hasLoadedData
         }
     }
 }
@@ -104,8 +119,8 @@ private extension DetailView {
                         showFullDescription.toggle()
                     } label: {
                         Text(showFullDescription
-                            ? LocalizationKey.collapse.localizedString
-                            : LocalizationKey.readMore.localizedString)
+                             ? LocalizationKey.collapse.localizedString
+                             : LocalizationKey.readMore.localizedString)
                     }
                     .tint(.theme.green)
                     .font(.footnote.weight(.bold))

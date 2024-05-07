@@ -17,9 +17,7 @@ final class HomeViewModel: ObservableObject {
     @Published var selectedCoin: Coin?
     @Published var isLoading: Bool = false
     @Published var sortOption: SortOption = .rank
-    @Published var showLaunchView = true {
-        didSet { print("DEBUG! showLaunchView: \(showLaunchView)") }
-    }
+    @Published var showLaunchView = true
 
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()

@@ -17,6 +17,7 @@ final class DetailViewModel: ObservableObject {
     @Published var redditURL: String?
     @Published var twitterURL: String?
     @Published var telegramURL: String?
+    @Published var hasLoadedData: Bool = false
 
     private let coinDetailService: CoinDetailsService
     private var cancellables = Set<AnyCancellable>()
@@ -50,6 +51,13 @@ private extension DetailViewModel {
                 redditURL = coinDetail?.links?.subredditURL
                 twitterURL = coinDetail?.links?.twitterURL
                 telegramURL = coinDetail?.links?.telegramURL
+            }
+            .store(in: &cancellables)
+
+        coinDetailService.$coinDetails
+            .sink { [weak self] coinDetail in
+                guard let self, coinDetail != nil else { return }
+                hasLoadedData = true
             }
             .store(in: &cancellables)
     }
