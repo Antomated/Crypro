@@ -48,7 +48,6 @@ final class NetworkManager {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300
         else {
-            print("no response or bad response")
             throw NetworkError.badURLResponse(url: url)
         }
         return output.data
@@ -57,9 +56,9 @@ final class NetworkManager {
     static func handleCompletion(completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:
-            print("Request completed successfully.")
+            AppLogger.log(tag: .error, "Request completed successfully.")
         case let .failure(error):
-            print("Request failed with error: \(error.localizedDescription)")
+            AppLogger.log(tag: .error, "Request failed with error: \(error.localizedDescription)")
         }
     }
 }

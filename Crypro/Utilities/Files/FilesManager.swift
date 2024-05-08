@@ -19,7 +19,7 @@ final class FilesManager {
         do {
             try data.write(to: url)
         } catch {
-            print("Error saving image. ImageName: \(imageName). \(error)")
+            AppLogger.log(tag: .error, "Error saving image. ImageName: \(imageName). \(error)")
         }
     }
 
@@ -40,7 +40,7 @@ private extension FilesManager {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         } catch {
-            print("Error creating directory. FolderName: \(folderName). \(error)")
+            AppLogger.log(tag: .error, "Error creating directory. FolderName: \(folderName). \(error)")
         }
     }
 

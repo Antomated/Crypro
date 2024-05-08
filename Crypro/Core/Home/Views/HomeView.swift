@@ -5,6 +5,7 @@
 //  Created by Beavean on 01.04.2024.
 //
 
+import CoreHaptics
 import SwiftUI
 
 struct HomeView: View {
@@ -43,7 +44,8 @@ struct HomeView: View {
                     columnTitles
                     ZStack {
                         if !showPortfolio {
-                            allCoinsList.transition(.move(edge: .leading))
+                            allCoinsList
+                                .transition(.move(edge: .leading))
                         } else {
                             ZStack(alignment: .top) {
                                 if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
@@ -81,6 +83,7 @@ private extension HomeView {
                     CircleButtonView(icon: showPortfolio ? .plus : .info)
                         .animation(.none, value: showPortfolio)
                         .onTapGesture {
+                            HapticManager.triggerSelection()
                             if showPortfolio {
                                 showPortfolioView.toggle()
                             } else {
@@ -94,6 +97,7 @@ private extension HomeView {
                 CircleButtonView(icon: .chevronRight)
                     .rotationEffect(.degrees(showPortfolio ? 180 : 0))
                     .onTapGesture {
+                        HapticManager.triggerSelection()
                         withAnimation(.spring()) {
                             showPortfolio.toggle()
                         }
@@ -110,6 +114,7 @@ private extension HomeView {
                     .listRowInsets(.init(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10)))
                     .padding(.vertical, 4)
                     .onTapGesture {
+                        HapticManager.triggerSelection()
                         segue(coin: coin)
                     }
                     .listRowBackground(Color.theme.background)

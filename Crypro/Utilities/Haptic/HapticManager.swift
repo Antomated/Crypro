@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-final class HapticManager {
+struct HapticManager {
     private static let generator = UINotificationFeedbackGenerator()
+    private static let selectionGenerator = UISelectionFeedbackGenerator()
 
-    static func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
+    static func triggerNotification(ofType type: UINotificationFeedbackGenerator.FeedbackType) {
         generator.notificationOccurred(type)
+    }
+
+    static func triggerSelection() {
+        selectionGenerator.selectionChanged()
     }
 }
