@@ -16,11 +16,16 @@ enum NetworkError: LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case let .badURLResponse(url: url): return LocalizationKey.badResponseFromUrlError.localizedString + "\(url)"
-        case .retryLimitReached: return LocalizationKey.retryLimitReachedError.localizedString
-        case .unknown: return LocalizationKey.unknownErrorOccurredError.localizedString
-        case .invalidEndpoint: return LocalizationKey.invalidEndpointError.localizedString
-        case .decodingError: return LocalizationKey.decodingResponseError.localizedString
+        case let .badURLResponse(url: url):
+             LocalizationKey.badResponseFromUrlError.localizedString + "\(url)"
+        case .retryLimitReached:
+             LocalizationKey.retryLimitReachedError.localizedString
+        case .unknown:
+            LocalizationKey.unknownErrorOccurredError.localizedString
+        case .invalidEndpoint:
+             LocalizationKey.invalidEndpointError.localizedString
+        case .decodingError:
+             LocalizationKey.decodingResponseError.localizedString
         }
     }
 }

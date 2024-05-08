@@ -103,8 +103,9 @@ private extension HomeView {
                         }
                     }
             }
-            .padding([.leading, .trailing], 24)
+            .padding(24)
         }
+        .ignoresSafeArea()
     }
 
     var allCoinsList: some View {
@@ -121,6 +122,10 @@ private extension HomeView {
                     .padding(.horizontal, 12)
             }
         }
+        .refreshable {
+            viewModel.reloadData()
+        }
+        .ignoresSafeArea()
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Spacer()
                 .frame(height: 100)
@@ -144,6 +149,10 @@ private extension HomeView {
                     }
                     .listRowBackground(Color.theme.background)
             }
+            .onDelete(perform: viewModel.deleteCoin)
+        }
+        .refreshable {
+            viewModel.reloadData()
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Spacer()
@@ -192,6 +201,21 @@ private extension HomeView {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsReversed : .holdings
                     }
                 }
+            } else {
+                HStack {
+                    Text(LocalizationKey.marketCapRow.localizedString)
+                    SystemImage.chevronDown.image
+                        .foregroundStyle(viewModel.sortOption == .marketCap
+                                         || viewModel.sortOption == .marketCapReversed
+                                         ? Color.theme.green
+                                         : Color.theme.secondaryText)
+                        .rotationEffect(.init(degrees: viewModel.sortOption == .marketCap ? 0 : 180))
+                }
+                .onTapGesture {
+                    withAnimation(.default) {
+                        viewModel.sortOption = viewModel.sortOption == .marketCap ? .marketCapReversed : .marketCap
+                    }
+                }
             }
 
             HStack {
@@ -210,9 +234,7 @@ private extension HomeView {
             }
 
             Button {
-                withAnimation(.linear(duration: 0.2)) {
                     viewModel.reloadData()
-                }
             } label: {
                 SystemImage.goForward.image
             }

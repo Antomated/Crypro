@@ -33,6 +33,13 @@ final class HomeViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
 
+    func deleteCoin(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let coin = portfolioCoins[index]
+            updatePortfolio(coin: coin, amount: 0)
+        }
+    }
+
     func reloadData() {
         isLoading = true
         coinDataService.getCoins()
@@ -45,7 +52,6 @@ final class HomeViewModel: ObservableObject {
 
 private extension HomeViewModel {
     func addSubscribers() {
-
         coinDataService.$allCoins
             .combineLatest(marketDataService.$marketData)
             .receive(on: DispatchQueue.main)
@@ -126,9 +132,12 @@ private extension HomeViewModel {
 
     func sortPortfolioCoinsIfNeeded(coins: [Coin]) -> [Coin] {
         switch sortOption {
-        case .holdings: return coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
-        case .holdingsReversed: return coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
-        default: return coins
+        case .holdings:
+             coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
+        case .holdingsReversed:
+             coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
+        default:
+             coins
         }
     }
 
@@ -199,6 +208,10 @@ private extension HomeViewModel {
             coins.sort { ($0.currentPrice ?? 0.0) > ($1.currentPrice ?? 0.0) }
         case .priceReversed:
             coins.sort { ($0.currentPrice ?? 0.0) < ($1.currentPrice ?? 0.0) }
+        case .marketCap:
+            coins.sort { ($0.marketCap ?? 0.0) > ($1.marketCap ?? 0.0) }
+        case .marketCapReversed:
+            coins.sort { ($0.marketCap ?? 0.0) < ($1.marketCap ?? 0.0) }
         }
     }
 }

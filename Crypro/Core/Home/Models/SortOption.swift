@@ -10,6 +10,8 @@ import Foundation
 enum SortOption {
     case rank
     case rankReversed
+    case marketCap
+    case marketCapReversed
     case holdings
     case holdingsReversed
     case price

@@ -11,11 +11,19 @@ struct CoinRowView: View {
     let coin: Coin
     let showHoldingsColumn: Bool
 
+    var marketCapDisplay: String {
+        if let marketCap = coin.marketCap {
+            return "$ " + marketCap.formattedWithAbbreviations()
+        } else {
+            return LocalizationKey.notAvailable.localizedString
+        }
+    }
+
     var body: some View {
         HStack(spacing: 0) {
             leftColumn
             Spacer()
-            if showHoldingsColumn { centralColumn }
+            centralColumn
             rightColumn
         }
         .font(.subheadline)
@@ -49,13 +57,18 @@ private extension CoinRowView {
 
     var centralColumn: some View {
         VStack(alignment: .trailing) {
-            Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
-                .bold()
-            Text(
-                (coin.currentHoldings ?? 0) > 1_000_000
+            if showHoldingsColumn {
+                Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
+                    .bold()
+                Text(
+                    (coin.currentHoldings ?? 0) > 1_000_000
                     ? (coin.currentHoldings ?? 0).formattedWithAbbreviations()
                     : (coin.currentHoldings ?? 0).asNumberString()
-            )
+                )
+            } else {
+                Text(marketCapDisplay)
+                    .bold()
+            }
         }
         .font(.footnote)
         .foregroundStyle(Color.theme.accent)
