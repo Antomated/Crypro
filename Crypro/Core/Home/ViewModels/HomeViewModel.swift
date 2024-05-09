@@ -17,7 +17,7 @@ final class HomeViewModel: ObservableObject {
     @Published var selectedCoin: Coin?
     @Published var isLoading: Bool = false
     @Published var sortOption: SortOption = .rank
-    @Published var showLaunchView = true
+    @Published var showLaunchView: Bool = false
 
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
@@ -27,6 +27,7 @@ final class HomeViewModel: ObservableObject {
 
     init() {
         addSubscribers()
+        setupLoadingSubscriber()
     }
 
     func updatePortfolio(coin: Coin, amount: Double) {
@@ -41,6 +42,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func reloadData() {
+        guard isLoading == false else { return }
         isLoading = true
         coinDataService.getCoins()
         marketDataService.getData()
@@ -53,13 +55,14 @@ final class HomeViewModel: ObservableObject {
 private extension HomeViewModel {
     func addSubscribers() {
         coinDataService.$allCoins
-            .combineLatest(marketDataService.$marketData)
+            .combineLatest($sortOption)
+            .map { coins, sortOption in
+                self.filterAndSortCoins(text: self.searchText, coins: coins, sortOption: sortOption)
+            }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] allCoins, marketData in
-                guard let self, !allCoins.isEmpty, let marketData else { return }
-                self.allCoins = allCoins
-                self.statistics = self.mapGlobalMarketData(data: marketData, portfolioCoins: self.portfolioCoins)
-                self.showLaunchView = false
+            .sink { [weak self] sortedCoins in
+                self?.allCoins = sortedCoins
+                self?.isLoading = false
             }
             .store(in: &cancellables)
 
@@ -110,6 +113,21 @@ private extension HomeViewModel {
             .store(in: &cancellables)
     }
 
+    private func setupLoadingSubscriber() {
+        $isLoading
+            .flatMap { isLoading -> AnyPublisher<Bool, Never> in
+                if isLoading {
+                    return Just(isLoading)
+                        .eraseToAnyPublisher()
+                } else {
+                    return Just(isLoading)
+                        .delay(for: .seconds(2), scheduler: DispatchQueue.main)
+                        .eraseToAnyPublisher()
+                }
+            }
+            .assign(to: &$showLaunchView)
+    }
+
     func filterAndSortCoins(text: String, coins: [Coin], sortOption: SortOption) -> [Coin] {
         var updatedCoins = filterCoins(text: text, coins: coins)
         sortCoins(sort: sortOption, coins: &updatedCoins)
@@ -125,19 +143,19 @@ private extension HomeViewModel {
 
         return coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
-                coin.symbol.lowercased().contains(lowerCasedText) ||
-                coin.id.lowercased().contains(lowerCasedText)
+            coin.symbol.lowercased().contains(lowerCasedText) ||
+            coin.id.lowercased().contains(lowerCasedText)
         }
     }
 
     func sortPortfolioCoinsIfNeeded(coins: [Coin]) -> [Coin] {
         switch sortOption {
         case .holdings:
-             coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
+            coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
         case .holdingsReversed:
-             coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
+            coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
         default:
-             coins
+            coins
         }
     }
 

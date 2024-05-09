@@ -122,6 +122,12 @@ private extension HomeView {
                     .padding(.horizontal, 12)
             }
         }
+        .overlay {
+            if viewModel.showLaunchView {
+                LoaderView()
+                    .ignoresSafeArea()
+            }
+        }
         .refreshable {
             viewModel.reloadData()
         }
@@ -213,7 +219,9 @@ private extension HomeView {
                 }
                 .onTapGesture {
                     withAnimation(.default) {
-                        viewModel.sortOption = viewModel.sortOption == .totalVolume ? .totalVolumeReversed : .totalVolume
+                        viewModel.sortOption = viewModel.sortOption == .totalVolume
+                        ? .totalVolumeReversed
+                        : .totalVolume
                     }
                 }
             }
