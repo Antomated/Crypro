@@ -66,6 +66,9 @@
 "appDescription" = "The application displays information and statistics for top crypto coins with portfolio tracking functionality.";
 "developedBy" = "Developed by ";
 "visitGitHub" = "Visit GitHub";
+"settings" = "Settings";
+"darkTheme" = "Dark Appearance";
+
 
 // MARK: - Network Errors
 

@@ -18,4 +18,6 @@ enum Constants {
 
     static let twitterBaseUrl = "https://twitter.com/"
     static let telegramBaseUrl = "https://t.me/"
+
+    static let selectedTheme = "selectedTheme"
 }

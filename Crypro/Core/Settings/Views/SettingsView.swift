@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
-    private let personalURL = URL(string: Constants.gitHubUrl)!
+    @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
     @Environment(\.dismiss) var dismiss
+
+    private let personalURL = URL(string: Constants.gitHubUrl)!
+    private static var defaultDarkMode: Bool {
+        UITraitCollection.current.userInterfaceStyle == .dark
+    }
 
     var body: some View {
         NavigationView {
@@ -18,6 +23,7 @@ struct SettingsView: View {
                     .ignoresSafeArea()
                 List {
                     appSection
+                    themeSection
                 }
             }
             .navigationTitle(LocalizationKey.information.localizedString)
@@ -32,6 +38,7 @@ struct SettingsView: View {
                 }
             }
             .foregroundColor(.theme.accent)
+            .preferredColorScheme(darkThemeIsOn == true ? .dark : .light)
         }
     }
 }
@@ -76,6 +83,28 @@ private extension SettingsView {
             }
             .padding(.vertical)
         }
+    }
+
+    var themeSection: some View {
+        Section {
+            HStack {
+                Toggle(isOn: $darkThemeIsOn) {
+                    Text(LocalizationKey.darkTheme.localizedString)
+                        .font(.body.weight(.bold))
+                }
+                .padding()
+                .toggleStyle(SwitchToggleStyle(tint: Color.theme.green))
+            }
+        } header: {
+            HStack {
+                Spacer()
+                Text(LocalizationKey.settings.localizedString)
+                    .font(.headline)
+                    .foregroundStyle(Color.theme.secondaryText)
+                Spacer()
+            }
+        }
+        .textCase(.none)
     }
 }
 

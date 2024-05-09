@@ -31,3 +31,7 @@ struct LoaderView: View {
         .background(BlurView(style: .regular))
     }
 }
+
+#Preview {
+    LoaderView()
+}

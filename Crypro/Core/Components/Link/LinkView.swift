@@ -18,7 +18,7 @@ struct LinkView: View {
                     .resizable()
                     .renderingMode(.template)
                     .frame(width: 14, height: 14)
-                    .foregroundStyle(Color.theme.background)
+                    .foregroundStyle(Color.theme.green)
                 Text(title)
                     .padding(.leading, 6)
                     .font(.footnote.weight(.semibold))

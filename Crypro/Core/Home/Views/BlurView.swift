@@ -18,3 +18,10 @@ struct BlurView: UIViewRepresentable {
         uiView.effect = UIBlurEffect(style: style)
     }
 }
+
+#Preview {
+    ZStack {
+        LoaderView()
+        BlurView(style: .regular)
+    }
+}

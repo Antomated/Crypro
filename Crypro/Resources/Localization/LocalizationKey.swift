@@ -66,6 +66,8 @@ enum LocalizationKey: String {
     case appDescription
     case developedBy
     case visitGitHub
+    case settings
+    case darkTheme
 
     // MARK: - Network Errors
 
