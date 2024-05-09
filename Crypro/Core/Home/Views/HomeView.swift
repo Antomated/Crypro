@@ -125,7 +125,6 @@ private extension HomeView {
         .refreshable {
             viewModel.reloadData()
         }
-        .ignoresSafeArea()
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Spacer()
                 .frame(height: 100)
@@ -136,6 +135,7 @@ private extension HomeView {
                                                          .theme.black,
                                                          .clear]),
                              startPoint: .top, endPoint: .bottom))
+        .ignoresSafeArea()
     }
 
     var allPortfolioCoinsList: some View {
@@ -203,17 +203,17 @@ private extension HomeView {
                 }
             } else {
                 HStack {
-                    Text(LocalizationKey.marketCapRow.localizedString)
+                    Text(LocalizationKey.totalVolumeRow.localizedString)
                     SystemImage.chevronDown.image
-                        .foregroundStyle(viewModel.sortOption == .marketCap
-                                         || viewModel.sortOption == .marketCapReversed
+                        .foregroundStyle(viewModel.sortOption == .totalVolume
+                                         || viewModel.sortOption == .totalVolumeReversed
                                          ? Color.theme.green
                                          : Color.theme.secondaryText)
-                        .rotationEffect(.init(degrees: viewModel.sortOption == .marketCap ? 0 : 180))
+                        .rotationEffect(.init(degrees: viewModel.sortOption == .totalVolume ? 0 : 180))
                 }
                 .onTapGesture {
                     withAnimation(.default) {
-                        viewModel.sortOption = viewModel.sortOption == .marketCap ? .marketCapReversed : .marketCap
+                        viewModel.sortOption = viewModel.sortOption == .totalVolume ? .totalVolumeReversed : .totalVolume
                     }
                 }
             }

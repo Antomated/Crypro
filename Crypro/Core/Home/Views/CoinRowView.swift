@@ -12,8 +12,8 @@ struct CoinRowView: View {
     let showHoldingsColumn: Bool
 
     var marketCapDisplay: String {
-        if let marketCap = coin.marketCap {
-            return "$ " + marketCap.formattedWithAbbreviations()
+        if let totalVolume = coin.totalVolume {
+            return "$ " + totalVolume.formattedWithAbbreviations()
         } else {
             return LocalizationKey.notAvailable.localizedString
         }

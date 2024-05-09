@@ -208,10 +208,10 @@ private extension HomeViewModel {
             coins.sort { ($0.currentPrice ?? 0.0) > ($1.currentPrice ?? 0.0) }
         case .priceReversed:
             coins.sort { ($0.currentPrice ?? 0.0) < ($1.currentPrice ?? 0.0) }
-        case .marketCap:
-            coins.sort { ($0.marketCap ?? 0.0) > ($1.marketCap ?? 0.0) }
-        case .marketCapReversed:
-            coins.sort { ($0.marketCap ?? 0.0) < ($1.marketCap ?? 0.0) }
+        case .totalVolume:
+            coins.sort { ($0.totalVolume ?? 0.0) > ($1.totalVolume ?? 0.0) }
+        case .totalVolumeReversed:
+            coins.sort { ($0.totalVolume ?? 0.0) < ($1.totalVolume ?? 0.0) }
         }
     }
 }

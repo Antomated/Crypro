@@ -12,7 +12,7 @@
 "livePrices" = "Current Prices";
 "searchByNameOrSymbol" = "Search by name or symbol...";
 "coinRow" = "Coin";
-"marketCapRow" = "Market Cap";
+"totalVolumeRow" = "Volume";
 "priceRow" = "Price";
 
 // MARK: - Portfolio

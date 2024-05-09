@@ -14,7 +14,7 @@ enum LocalizationKey: String {
     case livePrices
     case searchByNameOrSymbol
     case coinRow
-    case marketCapRow
+    case totalVolumeRow
     case priceRow
 
     // MARK: - Portfolio
