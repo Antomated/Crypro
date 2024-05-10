@@ -12,6 +12,7 @@ final class DetailViewModel: ObservableObject {
     @Published var overviewStatistics = [Statistic]()
     @Published var additionalStatistics = [Statistic]()
     @Published var coin: Coin
+    @Published var error: IdentifiableError?
     @Published var coinDescription: String?
     @Published var websiteURL: String?
     @Published var redditURL: String?
@@ -59,6 +60,15 @@ private extension DetailViewModel {
                 guard let self, coinDetail != nil else { return }
                 hasLoadedData = true
             }
+            .store(in: &cancellables)
+
+        coinDetailService.$error
+            .compactMap { $0?.errorDescription }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] errorMessage in
+                guard let self else { return }
+                error = IdentifiableError(message: errorMessage)
+            })
             .store(in: &cancellables)
     }
 }

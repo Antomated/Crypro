@@ -16,9 +16,9 @@ final class NetworkManager {
     }()
 
     static func download<T>(from endpoint: NetworkEndpoint,
-                            convertTo _: T.Type) -> AnyPublisher<T, Error> where T: Decodable {
+                            convertTo _: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
         guard let url = endpoint.url else {
-            return Fail(error: NetworkError.invalidEndpoint).eraseToAnyPublisher()
+            return Fail(error: .invalidEndpoint).eraseToAnyPublisher()
         }
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
@@ -27,13 +27,11 @@ final class NetworkManager {
             .tryMap { output in
                 try handleURLResponse(output: output, url: url)
             }
-            .catch { error -> AnyPublisher<Data, Error> in
-                guard (error as? NetworkError) != .badURLResponse(url: url) else {
-                    return Fail(error: NetworkError.retryLimitReached).eraseToAnyPublisher()
-                }
-                return Fail(error: error).eraseToAnyPublisher()
+            .mapError { error in
+                (error as? NetworkError) ?? .unknown
             }
             .decode(type: T.self, decoder: decoder)
+            .mapError { _ in .decodingError }
             .eraseToAnyPublisher()
     }
 
@@ -51,14 +49,5 @@ final class NetworkManager {
             throw NetworkError.badURLResponse(url: url)
         }
         return output.data
-    }
-
-    static func handleCompletion(completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            AppLogger.log(tag: .error, "Request completed successfully.")
-        case let .failure(error):
-            AppLogger.log(tag: .error, "Request failed with error: \(error.localizedDescription)")
-        }
     }
 }

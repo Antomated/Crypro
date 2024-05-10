@@ -68,6 +68,16 @@ struct HomeView: View {
             .navigationDestination(isPresented: $showDetailView) {
                 DetailLoadingView(coin: $selectedCoin)
             }
+            .alert(item: $viewModel.error) { error in
+                Alert(
+                    title: Text(LocalizationKey.errorTitle.localizedString),
+                    message: Text(error.message),
+                    dismissButton: .default(Text(LocalizationKey.okButton.localizedString),
+                                            action: {
+                                                viewModel.error = nil
+                                            })
+                )
+            }
         }
     }
 }

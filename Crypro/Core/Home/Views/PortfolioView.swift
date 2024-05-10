@@ -10,8 +10,8 @@ import SwiftUI
 struct PortfolioView: View {
     @EnvironmentObject private var viewModel: HomeViewModel
     @FocusState private var searchIsFocused: Bool
-    @Environment(\.dismiss) var dismiss
     @State private var quantityText: String = ""
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {

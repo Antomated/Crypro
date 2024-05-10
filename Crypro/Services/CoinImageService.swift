@@ -38,7 +38,14 @@ final class CoinImageService {
             }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: NetworkManager.handleCompletion,
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        AppLogger.log(tag: .error, "Image download finished.")
+                    case let .failure(error):
+                        AppLogger.log(tag: .error, "Image download failed with error: \(error.localizedDescription)")
+                    }
+                },
                 receiveValue: { [weak self] image in
                     guard let self, let downloadedImage = image else { return }
                     self.image = downloadedImage

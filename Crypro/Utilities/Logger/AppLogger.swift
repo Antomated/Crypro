@@ -8,7 +8,7 @@
 import OSLog
 
 struct AppLogger {
-    static var isEnabled: Bool = true // Allows dynamic enabling/disabling of logging
+    static var isEnabled: Bool = true
 
     static func log(tag: LogTag = .debug, _ items: Any...,
                     file: String = #file,

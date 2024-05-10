@@ -22,12 +22,15 @@ struct LinkView: View {
                 Text(title)
                     .padding(.leading, 6)
                     .font(.footnote.weight(.semibold))
-                    .foregroundStyle(Color.theme.background)
+                    .foregroundStyle(Color.theme.accent)
             }
         }
         .padding(7)
         .padding(.horizontal, 6)
-        .background(Capsule().fill(Color.theme.accent))
+        .overlay(
+            Capsule()
+                .strokeBorder(Color.theme.accent, lineWidth: 1)
+        )
     }
 }
 

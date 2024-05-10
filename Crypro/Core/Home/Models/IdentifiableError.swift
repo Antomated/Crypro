@@ -1,0 +1,13 @@
+//
+//  IdentifiableError.swift
+//  Crypro
+//
+//  Created by Anton Petrov on 10.05.2024.
+//
+
+import Foundation
+
+struct IdentifiableError: Identifiable {
+    let id: UUID = UUID()
+    let message: String
+}

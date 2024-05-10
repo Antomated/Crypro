@@ -13,11 +13,12 @@ final class HomeViewModel: ObservableObject {
     @Published var detailStatistics: [Statistic] = []
     @Published var allCoins: [Coin] = []
     @Published var portfolioCoins: [Coin] = []
-    @Published var searchText: String = ""
+    @Published var error: IdentifiableError?
     @Published var selectedCoin: Coin?
-    @Published var isLoading: Bool = false
+    @Published var searchText: String = ""
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
+    @Published var isLoading: Bool = false
 
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
@@ -61,8 +62,9 @@ private extension HomeViewModel {
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sortedCoins in
-                self?.allCoins = sortedCoins
-                self?.isLoading = false
+                guard let self else { return }
+                allCoins = sortedCoins
+                isLoading = false
             }
             .store(in: &cancellables)
 
@@ -110,6 +112,16 @@ private extension HomeViewModel {
                 statistics = stats
                 isLoading = false
             }
+            .store(in: &cancellables)
+
+        coinDataService.$error
+            .merge(with: marketDataService.$error)
+            .compactMap { $0?.errorDescription }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] errorMessage in
+                guard let self else { return }
+                error = IdentifiableError(message: errorMessage)
+            })
             .store(in: &cancellables)
     }
 

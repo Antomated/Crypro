@@ -10,6 +10,7 @@ import Foundation
 
 final class CoinDataService {
     @Published var allCoins: [Coin] = []
+    @Published var error: NetworkError?
     private var coinSubscription: AnyCancellable?
 
     init() {
@@ -20,7 +21,12 @@ final class CoinDataService {
         coinSubscription = NetworkManager.download(from: .allCoins, convertTo: [Coin].self)
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: NetworkManager.handleCompletion,
+                receiveCompletion: { [weak self] completion in
+                    guard let self else { return }
+                    if case let .failure(networkError) = completion {
+                        error = networkError
+                    }
+                },
                 receiveValue: { [weak self] coins in
                     guard let self else { return }
                     allCoins = coins

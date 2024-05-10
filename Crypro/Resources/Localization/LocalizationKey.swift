@@ -71,6 +71,8 @@ enum LocalizationKey: String {
 
     // MARK: - Network Errors
 
+    case errorTitle
+    case okButton
     case badResponseFromUrlError
     case retryLimitReachedError
     case unknownErrorOccurredError

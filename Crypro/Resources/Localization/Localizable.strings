@@ -72,6 +72,8 @@
 
 // MARK: - Network Errors
 
+"errorTitle" = "Error";
+"okButton" = "OK";
 "badResponseFromUrlError" = "Portfolio";
 "retryLimitReachedError" = "Retry limit reached";
 "unknownErrorOccurredError" = "Unknown error occurred";
