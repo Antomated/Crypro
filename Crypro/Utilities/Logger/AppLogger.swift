@@ -2,20 +2,20 @@
 //  AppLogger.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 08.05.2024.
+//  Created by Beavean on 08.05.2024.
 //
 
 import OSLog
 
 struct AppLogger {
-    static var isEnabled: Bool = true
+    static var configuration: LogConfiguration = .debugOnly
 
     static func log(tag: LogTag = .debug, _ items: Any...,
                     file: String = #file,
                     function: String = #function,
                     line: Int = #line,
                     separator: String = " ") {
-        guard isEnabled else { return }
+        guard configuration.isEnabled else { return }
 
         let log = OSLog(subsystem: Bundle.main.bundleIdentifier ?? "App", category: tag.rawValue)
         let shortFileName = URL(fileURLWithPath: file).lastPathComponent
