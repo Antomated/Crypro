@@ -32,7 +32,7 @@
 "portfolioValue" = "Portfolio Value";
 "currentPrice" = "Current Price";
 "currentPrice" = "Current Price";
-"allTimeHigh" = "All Time Hight";
+"allTimeHigh" = "All Time High";
 "allTimeLow" = "All Time Low";
 
 // MARK: - Coin Details
@@ -47,7 +47,7 @@
 "marketCapitalization" = "Market Capitalization";
 "rank" = "Rank";
 "volume" = "Volume";
-"high24h" = "24H Hight";
+"high24h" = "24H High";
 "low24h" = "24H Low";
 "priceChange24h" = "24H Price Change";
 "marketCapChange24h" = "24H Market Cap Change";

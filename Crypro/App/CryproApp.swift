@@ -12,7 +12,6 @@ struct CryproApp: App {
     @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
     @StateObject private var homeViewModel = HomeViewModel()
     @State private var showLaunchView = true
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     private static var defaultDarkMode: Bool {
         UITraitCollection.current.userInterfaceStyle == .dark

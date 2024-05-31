@@ -109,9 +109,9 @@ private extension DetailViewModel {
 
     func createAdditionalArray(coin: Coin, coinDetails: CoinDetails?) -> [Statistic] {
         var additionalArray: [Statistic] = []
-        let hight = coin.high24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
-        let hightStat = Statistic(title: LocalizationKey.high24h.localizedString,
-                                  value: hight)
+        let high = coin.high24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
+        let highStat = Statistic(title: LocalizationKey.high24h.localizedString,
+                                  value: high)
 
         let low = coin.low24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
         let lowStat = Statistic(title: LocalizationKey.low24h.localizedString,
@@ -136,7 +136,7 @@ private extension DetailViewModel {
         let hashingStat = Statistic(title: LocalizationKey.hashingAlgorithm.localizedString,
                                     value: hashing)
 
-        additionalArray.append(contentsOf: [hightStat,
+        additionalArray.append(contentsOf: [highStat,
                                             lowStat,
                                             priceChangeStat,
                                             marketCapChangeStat,
