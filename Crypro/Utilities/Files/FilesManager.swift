@@ -5,7 +5,7 @@
 //  Created by Beavean on 03.04.2024.
 //
 
-import SwiftUI
+import UIKit
 
 final class FilesManager {
     static let shared = FilesManager()

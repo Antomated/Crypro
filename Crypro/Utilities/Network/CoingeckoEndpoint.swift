@@ -1,5 +1,5 @@
 //
-//  NetworkEndpoint.swift
+//  CoingeckoEndpoint.swift
 //  Crypro
 //
 //  Created by Beavean on 02.04.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkEndpoint {
+enum CoingeckoEndpoint {
     case allCoins
     case globalData
     case coinDetails(id: String)
@@ -15,7 +15,7 @@ enum NetworkEndpoint {
 
 // MARK: - Computed properties
 
-extension NetworkEndpoint {
+extension CoingeckoEndpoint {
     var baseURL: String { Constants.apiBaseURL }
 
     var method: HTTPMethod {

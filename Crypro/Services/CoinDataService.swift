@@ -19,6 +19,7 @@ final class CoinDataService {
 
     func getCoins() {
         coinSubscription = NetworkManager.download(from: .allCoins, convertTo: [Coin].self)
+            .first()
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -30,7 +31,6 @@ final class CoinDataService {
                 receiveValue: { [weak self] coins in
                     guard let self else { return }
                     allCoins = coins
-                    coinSubscription?.cancel()
                 }
             )
     }

@@ -1,5 +1,5 @@
 //
-//  PreviewData.swift
+//  CoinsStubs.swift
 //  Crypro
 //
 //  Created by Beavean on 02.04.2024.
@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-enum PreviewData {
-    static let homeViewModel = HomeViewModel()
-
+enum CoinsStubs {
     static let stubStatistic1 = Statistic(title: "Market Cap", value: "$ 12.99 Bn", percentageChange: 0.42)
     static let stubStatistic2 = Statistic(title: "Total Volume", value: "$ 0.95T r")
     static let stubStatistic3 = Statistic(title: "Portfolio", value: "$ 9.01 K", percentageChange: -0.42)

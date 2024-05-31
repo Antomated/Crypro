@@ -91,5 +91,5 @@ private extension CoinRowView {
 }
 
 #Preview {
-    CoinRowView(coin: PreviewData.stubCoin, showHoldingsColumn: true)
+    CoinRowView(coin: CoinsStubs.stubCoin, showHoldingsColumn: true)
 }

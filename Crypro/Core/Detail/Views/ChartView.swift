@@ -134,6 +134,6 @@ private extension ChartView {
 }
 
 #Preview {
-    ChartView(coin: PreviewData.stubCoin, startAnimation: .constant(true))
+    ChartView(coin: CoinsStubs.stubCoin, startAnimation: .constant(true))
         .preferredColorScheme(.dark)
 }

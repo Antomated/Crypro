@@ -287,5 +287,5 @@ private extension HomeView {
         HomeView()
             .navigationBarHidden(true)
     }
-    .environmentObject(PreviewData.homeViewModel)
+    .environmentObject(HomeViewModel())
 }

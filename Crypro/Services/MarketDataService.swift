@@ -19,6 +19,7 @@ final class MarketDataService {
 
     func getData() {
         marketDataSubscription = NetworkManager.download(from: .globalData, convertTo: GlobalData.self)
+            .first()
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -30,7 +31,6 @@ final class MarketDataService {
                 receiveValue: { [weak self] globalData in
                     guard let self else { return }
                     marketData = globalData.data
-                    marketDataSubscription?.cancel()
                 }
             )
     }

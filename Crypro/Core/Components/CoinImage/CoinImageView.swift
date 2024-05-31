@@ -31,5 +31,5 @@ struct CoinImageView: View {
 }
 
 #Preview {
-    CoinImageView(coin: PreviewData.stubCoin)
+    CoinImageView(coin: CoinsStubs.stubCoin)
 }

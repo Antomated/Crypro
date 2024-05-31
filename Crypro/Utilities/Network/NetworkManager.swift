@@ -15,7 +15,7 @@ final class NetworkManager {
         return decoder
     }()
 
-    static func download<T>(from endpoint: NetworkEndpoint,
+    static func download<T>(from endpoint: CoingeckoEndpoint,
                             convertTo _: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
         guard let url = endpoint.url else {
             return Fail(error: .invalidEndpoint).eraseToAnyPublisher()

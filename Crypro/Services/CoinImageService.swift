@@ -12,9 +12,9 @@ final class CoinImageService {
     @Published var image: UIImage?
     private let coin: Coin
     private let fileManager = FilesManager.shared
-    private let coinImagesFolder = #function
     private var imageSubscription: AnyCancellable?
     private let imageName: String
+    private lazy var coinImagesFolder = String(describing: type(of: self))
 
     init(coin: Coin) {
         self.coin = coin
@@ -33,6 +33,7 @@ final class CoinImageService {
     private func downloadCoinImage() {
         guard let url = URL(string: coin.image) else { return }
         imageSubscription = NetworkManager.download(url: url)
+            .first()
             .tryMap { data in
                 UIImage(data: data)
             }
@@ -49,7 +50,6 @@ final class CoinImageService {
                 receiveValue: { [weak self] image in
                     guard let self, let downloadedImage = image else { return }
                     self.image = downloadedImage
-                    self.imageSubscription?.cancel()
                     self.fileManager.saveImage(image: downloadedImage,
                                                imageName: self.imageName,
                                                folderName: self.coinImagesFolder)
