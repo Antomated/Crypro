@@ -2,7 +2,7 @@
 //  LogTag.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 08.05.2024.
+//  Created by Beavean on 08.05.2024.
 //
 
 import OSLog
