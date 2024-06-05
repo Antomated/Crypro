@@ -11,7 +11,7 @@ import SwiftUI
 final class CoinImageService {
     @Published var image: UIImage?
     private let coin: Coin
-    private let fileManager = FilesManager.shared
+    private let imageProvider = LocalImageProvider.shared
     private var imageSubscription: AnyCancellable?
     private let imageName: String
     private lazy var coinImagesFolder = String(describing: type(of: self))
@@ -23,7 +23,7 @@ final class CoinImageService {
     }
 
     private func getCoinImage() {
-        if let savedImage = fileManager.getImage(imageName: imageName, folderName: coinImagesFolder) {
+        if let savedImage = imageProvider.getImage(imageName: imageName, folderName: coinImagesFolder) {
             image = savedImage
         } else {
             downloadCoinImage()
@@ -50,7 +50,7 @@ final class CoinImageService {
                 receiveValue: { [weak self] image in
                     guard let self, let downloadedImage = image else { return }
                     self.image = downloadedImage
-                    self.fileManager.saveImage(image: downloadedImage,
+                    self.imageProvider.saveImage(image: downloadedImage,
                                                imageName: self.imageName,
                                                folderName: self.coinImagesFolder)
                 }

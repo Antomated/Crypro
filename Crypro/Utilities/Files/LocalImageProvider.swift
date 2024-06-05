@@ -1,5 +1,5 @@
 //
-//  FilesManager.swift
+//  LocalImageProvider.swift
 //  Crypro
 //
 //  Created by Beavean on 03.04.2024.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class FilesManager {
-    static let shared = FilesManager()
+final class LocalImageProvider {
+    static let shared = LocalImageProvider()
     private init() {}
 
     func saveImage(image: UIImage, imageName: String, folderName: String) {
@@ -32,7 +32,7 @@ final class FilesManager {
 
 // MARK: - Private methods
 
-private extension FilesManager {
+private extension LocalImageProvider {
     func createFolderIfNeeded(folderName: String) {
         guard let url = getURLForFolder(folderName: folderName),
               !FileManager.default.fileExists(atPath: url.path)

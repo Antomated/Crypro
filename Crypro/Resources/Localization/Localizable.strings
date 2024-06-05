@@ -41,7 +41,7 @@
 "overview" = "Overview";
 "additionalDetails" = "Additional Details";
 "collapse" = "Collapse ↑";
-"readMore" = "Read more ↓";
+"readMore" = "Expand ↓";
 
 "detailsCurrentPrice" = "Current Price";
 "marketCapitalization" = "Market Capitalization";

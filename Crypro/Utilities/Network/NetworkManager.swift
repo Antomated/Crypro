@@ -6,10 +6,10 @@
 //
 
 import Combine
-import SwiftUI
+import Foundation
 
 final class NetworkManager {
-    static var decoder: JSONDecoder = {
+    private static var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -27,6 +27,7 @@ final class NetworkManager {
             .tryMap { output in
                 try handleURLResponse(output: output, url: url)
             }
+            .retry(3)
             .mapError { error in
                 (error as? NetworkError) ?? .unknown
             }
