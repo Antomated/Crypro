@@ -120,11 +120,11 @@ private extension ChartView {
 
     var chartDateLabels: some View {
         HStack {
-            Text(startingDate.asShortDateString())
+            Text(startingDate.shortDateString)
             Spacer()
             Text(LocalizationKey.sevenDaysChart.localizedString)
             Spacer()
-            Text(endingDate.asShortDateString())
+            Text(endingDate.shortDateString)
         }
         .padding(8)
         .padding(.horizontal, 4)
@@ -134,6 +134,6 @@ private extension ChartView {
 }
 
 #Preview {
-    ChartView(coin: CoinsStubs.stubCoin, startAnimation: .constant(true))
+    ChartView(coin: CoinsStubs.bitcoin, startAnimation: .constant(true))
         .preferredColorScheme(.dark)
 }

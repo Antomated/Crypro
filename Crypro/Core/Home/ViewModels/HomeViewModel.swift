@@ -219,13 +219,12 @@ private extension HomeViewModel {
     }
 
     func mapAllCoinsToPortfolioCoins(allCoins: [Coin], portfolioEntities: [Portfolio]) -> [Coin] {
-        allCoins
-            .compactMap { coin in
-                guard let entity = portfolioEntities.first(where: { $0.coinID == coin.id }) else {
-                    return nil
-                }
-                return coin.updateHoldings(amount: entity.amount)
-            }
+        allCoins.compactMap { coin in
+            guard let entity = portfolioEntities.first(where: { $0.coinID == coin.id }) else { return nil }
+            var updatedCoin = coin
+            updatedCoin.updateHoldings(amount: entity.amount)
+            return updatedCoin
+        }
     }
 
     func sortCoins(sort: SortOption, coins: inout [Coin]) {

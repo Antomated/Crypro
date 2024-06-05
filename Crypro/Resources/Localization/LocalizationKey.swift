@@ -79,6 +79,13 @@ enum LocalizationKey: String {
     case invalidEndpointError
     case decodingResponseError
 
+    // MARK: - Abbreviations
+
+    case trillionAbbreviation
+    case billionAbbreviation
+    case millionAbbreviation
+    case thousandAbbreviation
+
     var localizedString: String {
         return NSLocalizedString(rawValue, comment: "\(rawValue)_comment")
     }

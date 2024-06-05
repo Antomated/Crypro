@@ -8,7 +8,7 @@
 import Foundation
 
 struct Statistic: Identifiable {
-    let id = UUID().uuidString
+    let id = UUID()
     let title: String
     let value: String
     let percentageChange: Double?

@@ -99,19 +99,19 @@ extension Double {
         case 1_000_000_000_000...:
             let formatted = number / 1_000_000_000_000
             let stringFormatted = formatted.asNumberString()
-            return "\(sign)\(stringFormatted) Tr"
+            return "\(sign)\(stringFormatted) \(LocalizationKey.trillionAbbreviation.localizedString)"
         case 1_000_000_000...:
             let formatted = number / 1_000_000_000
             let stringFormatted = formatted.asNumberString()
-            return "\(sign)\(stringFormatted) Bn"
+            return "\(sign)\(stringFormatted) \(LocalizationKey.billionAbbreviation.localizedString)"
         case 1_000_000...:
             let formatted = number / 1_000_000
             let stringFormatted = formatted.asNumberString()
-            return "\(sign)\(stringFormatted) M"
+            return "\(sign)\(stringFormatted) \(LocalizationKey.millionAbbreviation.localizedString)"
         case 1000...:
             let formatted = number / 1000
             let stringFormatted = formatted.asNumberString()
-            return "\(sign)\(stringFormatted) K"
+            return "\(sign)\(stringFormatted) \(LocalizationKey.thousandAbbreviation.localizedString)"
         case 0...:
             return asNumberString()
         default:

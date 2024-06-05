@@ -79,3 +79,10 @@
 "unknownErrorOccurredError" = "Unknown error occurred";
 "invalidEndpointError" = "Invalid endpoint";
 "decodingResponseError" = "Error decoding response";
+
+// MARK: - Abbreviations 
+
+"trillionAbbreviation" = "Tr";
+"billionAbbreviation" = "Bn";
+"millionAbbreviation" = "M";
+"thousandAbbreviation" = "K";

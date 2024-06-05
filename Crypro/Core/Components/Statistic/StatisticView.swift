@@ -36,11 +36,11 @@ struct StatisticView: View {
 
 #Preview {
     Group {
-        StatisticView(stat: CoinsStubs.stubStatistic1)
+        StatisticView(stat: CoinsStubs.marketCap)
             .padding()
-        StatisticView(stat: CoinsStubs.stubStatistic2)
+        StatisticView(stat: CoinsStubs.totalVolume)
             .padding()
-        StatisticView(stat: CoinsStubs.stubStatistic3)
+        StatisticView(stat: CoinsStubs.portfolio)
             .padding()
     }
 }

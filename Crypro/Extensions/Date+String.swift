@@ -8,6 +8,17 @@
 import Foundation
 
 extension Date {
+    var shortDateString: String {
+        Date.shortFormatter.string(from: self)
+    }
+
+    init?(dateString: String) {
+        guard let date = Date.iso8601Formatter.date(from: dateString) else {
+            return nil
+        }
+        self.init(timeInterval: 0, since: date)
+    }
+
     private static var shortFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yy"
@@ -20,16 +31,5 @@ extension Date {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter
-    }
-
-    init?(dateString: String) {
-        guard let date = Date.iso8601Formatter.date(from: dateString) else {
-            return nil
-        }
-        self.init(timeInterval: 0, since: date)
-    }
-
-    func asShortDateString() -> String {
-        return Date.shortFormatter.string(from: self)
     }
 }

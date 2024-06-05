@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GlobalData: Decodable {
+struct GlobalCryptoMarketData: Decodable {
     let data: MarketData
 }
 

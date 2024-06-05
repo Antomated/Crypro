@@ -18,7 +18,7 @@ final class MarketDataService {
     }
 
     func getData() {
-        marketDataSubscription = NetworkManager.download(from: .globalData, convertTo: GlobalData.self)
+        marketDataSubscription = NetworkManager.download(from: .globalData, convertTo: GlobalCryptoMarketData.self)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(
