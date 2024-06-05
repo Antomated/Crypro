@@ -194,7 +194,7 @@ private extension DetailView {
 
 #Preview {
     NavigationView {
-        DetailView(coin: CoinsStubs.stubCoin)
+        DetailView(coin: CoinsStubs.bitcoin)
             .preferredColorScheme(.dark)
     }
 }
