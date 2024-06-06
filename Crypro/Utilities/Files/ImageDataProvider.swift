@@ -1,21 +1,19 @@
 //
-//  LocalImageProvider.swift
+//  ImageDataProvider.swift
 //  Crypro
 //
 //  Created by Beavean on 03.04.2024.
 //
 
-import UIKit
+import Foundation
 
-final class LocalImageProvider {
-    static let shared = LocalImageProvider()
+final class ImageDataProvider {
+    static let shared = ImageDataProvider()
     private init() {}
 
-    func saveImage(image: UIImage, imageName: String, folderName: String) {
+    func saveImage(data: Data, imageName: String, folderName: String) {
         createFolderIfNeeded(folderName: folderName)
-        guard let data = image.pngData(),
-              let url = getURLForImage(imageName: imageName, folderName: folderName)
-        else { return }
+        guard let url = getURLForImage(imageName: imageName, folderName: folderName) else { return }
         do {
             try data.write(to: url)
         } catch {
@@ -23,16 +21,16 @@ final class LocalImageProvider {
         }
     }
 
-    func getImage(imageName: String, folderName: String) -> UIImage? {
+    func getImageData(imageName: String, folderName: String) -> Data? {
         guard let url = getURLForImage(imageName: imageName, folderName: folderName),
               FileManager.default.fileExists(atPath: url.path) else { return nil }
-        return UIImage(contentsOfFile: url.path)
+        return try? Data(contentsOf: url)
     }
 }
 
 // MARK: - Private methods
 
-private extension LocalImageProvider {
+private extension ImageDataProvider {
     func createFolderIfNeeded(folderName: String) {
         guard let url = getURLForFolder(folderName: folderName),
               !FileManager.default.fileExists(atPath: url.path)
@@ -55,6 +53,6 @@ private extension LocalImageProvider {
         guard let folderURL = getURLForFolder(folderName: folderName) else {
             return nil
         }
-        return folderURL.appendingPathExtension(imageName + ".png")
+        return folderURL.appendingPathComponent(imageName).appendingPathExtension("png")
     }
 }

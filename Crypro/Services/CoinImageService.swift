@@ -11,7 +11,7 @@ import SwiftUI
 final class CoinImageService {
     @Published var image: UIImage?
     private let coin: Coin
-    private let imageProvider = LocalImageProvider.shared
+    private let imageProvider = ImageDataProvider.shared
     private var imageSubscription: AnyCancellable?
     private let imageName: String
     private lazy var coinImagesFolder = String(describing: type(of: self))
@@ -23,8 +23,8 @@ final class CoinImageService {
     }
 
     private func getCoinImage() {
-        if let savedImage = imageProvider.getImage(imageName: imageName, folderName: coinImagesFolder) {
-            image = savedImage
+        if let imageData = imageProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
+            image = UIImage(data: imageData)
         } else {
             downloadCoinImage()
         }
@@ -47,12 +47,12 @@ final class CoinImageService {
                         AppLogger.log(tag: .error, "Image download failed with error: \(error.localizedDescription)")
                     }
                 },
-                receiveValue: { [weak self] image in
-                    guard let self, let downloadedImage = image else { return }
+                receiveValue: { [weak self] downloadedImage in
+                    guard let self, let downloadedImage, let imageData = downloadedImage.pngData() else { return }
                     self.image = downloadedImage
-                    self.imageProvider.saveImage(image: downloadedImage,
-                                               imageName: self.imageName,
-                                               folderName: self.coinImagesFolder)
+                    self.imageProvider.saveImage(data: imageData,
+                                                 imageName: self.imageName,
+                                                 folderName: self.coinImagesFolder)
                 }
             )
     }
