@@ -62,7 +62,7 @@ struct HomeView: View {
                     }
                 }
                 .sheet(isPresented: $showSettingsView, content: {
-                    SettingsView()
+                    SettingsView(isPresented: $showSettingsView)
                 })
             }
             .navigationDestination(isPresented: $showDetailView) {

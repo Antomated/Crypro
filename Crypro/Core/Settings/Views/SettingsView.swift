@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
 
     private let personalURL = URL(string: Constants.gitHubUrl)!
     private static var defaultDarkMode: Bool {
@@ -30,7 +30,7 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        dismiss()
+                        isPresented = false
                     } label: {
                         SystemImage.xMark.image
                             .font(.headline)
@@ -109,6 +109,6 @@ private extension SettingsView {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(isPresented: .constant(true))
         .preferredColorScheme(.dark)
 }

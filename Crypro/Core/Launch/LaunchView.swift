@@ -21,11 +21,9 @@ struct LaunchView: View {
         ZStack {
             Color.launch.background
                 .ignoresSafeArea()
-
             Image(.logo)
                 .resizable()
                 .frame(width: 100, height: 100)
-
             ZStack {
                 if showLoadingText {
                     HStack(spacing: 4) {
@@ -46,21 +44,26 @@ struct LaunchView: View {
             showLoadingText.toggle()
         }
         .onReceive(timer) { _ in
-            DispatchQueue.main.async {
-                withAnimation(.spring()) {
-                    if counter == loadingText.count - 1 {
-                        loops += 1
-                        counter = 0
-                        if loops >= 2 && !loadingData {
-                            showLaunchView = false
-                        }
-                    } else {
-                        counter += 1
+            updateCounterAndLoops()
+        }
+    }
+
+    private func updateCounterAndLoops() {
+        DispatchQueue.main.async {
+            withAnimation(.spring()) {
+                if counter == loadingText.count - 1 {
+                    loops += 1
+                    counter = 0
+                    if loops >= 2 && !loadingData {
+                        showLaunchView = false
                     }
+                } else {
+                    counter += 1
                 }
             }
         }
     }
+
 }
 
 #Preview {
