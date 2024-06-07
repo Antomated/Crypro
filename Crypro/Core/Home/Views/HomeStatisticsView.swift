@@ -11,13 +11,16 @@ struct HomeStatisticsView: View {
     @EnvironmentObject private var viewModel: HomeViewModel
     @Binding var showPortfolio: Bool
 
+    private let horizontalPadding: CGFloat = 12
+    private let numberOfColumns: CGFloat = 3
+
     var body: some View {
         GeometryReader { geometry in
             HStack {
                 ForEach(viewModel.statistics) { stat in
                     StatisticView(stat: stat)
-                        .frame(width: (geometry.size.width - 12) / 3)
-                        .offset(x: showPortfolio ? 0 : -12)
+                        .frame(width: (geometry.size.width - horizontalPadding) / numberOfColumns)
+                        .offset(x: showPortfolio ? 0 : -horizontalPadding)
                 }
             }
             .frame(

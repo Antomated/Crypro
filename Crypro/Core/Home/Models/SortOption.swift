@@ -9,11 +9,11 @@ import Foundation
 
 enum SortOption {
     case rank
-    case rankReversed
+    case rankDescending
     case totalVolume
-    case totalVolumeReversed
+    case totalVolumeDescending
     case holdings
-    case holdingsReversed
+    case holdingsDescending
     case price
-    case priceReversed
+    case priceDescending
 }

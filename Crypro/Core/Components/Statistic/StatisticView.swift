@@ -22,9 +22,7 @@ struct StatisticView: View {
                 HStack {
                     SystemImage.statisticChangeArrow.image
                         .font(.caption2)
-                        .rotationEffect(.init(
-                            degrees: statPercentageChange >= 0 ? 0 : 180)
-                        )
+                        .rotationEffect(.radians(statPercentageChange >= 0 ? 0 : .pi))
                     Text(statPercentageChange.asPercentString())
                         .font(.caption)
                         .bold()
@@ -34,9 +32,6 @@ struct StatisticView: View {
                 HStack {
                     SystemImage.minus.image
                         .font(.caption2)
-                        .rotationEffect(.init(
-                            degrees: (stat.percentageChange ?? 0) >= 0 ? 0 : 180)
-                        )
                     Text(LocalizationKey.zeroStatChange.localizedString)
                         .multilineTextAlignment(.center)
                         .font(.caption)

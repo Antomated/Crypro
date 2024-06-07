@@ -58,7 +58,7 @@ private extension HomeViewModel {
         coinDataService.$allCoins
             .combineLatest($sortOption)
             .map { coins, sortOption in
-                self.filterAndSortCoins(text: self.searchText, coins: coins, sortOption: sortOption)
+                self.filterAndSortCoins(coins, query: self.searchText, sortOption: sortOption)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sortedCoins in
@@ -68,8 +68,8 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        $searchText
-            .combineLatest(coinDataService.$allCoins, $sortOption)
+        coinDataService.$allCoins
+            .combineLatest($searchText, $sortOption)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .map(filterAndSortCoins)
             .sink { [weak self] coins in
@@ -100,7 +100,7 @@ private extension HomeViewModel {
             .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] coins in
                 guard let self else { return }
-                self.portfolioCoins = self.sortPortfolioCoinsIfNeeded(coins: coins)
+                self.portfolioCoins = self.sortedPortfolioCoins(coins)
             }
             .store(in: &cancellables)
 
@@ -128,30 +128,25 @@ private extension HomeViewModel {
     private func setupLoadingSubscriber() {
         $isLoading
             .flatMap { isLoading -> AnyPublisher<Bool, Never> in
-                if isLoading {
-                    return Just(isLoading)
-                        .eraseToAnyPublisher()
-                } else {
-                    return Just(isLoading)
-                        .delay(for: .seconds(2), scheduler: DispatchQueue.main)
-                        .eraseToAnyPublisher()
-                }
+                Just(isLoading)
+                    .delay(for: .seconds(isLoading ? 0 : 2), scheduler: DispatchQueue.main)
+                    .eraseToAnyPublisher()
             }
             .assign(to: &$showLaunchView)
     }
 
-    func filterAndSortCoins(text: String, coins: [Coin], sortOption: SortOption) -> [Coin] {
-        var updatedCoins = filterCoins(text: text, coins: coins)
+    func filterAndSortCoins(_ coins: [Coin], query: String, sortOption: SortOption) -> [Coin] {
+        var updatedCoins = filteredCoins(coins, filterQuery: query)
         sortCoins(sort: sortOption, coins: &updatedCoins)
         return updatedCoins
     }
 
-    func filterCoins(text: String, coins: [Coin]) -> [Coin] {
-        guard !text.isEmpty else {
+    func filteredCoins(_ coins: [Coin], filterQuery: String) -> [Coin] {
+        guard !filterQuery.isEmpty else {
             return coins
         }
 
-        let lowerCasedText = text.lowercased()
+        let lowerCasedText = filterQuery.lowercased()
 
         return coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
@@ -160,11 +155,11 @@ private extension HomeViewModel {
         }
     }
 
-    func sortPortfolioCoinsIfNeeded(coins: [Coin]) -> [Coin] {
+    func sortedPortfolioCoins(_ coins: [Coin]) -> [Coin] {
         switch sortOption {
         case .holdings:
             coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
-        case .holdingsReversed:
+        case .holdingsDescending:
             coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
         default:
             coins
@@ -231,15 +226,15 @@ private extension HomeViewModel {
         switch sort {
         case .rank, .holdings:
             coins.sort { $0.rank < $1.rank }
-        case .rankReversed, .holdingsReversed:
+        case .rankDescending, .holdingsDescending:
             coins.sort { $0.rank > $1.rank }
         case .price:
             coins.sort { ($0.currentPrice ?? 0.0) > ($1.currentPrice ?? 0.0) }
-        case .priceReversed:
+        case .priceDescending:
             coins.sort { ($0.currentPrice ?? 0.0) < ($1.currentPrice ?? 0.0) }
         case .totalVolume:
             coins.sort { ($0.totalVolume ?? 0.0) > ($1.totalVolume ?? 0.0) }
-        case .totalVolumeReversed:
+        case .totalVolumeDescending:
             coins.sort { ($0.totalVolume ?? 0.0) < ($1.totalVolume ?? 0.0) }
         }
     }

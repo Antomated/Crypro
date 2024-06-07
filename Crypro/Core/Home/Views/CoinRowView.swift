@@ -10,6 +10,7 @@ import SwiftUI
 struct CoinRowView: View {
     let coin: Coin
     let showHoldingsColumn: Bool
+    private let rightColumnWidthToScreenRatio: CGFloat = 3.5
 
     var marketCapDisplay: String {
         if let totalVolume = coin.totalVolume {
@@ -60,11 +61,7 @@ private extension CoinRowView {
             if showHoldingsColumn {
                 Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
                     .bold()
-                Text(
-                    (coin.currentHoldings ?? 0) > 1_000_000
-                    ? (coin.currentHoldings ?? 0).formattedWithAbbreviations()
-                    : (coin.currentHoldings ?? 0).asNumberString()
-                )
+                Text(coin.formattedCurrentHoldings)
             } else {
                 Text(marketCapDisplay)
                     .bold()
@@ -86,7 +83,8 @@ private extension CoinRowView {
                 )
         }
         .font(.footnote)
-        .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+        .frame(width: UIScreen.main.bounds.width / rightColumnWidthToScreenRatio,
+               alignment: .trailing)
     }
 }
 

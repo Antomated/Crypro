@@ -105,7 +105,7 @@ private extension HomeView {
                 .frame(maxWidth: 60, maxHeight: 60)
                 Spacer()
                 CircleButtonView(icon: .chevronRight)
-                    .rotationEffect(.degrees(showPortfolio ? 180 : 0))
+                    .rotationEffect(.radians(showPortfolio ? .pi : 0))
                     .onTapGesture {
                         HapticManager.triggerSelection()
                         withAnimation(.spring()) {
@@ -190,14 +190,14 @@ private extension HomeView {
                 Text(LocalizationKey.coinRow.localizedString)
                     .padding(.leading, 4)
                 SystemImage.chevronDown.image
-                    .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankReversed
+                    .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
                         ? Color.theme.green
                         : Color.theme.secondaryText)
-                    .rotationEffect(.init(degrees: viewModel.sortOption == .rank ? 0 : 180))
+                    .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    viewModel.sortOption = viewModel.sortOption == .rank ? .rankReversed : .rank
+                    viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
                 }
             }
 
@@ -207,14 +207,14 @@ private extension HomeView {
                 HStack {
                     Text(LocalizationKey.holdingsRow.localizedString)
                     SystemImage.chevronDown.image
-                        .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsReversed
+                        .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
                             ? Color.theme.green
                             : Color.theme.secondaryText)
-                        .rotationEffect(.init(degrees: viewModel.sortOption == .holdings ? 0 : 180))
+                        .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .onTapGesture {
                     withAnimation(.default) {
-                        viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsReversed : .holdings
+                        viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
                     }
                 }
             } else {
@@ -222,15 +222,15 @@ private extension HomeView {
                     Text(LocalizationKey.totalVolumeRow.localizedString)
                     SystemImage.chevronDown.image
                         .foregroundStyle(viewModel.sortOption == .totalVolume
-                                         || viewModel.sortOption == .totalVolumeReversed
+                                         || viewModel.sortOption == .totalVolumeDescending
                                          ? Color.theme.green
                                          : Color.theme.secondaryText)
-                        .rotationEffect(.init(degrees: viewModel.sortOption == .totalVolume ? 0 : 180))
+                        .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
-                        ? .totalVolumeReversed
+                        ? .totalVolumeDescending
                         : .totalVolume
                     }
                 }
@@ -240,14 +240,14 @@ private extension HomeView {
                 Text(LocalizationKey.priceRow.localizedString)
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 SystemImage.chevronDown.image
-                    .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceReversed
+                    .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
                         ? Color.theme.green
                         : Color.theme.secondaryText)
-                    .rotationEffect(.init(degrees: viewModel.sortOption == .price ? 0 : 180))
+                    .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .onTapGesture {
                 withAnimation(.default) {
-                    viewModel.sortOption = viewModel.sortOption == .price ? .priceReversed : .price
+                    viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price
                 }
             }
 
@@ -256,7 +256,7 @@ private extension HomeView {
             } label: {
                 SystemImage.goForward.image
             }
-            .rotationEffect(.init(degrees: viewModel.isLoading ? 360 : 0), anchor: .center)
+            .rotationEffect(.radians(viewModel.isLoading ? 2 * .pi : 0), anchor: .center)
         }
         .font(.caption)
         .foregroundStyle(Color.theme.secondaryText)

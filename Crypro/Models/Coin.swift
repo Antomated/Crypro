@@ -45,6 +45,11 @@ struct Coin: Decodable, Identifiable {
         (currentHoldings ?? 0) * (currentPrice ?? 0)
     }
 
+    var formattedCurrentHoldings: String {
+        guard let holdings = currentHoldings else { return "0" }
+        return holdings > 1_000_000 ? holdings.formattedWithAbbreviations() : holdings.asNumberString()
+    }
+
     var rank: Int {
         Int(marketCapRank ?? 0)
     }
