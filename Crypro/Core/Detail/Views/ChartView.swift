@@ -14,6 +14,7 @@ struct ChartView: View {
     private let lineColor: Color
     private let startingDate: Date
     private let endingDate: Date
+    private let chartBackgroundOpacity: CGFloat = 1
     @Binding var startAnimation: Bool
     @State private var percentage: CGFloat = 0
 
@@ -95,24 +96,24 @@ private extension ChartView {
     var chartYAxis: some View {
         VStack {
             Text(maxY.formattedWithAbbreviations())
-                .padding(2)
+                .padding(4)
                 .background(
                     Capsule()
-                        .fill(Color.theme.background.opacity(0.85))
+                        .fill(Color.theme.background.opacity(chartBackgroundOpacity))
                 )
             Spacer()
             Text(((maxY + minY) / 2).formattedWithAbbreviations())
-                .padding(2)
+                .padding(4)
                 .background(
                     Capsule()
-                        .fill(Color.theme.background.opacity(0.85))
+                        .fill(Color.theme.background.opacity(chartBackgroundOpacity))
                 )
             Spacer()
             Text(minY.formattedWithAbbreviations())
-                .padding(2)
+                .padding(4)
                 .background(
                     Capsule()
-                        .fill(Color.theme.background.opacity(0.85))
+                        .fill(Color.theme.background.opacity(chartBackgroundOpacity))
                 )
         }
         .foregroundStyle(Color.theme.accent)

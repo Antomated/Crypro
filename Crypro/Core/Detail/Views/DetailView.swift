@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-struct DetailLoadingView: View {
-    @Binding var coin: Coin?
-
-    var body: some View {
-        ZStack {
-            if let coin = coin {
-                DetailView(coin: coin)
-            }
-        }
-    }
-}
-
 struct DetailView: View {
     @StateObject private var viewModel: DetailViewModel
     @State private var showLoader: Bool = true
@@ -70,7 +58,8 @@ struct DetailView: View {
                 }
             }
                 .animation(.easeInOut, value: showLoader)
-                .transition(.opacity)        )
+                .transition(.opacity)
+        )
         .onReceive(viewModel.$hasLoadedData) { hasLoadedData in
             showLoader = !hasLoadedData
             startAnimation = hasLoadedData
@@ -79,10 +68,12 @@ struct DetailView: View {
             Alert(
                 title: Text(LocalizationKey.errorTitle.localizedString),
                 message: Text(error.message),
-                dismissButton: .default(Text(LocalizationKey.okButton.localizedString),
-                                        action: {
-                                            viewModel.error = nil
-                                        })
+                dismissButton: .default(
+                    Text(LocalizationKey.okButton.localizedString),
+                    action: {
+                        viewModel.error = nil
+                    }
+                )
             )
         }
     }

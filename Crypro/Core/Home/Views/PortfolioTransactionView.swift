@@ -12,6 +12,11 @@ struct PortfolioTransactionView: View {
     @Binding var quantityText: String
     @FocusState var quantityIsFocused: Bool
 
+    private var currentValue: Double {
+        guard let quantity = Double(quantityText) else { return 0 }
+        return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Divider()
@@ -47,9 +52,8 @@ private extension PortfolioTransactionView {
                 )
                 .keyboardType(.decimalPad)
                 .focused($quantityIsFocused)
-            Text("= \(getCurrentValue().asCurrencyWith2Decimals())")
+            Text("= \(currentValue.asCurrencyWith2Decimals())")
                 .padding(12)
-                .layoutPriority(1)
                 .lineLimit(1)
                 .foregroundStyle(Color.theme.accent)
                 .background(
@@ -61,7 +65,7 @@ private extension PortfolioTransactionView {
 
     var saveButtonView: some View {
         Button {
-            saveButtonPressed()
+            updatePortfolio()
         } label: {
             Text(LocalizationKey.saveButton.localizedString)
                 .foregroundStyle(Color.theme.background)
@@ -79,12 +83,7 @@ private extension PortfolioTransactionView {
 // MARK: - Private methods
 
 private extension PortfolioTransactionView {
-    func getCurrentValue() -> Double {
-        guard let quantity = Double(quantityText) else { return 0 }
-        return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
-    }
-
-    func saveButtonPressed() {
+    func updatePortfolio() {
         guard let coin = viewModel.selectedCoin,
               let amount = Double(quantityText)
         else { return }

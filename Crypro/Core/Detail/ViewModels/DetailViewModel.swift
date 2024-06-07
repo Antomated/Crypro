@@ -52,13 +52,7 @@ private extension DetailViewModel {
                 redditURL = coinDetail?.links?.subredditURL
                 twitterURL = coinDetail?.links?.twitterURL
                 telegramURL = coinDetail?.links?.telegramURL
-            }
-            .store(in: &cancellables)
-
-        coinDetailService.$coinDetails
-            .sink { [weak self] coinDetail in
-                guard let self, coinDetail != nil else { return }
-                hasLoadedData = true
+                hasLoadedData = coinDetail != nil
             }
             .store(in: &cancellables)
 

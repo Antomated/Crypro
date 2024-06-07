@@ -33,6 +33,7 @@
 		3A4E46662BBE1568002B0687 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46652BBE1568002B0687 /* SortOption.swift */; };
 		3A4E46692BBE1EA4002B0687 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46682BBE1EA4002B0687 /* LaunchView.swift */; };
 		3A5C97C72C0A087F00A15AB8 /* LogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */; };
+		3A776DA02C13B35500B3B574 /* DetailLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A776D9F2C13B35500B3B574 /* DetailLoadingView.swift */; };
 		3A7C9F9F2BEC228A002F2EEC /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C9F9E2BEC228A002F2EEC /* AppLogger.swift */; };
 		3A7C9FA12BEC22A3002F2EEC /* LogTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C9FA02BEC22A3002F2EEC /* LogTag.swift */; };
 		3A85F8B82BC89C4600E18F26 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85F8B72BC89C4600E18F26 /* ChartView.swift */; };
@@ -93,6 +94,7 @@
 		3A4E46652BBE1568002B0687 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		3A4E46682BBE1EA4002B0687 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogConfiguration.swift; sourceTree = "<group>"; };
+		3A776D9F2C13B35500B3B574 /* DetailLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLoadingView.swift; sourceTree = "<group>"; };
 		3A7C9F9E2BEC228A002F2EEC /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		3A7C9FA02BEC22A3002F2EEC /* LogTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTag.swift; sourceTree = "<group>"; };
 		3A85F8B72BC89C4600E18F26 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		3A2AFB152BC0B3AB0001277F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A776D9F2C13B35500B3B574 /* DetailLoadingView.swift */,
 				3A2AFB162BC0B3C40001277F /* DetailView.swift */,
 				3A85F8B72BC89C4600E18F26 /* ChartView.swift */,
 			);
@@ -593,6 +596,7 @@
 				3A4E46622BBE0EAE002B0687 /* CoinLogoView.swift in Sources */,
 				3ABA14F22BEAE08A0086056C /* BlurView.swift in Sources */,
 				3A9B6BC82BBCAA3F00CD40D1 /* CoingeckoEndpoint.swift in Sources */,
+				3A776DA02C13B35500B3B574 /* DetailLoadingView.swift in Sources */,
 				3A85F8BA2BC89CA800E18F26 /* Date+String.swift in Sources */,
 				3A27B6CE2BBB680E00FCC327 /* CircleButtonAnimationView.swift in Sources */,
 				3A9B6BC52BBCA7CD00CD40D1 /* CoinDataService.swift in Sources */,
