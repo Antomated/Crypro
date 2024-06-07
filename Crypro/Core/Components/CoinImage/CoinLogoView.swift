@@ -19,13 +19,11 @@ struct CoinLogoView: View {
                 .font(.headline)
                 .foregroundColor(.theme.accent)
                 .lineLimit(1)
-                .minimumScaleFactor(0.5)
 
             Text(coin.name)
                 .font(.caption)
                 .foregroundColor(.theme.secondaryText)
                 .lineLimit(2)
-                .minimumScaleFactor(0.5)
                 .multilineTextAlignment(.center)
         }
     }

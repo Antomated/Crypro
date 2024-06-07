@@ -6,10 +6,10 @@
 //
 
 import Combine
-import SwiftUI
+import Foundation
 
 final class CoinImageViewModel: ObservableObject {
-    @Published var coinImage: UIImage?
+    @Published var coinImageData: Data?
     @Published var isLoading: Bool = true
 
     private let dataService: CoinImageService
@@ -22,11 +22,11 @@ final class CoinImageViewModel: ObservableObject {
     }
 
     private func addSubscribers() {
-        dataService.$image
+        dataService.$imageData
             .sink(receiveValue: { [weak self] image in
                 guard let self else { return }
                 isLoading = false
-                coinImage = image
+                coinImageData = image
             })
             .store(in: &cancellables)
     }

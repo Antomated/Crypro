@@ -6,7 +6,7 @@
 //
 
 import Combine
-import SwiftUI
+import Foundation
 
 final class HomeViewModel: ObservableObject {
     @Published var statistics: [Statistic] = []

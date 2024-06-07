@@ -6,10 +6,10 @@
 //
 
 import Combine
-import SwiftUI
+import Foundation
 
 final class CoinImageService {
-    @Published var image: UIImage?
+    @Published var imageData: Data?
     private let coin: Coin
     private let imageProvider = ImageDataProvider.shared
     private var imageSubscription: AnyCancellable?
@@ -24,7 +24,7 @@ final class CoinImageService {
 
     private func getCoinImage() {
         if let imageData = imageProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
-            image = UIImage(data: imageData)
+            self.imageData = imageData
         } else {
             downloadCoinImage()
         }
@@ -34,9 +34,6 @@ final class CoinImageService {
         guard let url = URL(string: coin.image) else { return }
         imageSubscription = NetworkManager.download(url: url)
             .first()
-            .tryMap { data in
-                UIImage(data: data)
-            }
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { completion in
@@ -48,9 +45,9 @@ final class CoinImageService {
                     }
                 },
                 receiveValue: { [weak self] downloadedImage in
-                    guard let self, let downloadedImage, let imageData = downloadedImage.pngData() else { return }
-                    self.image = downloadedImage
-                    self.imageProvider.saveImage(data: imageData,
+                    guard let self else { return }
+                    self.imageData = downloadedImage
+                    self.imageProvider.saveImage(data: downloadedImage,
                                                  imageName: self.imageName,
                                                  folderName: self.coinImagesFolder)
                 }
