@@ -18,18 +18,32 @@ struct StatisticView: View {
             Text(stat.value)
                 .font(.headline)
                 .foregroundStyle(Color.theme.accent)
-            HStack {
-                SystemImage.statisticChangeArrow.image
-                    .font(.caption2)
-                    .rotationEffect(.init(
-                        degrees: (stat.percentageChange ?? 0) >= 0 ? 0 : 180)
-                    )
-                Text(stat.percentageChange?.asPercentString() ?? "")
-                    .font(.caption)
-                    .bold()
+            if let statPercentageChange = stat.percentageChange {
+                HStack {
+                    SystemImage.statisticChangeArrow.image
+                        .font(.caption2)
+                        .rotationEffect(.init(
+                            degrees: statPercentageChange >= 0 ? 0 : 180)
+                        )
+                    Text(statPercentageChange.asPercentString())
+                        .font(.caption)
+                        .bold()
+                }
+                .foregroundStyle(statPercentageChange >= 0 ? Color.theme.green : Color.theme.red)
+            } else {
+                HStack {
+                    SystemImage.minus.image
+                        .font(.caption2)
+                        .rotationEffect(.init(
+                            degrees: (stat.percentageChange ?? 0) >= 0 ? 0 : 180)
+                        )
+                    Text(LocalizationKey.zeroStatChange.localizedString)
+                        .multilineTextAlignment(.center)
+                        .font(.caption)
+                        .bold()
+                }
+                .foregroundStyle(Color.theme.secondaryText)
             }
-            .foregroundStyle((stat.percentageChange ?? 0) >= 0 ? Color.theme.green : Color.theme.red)
-            .opacity(stat.percentageChange == nil ? 0.0 : 1.0)
         }
     }
 }
