@@ -63,7 +63,6 @@ enum LocalizationKey: String {
 
     case information
     case appDescription
-    case developedBy
     case visitGitHub
     case settings
     case darkTheme

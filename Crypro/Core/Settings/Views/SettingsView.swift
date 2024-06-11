@@ -54,6 +54,10 @@ private extension SettingsView {
                         .resizable()
                         .frame(width: 120, height: 120)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.black)
+                        )
                     Text(Constants.appName)
                         .font(.headline.weight(.heavy))
                         .foregroundStyle(Color.launch.accent)
@@ -64,9 +68,6 @@ private extension SettingsView {
                         .font(.caption2.weight(.medium))
                         .foregroundStyle(Color.theme.accent)
                     Spacer()
-                    Text(LocalizationKey.developedBy.localizedString + Constants.gitHubNickname)
-                        .font(.caption.weight(.medium))
-                        .foregroundStyle(Color.theme.accent)
                     Link(destination: personalURL) {
                         Text(LocalizationKey.visitGitHub.localizedString)
                             .frame(maxWidth: .infinity)
