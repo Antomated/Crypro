@@ -167,34 +167,25 @@ private extension HomeViewModel {
     }
 
     func mapGlobalMarketData(data: MarketData?, portfolioCoins: [Coin]) -> [Statistic] {
+        guard let data else { return [] }
         var stats: [Statistic] = []
-
-        guard let data else {
-            return stats
-        }
-
         let marketCap = Statistic(title: LocalizationKey.marketCap.localizedString,
                                   value: data.marketCap,
                                   percentageChange: data.marketCapChangePercentage24HUsd)
         let volume = Statistic(title: LocalizationKey.volume24h.localizedString, value: data.volume)
         let btcDominance = Statistic(title: LocalizationKey.btcDominance.localizedString, value: data.btcDominance)
-
         let portfolioValue = portfolioCoins
             .map { $0.currentHoldingsValue }
             .reduce(0, +)
-
         let previousValue = portfolioCoins
             .map { $0.currentHoldingsValue / (1 + ($0.priceChangePercentage24H ?? 0) / 100) }
             .reduce(0, +)
-
         let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
-
         let portfolio = Statistic(
             title: LocalizationKey.portfolioValue.localizedString,
             value: portfolioValue.asCurrencyWith2Decimals(),
             percentageChange: percentageChange
         )
-
         stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
         return stats
     }
