@@ -130,6 +130,18 @@ private extension HomeView {
                     }
                     .listRowBackground(Color.theme.background)
                     .padding(.horizontal, 12)
+                    .swipeActions {
+                        Button {
+                            withAnimation {
+                                showPortfolio.toggle()
+                                showPortfolioView.toggle()
+                                viewModel.selectedCoin = coin
+                            }
+                        } label: {
+                            SystemImage.filledPlus.image
+                        }
+                        .tint(Color.theme.green)
+                    }
             }
         }
         .overlay {
@@ -164,8 +176,21 @@ private extension HomeView {
                         segue(coin: coin)
                     }
                     .listRowBackground(Color.theme.background)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            viewModel.deleteCoin(coin)
+                        } label: {
+                            SystemImage.thrash.image
+                        }
+                        Button {
+                            showPortfolioView.toggle()
+                            viewModel.selectedCoin = coin
+                        } label: {
+                            SystemImage.filledPlus.image
+                        }
+                        .tint(Color.theme.green)
+                    }
             }
-            .onDelete(perform: viewModel.deleteCoin)
         }
         .refreshable {
             viewModel.reloadData()

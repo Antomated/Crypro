@@ -73,7 +73,8 @@ private extension PortfolioTransactionView {
                 .frame(maxWidth: .infinity, maxHeight: 40)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.theme.accent)
+                        .fill(Color.theme.green)
+
                 )
         }
         .disabled(quantityText.isEmpty ? true : false)

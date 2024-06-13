@@ -19,6 +19,8 @@ enum SystemImage: String {
     case chevronDown = "chevron.down"
     case goForward = "goforward"
     case xMark = "xmark"
+    case thrash = "trash.circle.fill"
+    case filledPlus = "plus.circle.fill"
 
     var image: Image {
         Image(systemName: rawValue)

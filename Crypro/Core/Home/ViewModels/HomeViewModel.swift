@@ -35,11 +35,8 @@ final class HomeViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
 
-    func deleteCoin(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let coin = portfolioCoins[index]
-            updatePortfolio(coin: coin, amount: 0)
-        }
+    func deleteCoin(_ coin: Coin) {
+        updatePortfolio(coin: coin, amount: 0)
     }
 
     func reloadData() {

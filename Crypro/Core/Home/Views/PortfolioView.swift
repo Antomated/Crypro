@@ -52,6 +52,12 @@ struct PortfolioView: View {
                 .animation(.easeOut(duration: 0.16), value: UUID())
             }
         }
+        .onAppear {
+            if let coin = viewModel.selectedCoin {
+                updateSelectedCoin(coin: coin)
+                searchIsFocused = false
+            }
+        }
     }
 }
 
@@ -65,30 +71,39 @@ private extension PortfolioView {
     }
 
     var coinLogoList: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 10) {
-                ForEach(searchListCoins) { coin in
-                    CoinLogoView(coin: coin)
-                        .frame(width: 75)
-                        .padding(4)
-                        .onTapGesture {
-                            withAnimation(.easeIn) {
-                                updateSelectedCoin(coin: coin)
-                                searchIsFocused = false
+        ScrollViewReader { scrollView in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 10) {
+                    ForEach(searchListCoins) { coin in
+                        CoinLogoView(coin: coin)
+                            .frame(width: 75)
+                            .padding(4)
+                            .id(coin.id)
+                            .onTapGesture {
+                                withAnimation(.easeIn) {
+                                    updateSelectedCoin(coin: coin)
+                                    searchIsFocused = false
+                                    scrollView.scrollTo(coin.id, anchor: .center)
+                                }
                             }
-                        }
-                        .background(
-                            RoundedRectangle(cornerRadius: 8)
-                                .strokeBorder(
-                                    (viewModel.selectedCoin?.id == coin.id)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .strokeBorder(
+                                        (viewModel.selectedCoin?.id == coin.id)
                                         ? Color.theme.green
                                         : Color.clear
-                                )
-                        )
+                                    )
+                            )
+                    }
+                }
+                .padding(.vertical, 4)
+                .padding(.leading)
+            }
+            .onAppear {
+                if let selectedCoinID = viewModel.selectedCoin?.id {
+                    scrollView.scrollTo(selectedCoinID, anchor: .center)
                 }
             }
-            .padding(.vertical, 4)
-            .padding(.leading)
         }
     }
 }
@@ -98,7 +113,6 @@ private extension PortfolioView {
 private extension PortfolioView {
     func updateSelectedCoin(coin: Coin) {
         viewModel.selectedCoin = coin
-
         if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
            let amount = portfolioCoin.currentHoldings {
             quantityText = "\(amount)"
