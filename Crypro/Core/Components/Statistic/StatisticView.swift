@@ -30,8 +30,6 @@ struct StatisticView: View {
                 .foregroundStyle(statPercentageChange >= 0 ? Color.theme.green : Color.theme.red)
             } else {
                 HStack {
-                    SystemImage.minus.image
-                        .font(.caption2)
                     Text(LocalizationKey.zeroStatChange.localizedString)
                         .multilineTextAlignment(.center)
                         .font(.caption)

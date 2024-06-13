@@ -2,7 +2,7 @@
   Localizable.strings
   Crypro
 
-  Created by Beavean on 03.05.2024.
+  Created by Beavean on 03.05.2024
   
 */
 
@@ -22,7 +22,7 @@
 "marketCap" = "Market Cap";
 "volume24h" = "24h Volume";
 "btcDominance" = "BTC Dominance";
-"zeroStatChange" = "0%";
+"zeroStatChange" = "";
 
 // MARK: - Edit Portfolio
 
@@ -57,7 +57,7 @@
 "notAvailable" = "n/a";
 
 "website" = "Website";
-"twitter" = "Twitter";
+"twitter" = "X.com";
 "telegram" = "Telegram";
 "reddit" = "Reddit";
 
