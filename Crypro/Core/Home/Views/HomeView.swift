@@ -212,11 +212,11 @@ private extension HomeView {
                 Text(LocalizationKey.coinRow.localizedString)
                     .padding(.leading, 4)
                 SystemImage.chevronDown.image
-                    .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                                     ? Color.theme.green
-                                     : Color.theme.secondaryText)
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
+            .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
@@ -229,26 +229,28 @@ private extension HomeView {
                 HStack {
                     Text(LocalizationKey.holdingsRow.localizedString)
                     SystemImage.chevronDown.image
-                        .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                                         ? Color.theme.green
-                                         : Color.theme.secondaryText)
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
+                .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
                     }
                 }
+
             } else {
                 HStack {
                     Text(LocalizationKey.totalVolumeRow.localizedString)
                     SystemImage.chevronDown.image
-                        .foregroundStyle(viewModel.sortOption == .totalVolume
-                                         || viewModel.sortOption == .totalVolumeDescending
-                                         ? Color.theme.green
-                                         : Color.theme.secondaryText)
+
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
+                .foregroundStyle(viewModel.sortOption == .totalVolume
+                                 || viewModel.sortOption == .totalVolumeDescending
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
@@ -262,11 +264,12 @@ private extension HomeView {
                 Text(LocalizationKey.priceRow.localizedString)
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 SystemImage.chevronDown.image
-                    .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                                     ? Color.theme.green
-                                     : Color.theme.secondaryText)
+
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
+            .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price

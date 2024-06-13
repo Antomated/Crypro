@@ -37,10 +37,12 @@ struct SearchBarView: View {
                 )
         }
         .font(.callout)
-        .padding()
+        .padding(12)
         .background(
-            RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(Color.theme.secondaryText)
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(textFieldIsFocused
+                              ? Color.theme.green
+                              : Color.theme.secondaryText)
         )
     }
 }
