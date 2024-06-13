@@ -29,9 +29,10 @@ struct PortfolioView: View {
                 }
                 .background(Color.theme.background.ignoresSafeArea())
                 .navigationTitle(LocalizationKey.editPortfolio.localizedString)
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(
-                        placement: .topBarLeading,
+                        placement: .topBarTrailing,
                         content: {
                             Button {
                                 dismiss()

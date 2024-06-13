@@ -19,22 +19,19 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // background
                 Color.theme.background
                     .ignoresSafeArea()
                     .sheet(isPresented: $showPortfolioView, content: {
                         PortfolioView()
                     })
-
-                // content layer
                 VStack {
                     Text(showPortfolio
-                        ? LocalizationKey.portfolio.localizedString
-                        : LocalizationKey.livePrices.localizedString)
-                        .font(.headline.weight(.heavy))
-                        .foregroundStyle(Color.theme.accent)
-                        .animation(.none, value: showPortfolio)
-                        .padding(.top)
+                         ? LocalizationKey.portfolio.localizedString
+                         : LocalizationKey.livePrices.localizedString)
+                    .font(.title3.weight(.heavy))
+                    .foregroundStyle(Color.theme.accent)
+                    .animation(.none, value: showPortfolio)
+                    .padding(.top)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
                         .padding(.top)
                         .frame(height: 70)
@@ -216,8 +213,8 @@ private extension HomeView {
                     .padding(.leading, 4)
                 SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                        ? Color.theme.green
-                        : Color.theme.secondaryText)
+                                     ? Color.theme.green
+                                     : Color.theme.secondaryText)
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .onTapGesture {
@@ -233,8 +230,8 @@ private extension HomeView {
                     Text(LocalizationKey.holdingsRow.localizedString)
                     SystemImage.chevronDown.image
                         .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                            ? Color.theme.green
-                            : Color.theme.secondaryText)
+                                         ? Color.theme.green
+                                         : Color.theme.secondaryText)
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .onTapGesture {
@@ -266,8 +263,8 @@ private extension HomeView {
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 SystemImage.chevronDown.image
                     .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                        ? Color.theme.green
-                        : Color.theme.secondaryText)
+                                     ? Color.theme.green
+                                     : Color.theme.secondaryText)
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .onTapGesture {
@@ -277,7 +274,7 @@ private extension HomeView {
             }
 
             Button {
-                    viewModel.reloadData()
+                viewModel.reloadData()
             } label: {
                 SystemImage.goForward.image
             }
