@@ -2,7 +2,7 @@
 //  CoinInfoSource.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 05.06.2024.
+//  Created by Beavean on 05.06.2024.
 //
 
 import Foundation

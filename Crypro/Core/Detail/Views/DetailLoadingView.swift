@@ -2,7 +2,7 @@
 //  DetailLoadingView.swift
 //  Crypro
 //
-//  Created by Anton Petrov on 07.06.2024.
+//  Created by Beavean on 07.06.2024.
 //
 
 import SwiftUI

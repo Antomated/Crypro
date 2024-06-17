@@ -65,7 +65,6 @@
 		3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A1E2BBB539B004E643B /* Assets.xcassets */; };
 		3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AC51A212BBB539B004E643B /* Preview Assets.xcassets */; };
 		3ACDEDFC2C1116B600725E66 /* CoinInfoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDEDFB2C1116B600725E66 /* CoinInfoSource.swift */; };
-		3AE602272C19F61600122FDD /* PortfolioTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE602262C19F61600122FDD /* PortfolioTransactionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,7 +127,6 @@
 		3AC51A1E2BBB539B004E643B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC51A212BBB539B004E643B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3ACDEDFB2C1116B600725E66 /* CoinInfoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfoSource.swift; sourceTree = "<group>"; };
-		3AE602262C19F61600122FDD /* PortfolioTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTransactionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +170,6 @@
 				3A8740082BBB71CB004D1BCB /* CoinRowView.swift */,
 				3A4E465C2BBE0BAA002B0687 /* PortfolioView.swift */,
 				3A4E46632BBE14F3002B0687 /* PortfolioTransactionView.swift */,
-				3AE602262C19F61600122FDD /* PortfolioTransactionViewModel.swift */,
 				3ABA14EF2BEAE0620086056C /* LoaderView.swift */,
 				3ABA14F12BEAE08A0086056C /* BlurView.swift */,
 			);
@@ -560,7 +557,6 @@
 				3A7C9F9F2BEC228A002F2EEC /* AppLogger.swift in Sources */,
 				3A9B6BCC2BBCAADB00CD40D1 /* NetworkError.swift in Sources */,
 				3A4E46572BBE013A002B0687 /* HomeStatisticsView.swift in Sources */,
-				3AE602272C19F61600122FDD /* PortfolioTransactionViewModel.swift in Sources */,
 				3A8740072BBB6D54004D1BCB /* Coin.swift in Sources */,
 				3A01E8222BEECCF900988776 /* IdentifiableError.swift in Sources */,
 				3A5C97C72C0A087F00A15AB8 /* LogConfiguration.swift in Sources */,
