@@ -1,6 +1,6 @@
 ![Header](https://github.com/Beavean/Crypro/assets/105853157/1741e5b3-4f4d-4d7d-b6b7-c3e8614c11d1)
 
-The application displays information about top 250 crypto coins. The cryptocurrency data that is used in this app comes from a free API from CoinGecko.
+The application displays information and details for top crypto coins with portfolio tracking and statistics functionality.
 
 ## Requirements
 * iOS 16.0+
