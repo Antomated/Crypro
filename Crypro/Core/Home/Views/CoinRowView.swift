@@ -39,7 +39,7 @@ private extension CoinRowView {
         HStack(spacing: 0) {
             Text("\(coin.rank)")
                 .font(.caption)
-                .foregroundStyle(Color.theme.secondaryText)
+                .foregroundColor(Color.theme.secondaryText)
                 .frame(minWidth: 30)
             CoinImageView(coin: coin)
                 .frame(width: 30, height: 30)
@@ -47,13 +47,18 @@ private extension CoinRowView {
                 Text(coin.symbol.uppercased())
                     .font(.subheadline)
                     .bold()
-                    .foregroundStyle(Color.theme.accent)
-                Text(coin.name)
-                    .font(.caption)
-                    .foregroundStyle(Color.theme.secondaryText)
+                    .foregroundColor(Color.theme.accent)
+                GeometryReader { geometry in
+                    Text(coin.name)
+                        .font(.caption)
+                        .foregroundColor(Color.theme.secondaryText)
+                        .frame(width: geometry.size.width, alignment: .leading)
+                        .lineLimit(1)
+                }
             }
             .padding(.leading, 6)
         }
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
 
     var centralColumn: some View {
