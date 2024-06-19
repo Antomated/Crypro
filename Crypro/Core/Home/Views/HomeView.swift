@@ -58,6 +58,12 @@ struct HomeView: View {
                     SettingsView(isPresented: $showSettingsView)
                 })
             }
+            .overlay {
+                if viewModel.showLaunchView {
+                    LoaderView()
+                        .ignoresSafeArea()
+                }
+            }
             .navigationDestination(isPresented: $showDetailView) {
                 DetailLoadingView(coin: $selectedCoin)
             }
@@ -135,12 +141,6 @@ private extension HomeView {
                         }
                         .tint(Color.theme.green)
                     }
-            }
-        }
-        .overlay {
-            if viewModel.showLaunchView {
-                LoaderView()
-                    .ignoresSafeArea()
             }
         }
         .refreshable {

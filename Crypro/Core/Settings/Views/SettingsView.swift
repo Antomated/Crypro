@@ -53,11 +53,6 @@ private extension SettingsView {
                     Image(.logo)
                         .resizable()
                         .frame(width: 120, height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.black)
-                        )
                     Text(Constants.appName)
                         .font(.headline.weight(.heavy))
                         .foregroundStyle(Color.launch.accent)
