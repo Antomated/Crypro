@@ -178,14 +178,20 @@ private extension HomeViewModel {
             value: data.marketCap,
             percentageChange: data.marketCapChangePercentage24HUsd
         )
-        let volume = Statistic(
-            title: LocalizationKey.volume24h.localizedString,
-            value: data.volume
+
+        let totalIcos = data.ongoingIcos + data.endedIcos
+        let icoPercentageChange = totalIcos == 0 ? 0 : (Double(data.ongoingIcos) / Double(totalIcos)) * 100
+        let icoStatistic = Statistic(
+            title: LocalizationKey.totalIcos.localizedString,
+            value: (data.endedIcos + data.ongoingIcos).formatted(),
+            percentageChange: icoPercentageChange
         )
+
         let btcDominance = Statistic(
             title: LocalizationKey.btcDominance.localizedString,
             value: data.btcDominance
         )
+
         let portfolioValue = portfolioCoins
             .map { $0.currentHoldingsValue }
             .reduce(0, +)
@@ -199,7 +205,7 @@ private extension HomeViewModel {
             percentageChange: percentageChange
         )
 
-        stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
+        stats.append(contentsOf: [marketCap, icoStatistic, btcDominance, portfolio])
         return stats
     }
 
@@ -215,19 +221,18 @@ private extension HomeViewModel {
             title: LocalizationKey.markets.localizedString,
             value: "\(data.markets)"
         )
-        let totalIcos = data.ongoingIcos + data.endedIcos
-        let icoPercentageChange = totalIcos == 0 ? 0 : (Double(data.ongoingIcos) / Double(totalIcos)) * 100
-        let icoStatistic = Statistic(
-            title: LocalizationKey.totalIcos.localizedString,
-            value: (data.endedIcos + data.ongoingIcos).formatted(),
-            percentageChange: icoPercentageChange
+
+        let volume = Statistic(
+            title: LocalizationKey.volume24h.localizedString,
+            value: data.volume
         )
+
         let portfolioCoins = Statistic(
             title: LocalizationKey.coinsInPortfolio.localizedString,
             value: "\(portfolioCoins.count)"
         )
 
-        stats.append(contentsOf: [icoStatistic, activeCryptocurrencies, markets, portfolioCoins])
+        stats.append(contentsOf: [markets, activeCryptocurrencies, volume, portfolioCoins])
         return stats
     }
 

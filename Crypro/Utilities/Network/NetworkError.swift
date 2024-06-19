@@ -17,7 +17,7 @@ enum NetworkError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case let .badURLResponse(url: url):
-             LocalizationKey.badResponseFromUrlError.localizedString + "\(url)"
+             LocalizationKey.badResponseFromURLError.localizedString + "\(url)"
         case .retryLimitReached:
              LocalizationKey.retryLimitReachedError.localizedString
         case .unknown:

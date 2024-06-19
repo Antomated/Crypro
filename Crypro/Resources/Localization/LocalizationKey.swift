@@ -75,7 +75,7 @@ enum LocalizationKey: String {
 
     case errorTitle
     case okButton
-    case badResponseFromUrlError
+    case badResponseFromURLError
     case retryLimitReachedError
     case unknownErrorOccurredError
     case invalidEndpointError

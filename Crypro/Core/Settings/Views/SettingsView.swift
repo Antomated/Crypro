@@ -11,7 +11,7 @@ struct SettingsView: View {
     @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
     @Binding var isPresented: Bool
 
-    private let personalURL = URL(string: Constants.gitHubUrl)!
+    private let personalURL = URL(string: Constants.gitHubURL)!
     private static var defaultDarkMode: Bool {
         UITraitCollection.current.userInterfaceStyle == .dark
     }

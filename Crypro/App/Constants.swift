@@ -13,10 +13,13 @@ enum Constants {
     static let apiPath = "/api/v3"
     static let apiKey = "CG-tE4W8rqW6Kwk9vcaNwYXxyej"
 
-    static let gitHubUrl = "https://github.com/Beavean"
+    static let gitHubURL = "https://github.com/Beavean"
 
-    static let twitterBaseUrl = "https://twitter.com/"
-    static let telegramBaseUrl = "https://t.me/"
+    static let projectURL = "https://github.com/Beavean/CRYPRO"
+    static let coinGeckoURL = "https://www.coingecko.com"
+
+    static let twitterBaseURL = "https://twitter.com/"
+    static let telegramBaseURL = "https://t.me/"
 
     static let selectedTheme = "selectedTheme"
 }

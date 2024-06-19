@@ -25,16 +25,11 @@ struct HomeView: View {
                         PortfolioView()
                     })
                 VStack {
-                    Text(showPortfolio
-                         ? LocalizationKey.portfolio.localizedString
-                         : LocalizationKey.livePrices.localizedString)
-                    .font(.title3.weight(.heavy))
-                    .foregroundStyle(Color.theme.accent)
-                    .animation(.none, value: showPortfolio)
-                    .padding(.top)
+                    HeaderView(showPortfolio: $showPortfolio)
+                        .padding(.horizontal, 12)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
                         .padding(.top)
-                        .frame(height: 170)
+                        .frame(height: 150)
                     Divider()
                     SearchBarView(searchText: $viewModel.searchText)
                         .padding(.horizontal)

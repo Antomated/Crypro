@@ -78,7 +78,7 @@
 
 "errorTitle" = "Error";
 "okButton" = "OK";
-"badResponseFromUrlError" = "Portfolio";
+"badResponseFromURLError" = "Portfolio";
 "retryLimitReachedError" = "Retry limit reached";
 "unknownErrorOccurredError" = "Unknown error occurred";
 "invalidEndpointError" = "Invalid endpoint";

@@ -15,11 +15,11 @@ struct CoinInfoSource: Decodable {
 
     var twitterURL: String? {
         guard let twitterName = twitterScreenName, !twitterName.isEmpty else { return nil }
-        return Constants.twitterBaseUrl + twitterName
+        return Constants.twitterBaseURL + twitterName
     }
 
     var telegramURL: String? {
         guard let telegramIdentifier = telegramChannelIdentifier, !telegramIdentifier.isEmpty else { return nil }
-        return Constants.telegramBaseUrl + telegramIdentifier
+        return Constants.telegramBaseURL + telegramIdentifier
     }
 }
