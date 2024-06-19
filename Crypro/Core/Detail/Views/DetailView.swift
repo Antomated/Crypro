@@ -12,6 +12,7 @@ struct DetailView: View {
     @State private var showLoader: Bool = true
     @State private var startAnimation: Bool = false
     @State private var showFullDescription: Bool = false
+    @State private var showPortfolioView: Bool = false
 
     private let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -52,6 +53,7 @@ struct DetailView: View {
         }
         .overlay(
             Group {
+                detailFooter
                 if showLoader {
                     LoaderView()
                         .ignoresSafeArea()
@@ -64,6 +66,9 @@ struct DetailView: View {
             showLoader = !hasLoadedData
             startAnimation = hasLoadedData
         }
+        .sheet(isPresented: $showPortfolioView, content: {
+            PortfolioView(coin: viewModel.coin)
+        })
         .alert(item: $viewModel.error) { error in
             Alert(
                 title: Text(LocalizationKey.errorTitle.localizedString),
@@ -156,6 +161,27 @@ private extension DetailView {
             }
         }
     }
+
+    var detailFooter: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                ZStack {
+                    CircleButtonView(icon: .plus)
+                        .animation(.none, value: showPortfolioView)
+                        .onTapGesture {
+                            HapticManager.triggerSelection()
+                            showPortfolioView.toggle()
+                        }
+                }
+                .frame(maxWidth: 60, maxHeight: 60)
+            }
+            .padding(24)
+        }
+        .ignoresSafeArea()
+    }
+
 }
 
 // MARK: - Private methods

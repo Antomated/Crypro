@@ -132,7 +132,6 @@ private extension HomeView {
                     .swipeActions {
                         Button {
                             withAnimation {
-                                showPortfolio.toggle()
                                 showPortfolioView.toggle()
                                 viewModel.selectedCoin = coin
                             }

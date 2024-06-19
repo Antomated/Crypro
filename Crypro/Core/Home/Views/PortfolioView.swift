@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct PortfolioView: View {
-    @EnvironmentObject private var viewModel: HomeViewModel
+    @EnvironmentObject var viewModel: HomeViewModel
     @FocusState private var searchIsFocused: Bool
     @State private var quantityText: String = ""
     @Environment(\.dismiss) var dismiss
+
+    private var coin: Coin?
+
+    init(coin: Coin? = nil) {
+        self.coin = coin
+    }
 
     var body: some View {
         NavigationView {
@@ -55,8 +61,17 @@ struct PortfolioView: View {
         .onAppear {
             if let coin = viewModel.selectedCoin {
                 updateSelectedCoin(coin: coin)
+                viewModel.searchText = coin.name
+                searchIsFocused = false
+            } else if let coin {
+                viewModel.selectedCoin = coin
+                viewModel.searchText = coin.name
+                updateSelectedCoin(coin: coin)
                 searchIsFocused = false
             }
+        }
+        .onDisappear {
+            viewModel.searchText = ""
         }
     }
 }
