@@ -20,7 +20,7 @@ The application displays information and details for top crypto coins with portf
 
 ## Features
 
-*  JNo 3rd-party libraries
+* No 3rd-party libraries
 * Image caching
 * Error handling
 
