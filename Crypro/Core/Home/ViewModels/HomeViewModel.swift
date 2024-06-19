@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 final class HomeViewModel: ObservableObject {
-    @Published var statistics: [Statistic] = []
+    @Published var statistics: [StatisticPair] = []
     @Published var detailStatistics: [Statistic] = []
     @Published var allCoins: [Coin] = []
     @Published var portfolioCoins: [Coin] = []
@@ -103,7 +103,7 @@ private extension HomeViewModel {
 
         marketDataService.$marketData
             .combineLatest($portfolioCoins)
-            .map(mapGlobalMarketData)
+            .map(mapGlobalAndSecondaryMarketData)
             .sink { [weak self] stats in
                 guard let self else { return }
                 statistics = stats
@@ -163,14 +163,29 @@ private extension HomeViewModel {
         }
     }
 
+    func mapGlobalAndSecondaryMarketData(data: MarketData?, portfolioCoins: [Coin]) -> [StatisticPair] {
+        let topStats = mapGlobalMarketData(data: data, portfolioCoins: portfolioCoins)
+        let bottomStats = mapSecondaryGlobalMarketData(data: data, portfolioCoins: portfolioCoins)
+        return zip(topStats, bottomStats).map { StatisticPair(top: $0, bottom: $1) }
+    }
+
     func mapGlobalMarketData(data: MarketData?, portfolioCoins: [Coin]) -> [Statistic] {
         guard let data else { return [] }
         var stats: [Statistic] = []
-        let marketCap = Statistic(title: LocalizationKey.marketCap.localizedString,
-                                  value: data.marketCap,
-                                  percentageChange: data.marketCapChangePercentage24HUsd)
-        let volume = Statistic(title: LocalizationKey.volume24h.localizedString, value: data.volume)
-        let btcDominance = Statistic(title: LocalizationKey.btcDominance.localizedString, value: data.btcDominance)
+
+        let marketCap = Statistic(
+            title: LocalizationKey.marketCap.localizedString,
+            value: data.marketCap,
+            percentageChange: data.marketCapChangePercentage24HUsd
+        )
+        let volume = Statistic(
+            title: LocalizationKey.volume24h.localizedString,
+            value: data.volume
+        )
+        let btcDominance = Statistic(
+            title: LocalizationKey.btcDominance.localizedString,
+            value: data.btcDominance
+        )
         let portfolioValue = portfolioCoins
             .map { $0.currentHoldingsValue }
             .reduce(0, +)
@@ -183,7 +198,36 @@ private extension HomeViewModel {
             value: portfolioValue.asCurrencyWith2Decimals(),
             percentageChange: percentageChange
         )
+
         stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
+        return stats
+    }
+
+    func mapSecondaryGlobalMarketData(data: MarketData?, portfolioCoins: [Coin]) -> [Statistic] {
+        guard let data else { return [] }
+        var stats: [Statistic] = []
+
+        let activeCryptocurrencies = Statistic(
+            title: LocalizationKey.activeCryptocurrencies.localizedString,
+            value: "\(data.activeCryptocurrencies)"
+        )
+        let markets = Statistic(
+            title: LocalizationKey.markets.localizedString,
+            value: "\(data.markets)"
+        )
+        let totalIcos = data.ongoingIcos + data.endedIcos
+        let icoPercentageChange = totalIcos == 0 ? 0 : (Double(data.ongoingIcos) / Double(totalIcos)) * 100
+        let icoStatistic = Statistic(
+            title: LocalizationKey.totalIcos.localizedString,
+            value: (data.endedIcos + data.ongoingIcos).formatted(),
+            percentageChange: icoPercentageChange
+        )
+        let portfolioCoins = Statistic(
+            title: LocalizationKey.coinsInPortfolio.localizedString,
+            value: "\(portfolioCoins.count)"
+        )
+
+        stats.append(contentsOf: [icoStatistic, activeCryptocurrencies, markets, portfolioCoins])
         return stats
     }
 

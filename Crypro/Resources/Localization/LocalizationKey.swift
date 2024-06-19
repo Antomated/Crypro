@@ -25,6 +25,9 @@ enum LocalizationKey: String {
     case saveButton
     case holdingsRow
     case btcDominance
+    case activeCryptocurrencies
+    case markets
+    case totalIcos
     case zeroStatChange
 
     // MARK: - Edit Portfolio
@@ -32,6 +35,7 @@ enum LocalizationKey: String {
     case marketCap
     case volume24h
     case portfolioValue
+    case coinsInPortfolio
     case currentPrice
     case allTimeHigh
     case allTimeLow

@@ -16,6 +16,10 @@ struct MarketData: Decodable {
     let totalVolume: [String: Double]
     let marketCapPercentage: [String: Double]
     let marketCapChangePercentage24HUsd: Double
+    let activeCryptocurrencies: Int
+    let markets: Int
+    let endedIcos: Int
+    let ongoingIcos: Int
 
     var marketCap: String {
         guard let item = totalMarketCap.first(where: { $0.key == "usd" }) else { return "" }
@@ -29,6 +33,11 @@ struct MarketData: Decodable {
 
     var btcDominance: String {
         guard let item = marketCapPercentage.first(where: { $0.key == "btc" }) else { return "" }
+        return item.value.asPercentString()
+    }
+
+    var ethDominance: String {
+        guard let item = marketCapPercentage.first(where: { $0.key == "eth" }) else { return "" }
         return item.value.asPercentString()
     }
 }

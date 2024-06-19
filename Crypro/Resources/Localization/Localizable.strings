@@ -22,6 +22,9 @@
 "marketCap" = "Market Cap";
 "volume24h" = "24h Volume";
 "btcDominance" = "BTC Dominance";
+"activeCryptocurrencies" = "Active Coins";
+"markets" = "Markets";
+"totalIcos" = "Total ICOs";
 "zeroStatChange" = "";
 
 // MARK: - Edit Portfolio
@@ -31,6 +34,7 @@
 "saveButton" = "Save";
 "marketCap" = "Market Cap";
 "portfolioValue" = "Portfolio Value";
+"coinsInPortfolio" = "Coins in Portfolio";
 "currentPrice" = "Current Price";
 "currentPrice" = "Current Price";
 "allTimeHigh" = "All Time High";
