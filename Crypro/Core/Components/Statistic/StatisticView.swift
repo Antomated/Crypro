@@ -13,10 +13,11 @@ struct StatisticView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(stat.title)
-                .font(.chakraPetch(.medium, size: 12))
+                .font(.chakraPetch(.medium, size: 14))
                 .foregroundStyle(Color.theme.secondaryText)
             Text(stat.value)
                 .font(.chakraPetch(.bold, size: 16))
+                .tracking(1)
                 .foregroundStyle(Color.theme.accent)
             if let statPercentageChange = stat.percentageChange {
                 HStack {

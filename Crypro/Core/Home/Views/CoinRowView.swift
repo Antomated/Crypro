@@ -44,11 +44,12 @@ private extension CoinRowView {
                 .frame(width: 30, height: 30)
             VStack(alignment: .leading, spacing: 0) {
                 Text(coin.symbol.uppercased())
-                    .font(.chakraPetch(.bold, size: 14))
+                    .font(.chakraPetch(.bold, size: 16))
+                    .tracking(1)
                     .foregroundColor(Color.theme.accent)
                 GeometryReader { geometry in
                     Text(coin.name)
-                        .font(.chakraPetch(.regular, size: 12))
+                        .font(.chakraPetch(.regular, size: 13))
                         .foregroundColor(Color.theme.secondaryText)
                         .frame(width: geometry.size.width, alignment: .leading)
                         .lineLimit(1)
@@ -63,15 +64,15 @@ private extension CoinRowView {
         VStack(alignment: .trailing) {
             if showHoldingsColumn {
                 Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
-                    .font(.chakraPetch(.bold, size: 12))
+                    .font(.chakraPetch(.bold, size: 13))
                 Text(coin.formattedCurrentHoldings)
                     .font(.chakraPetch(.regular, size: 12))
             } else {
                 Text(marketCapDisplay)
-                    .font(.chakraPetch(.medium, size: 12))
-
+                    .font(.chakraPetch(.medium, size: 13))
             }
         }
+        .tracking(1)
         .foregroundStyle(Color.theme.accent)
     }
 
@@ -79,7 +80,7 @@ private extension CoinRowView {
         VStack(alignment: .trailing) {
             Text((coin.currentPrice ?? 0.0).asCurrencyWith6Decimals())
                 .foregroundStyle(Color.theme.accent)
-                .font(.chakraPetch(.bold, size: 12))
+                .font(.chakraPetch(.bold, size: 13))
             Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
                 .foregroundStyle(
                     (coin.priceChangePercentage24H ?? 0) >= 0 ?
@@ -87,6 +88,7 @@ private extension CoinRowView {
                 )
                 .font(.chakraPetch(.medium, size: 12))
         }
+        .tracking(1)
         .frame(width: UIScreen.main.bounds.width / rightColumnWidthToScreenRatio,
                alignment: .trailing)
     }

@@ -24,7 +24,7 @@ struct HomeView: View {
                     .sheet(isPresented: $showPortfolioView, content: {
                         PortfolioView()
                     })
-                VStack(spacing: 16) {
+                VStack {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding(.horizontal, 12)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
@@ -201,7 +201,7 @@ private extension HomeView {
             HStack {
                 Text("#")
                 Text(LocalizationKey.coinRow.localizedString)
-                    .padding(.leading, 4)
+                    .padding(.leading, 8)
                 SystemImage.chevronDown.image
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
@@ -235,7 +235,6 @@ private extension HomeView {
                 HStack {
                     Text(LocalizationKey.totalVolumeRow.localizedString)
                     SystemImage.chevronDown.image
-
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .totalVolume
@@ -255,7 +254,6 @@ private extension HomeView {
                 Text(LocalizationKey.priceRow.localizedString)
                     .frame(width: UIScreen.main.bounds.width / 6.2, alignment: .trailing)
                 SystemImage.chevronDown.image
-
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
@@ -274,7 +272,7 @@ private extension HomeView {
             }
             .rotationEffect(.radians(viewModel.isLoading ? 2 * .pi : 0), anchor: .center)
         }
-        .font(.chakraPetch(.medium, size: 11))
+        .font(.chakraPetch(.medium, size: 14))
         .foregroundStyle(Color.theme.secondaryText)
         .padding(.top, 8)
         .padding(.horizontal, 22)
