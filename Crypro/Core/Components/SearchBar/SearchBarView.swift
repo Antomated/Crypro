@@ -41,8 +41,8 @@ struct SearchBarView: View {
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(textFieldIsFocused
-                              ? Color.theme.green
-                              : Color.theme.secondaryText)
+                    ? Color.theme.green
+                    : Color.theme.secondaryText)
         )
     }
 }

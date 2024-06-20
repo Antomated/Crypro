@@ -14,7 +14,7 @@ extension Font {
         case regular = "Regular"
 
         var fontName: String {
-            "ChakraPetch-" + self.rawValue
+            "ChakraPetch-" + rawValue
         }
     }
 

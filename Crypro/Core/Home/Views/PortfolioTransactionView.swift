@@ -76,7 +76,6 @@ private extension PortfolioTransactionView {
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .fill(Color.theme.green)
-
                 )
         }
         .disabled(quantityText.isEmpty ? true : false)

@@ -19,7 +19,7 @@ struct LoaderView: View {
                 .opacity(isAnimating ? 1.0 : 0.5)
                 .animation(
                     .easeInOut(duration: 1.0)
-                    .repeatForever(autoreverses: true),
+                        .repeatForever(autoreverses: true),
                     value: isAnimating
                 )
                 .onAppear {

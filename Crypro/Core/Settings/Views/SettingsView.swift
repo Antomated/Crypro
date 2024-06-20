@@ -95,7 +95,7 @@ private extension SettingsView {
                 Toggle(isOn: $darkThemeIsOn) {
                     Text(LocalizationKey.darkTheme.localizedString)
                         .font(.chakraPetch(.bold, size: 16))
-                    .tracking(1)
+                        .tracking(1)
                 }
                 .padding()
                 .toggleStyle(SwitchToggleStyle(tint: Color.theme.green))

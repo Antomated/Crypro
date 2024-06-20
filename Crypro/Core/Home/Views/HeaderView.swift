@@ -22,14 +22,14 @@ struct HeaderView: View {
             }
             Spacer()
             Text(showPortfolio
-                 ? LocalizationKey.portfolio.localizedString
-                 : LocalizationKey.livePrices.localizedString)
-            .font(.chakraPetch(.bold, size: 24))
-            .tracking(4)
-            .foregroundStyle(Color.theme.accent)
-            .animation(.none, value: showPortfolio)
-            .padding(.top)
-            .frame(maxWidth: .infinity)
+                ? LocalizationKey.portfolio.localizedString
+                : LocalizationKey.livePrices.localizedString)
+                .font(.chakraPetch(.bold, size: 24))
+                .tracking(4)
+                .foregroundStyle(Color.theme.accent)
+                .animation(.none, value: showPortfolio)
+                .padding(.top)
+                .frame(maxWidth: .infinity)
             Spacer()
             Link(destination: coinGeckoURL) {
                 Image(.coinGeckoLogo)

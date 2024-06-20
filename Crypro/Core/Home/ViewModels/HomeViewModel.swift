@@ -147,8 +147,8 @@ private extension HomeViewModel {
 
         return coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
-            coin.symbol.lowercased().contains(lowerCasedText) ||
-            coin.id.lowercased().contains(lowerCasedText)
+                coin.symbol.lowercased().contains(lowerCasedText) ||
+                coin.id.lowercased().contains(lowerCasedText)
         }
     }
 

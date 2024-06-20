@@ -97,7 +97,6 @@ private extension HomeView {
                                 showSettingsView.toggle()
                             }
                         }
-                    CircleButtonAnimationView(animate: $showPortfolio)
                 }
                 .frame(maxWidth: 60, maxHeight: 60)
                 Spacer()
@@ -206,8 +205,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                             ? Color.theme.green
-                             : Color.theme.secondaryText)
+                ? Color.theme.green
+                : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
@@ -223,8 +222,8 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                                 ? Color.theme.green
-                                 : Color.theme.secondaryText)
+                    ? Color.theme.green
+                    : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
@@ -238,14 +237,14 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .totalVolume
-                                 || viewModel.sortOption == .totalVolumeDescending
-                                 ? Color.theme.green
-                                 : Color.theme.secondaryText)
+                    || viewModel.sortOption == .totalVolumeDescending
+                    ? Color.theme.green
+                    : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
-                        ? .totalVolumeDescending
-                        : .totalVolume
+                            ? .totalVolumeDescending
+                            : .totalVolume
                     }
                 }
             }
@@ -257,8 +256,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                             ? Color.theme.green
-                             : Color.theme.secondaryText)
+                ? Color.theme.green
+                : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price

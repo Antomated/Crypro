@@ -18,6 +18,7 @@ struct CoinLogoView: View {
             Text(coin.symbol.uppercased())
                 .font(.chakraPetch(.bold, size: 18))
                 .foregroundColor(.theme.accent)
+                .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                 .lineLimit(1)
 
             Text(coin.name)

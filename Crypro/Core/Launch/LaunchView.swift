@@ -63,7 +63,6 @@ struct LaunchView: View {
             }
         }
     }
-
 }
 
 #Preview {

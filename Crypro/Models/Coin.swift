@@ -38,7 +38,7 @@ struct Coin: Decodable, Identifiable {
     var currentHoldings: Double?
 
     mutating func updateHoldings(amount: Double) {
-        self.currentHoldings = amount
+        currentHoldings = amount
     }
 
     var currentHoldingsValue: Double {

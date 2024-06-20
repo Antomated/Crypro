@@ -61,8 +61,8 @@ struct DetailView: View {
                         .ignoresSafeArea()
                 }
             }
-                .animation(.easeInOut, value: showLoader)
-                .transition(.opacity)
+            .animation(.easeInOut, value: showLoader)
+            .transition(.opacity)
         )
         .onReceive(viewModel.$hasLoadedData) { hasLoadedData in
             showLoader = !hasLoadedData
@@ -127,8 +127,8 @@ private extension DetailView {
                         showFullDescription.toggle()
                     } label: {
                         Text(showFullDescription
-                             ? LocalizationKey.collapse.localizedString
-                             : LocalizationKey.readMore.localizedString)
+                            ? LocalizationKey.collapse.localizedString
+                            : LocalizationKey.readMore.localizedString)
                     }
                     .tint(.theme.green)
                     .font(.chakraPetch(.bold, size: 14))
@@ -183,7 +183,6 @@ private extension DetailView {
         }
         .ignoresSafeArea()
     }
-
 }
 
 // MARK: - Private methods

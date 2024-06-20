@@ -12,7 +12,10 @@ struct CircleButtonView: View {
 
     var body: some View {
         icon.image
-            .font(.headline)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 18, height: 18)
+            .bold()
             .foregroundColor(Color.theme.accent)
             .frame(width: 60, height: 60)
             .background(
@@ -30,6 +33,10 @@ struct CircleButtonView: View {
             .previewLayout(.sizeThatFits)
 
         CircleButtonView(icon: .info)
+            .previewLayout(.sizeThatFits)
+            .preferredColorScheme(.dark)
+
+        CircleButtonView(icon: .chevronRight)
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
     }

@@ -105,7 +105,7 @@ private extension DetailViewModel {
         var additionalArray: [Statistic] = []
         let high = coin.high24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
         let highStat = Statistic(title: LocalizationKey.high24h.localizedString,
-                                  value: high)
+                                 value: high)
 
         let low = coin.low24H?.asCurrencyWith6Decimals() ?? LocalizationKey.notAvailable.localizedString
         let lowStat = Statistic(title: LocalizationKey.low24h.localizedString,

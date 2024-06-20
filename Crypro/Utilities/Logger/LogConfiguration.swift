@@ -18,11 +18,11 @@ enum LogConfiguration {
             return true
         case .debugOnly:
             #if DEBUG
-            return true
+                return true
             #else
-            return false
+                return false
             #endif
-        case .environmentVariable(let key):
+        case let .environmentVariable(key):
             return ProcessInfo.processInfo.environment[key] == "YES"
         }
     }

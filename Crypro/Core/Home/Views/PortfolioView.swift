@@ -35,10 +35,9 @@ struct PortfolioView: View {
                 }
                 .background(Color.theme.background.ignoresSafeArea())
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
+                    ToolbarItem(placement: .principal) {
                         Text(LocalizationKey.editPortfolio.localizedString)
                             .font(.chakraPetch(.bold, size: 24))
-
                     }
                     ToolbarItem(
                         placement: .topBarTrailing,
@@ -61,6 +60,7 @@ struct PortfolioView: View {
                 })
                 .animation(.easeOut(duration: 0.16), value: UUID())
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             if let coin = viewModel.selectedCoin {
@@ -109,8 +109,8 @@ private extension PortfolioView {
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
                                         (viewModel.selectedCoin?.id == coin.id)
-                                        ? Color.theme.green
-                                        : Color.clear
+                                            ? Color.theme.green
+                                            : Color.clear
                                     )
                             )
                     }

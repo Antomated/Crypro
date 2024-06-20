@@ -8,6 +8,6 @@
 import Foundation
 
 struct IdentifiableError: Identifiable {
-    let id: UUID = UUID()
+    let id: UUID = .init()
     let message: String
 }
