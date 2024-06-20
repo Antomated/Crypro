@@ -24,7 +24,7 @@ struct HeaderView: View {
             Text(showPortfolio
                  ? LocalizationKey.portfolio.localizedString
                  : LocalizationKey.livePrices.localizedString)
-            .font(.chakraPetch(.bold, size: 32))
+            .font(.chakraPetch(.bold, size: 24))
             .tracking(4)
             .foregroundStyle(Color.theme.accent)
             .animation(.none, value: showPortfolio)

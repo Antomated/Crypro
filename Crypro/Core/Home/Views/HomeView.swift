@@ -24,7 +24,7 @@ struct HomeView: View {
                     .sheet(isPresented: $showPortfolioView, content: {
                         PortfolioView()
                     })
-                VStack(spacing: 12) {
+                VStack(spacing: 16) {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding(.horizontal, 12)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
@@ -274,7 +274,7 @@ private extension HomeView {
             }
             .rotationEffect(.radians(viewModel.isLoading ? 2 * .pi : 0), anchor: .center)
         }
-        .font(.chakraPetch(.medium, size: 12))
+        .font(.chakraPetch(.medium, size: 11))
         .foregroundStyle(Color.theme.secondaryText)
         .padding(.top, 8)
         .padding(.horizontal, 22)

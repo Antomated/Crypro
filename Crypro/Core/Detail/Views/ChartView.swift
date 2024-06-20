@@ -75,11 +75,12 @@ private extension ChartView {
                 }
             }
             .trim(from: 0, to: percentage)
-            .stroke(lineColor, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
-            .shadow(color: lineColor.opacity(0.5), radius: 10, x: 9, y: 10)
-            .shadow(color: lineColor.opacity(0.2), radius: 10, x: 9, y: 20)
-            .shadow(color: lineColor.opacity(0.1), radius: 10, x: 9, y: 30)
+            .stroke(lineColor, style: StrokeStyle(lineWidth: 2, lineCap: .square, lineJoin: .miter))
         }
+        .shadow(color: lineColor.opacity(0.6), radius: 10, x: 0, y: 10)
+        .shadow(color: lineColor.opacity(0.4), radius: 10, x: 0, y: 20)
+        .shadow(color: lineColor.opacity(0.2), radius: 10, x: 0, y: 30)
+        .shadow(color: lineColor.opacity(0.1), radius: 10, x: 0, y: 40)
     }
 
     var chartBackground: some View {
