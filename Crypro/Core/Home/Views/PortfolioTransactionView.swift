@@ -44,7 +44,7 @@ private extension PortfolioTransactionView {
     var coinInputAmountView: some View {
         HStack {
             TextField(LocalizationKey.amountHolding.localizedString, text: $quantityText)
-                .font(.callout)
+                .font(.chakraPetch(.medium, size: 14))
                 .padding(12)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
@@ -53,6 +53,7 @@ private extension PortfolioTransactionView {
                 .keyboardType(.decimalPad)
                 .focused($quantityIsFocused)
             Text("= \(currentValue.asCurrencyWith2Decimals())")
+                .font(.chakraPetch(.medium, size: 15))
                 .padding(12)
                 .lineLimit(1)
                 .foregroundStyle(Color.theme.accent)
@@ -69,6 +70,7 @@ private extension PortfolioTransactionView {
         } label: {
             Text(LocalizationKey.saveButton.localizedString)
                 .foregroundStyle(Color.theme.background)
+                .font(.chakraPetch(.bold, size: 16))
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: 40)
                 .background(

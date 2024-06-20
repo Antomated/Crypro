@@ -24,16 +24,14 @@ struct HomeView: View {
                     .sheet(isPresented: $showPortfolioView, content: {
                         PortfolioView()
                     })
-                VStack {
+                VStack(spacing: 12) {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding(.horizontal, 12)
                     HomeStatisticsView(showPortfolio: $showPortfolio)
-                        .padding(.top)
-                        .frame(height: 150)
+                        .frame(height: 130)
                     Divider()
                     SearchBarView(searchText: $viewModel.searchText)
                         .padding(.horizontal)
-                        .padding(.vertical, 8)
                     columnTitles
                     ZStack {
                         if !showPortfolio {
@@ -121,14 +119,13 @@ private extension HomeView {
         List {
             ForEach(viewModel.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
-                    .listRowInsets(.init(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10)))
-                    .padding(.vertical, 4)
+                    .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
+                    .padding(12)
                     .onTapGesture {
                         HapticManager.triggerSelection()
                         segue(coin: coin)
                     }
                     .listRowBackground(Color.theme.background)
-                    .padding(.horizontal, 12)
                     .swipeActions {
                         Button {
                             withAnimation {
@@ -162,8 +159,8 @@ private extension HomeView {
         List {
             ForEach(viewModel.portfolioCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
-                    .listRowInsets(.init(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 10)))
-                    .padding(.vertical, 4)
+                    .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
+                    .padding(12)
                     .onTapGesture {
                         segue(coin: coin)
                     }
@@ -191,7 +188,6 @@ private extension HomeView {
             Spacer()
                 .frame(height: 100)
         }
-        .padding(.horizontal, 12)
         .listStyle(.plain)
         .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
                                                          .theme.black,
@@ -278,7 +274,7 @@ private extension HomeView {
             }
             .rotationEffect(.radians(viewModel.isLoading ? 2 * .pi : 0), anchor: .center)
         }
-        .font(.caption)
+        .font(.chakraPetch(.medium, size: 12))
         .foregroundStyle(Color.theme.secondaryText)
         .padding(.top, 8)
         .padding(.horizontal, 22)
@@ -286,7 +282,7 @@ private extension HomeView {
 
     var portfolioEmptyText: some View {
         Text(LocalizationKey.portfolioTip.localizedString)
-            .font(.callout.weight(.medium))
+            .font(.chakraPetch(.medium, size: 12))
             .foregroundStyle(Color.theme.secondaryText)
             .multilineTextAlignment(.center)
             .padding(50)

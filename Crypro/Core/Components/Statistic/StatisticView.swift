@@ -13,10 +13,10 @@ struct StatisticView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(stat.title)
-                .font(.caption)
+                .font(.chakraPetch(.medium, size: 12))
                 .foregroundStyle(Color.theme.secondaryText)
             Text(stat.value)
-                .font(.headline)
+                .font(.chakraPetch(.bold, size: 16))
                 .foregroundStyle(Color.theme.accent)
             if let statPercentageChange = stat.percentageChange {
                 HStack {
@@ -24,7 +24,7 @@ struct StatisticView: View {
                         .font(.caption2)
                         .rotationEffect(.radians(statPercentageChange >= 0 ? 0 : .pi))
                     Text(statPercentageChange.asPercentString())
-                        .font(.caption)
+                        .font(.chakraPetch(.regular, size: 12))
                         .bold()
                 }
                 .foregroundStyle(statPercentageChange >= 0 ? Color.theme.green : Color.theme.red)
@@ -32,7 +32,7 @@ struct StatisticView: View {
                 HStack {
                     Text(LocalizationKey.zeroStatChange.localizedString)
                         .multilineTextAlignment(.center)
-                        .font(.caption)
+                        .font(.chakraPetch(.regular, size: 12))
                         .bold()
                 }
                 .foregroundStyle(Color.theme.secondaryText)

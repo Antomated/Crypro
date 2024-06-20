@@ -38,12 +38,11 @@ struct ChartView: View {
                 .background(chartBackground)
                 .overlay(
                     chartYAxis
-                        .padding(.horizontal, 4)
-                        .font(.caption2),
+                        .padding(.horizontal, 4),
                     alignment: .leading
                 )
         }
-        .font(.caption)
+        .font(.chakraPetch(.medium, size: 12))
         .foregroundStyle(Color.theme.secondaryText)
         .onChange(of: startAnimation) { newValue in
             if newValue {

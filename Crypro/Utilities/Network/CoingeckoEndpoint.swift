@@ -21,7 +21,7 @@ extension CoingeckoEndpoint {
     var method: HTTPMethod {
         switch self {
         case .allCoins, .globalData, .coinDetails:
-            .get
+                .get
         }
     }
 

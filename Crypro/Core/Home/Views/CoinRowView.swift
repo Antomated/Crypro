@@ -27,7 +27,6 @@ struct CoinRowView: View {
             centralColumn
             rightColumn
         }
-        .font(.subheadline)
         .contentShape(.rect)
     }
 }
@@ -36,21 +35,20 @@ struct CoinRowView: View {
 
 private extension CoinRowView {
     var leftColumn: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 2) {
             Text("\(coin.rank)")
-                .font(.caption)
+                .font(.chakraPetch(.regular, size: 12))
                 .foregroundColor(Color.theme.secondaryText)
                 .frame(minWidth: 30)
             CoinImageView(coin: coin)
                 .frame(width: 30, height: 30)
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(coin.symbol.uppercased())
-                    .font(.subheadline)
-                    .bold()
+                    .font(.chakraPetch(.bold, size: 14))
                     .foregroundColor(Color.theme.accent)
                 GeometryReader { geometry in
                     Text(coin.name)
-                        .font(.caption)
+                        .font(.chakraPetch(.regular, size: 12))
                         .foregroundColor(Color.theme.secondaryText)
                         .frame(width: geometry.size.width, alignment: .leading)
                         .lineLimit(1)
@@ -65,29 +63,30 @@ private extension CoinRowView {
         VStack(alignment: .trailing) {
             if showHoldingsColumn {
                 Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
-                    .bold()
+                    .font(.chakraPetch(.bold, size: 12))
                 Text(coin.formattedCurrentHoldings)
+                    .font(.chakraPetch(.regular, size: 12))
             } else {
                 Text(marketCapDisplay)
-                    .bold()
+                    .font(.chakraPetch(.medium, size: 12))
+
             }
         }
-        .font(.footnote)
         .foregroundStyle(Color.theme.accent)
     }
 
     var rightColumn: some View {
         VStack(alignment: .trailing) {
             Text((coin.currentPrice ?? 0.0).asCurrencyWith6Decimals())
-                .bold()
                 .foregroundStyle(Color.theme.accent)
+                .font(.chakraPetch(.bold, size: 12))
             Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
                 .foregroundStyle(
                     (coin.priceChangePercentage24H ?? 0) >= 0 ?
                         Color.theme.green : Color.theme.red
                 )
+                .font(.chakraPetch(.medium, size: 12))
         }
-        .font(.footnote)
         .frame(width: UIScreen.main.bounds.width / rightColumnWidthToScreenRatio,
                alignment: .trailing)
     }

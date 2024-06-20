@@ -21,7 +21,7 @@ struct LinkView: View {
                     .foregroundStyle(Color.theme.green)
                 Text(title)
                     .padding(.leading, 6)
-                    .font(.footnote.weight(.semibold))
+                    .font(.chakraPetch(.bold, size: 12))
                     .foregroundStyle(Color.theme.accent)
             }
         }

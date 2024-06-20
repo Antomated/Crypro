@@ -36,8 +36,8 @@ struct SearchBarView: View {
                     alignment: .trailing
                 )
         }
-        .font(.callout)
-        .padding(12)
+        .font(.chakraPetch(.regular, size: 16))
+        .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(textFieldIsFocused

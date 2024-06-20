@@ -16,12 +16,12 @@ struct CoinLogoView: View {
                 .frame(width: 50, height: 50)
 
             Text(coin.symbol.uppercased())
-                .font(.headline)
+                .font(.chakraPetch(.bold, size: 18))
                 .foregroundColor(.theme.accent)
                 .lineLimit(1)
 
             Text(coin.name)
-                .font(.caption)
+                .font(.chakraPetch(.medium, size: 12))
                 .foregroundColor(.theme.secondaryText)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)

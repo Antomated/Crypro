@@ -25,15 +25,20 @@ struct SettingsView: View {
                     appSection
                     themeSection
                 }
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle(LocalizationKey.information.localizedString)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .principal) {
+                    Text(LocalizationKey.information.localizedString)
+                        .font(.chakraPetch(.bold, size: 24))
+                        .tracking(2)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         isPresented = false
                     } label: {
                         SystemImage.xMark.image
-                            .font(.headline)
+                            .bold()
                     }
                 }
             }
@@ -54,19 +59,22 @@ private extension SettingsView {
                         .resizable()
                         .frame(width: 120, height: 120)
                     Text(Constants.appName)
-                        .font(.headline.weight(.heavy))
+                        .font(.chakraPetch(.bold, size: 16))
+                        .tracking(4)
                         .foregroundStyle(Color.launch.accent)
                 })
                 VStack(alignment: .center) {
                     Spacer()
                     Text(LocalizationKey.appDescription.localizedString)
-                        .font(.caption2.weight(.medium))
+                        .font(.chakraPetch(.medium, size: 12))
+                        .tracking(1)
                         .foregroundStyle(Color.theme.accent)
                     Spacer()
                     Link(destination: personalURL) {
                         Text(LocalizationKey.visitGitHub.localizedString)
                             .frame(maxWidth: .infinity)
-                            .font(.caption)
+                            .font(.chakraPetch(.bold, size: 16))
+                            .tracking(2)
                             .foregroundStyle(Color.theme.accent)
                             .padding(.vertical, 7)
                             .background(
@@ -86,7 +94,8 @@ private extension SettingsView {
             HStack {
                 Toggle(isOn: $darkThemeIsOn) {
                     Text(LocalizationKey.darkTheme.localizedString)
-                        .font(.body.weight(.bold))
+                        .font(.chakraPetch(.bold, size: 16))
+                    .tracking(1)
                 }
                 .padding()
                 .toggleStyle(SwitchToggleStyle(tint: Color.theme.green))
@@ -95,8 +104,10 @@ private extension SettingsView {
             HStack {
                 Spacer()
                 Text(LocalizationKey.settings.localizedString)
-                    .font(.headline)
-                    .foregroundStyle(Color.theme.secondaryText)
+                    .foregroundStyle(Color.theme.accent)
+                    .font(.chakraPetch(.bold, size: 24))
+                    .tracking(1)
+                    .padding(.bottom)
                 Spacer()
             }
         }

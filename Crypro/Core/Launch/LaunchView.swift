@@ -29,7 +29,7 @@ struct LaunchView: View {
                     HStack(spacing: 4) {
                         ForEach(loadingText.indices, id: \.self) { index in
                             Text(loadingText[index])
-                                .font(.headline.weight(.heavy))
+                                .font(.chakraPetch(.bold, size: 20))
                                 .foregroundStyle(Color.launch.accent)
                                 .offset(y: counter == index ? -5 : 0)
                         }

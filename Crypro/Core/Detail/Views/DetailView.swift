@@ -29,7 +29,7 @@ struct DetailView: View {
             VStack {
                 ChartView(coin: viewModel.coin, startAnimation: $startAnimation)
                     .padding(.horizontal)
-                    .padding(.vertical)
+                    .padding(.bottom)
                 VStack(spacing: 16) {
                     linkSection
                     overviewHeader
@@ -44,9 +44,11 @@ struct DetailView: View {
             }
         }
         .background(Color.theme.background.ignoresSafeArea())
-        .navigationTitle(viewModel.coin.name)
-        .navigationBarTitleDisplayMode(.large)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.coin.name)
+                    .font(.chakraPetch(.bold, size: 18))
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 navigationBarTrailingItems
             }
@@ -106,7 +108,7 @@ private extension DetailView {
     var navigationBarTrailingItems: some View {
         HStack {
             Text(viewModel.coin.symbol.uppercased())
-                .font(.headline)
+                .font(.chakraPetch(.medium, size: 16))
                 .foregroundStyle(Color.theme.secondaryText)
             CoinImageView(coin: viewModel.coin)
                 .frame(width: 25, height: 25)
@@ -119,7 +121,7 @@ private extension DetailView {
                 VStack(alignment: .leading) {
                     Text(coinDescription)
                         .lineLimit(showFullDescription ? .max : 3)
-                        .font(.callout)
+                        .font(.chakraPetch(.regular, size: 14))
                         .foregroundStyle(Color.theme.secondaryText)
                     Button {
                         showFullDescription.toggle()
@@ -129,7 +131,7 @@ private extension DetailView {
                              : LocalizationKey.readMore.localizedString)
                     }
                     .tint(.theme.green)
-                    .font(.footnote.weight(.bold))
+                    .font(.chakraPetch(.bold, size: 14))
                     .padding(.vertical, 1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -189,7 +191,7 @@ private extension DetailView {
 private extension DetailView {
     func getStatDetailsHeader(with title: String) -> some View {
         Text(title)
-            .font(.title)
+            .font(.chakraPetch(.bold, size: 24))
             .bold()
             .foregroundStyle(Color.theme.accent)
             .frame(maxWidth: .infinity, alignment: .leading)

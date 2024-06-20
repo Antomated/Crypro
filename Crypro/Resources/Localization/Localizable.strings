@@ -8,8 +8,8 @@
 
 // MARK: - Home
 
-"portfolio" = "Portfolio";
-"livePrices" = "Current Prices";
+"portfolio" = "PORTFOLIO";
+"livePrices" = "MARKET";
 "searchByNameOrSymbol" = "Search by name or symbol...";
 "coinRow" = "Coin";
 "totalVolumeRow" = "Volume";

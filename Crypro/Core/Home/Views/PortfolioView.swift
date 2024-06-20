@@ -34,17 +34,21 @@ struct PortfolioView: View {
                     }
                 }
                 .background(Color.theme.background.ignoresSafeArea())
-                .navigationTitle(LocalizationKey.editPortfolio.localizedString)
                 .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text(LocalizationKey.editPortfolio.localizedString)
+                            .font(.chakraPetch(.bold, size: 24))
+
+                    }
                     ToolbarItem(
-                        placement: .topBarLeading,
+                        placement: .topBarTrailing,
                         content: {
                             Button {
                                 dismiss()
                                 viewModel.selectedCoin = nil
                             } label: {
                                 SystemImage.xMark.image
-                                    .font(.headline)
+                                    .bold()
                             }
                             .foregroundColor(.theme.accent)
                         }
