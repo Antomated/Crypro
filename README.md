@@ -37,7 +37,7 @@ The application displays information and details for top crypto coins with portf
 
 | Market | Portfolio | Details |
 :---:|:---:|:---:
-![Market](https://github.com/Beavean/CRYPRO/assets/105853157/7e2efdde-5c77-4543-b0f8-456fbd7ee830) | ![Portfolio](https://github.com/Beavean/CRYPRO/assets/105853157/3b1242bb-4aaa-4d62-9d28-96368c7ab3b3) | ![Details](https://github.com/Beavean/CRYPRO/assets/105853157/317a8bbe-6fef-4e8f-89b5-85064e6e8803)
+![Market](https://github.com/Beavean/CRYPRO/assets/105853157/fe2dfc54-348d-4640-9c7e-6f5eb5dad604) | ![Portfolio](https://github.com/Beavean/CRYPRO/assets/105853157/3b1242bb-4aaa-4d62-9d28-96368c7ab3b3) | ![Details](https://github.com/Beavean/CRYPRO/assets/105853157/317a8bbe-6fef-4e8f-89b5-85064e6e8803)
 
 ## Contact
 For questions, please contact [Beavean](https://github.com/Beavean).
