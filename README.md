@@ -1,4 +1,4 @@
-![Header-Corner](https://github.com/Beavean/CRYPRO/assets/105853157/5d747e61-2650-4649-813d-58f95462735a)
+![Header+CornerRadius](https://github.com/Beavean/CRYPRO/assets/105853157/6d41ddf0-c5cc-4d42-b6fe-1153794f6a2e)
 
 The application displays information and details for top crypto coins with portfolio tracking and statistics functionality.
 
