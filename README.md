@@ -29,7 +29,7 @@ The application displays information and details for top crypto coins with portf
 
 ##  Usage
 * Market: View the top coins, latest prices and market trends.
-* Portfolio: Add, edit and tracj your investments and see their performance.
+* Portfolio: Add, edit and track your investments and see their performance.
 * Details: Get detailed information about each cryptocurrency and quickly add or edit it in your portfolio.
 
 ## Preview
