@@ -26,7 +26,7 @@ struct HomeView: View {
                     })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
-                        .padding(.horizontal, 12)
+                        .padding()
                     HomeStatisticsView(showPortfolio: $showPortfolio)
                         .frame(height: 130)
                     Divider()

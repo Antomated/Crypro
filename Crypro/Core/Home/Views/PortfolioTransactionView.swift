@@ -18,7 +18,7 @@ struct PortfolioTransactionView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 16) {
             Divider()
             coinDetailStatView
             coinInputAmountView
@@ -70,7 +70,7 @@ private extension PortfolioTransactionView {
         } label: {
             Text(LocalizationKey.saveButton.localizedString)
                 .foregroundStyle(Color.theme.background)
-                .font(.chakraPetch(.bold, size: 16))
+                .font(.chakraPetch(.bold, size: 20))
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: 40)
                 .background(

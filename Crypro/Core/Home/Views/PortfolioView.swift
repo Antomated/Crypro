@@ -22,7 +22,7 @@ struct PortfolioView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 8) {
                     SearchBarView(searchText: $viewModel.searchText)
                         .padding()
                         .focused($searchIsFocused)
