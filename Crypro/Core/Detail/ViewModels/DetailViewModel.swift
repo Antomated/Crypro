@@ -19,7 +19,6 @@ final class DetailViewModel: ObservableObject {
     @Published var twitterURL: String?
     @Published var telegramURL: String?
     @Published var hasLoadedData: Bool = false
-
     private let coinDetailService: CoinDetailsService
     private var cancellables = Set<AnyCancellable>()
 

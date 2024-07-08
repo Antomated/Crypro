@@ -11,7 +11,6 @@ import Foundation
 final class CoinImageViewModel: ObservableObject {
     @Published var coinImageData: Data?
     @Published var isLoading: Bool = true
-
     private let dataService: CoinImageService
     private var cancellables = Set<AnyCancellable>()
 

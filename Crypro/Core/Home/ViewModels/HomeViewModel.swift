@@ -19,7 +19,6 @@ final class HomeViewModel: ObservableObject {
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
-
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
@@ -147,8 +146,8 @@ private extension HomeViewModel {
 
         return coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
-                coin.symbol.lowercased().contains(lowerCasedText) ||
-                coin.id.lowercased().contains(lowerCasedText)
+            coin.symbol.lowercased().contains(lowerCasedText) ||
+            coin.id.lowercased().contains(lowerCasedText)
         }
     }
 

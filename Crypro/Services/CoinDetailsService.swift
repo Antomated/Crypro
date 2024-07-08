@@ -11,7 +11,7 @@ import Foundation
 final class CoinDetailsService {
     @Published var coinDetails: CoinDetails?
     @Published var error: NetworkError?
-    var coinSubscription: AnyCancellable?
+    private var coinSubscription: AnyCancellable?
     let coin: Coin
 
     init(coin: Coin) {
