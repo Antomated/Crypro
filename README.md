@@ -1,4 +1,4 @@
-![Header+CornerRadius](https://github.com/Beavean/CRYPRO/assets/105853157/6d41ddf0-c5cc-4d42-b6fe-1153794f6a2e)
+![Header+CornerRadius](https://github.com/user-attachments/assets/ccddc452-8f42-438b-b91f-3987bb8c6c2c)
 
 ## Overview
 
@@ -6,7 +6,7 @@ Crypro is a comprehensive cryptocurrency tracking application designed for iOS u
 
 It provides real-time data on top cryptocurrencies, including prices, market trends, and detailed coin information. 
 
-Users can manage their portfolio, track investments, and analyze performance, all within a sleek and intuitive interface. 
+Users can manage their portfolios, track investments, and analyze performance, all within a sleek and intuitive interface. 
 
 The app supports both dark and light modes for a comfortable viewing experience.
 
@@ -25,26 +25,29 @@ The app supports both dark and light modes for a comfortable viewing experience.
 * MVVM
 
 ##  Usage
+
 * Market: View the top coins, latest prices and market trends.
 * Portfolio: Add, edit and track your investments and see their performance.
-* Details: Get detailed information about each cryptocurrency and quickly add or edit it in your portfolio.
+* Details: Get detailed information about each cryptocurrency and quickly add or edit it to your portfolio.
 
 ## Demo
 
 ### Interface demo
 | Market | Portfolio | Details |
 :---:|:---:|:---:
-![Market](https://github.com/Beavean/CRYPRO/assets/105853157/fe2dfc54-348d-4640-9c7e-6f5eb5dad604) | ![Portfolio](https://github.com/Beavean/CRYPRO/assets/105853157/3b1242bb-4aaa-4d62-9d28-96368c7ab3b3) | ![Details](https://github.com/Beavean/CRYPRO/assets/105853157/317a8bbe-6fef-4e8f-89b5-85064e6e8803)
+![Market](https://github.com/user-attachments/assets/709471a9-9b37-4d36-8cee-a51a8e571a53) | ![Portfolio](https://github.com/user-attachments/assets/23765f1b-0944-4455-939c-c60e5cdb5187) | ![Details](https://github.com/user-attachments/assets/ec33cddf-15d1-485d-85d4-f5da0de1481f)
 
 ### Dark Mode 
 | Market | Details | Transaction | Portfolio | Settings |
 :---:|:---:|:---:|:---:|:---:
-<img src="https://github.com/Beavean/CRYPRO/assets/105853157/3b640606-c373-4051-aa84-aed7b314bb5e"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/8c3cc63e-2cab-4327-89b2-05a3bc773263"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/560c2eb0-fed7-4a09-b696-5c26e97d41b0"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/073f88dc-c421-47f0-968f-9efb08ce8bf4"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/8543569c-eada-47c9-93bc-b94ba1e8a173">
+<img src="https://github.com/user-attachments/assets/b3798b99-62e3-46cd-af2c-839914106ac0"> | <img src="https://github.com/user-attachments/assets/1aa4d42d-d559-442d-befa-8593edc162cb"> | <img src="https://github.com/user-attachments/assets/90d9cf78-0b7f-4a0c-bb61-61ed4f7c1eb9"> | <img src="https://github.com/user-attachments/assets/a09e6aef-08ee-4144-955c-3b609b84c7ba"> | <img src="https://github.com/user-attachments/assets/8d347fe6-79e6-4b02-a7ed-3462f38ab9dc">
+
+
 
 ### Light Mode
 | Market | Details | Transaction | Portfolio | Settings |
 :---:|:---:|:---:|:---:|:---:
-<img src="https://github.com/Beavean/CRYPRO/assets/105853157/81225e8c-fc05-4016-a4bd-6904e62e2da6"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/224d27e4-29e1-45ba-92a8-caf96efe171f"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/71b4378a-09e2-4f00-bc90-9142c50a1438"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/12a89c56-a4fc-45b8-add7-1ab190611085"> | <img src="https://github.com/Beavean/CRYPRO/assets/105853157/1d73494c-9e80-41cf-8e8e-93cf3ce2d07e">
+<img src="https://github.com/user-attachments/assets/ec18c021-6367-4764-b74d-100401718129"> | <img src="https://github.com/user-attachments/assets/d15907cd-a92b-474e-9107-28d9227ad945"> | <img src="https://github.com/user-attachments/assets/441581b4-881d-4c34-8ceb-9524ded792de"> | <img src="https://github.com/user-attachments/assets/7c734371-27a1-4507-98d8-8b479863657b"> | <img src="https://github.com/user-attachments/assets/163b2ecc-4afa-450b-add6-6c7eaec0586e">
 
 ## Requirements
 * iOS 16.0+
@@ -56,7 +59,7 @@ The app supports both dark and light modes for a comfortable viewing experience.
 3. Build & Run with <kbd> <br> command <br> </kbd> + <kbd> <br>R<br> </kbd>
 
 ## Contact
-For questions, please contact [me](https://github.com/Beavean).
+For questions, please contact [me](https://github.com/Antomated).
 
 ## License
 
