@@ -2,7 +2,7 @@
 //  PortfolioView.swift
 //  Crypro
 //
-//  Created by Beavean on 04.04.2024.
+//  Created by Antomated on 04.04.2024.
 //
 
 import SwiftUI

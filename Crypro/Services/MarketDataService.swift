@@ -2,7 +2,7 @@
 //  MarketDataService.swift
 //  Crypro
 //
-//  Created by Beavean on 03.04.2024.
+//  Created by Antomated on 03.04.2024.
 //
 
 import Combine

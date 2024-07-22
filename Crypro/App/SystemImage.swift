@@ -2,7 +2,7 @@
 //  SystemImage.swift
 //  Crypro
 //
-//  Created by Beavean on 06.05.2024.
+//  Created by Antomated on 06.05.2024.
 //
 
 import SwiftUI

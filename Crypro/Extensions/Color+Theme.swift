@@ -2,7 +2,7 @@
 //  Color+Theme.swift
 //  Crypro
 //
-//  Created by Beavean on 02.04.2024.
+//  Created by Antomated on 02.04.2024.
 //
 
 import SwiftUI

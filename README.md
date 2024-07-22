@@ -54,7 +54,7 @@ The app supports both dark and light modes for a comfortable viewing experience.
 
 ## Installation
 
-1. [Download](https://github.com/Beavean/Crypro/archive/refs/heads/main.zip) repository
+1. [Download](https://github.com/Antomated/Crypro/archive/refs/heads/main.zip) repository
 2. Open Crypro.xcodeproj using Xcode
 3. Build & Run with <kbd> <br> command <br> </kbd> + <kbd> <br>R<br> </kbd>
 

@@ -2,7 +2,7 @@
 //  HeaderView.swift
 //  Crypro
 //
-//  Created by Beavean on 19.06.2024.
+//  Created by Antomated on 19.06.2024.
 //
 
 import SwiftUI

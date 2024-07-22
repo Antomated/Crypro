@@ -2,7 +2,7 @@
 //  IdentifiableError.swift
 //  Crypro
 //
-//  Created by Beavean on 10.05.2024.
+//  Created by Antomated on 10.05.2024.
 //
 
 import Foundation

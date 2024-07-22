@@ -2,7 +2,7 @@
 //  AppLogger.swift
 //  Crypro
 //
-//  Created by Beavean on 08.05.2024.
+//  Created by Antomated on 08.05.2024.
 //
 
 import OSLog

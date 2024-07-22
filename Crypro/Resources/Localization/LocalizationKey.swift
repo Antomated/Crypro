@@ -2,7 +2,7 @@
 //  LocalizationKey.swift
 //  Crypro
 //
-//  Created by Beavean on 03.05.2024.
+//  Created by Antomated on 03.05.2024.
 //
 
 import Foundation

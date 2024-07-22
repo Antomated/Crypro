@@ -2,7 +2,7 @@
 //  Fonts.swift
 //  Crypro
 //
-//  Created by Beavean on 20.06.2024.
+//  Created by Antomated on 20.06.2024.
 //
 
 import SwiftUI

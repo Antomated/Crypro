@@ -2,7 +2,7 @@
 //  SparkLine.swift
 //  Crypro
 //
-//  Created by Beavean on 02.05.2024.
+//  Created by Antomated on 02.05.2024.
 //
 
 import Foundation

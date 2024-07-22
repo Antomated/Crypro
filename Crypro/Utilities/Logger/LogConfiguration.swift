@@ -2,7 +2,7 @@
 //  LogConfiguration.swift
 //  Crypro
 //
-//  Created by Beavean on 31.05.2024.
+//  Created by Antomated on 31.05.2024.
 //
 
 import Foundation
