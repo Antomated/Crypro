@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct PortfolioTransactionView: View {
-    @EnvironmentObject private var viewModel: HomeViewModel
+    @StateObject var viewModel: PortfolioTransactionViewModel
     @Binding var quantityText: String
     @FocusState var quantityIsFocused: Bool
 
     private var currentValue: Double {
         guard let quantity = Double(quantityText) else { return 0 }
-        return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
+        return quantity * (viewModel.sharedState.selectedCoin?.currentPrice ?? 0)
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Divider()
-            coinDetailStatView
+            coinDetailStatisticsView
             coinInputAmountView
             saveButtonView
         }
@@ -30,7 +30,7 @@ struct PortfolioTransactionView: View {
 // MARK: - UI Components
 
 private extension PortfolioTransactionView {
-    var coinDetailStatView: some View {
+    var coinDetailStatisticsView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(viewModel.detailStatistics) { stat in
@@ -86,7 +86,7 @@ private extension PortfolioTransactionView {
 
 private extension PortfolioTransactionView {
     func updatePortfolio() {
-        guard let coin = viewModel.selectedCoin,
+        guard let coin = viewModel.sharedState.selectedCoin,
               let amount = Double(quantityText)
         else { return }
         viewModel.updatePortfolio(coin: coin, amount: amount)
@@ -97,13 +97,14 @@ private extension PortfolioTransactionView {
     }
 
     func removeSelectedCoin() {
-        viewModel.selectedCoin = nil
+        viewModel.sharedState.selectedCoin = nil
         quantityText = ""
         viewModel.searchText = ""
     }
 }
 
-#Preview {
-    PortfolioTransactionView(quantityText: .constant(""))
-        .environmentObject(HomeViewModel())
-}
+// TODO: fix
+//#Preview {
+//    PortfolioTransactionView(viewModel: PortfolioTransactionViewModel(selectedCoin: CoinsStubs.bitcoin),
+//                             quantityText: .constant(""))
+//}

@@ -10,22 +10,21 @@ import Foundation
 
 final class HomeViewModel: ObservableObject {
     @Published var statistics: [StatisticPair] = []
-    @Published var detailStatistics: [Statistic] = []
     @Published var allCoins: [Coin] = []
     @Published var portfolioCoins: [Coin] = []
     @Published var error: IdentifiableError?
-    @Published var selectedCoin: Coin?
     @Published var searchText: String = ""
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
+    let selectedCoinState: SelectedCoinState
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
-
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(sharedState: SelectedCoinState = SelectedCoinState()) {
+        self.selectedCoinState = sharedState
         addSubscribers()
         setupLoadingSubscriber()
     }
@@ -80,14 +79,6 @@ private extension HomeViewModel {
             .sink { [weak self] returnedCoins in
                 guard let self else { return }
                 portfolioCoins = returnedCoins
-            }
-            .store(in: &cancellables)
-
-        $selectedCoin
-            .map(getCoinDetailStatistics)
-            .sink { [weak self] stats in
-                guard let self else { return }
-                detailStatistics = stats
             }
             .store(in: &cancellables)
 
@@ -260,9 +251,9 @@ private extension HomeViewModel {
 
     func sortCoins(sort: SortOption, coins: inout [Coin]) {
         switch sort {
-        case .rank, .holdings:
+        case .rank:
             coins.sort { $0.rank < $1.rank }
-        case .rankDescending, .holdingsDescending:
+        case .rankDescending:
             coins.sort { $0.rank > $1.rank }
         case .price:
             coins.sort { ($0.currentPrice ?? 0.0) > ($1.currentPrice ?? 0.0) }
@@ -272,6 +263,8 @@ private extension HomeViewModel {
             coins.sort { ($0.totalVolume ?? 0.0) > ($1.totalVolume ?? 0.0) }
         case .totalVolumeDescending:
             coins.sort { ($0.totalVolume ?? 0.0) < ($1.totalVolume ?? 0.0) }
+        case .holdings, .holdingsDescending:
+            return
         }
     }
 }

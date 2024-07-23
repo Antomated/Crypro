@@ -27,8 +27,9 @@ struct PortfolioView: View {
                         .padding()
                         .focused($searchIsFocused)
                     coinLogoList
-                    if viewModel.selectedCoin != nil {
-                        PortfolioTransactionView(quantityText: $quantityText)
+                    if viewModel.selectedCoinState.selectedCoin != nil {
+                        PortfolioTransactionView(viewModel: PortfolioTransactionViewModel(sharedState: viewModel.selectedCoinState),
+                                                 quantityText: $quantityText)
                             .padding()
                             .animation(.none, value: UUID())
                     }
@@ -44,7 +45,7 @@ struct PortfolioView: View {
                         content: {
                             Button {
                                 dismiss()
-                                viewModel.selectedCoin = nil
+                                viewModel.selectedCoinState.selectedCoin = nil
                             } label: {
                                 SystemImage.xMark.image
                                     .bold()
@@ -55,7 +56,7 @@ struct PortfolioView: View {
                 }
                 .onChange(of: viewModel.searchText, perform: { value in
                     if value.isEmpty {
-                        viewModel.selectedCoin = nil
+                        viewModel.selectedCoinState.selectedCoin = nil
                     }
                 })
                 .animation(.easeOut(duration: 0.16), value: UUID())
@@ -63,12 +64,12 @@ struct PortfolioView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            if let coin = viewModel.selectedCoin {
+            if let coin = viewModel.selectedCoinState.selectedCoin {
                 updateSelectedCoin(coin: coin)
                 viewModel.searchText = coin.name
                 searchIsFocused = false
             } else if let coin {
-                viewModel.selectedCoin = coin
+                viewModel.selectedCoinState.selectedCoin = coin
                 viewModel.searchText = coin.name
                 updateSelectedCoin(coin: coin)
                 searchIsFocused = false
@@ -108,7 +109,7 @@ private extension PortfolioView {
                             .background(
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
-                                        (viewModel.selectedCoin?.id == coin.id)
+                                        (viewModel.selectedCoinState.selectedCoin?.id == coin.id)
                                             ? Color.theme.green
                                             : Color.clear
                                     )
@@ -119,7 +120,7 @@ private extension PortfolioView {
                 .padding(.leading)
             }
             .onAppear {
-                if let selectedCoinID = viewModel.selectedCoin?.id {
+                if let selectedCoinID = viewModel.selectedCoinState.selectedCoin?.id {
                     scrollView.scrollTo(selectedCoinID, anchor: .center)
                 }
             }
@@ -131,7 +132,7 @@ private extension PortfolioView {
 
 private extension PortfolioView {
     func updateSelectedCoin(coin: Coin) {
-        viewModel.selectedCoin = coin
+        viewModel.selectedCoinState.selectedCoin = coin
         if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
            let amount = portfolioCoin.currentHoldings {
             quantityText = "\(amount)"

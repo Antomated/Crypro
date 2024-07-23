@@ -150,7 +150,7 @@ private extension HomeView {
                         Button {
                             withAnimation {
                                 showPortfolioView.toggle()
-                                viewModel.selectedCoin = coin
+                                viewModel.selectedCoinState.selectedCoin = coin
                             }
                         } label: {
                             SystemImage.filledPlus.image
@@ -193,7 +193,7 @@ private extension HomeView {
                         }
                         Button {
                             showPortfolioView.toggle()
-                            viewModel.selectedCoin = coin
+                            viewModel.selectedCoinState.selectedCoin = coin
                         } label: {
                             SystemImage.filledPlus.image
                         }
