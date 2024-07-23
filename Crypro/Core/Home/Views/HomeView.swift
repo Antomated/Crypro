@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var viewModel: HomeViewModel
     @State private var showPortfolio: Bool = false
-    @State private var showPortfolioView: Bool = false
+    @State private var showEditPortfolioView: Bool = false
     @State private var showDetailView: Bool = false
     @State private var showSettingsView: Bool = false
     @State private var selectedCoin: Coin?
@@ -21,8 +21,8 @@ struct HomeView: View {
             ZStack {
                 Color.theme.background
                     .ignoresSafeArea()
-                    .sheet(isPresented: $showPortfolioView, content: {
-                        PortfolioView()
+                    .sheet(isPresented: $showEditPortfolioView, content: {
+                        EditPortfolioView(coin: selectedCoin, allCoins: viewModel.allCoins)
                     })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
@@ -113,7 +113,8 @@ private extension HomeView {
                         .onTapGesture {
                             HapticManager.triggerSelection()
                             if showPortfolio {
-                                showPortfolioView.toggle()
+                                selectedCoin = nil
+                                showEditPortfolioView.toggle()
                             } else {
                                 showSettingsView.toggle()
                             }
@@ -149,8 +150,8 @@ private extension HomeView {
                     .swipeActions {
                         Button {
                             withAnimation {
-                                showPortfolioView.toggle()
-                                viewModel.selectedCoinState.selectedCoin = coin
+                                selectedCoin = coin
+                                showEditPortfolioView.toggle()
                             }
                         } label: {
                             SystemImage.filledPlus.image
@@ -192,8 +193,8 @@ private extension HomeView {
                             SystemImage.thrash.image
                         }
                         Button {
-                            showPortfolioView.toggle()
-                            viewModel.selectedCoinState.selectedCoin = coin
+                            selectedCoin = coin
+                            showEditPortfolioView.toggle()
                         } label: {
                             SystemImage.filledPlus.image
                         }

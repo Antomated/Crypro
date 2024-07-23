@@ -12,7 +12,7 @@ struct DetailView: View {
     @State private var showLoader: Bool = true
     @State private var startAnimation: Bool = false
     @State private var showFullDescription: Bool = false
-    @State private var showPortfolioView: Bool = false
+    @State private var showEditPortfolioView: Bool = false
 
     private let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -68,8 +68,9 @@ struct DetailView: View {
             showLoader = !hasLoadedData
             startAnimation = hasLoadedData
         }
-        .sheet(isPresented: $showPortfolioView, content: {
-            PortfolioView(coin: viewModel.coin)
+        .sheet(isPresented: $showEditPortfolioView, content: {
+            // TODO: Fix implementation
+            EditPortfolioView(coin: viewModel.coin, allCoins: [viewModel.coin])
         })
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -171,10 +172,10 @@ private extension DetailView {
                 Spacer()
                 ZStack {
                     CircleButtonView(icon: .plus)
-                        .animation(.none, value: showPortfolioView)
+                        .animation(.none, value: showEditPortfolioView)
                         .onTapGesture {
                             HapticManager.triggerSelection()
-                            showPortfolioView.toggle()
+                            showEditPortfolioView.toggle()
                         }
                 }
                 .frame(maxWidth: 60, maxHeight: 60)

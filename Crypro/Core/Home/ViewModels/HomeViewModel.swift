@@ -17,14 +17,12 @@ final class HomeViewModel: ObservableObject {
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
-    let selectedCoinState: SelectedCoinState
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()
     private var cancellables = Set<AnyCancellable>()
 
-    init(sharedState: SelectedCoinState = SelectedCoinState()) {
-        self.selectedCoinState = sharedState
+    init() {
         addSubscribers()
         setupLoadingSubscriber()
     }
@@ -76,15 +74,6 @@ private extension HomeViewModel {
         $allCoins
             .combineLatest(portfolioDataService.$savedEntities)
             .map(mapAllCoinsToPortfolioCoins)
-            .sink { [weak self] returnedCoins in
-                guard let self else { return }
-                portfolioCoins = returnedCoins
-            }
-            .store(in: &cancellables)
-
-        $allCoins
-            .combineLatest(portfolioDataService.$savedEntities)
-            .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] coins in
                 guard let self else { return }
                 self.portfolioCoins = self.sortedPortfolioCoins(coins)
@@ -123,12 +112,12 @@ private extension HomeViewModel {
     }
 
     func filterAndSortCoins(_ coins: [Coin], query: String, sortOption: SortOption) -> [Coin] {
-        var updatedCoins = filteredCoins(coins, filterQuery: query)
+        var updatedCoins = filterCoins(coins, filterQuery: query)
         sortCoins(sort: sortOption, coins: &updatedCoins)
         return updatedCoins
     }
 
-    func filteredCoins(_ coins: [Coin], filterQuery: String) -> [Coin] {
+    func filterCoins(_ coins: [Coin], filterQuery: String) -> [Coin] {
         guard !filterQuery.isEmpty else {
             return coins
         }

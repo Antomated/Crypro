@@ -1,5 +1,5 @@
 //
-//  PortfolioView.swift
+//  EditPortfolioView.swift
 //  Crypro
 //
 //  Created by Antomated on 04.04.2024.
@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct PortfolioView: View {
-    @EnvironmentObject var viewModel: HomeViewModel
+struct EditPortfolioView: View {
+    @StateObject var viewModel: EditPortfolioViewModel
     @FocusState private var searchIsFocused: Bool
     @State private var quantityText: String = ""
     @Environment(\.dismiss) var dismiss
 
-    private var coin: Coin?
-
-    init(coin: Coin? = nil) {
-        self.coin = coin
+    init(coin: Coin? = nil, allCoins: [Coin]) {
+        let state = SelectedCoinState()
+        state.selectedCoin = coin
+        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel.init(sharedState: state, allCoins: allCoins))
     }
 
     var body: some View {
@@ -68,11 +68,6 @@ struct PortfolioView: View {
                 updateSelectedCoin(coin: coin)
                 viewModel.searchText = coin.name
                 searchIsFocused = false
-            } else if let coin {
-                viewModel.selectedCoinState.selectedCoin = coin
-                viewModel.searchText = coin.name
-                updateSelectedCoin(coin: coin)
-                searchIsFocused = false
             }
         }
         .onDisappear {
@@ -83,7 +78,7 @@ struct PortfolioView: View {
 
 // MARK: - UI Components
 
-private extension PortfolioView {
+private extension EditPortfolioView {
     private var searchListCoins: [Coin] {
         viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
             ? viewModel.portfolioCoins
@@ -120,6 +115,7 @@ private extension PortfolioView {
                 .padding(.leading)
             }
             .onAppear {
+                print("DEBUG! viewModel.selectedCoinState.selectedCoin?.id: \(viewModel.selectedCoinState.selectedCoin?.id)")
                 if let selectedCoinID = viewModel.selectedCoinState.selectedCoin?.id {
                     scrollView.scrollTo(selectedCoinID, anchor: .center)
                 }
@@ -130,7 +126,7 @@ private extension PortfolioView {
 
 // MARK: - Private methods
 
-private extension PortfolioView {
+private extension EditPortfolioView {
     func updateSelectedCoin(coin: Coin) {
         viewModel.selectedCoinState.selectedCoin = coin
         if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
@@ -142,7 +138,9 @@ private extension PortfolioView {
     }
 }
 
-#Preview {
-    PortfolioView()
-        .environmentObject(HomeViewModel())
-}
+// TODO:  fix
+
+//#Preview {
+//    EditPortfolioView()
+//        .environmentObject(HomeViewModel())
+//}
