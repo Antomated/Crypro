@@ -27,7 +27,7 @@ struct HomeView: View {
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding()
-                    HomeStatisticsView(showPortfolio: $showPortfolio)
+                    homeStatisticsView
                         .frame(height: 130)
                     Divider()
                     SearchBarView(searchText: $viewModel.searchText)
@@ -82,6 +82,27 @@ struct HomeView: View {
 // MARK: - UI Components
 
 private extension HomeView {
+    var homeStatisticsView: some View {
+        GeometryReader { geometry in
+            HStack {
+                ForEach(viewModel.statistics) { statPair in
+                    VStack(alignment: .leading, spacing: 12) {
+                        StatisticView(stat: statPair.top)
+                        Divider()
+                            .frame(width: 70)
+                        StatisticView(stat: statPair.bottom)
+                    }
+                    .frame(width: (geometry.size.width - 12) / 3)
+                    .offset(x: showPortfolio ? 0 : -12)
+                }
+            }
+            .frame(
+                width: geometry.size.width,
+                alignment: showPortfolio ? .trailing : .leading
+            )
+        }
+    }
+
     var homeFooter: some View {
         VStack {
             Spacer()
