@@ -14,6 +14,7 @@ final class EditPortfolioViewModel: ObservableObject {
     @Published var portfolioCoins: [Coin] = []
     @Published var filteredCoins: [Coin] = []
     @Published var selectedCoin: Coin?
+    private(set) var networkManager: NetworkManaging
     private let allCoins: [Coin]
     private let portfolioDataService: PortfolioDataService
     private var cancellables = Set<AnyCancellable>()
@@ -21,11 +22,13 @@ final class EditPortfolioViewModel: ObservableObject {
     init(
         selectedCoin: Coin?,
         allCoins: [Coin],
-        portfolioDataService: PortfolioDataService = PortfolioDataService()
+        networkManager: NetworkManaging,
+        portfolioDataService: PortfolioDataService
     ) {
         self.selectedCoin = selectedCoin
         self.allCoins = allCoins
         self.filteredCoins = allCoins
+        self.networkManager = networkManager
         self.portfolioDataService = portfolioDataService
         addSubscribers()
     }
@@ -49,13 +52,13 @@ final class EditPortfolioViewModel: ObservableObject {
             }
             .sink { [weak self] coins in
                 guard let self = self else { return }
-                self.portfolioCoins = self.sortedPortfolioCoins(coins)
+                self.portfolioCoins = coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
             }
             .store(in: &cancellables)
 
         $searchText
             .map { query in
-                self.filterAndSortCoins(self.allCoins, query: query, sortOption: .rank)
+                self.filterAndSortCoins(self.allCoins, query: query)
             }
             .sink { coins in
                 self.filteredCoins = coins
@@ -91,46 +94,15 @@ private extension EditPortfolioViewModel {
         }
     }
 
-    func filterAndSortCoins(_ coins: [Coin], query: String, sortOption: SortOption) -> [Coin] {
-        var updatedCoins = filterCoins(coins, filterQuery: query)
-        sortCoins(sort: sortOption, coins: &updatedCoins)
-        return updatedCoins
-    }
-
-    func sortCoins(sort: SortOption, coins: inout [Coin]) {
-        switch sort {
-        case .rank:
-            coins.sort { $0.rank < $1.rank }
-        case .rankDescending:
-            coins.sort { $0.rank > $1.rank }
-        case .price:
-            coins.sort { ($0.currentPrice ?? 0.0) > ($1.currentPrice ?? 0.0) }
-        case .priceDescending:
-            coins.sort { ($0.currentPrice ?? 0.0) < ($1.currentPrice ?? 0.0) }
-        case .totalVolume:
-            coins.sort { ($0.totalVolume ?? 0.0) > ($1.totalVolume ?? 0.0) }
-        case .totalVolumeDescending:
-            coins.sort { ($0.totalVolume ?? 0.0) < ($1.totalVolume ?? 0.0) }
-        case .holdings, .holdingsDescending:
-            return
-        }
-    }
-
-    func filterCoins(_ coins: [Coin], filterQuery: String) -> [Coin] {
-        guard !filterQuery.isEmpty else {
-            return coins
-        }
-
-        let lowerCasedText = filterQuery.lowercased()
-
-        return coins.filter { coin in
+    func filterAndSortCoins(_ coins: [Coin], query: String) -> [Coin] {
+        guard !query.isEmpty else { return coins }
+        let lowerCasedText = query.lowercased()
+        var updatedCoins = coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
             coin.symbol.lowercased().contains(lowerCasedText) ||
             coin.id.lowercased().contains(lowerCasedText)
         }
-    }
-
-    func sortedPortfolioCoins(_ coins: [Coin]) -> [Coin] {
-        coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
+        updatedCoins.sort { $0.rank < $1.rank }
+        return updatedCoins
     }
 }

@@ -11,16 +11,18 @@ import Foundation
 final class CoinDetailsService {
     @Published var coinDetails: CoinDetails?
     @Published var error: NetworkError?
+    private let networkManager: NetworkManaging
     private var coinSubscription: AnyCancellable?
     let coin: Coin
 
-    init(coin: Coin) {
+    init(coin: Coin, networkManager: NetworkManaging) {
         self.coin = coin
+        self.networkManager = networkManager
         getCoinDetails()
     }
 
     func getCoinDetails() {
-        coinSubscription = NetworkManager.download(from: .coinDetails(id: coin.id), convertTo: CoinDetails.self)
+        coinSubscription = networkManager.download(from: .coinDetails(id: coin.id), convertTo: CoinDetails.self)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(

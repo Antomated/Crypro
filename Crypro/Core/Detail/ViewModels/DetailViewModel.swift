@@ -19,12 +19,16 @@ final class DetailViewModel: ObservableObject {
     @Published var twitterURL: String?
     @Published var telegramURL: String?
     @Published var hasLoadedData: Bool = false
+    private(set) var portfolioDataService: PortfolioDataService
+    private(set) var networkManager: NetworkManaging
     private let coinDetailService: CoinDetailsService
     private var cancellables = Set<AnyCancellable>()
 
-    init(coin: Coin) {
+    init(coin: Coin, portfolioDataService: PortfolioDataService, networkManager: NetworkManaging) {
         self.coin = coin
-        coinDetailService = CoinDetailsService(coin: coin)
+        self.portfolioDataService = portfolioDataService
+        self.networkManager = networkManager
+        coinDetailService = CoinDetailsService(coin: coin, networkManager: networkManager)
         addSubscribers()
     }
 }

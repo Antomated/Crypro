@@ -15,9 +15,11 @@ final class CoinImageService {
     private var imageSubscription: AnyCancellable?
     private let imageName: String
     private lazy var coinImagesFolder = String(describing: type(of: self))
+    private let networkManager: NetworkManaging
 
-    init(coin: Coin) {
+    init(coin: Coin, networkManager: NetworkManaging) {
         self.coin = coin
+        self.networkManager = networkManager
         imageName = coin.id
         getCoinImage()
     }
@@ -32,7 +34,7 @@ final class CoinImageService {
 
     private func downloadCoinImage() {
         guard let url = URL(string: coin.image) else { return }
-        imageSubscription = NetworkManager.download(url: url)
+        imageSubscription = networkManager.download(url: url)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(

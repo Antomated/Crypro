@@ -8,15 +8,21 @@
 import Combine
 import Foundation
 
-final class NetworkManager {
-    private static var decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
+protocol NetworkManaging {
+    func download<T: Decodable>(from endpoint: CoingeckoEndpoint, convertTo: T.Type) -> AnyPublisher<T, NetworkError>
+    func download(url: URL) -> AnyPublisher<Data, Error>
+}
 
-    static func download<T>(from endpoint: CoingeckoEndpoint,
-                            convertTo _: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
+final class NetworkManager: NetworkManaging {
+    private let decoder: JSONDecoder
+
+    init(decoder: JSONDecoder = JSONDecoder()) {
+        self.decoder = decoder
+        self.decoder.keyDecodingStrategy = .convertFromSnakeCase
+    }
+
+    func download<T>(from endpoint: CoingeckoEndpoint,
+                     convertTo _: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
         guard let url = endpoint.url else {
             return Fail(error: .invalidEndpoint).eraseToAnyPublisher()
         }
@@ -25,25 +31,25 @@ final class NetworkManager {
         endpoint.headers.forEach { request.addValue($1, forHTTPHeaderField: $0) }
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { output in
-                try handleURLResponse(output: output, url: url)
+                try self.handleURLResponse(output: output, url: url)
             }
             .retry(3)
             .mapError { error in
                 (error as? NetworkError) ?? .unknown
             }
-            .decode(type: T.self, decoder: decoder)
+            .decode(type: T.self, decoder: self.decoder)
             .mapError { _ in .decodingError }
             .eraseToAnyPublisher()
     }
 
-    static func download(url: URL) -> AnyPublisher<Data, Error> {
+    func download(url: URL) -> AnyPublisher<Data, Error> {
         URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { try handleURLResponse(output: $0, url: url) }
+            .tryMap { try self.handleURLResponse(output: $0, url: url) }
             .retry(3)
             .eraseToAnyPublisher()
     }
 
-    static func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
+    private func handleURLResponse(output: URLSession.DataTaskPublisher.Output, url: URL) throws -> Data {
         guard let response = output.response as? HTTPURLResponse,
               response.statusCode >= 200 && response.statusCode < 300
         else {

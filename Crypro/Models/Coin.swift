@@ -54,3 +54,9 @@ struct Coin: Decodable, Identifiable {
         Int(marketCapRank ?? 0)
     }
 }
+
+extension Coin: Equatable {
+    static func == (lhs: Coin, rhs: Coin) -> Bool {
+        lhs.id == rhs.id
+    }
+}

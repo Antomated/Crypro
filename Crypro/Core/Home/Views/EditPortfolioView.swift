@@ -15,18 +15,40 @@ struct EditPortfolioView: View {
     @FocusState var quantityIsFocused: Bool
     private let singleCoinDisplay: Bool
 
+    private var showsPortfolio: Bool {
+        viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
+    }
+
+    private var searchListCoins: [Coin] {
+        showsPortfolio ? viewModel.portfolioCoins : viewModel.filteredCoins
+    }
+
     private var currentValue: Double {
         guard let quantity = Double(quantityText) else { return 0 }
         return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
     }
 
-    init(allCoins: [Coin]) {
-        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: nil, allCoins: allCoins))
+    init(
+        allCoins: [Coin],
+        networkManager: NetworkManaging,
+        portfolioDataService: PortfolioDataService
+    ) {
+        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: nil,
+                                                                      allCoins: allCoins,
+                                                                      networkManager: networkManager,
+                                                                      portfolioDataService: portfolioDataService))
         singleCoinDisplay = false
     }
 
-    init(singleCoin: Coin) {
-        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: singleCoin, allCoins: [singleCoin]))
+    init(
+        singleCoin: Coin,
+        networkManager: NetworkManaging,
+        portfolioDataService: PortfolioDataService
+    ) {
+        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: singleCoin,
+                                                                      allCoins: [singleCoin],
+                                                                      networkManager: networkManager,
+                                                                      portfolioDataService: portfolioDataService))
         singleCoinDisplay = true
     }
 
@@ -96,18 +118,12 @@ struct EditPortfolioView: View {
 // MARK: - UI Components
 
 private extension EditPortfolioView {
-    private var searchListCoins: [Coin] {
-        viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
-            ? viewModel.portfolioCoins
-            : viewModel.filteredCoins
-    }
-
     var coinLogoList: some View {
         ScrollViewReader { scrollView in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
                     ForEach(searchListCoins) { coin in
-                        CoinLogoView(coin: coin)
+                        CoinLogoView(coin: coin, networkManager: viewModel.networkManager)
                             .frame(width: 75)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 8)
@@ -134,6 +150,15 @@ private extension EditPortfolioView {
             .onAppear {
                 if let selectedCoinID = viewModel.selectedCoin?.id {
                     scrollView.scrollTo(selectedCoinID, anchor: .center)
+                }
+            }
+            .onChange(of: viewModel.filteredCoins) { _ in
+                withAnimation(.smooth) {
+                    if !showsPortfolio, let firstCoinID = viewModel.filteredCoins.first?.id {
+                        scrollView.scrollTo(firstCoinID, anchor: .leading)
+                    } else if let firstPortfolioCoinId = viewModel.portfolioCoins.first?.id {
+                        scrollView.scrollTo(firstPortfolioCoinId, anchor: .leading)
+                    }
                 }
             }
         }
@@ -226,5 +251,7 @@ private extension EditPortfolioView {
 }
 
 #Preview {
-    EditPortfolioView(singleCoin: CoinsStubs.bitcoin)
+    EditPortfolioView(singleCoin: CoinsStubs.bitcoin,
+                      networkManager: NetworkManager(),
+                      portfolioDataService: PortfolioDataService())
 }

@@ -18,12 +18,22 @@ final class HomeViewModel: ObservableObject {
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
     @Published var selectedCoin: Coin?
-    private let coinDataService = CoinDataService()
-    private let marketDataService = MarketDataService()
-    private let portfolioDataService = PortfolioDataService()
+    private let coinDataService: CoinDataService
+    private let marketDataService: MarketDataService
+    private(set) var portfolioDataService: PortfolioDataService
+    private(set) var networkManager: NetworkManaging
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(
+        networkManager: NetworkManaging,
+        coinDataService: CoinDataService,
+        marketDataService: MarketDataService,
+        portfolioDataService: PortfolioDataService
+    ) {
+        self.networkManager = networkManager
+        self.coinDataService = coinDataService
+        self.marketDataService = marketDataService
+        self.portfolioDataService = portfolioDataService
         addSubscribers()
         setupLoadingSubscriber()
     }
@@ -214,20 +224,6 @@ private extension HomeViewModel {
 
         stats.append(contentsOf: [markets, activeCryptocurrencies, volume, portfolioCoins])
         return stats
-    }
-
-    func getCoinDetailStatistics(coin: Coin?) -> [Statistic] {
-        guard let coin else { return [] }
-        return [
-            Statistic(title: LocalizationKey.marketCap.localizedString + ":",
-                      value: coin.marketCap?.formattedWithAbbreviations() ?? ""),
-            Statistic(title: LocalizationKey.currentPrice.localizedString + ":",
-                      value: (coin.currentPrice ?? 0.0).formattedWithAbbreviations()),
-            Statistic(title: LocalizationKey.allTimeHigh.localizedString + ":",
-                      value: coin.ath?.formattedWithAbbreviations() ?? ""),
-            Statistic(title: LocalizationKey.allTimeLow.localizedString + ":",
-                      value: coin.atl?.formattedWithAbbreviations() ?? "")
-        ]
     }
 
     func mapAllCoinsToPortfolioCoins(allCoins: [Coin], portfolioEntities: [Portfolio]) -> [Coin] {

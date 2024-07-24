@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct CryproApp: App {
     @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
-    @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject private var homeViewModel: HomeViewModel
     @State private var showLaunchView = true
 
     private static var defaultDarkMode: Bool {
@@ -18,16 +18,23 @@ struct CryproApp: App {
     }
 
     init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
-        UITableView.appearance().backgroundColor = UIColor.clear
+        let networkManager = NetworkManager()
+        let coinDataService = CoinDataService(networkManager: networkManager)
+        let marketDataService = MarketDataService(networkManager: networkManager)
+        let portfolioDataService = PortfolioDataService()
+        _homeViewModel = StateObject(wrappedValue: HomeViewModel(
+            networkManager: networkManager,
+            coinDataService: coinDataService,
+            marketDataService: marketDataService,
+            portfolioDataService: portfolioDataService
+        ))
     }
 
     var body: some Scene {
         WindowGroup {
             ZStack {
                 NavigationView {
-                    HomeView()
+                    HomeView(viewModel: homeViewModel)
                 }
                 .navigationViewStyle(.stack)
                 .environmentObject(homeViewModel)

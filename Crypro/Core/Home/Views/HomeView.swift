@@ -9,7 +9,7 @@ import CoreHaptics
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject private var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     @State private var showPortfolio: Bool = false
     @State private var showEditPortfolioView: Bool = false
     @State private var showDetailView: Bool = false
@@ -23,9 +23,13 @@ struct HomeView: View {
                     .sheet(isPresented: $showEditPortfolioView,
                            content: {
                         if let selectedCoin = viewModel.selectedCoin {
-                            EditPortfolioView(singleCoin: selectedCoin)
+                            EditPortfolioView(singleCoin: selectedCoin,
+                                              networkManager: viewModel.networkManager,
+                                              portfolioDataService: viewModel.portfolioDataService)
                         } else {
-                            EditPortfolioView(allCoins: viewModel.allCoins)
+                            EditPortfolioView(allCoins: viewModel.allCoins,
+                                              networkManager: viewModel.networkManager,
+                                              portfolioDataService: viewModel.portfolioDataService)
                         }
                     })
                 VStack {
@@ -67,7 +71,9 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $showDetailView) {
-                DetailLoadingView(coin: viewModel.selectedCoin)
+                DetailLoadingView(coin: viewModel.selectedCoin,
+                                  portfolioDataService: viewModel.portfolioDataService,
+                                  networkManager: viewModel.networkManager)
             }
             .alert(item: $viewModel.error) { error in
                 Alert(
@@ -142,7 +148,7 @@ private extension HomeView {
     var allCoinsList: some View {
         List {
             ForEach(viewModel.allCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false)
+                CoinRowView(coin: coin, showHoldingsColumn: false, networkManager: viewModel.networkManager)
                     .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
                     .padding(12)
                     .onTapGesture {
@@ -180,7 +186,7 @@ private extension HomeView {
     var allPortfolioCoinsList: some View {
         List {
             ForEach(viewModel.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
+                CoinRowView(coin: coin, showHoldingsColumn: true, networkManager: viewModel.networkManager)
                     .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
                     .padding(12)
                     .onTapGesture {
@@ -330,8 +336,10 @@ private extension HomeView {
 
 #Preview {
     NavigationView {
-        HomeView()
+        HomeView(viewModel: HomeViewModel(networkManager: NetworkManager(),
+                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
+                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
+                                          portfolioDataService: PortfolioDataService()))
             .navigationBarHidden(true)
     }
-    .environmentObject(HomeViewModel())
 }

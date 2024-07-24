@@ -20,8 +20,10 @@ struct DetailView: View {
     ]
     private let spacing: CGFloat = 20
 
-    init(coin: Coin) {
-        _viewModel = .init(wrappedValue: DetailViewModel(coin: coin))
+    init(coin: Coin, portfolioDataService: PortfolioDataService, networkManager: NetworkManaging) {
+        _viewModel = .init(wrappedValue: DetailViewModel(coin: coin,
+                                                         portfolioDataService: portfolioDataService,
+                                                         networkManager: networkManager))
     }
 
     var body: some View {
@@ -69,7 +71,9 @@ struct DetailView: View {
             startAnimation = hasLoadedData
         }
         .sheet(isPresented: $showEditPortfolioView, content: {
-            EditPortfolioView(singleCoin: viewModel.coin)
+            EditPortfolioView(singleCoin: viewModel.coin,
+                              networkManager: viewModel.networkManager,
+                              portfolioDataService: viewModel.portfolioDataService)
         })
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -110,7 +114,7 @@ private extension DetailView {
             Text(viewModel.coin.symbol.uppercased())
                 .font(.chakraPetch(.medium, size: 16))
                 .foregroundStyle(Color.theme.secondaryText)
-            CoinImageView(coin: viewModel.coin)
+            CoinImageView(coin: viewModel.coin, networkManager: viewModel.networkManager)
                 .frame(width: 25, height: 25)
         }
     }
@@ -212,7 +216,9 @@ private extension DetailView {
 
 #Preview {
     NavigationView {
-        DetailView(coin: CoinsStubs.bitcoin)
+        DetailView(coin: CoinsStubs.bitcoin,
+                   portfolioDataService: PortfolioDataService(),
+                   networkManager: NetworkManager())
             .preferredColorScheme(.dark)
     }
 }
