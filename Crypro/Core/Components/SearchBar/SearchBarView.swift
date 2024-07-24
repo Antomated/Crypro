@@ -48,8 +48,6 @@ struct SearchBarView: View {
 }
 
 #Preview {
-    Group {
-        SearchBarView(searchText: .constant(""))
-            .preferredColorScheme(.dark)
-    }
+    SearchBarView(searchText: .constant(""))
+        .preferredColorScheme(.dark)
 }

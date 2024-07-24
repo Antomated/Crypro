@@ -69,8 +69,7 @@ struct DetailView: View {
             startAnimation = hasLoadedData
         }
         .sheet(isPresented: $showEditPortfolioView, content: {
-            // TODO: Fix implementation
-            EditPortfolioView(coin: viewModel.coin, allCoins: [viewModel.coin])
+            EditPortfolioView(singleCoin: viewModel.coin)
         })
         .alert(item: $viewModel.error) { error in
             Alert(

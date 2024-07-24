@@ -11,21 +11,21 @@ import Combine
 final class EditPortfolioViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var detailStatistics: [Statistic] = []
-    @Published var allCoins: [Coin]
     @Published var portfolioCoins: [Coin] = []
-    // TODO: remove sort option
-    @Published var sortOption: SortOption = .rank
-    let selectedCoinState: SelectedCoinState
+    @Published var filteredCoins: [Coin] = []
+    @Published var selectedCoin: Coin?
+    private let allCoins: [Coin]
     private let portfolioDataService: PortfolioDataService
     private var cancellables = Set<AnyCancellable>()
 
     init(
-        sharedState: SelectedCoinState,
-        portfolioDataService: PortfolioDataService = PortfolioDataService(),
-        allCoins: [Coin]
+        selectedCoin: Coin?,
+        allCoins: [Coin],
+        portfolioDataService: PortfolioDataService = PortfolioDataService()
     ) {
-        self.selectedCoinState = sharedState
+        self.selectedCoin = selectedCoin
         self.allCoins = allCoins
+        self.filteredCoins = allCoins
         self.portfolioDataService = portfolioDataService
         addSubscribers()
     }
@@ -35,19 +35,33 @@ final class EditPortfolioViewModel: ObservableObject {
     }
 
     private func addSubscribers() {
-        selectedCoinState.$selectedCoin
+        $selectedCoin
             .map(getCoinDetailStatistics)
             .sink { [weak self] stats in
                 guard let self else { return }
                 detailStatistics = stats
             }
             .store(in: &cancellables)
-        $allCoins
-            .combineLatest(portfolioDataService.$savedEntities)
-            .map(mapAllCoinsToPortfolioCoins)
+
+        portfolioDataService.$savedEntities
+            .map { savedEntities in
+                self.mapAllCoinsToPortfolioCoins(allCoins: self.allCoins, portfolioEntities: savedEntities)
+            }
             .sink { [weak self] coins in
-                guard let self else { return }
+                guard let self = self else { return }
                 self.portfolioCoins = self.sortedPortfolioCoins(coins)
+            }
+            .store(in: &cancellables)
+
+        $searchText
+            .map { query in
+                self.filterAndSortCoins(self.allCoins, query: query, sortOption: .rank)
+            }
+            .sink { coins in
+                self.filteredCoins = coins
+                if let selectedCoin = self.selectedCoin, !coins.contains(where: { $0.id == selectedCoin.id }) {
+                    self.selectedCoin = nil
+                }
             }
             .store(in: &cancellables)
     }
@@ -117,13 +131,6 @@ private extension EditPortfolioViewModel {
     }
 
     func sortedPortfolioCoins(_ coins: [Coin]) -> [Coin] {
-        switch sortOption {
-        case .holdings:
-            coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
-        case .holdingsDescending:
-            coins.sorted { $0.currentHoldingsValue < $1.currentHoldingsValue }
-        default:
-            coins
-        }
+        coins.sorted { $0.currentHoldingsValue > $1.currentHoldingsValue }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailLoadingView: View {
-    @Binding var coin: Coin?
+    var coin: Coin?
 
     var body: some View {
         ZStack {

@@ -14,15 +14,19 @@ struct HomeView: View {
     @State private var showEditPortfolioView: Bool = false
     @State private var showDetailView: Bool = false
     @State private var showSettingsView: Bool = false
-    @State private var selectedCoin: Coin?
 
     var body: some View {
         NavigationStack {
             ZStack {
                 Color.theme.background
                     .ignoresSafeArea()
-                    .sheet(isPresented: $showEditPortfolioView, content: {
-                        EditPortfolioView(coin: selectedCoin, allCoins: viewModel.allCoins)
+                    .sheet(isPresented: $showEditPortfolioView,
+                           content: {
+                        if let selectedCoin = viewModel.selectedCoin {
+                            EditPortfolioView(singleCoin: selectedCoin)
+                        } else {
+                            EditPortfolioView(allCoins: viewModel.allCoins)
+                        }
                     })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
@@ -63,7 +67,7 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $showDetailView) {
-                DetailLoadingView(coin: $selectedCoin)
+                DetailLoadingView(coin: viewModel.selectedCoin)
             }
             .alert(item: $viewModel.error) { error in
                 Alert(
@@ -113,8 +117,7 @@ private extension HomeView {
                         .onTapGesture {
                             HapticManager.triggerSelection()
                             if showPortfolio {
-                                selectedCoin = nil
-                                showEditPortfolioView.toggle()
+                                showEditView()
                             } else {
                                 showSettingsView.toggle()
                             }
@@ -149,12 +152,10 @@ private extension HomeView {
                     .listRowBackground(Color.theme.background)
                     .swipeActions {
                         Button {
-                            withAnimation {
-                                selectedCoin = coin
-                                showEditPortfolioView.toggle()
-                            }
+                            selectCoinAndShowEditView(coin: coin)
                         } label: {
                             SystemImage.filledPlus.image
+                                .tint(Color.theme.background)
                         }
                         .tint(Color.theme.green)
                     }
@@ -191,12 +192,13 @@ private extension HomeView {
                             viewModel.deleteCoin(coin)
                         } label: {
                             SystemImage.thrash.image
+                                .tint(Color.theme.background)
                         }
                         Button {
-                            selectedCoin = coin
-                            showEditPortfolioView.toggle()
+                            selectCoinAndShowEditView(coin: coin)
                         } label: {
                             SystemImage.filledPlus.image
+                                .tint(Color.theme.background)
                         }
                         .tint(Color.theme.green)
                     }
@@ -227,8 +229,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                ? Color.theme.green
-                : Color.theme.secondaryText)
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
@@ -244,8 +246,8 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                    ? Color.theme.green
-                    : Color.theme.secondaryText)
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
@@ -259,14 +261,14 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .totalVolume
-                    || viewModel.sortOption == .totalVolumeDescending
-                    ? Color.theme.green
-                    : Color.theme.secondaryText)
+                                 || viewModel.sortOption == .totalVolumeDescending
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
-                            ? .totalVolumeDescending
-                            : .totalVolume
+                        ? .totalVolumeDescending
+                        : .totalVolume
                     }
                 }
             }
@@ -278,8 +280,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                ? Color.theme.green
-                : Color.theme.secondaryText)
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price
@@ -312,8 +314,17 @@ private extension HomeView {
 
 private extension HomeView {
     func segue(coin: Coin) {
-        selectedCoin = coin
+        viewModel.selectedCoin = coin
         showDetailView.toggle()
+    }
+
+    private func showEditView() {
+        selectCoinAndShowEditView(coin: nil)
+    }
+
+    private func selectCoinAndShowEditView(coin: Coin?) {
+        viewModel.selectedCoin = coin
+        showEditPortfolioView = true
     }
 }
 

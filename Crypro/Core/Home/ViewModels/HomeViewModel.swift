@@ -17,6 +17,7 @@ final class HomeViewModel: ObservableObject {
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
+    @Published var selectedCoin: Coin?
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     private let portfolioDataService = PortfolioDataService()

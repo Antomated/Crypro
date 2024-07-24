@@ -12,24 +12,41 @@ struct EditPortfolioView: View {
     @FocusState private var searchIsFocused: Bool
     @State private var quantityText: String = ""
     @Environment(\.dismiss) var dismiss
+    @FocusState var quantityIsFocused: Bool
+    private let singleCoinDisplay: Bool
 
-    init(coin: Coin? = nil, allCoins: [Coin]) {
-        let state = SelectedCoinState()
-        state.selectedCoin = coin
-        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel.init(sharedState: state, allCoins: allCoins))
+    private var currentValue: Double {
+        guard let quantity = Double(quantityText) else { return 0 }
+        return quantity * (viewModel.selectedCoin?.currentPrice ?? 0)
+    }
+
+    init(allCoins: [Coin]) {
+        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: nil, allCoins: allCoins))
+        singleCoinDisplay = false
+    }
+
+    init(singleCoin: Coin) {
+        _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: singleCoin, allCoins: [singleCoin]))
+        singleCoinDisplay = true
     }
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 8) {
-                    SearchBarView(searchText: $viewModel.searchText)
-                        .padding()
-                        .focused($searchIsFocused)
+                    if !singleCoinDisplay {
+                        SearchBarView(searchText: $viewModel.searchText)
+                            .padding()
+                            .focused($searchIsFocused)
+                    }
                     coinLogoList
-                    if viewModel.selectedCoinState.selectedCoin != nil {
-                        PortfolioTransactionView(viewModel: PortfolioTransactionViewModel(sharedState: viewModel.selectedCoinState),
-                                                 quantityText: $quantityText)
+                    if viewModel.selectedCoin != nil {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Divider()
+                            coinDetailStatisticsView
+                            coinInputAmountView
+                            saveButtonView
+                        }
                             .padding()
                             .animation(.none, value: UUID())
                     }
@@ -45,7 +62,7 @@ struct EditPortfolioView: View {
                         content: {
                             Button {
                                 dismiss()
-                                viewModel.selectedCoinState.selectedCoin = nil
+                                viewModel.selectedCoin = nil
                             } label: {
                                 SystemImage.xMark.image
                                     .bold()
@@ -56,7 +73,7 @@ struct EditPortfolioView: View {
                 }
                 .onChange(of: viewModel.searchText, perform: { value in
                     if value.isEmpty {
-                        viewModel.selectedCoinState.selectedCoin = nil
+                        viewModel.selectedCoin = nil
                     }
                 })
                 .animation(.easeOut(duration: 0.16), value: UUID())
@@ -64,7 +81,7 @@ struct EditPortfolioView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            if let coin = viewModel.selectedCoinState.selectedCoin {
+            if let coin = viewModel.selectedCoin {
                 updateSelectedCoin(coin: coin)
                 viewModel.searchText = coin.name
                 searchIsFocused = false
@@ -82,7 +99,7 @@ private extension EditPortfolioView {
     private var searchListCoins: [Coin] {
         viewModel.searchText.isEmpty && !viewModel.portfolioCoins.isEmpty
             ? viewModel.portfolioCoins
-            : viewModel.allCoins
+            : viewModel.filteredCoins
     }
 
     var coinLogoList: some View {
@@ -92,7 +109,8 @@ private extension EditPortfolioView {
                     ForEach(searchListCoins) { coin in
                         CoinLogoView(coin: coin)
                             .frame(width: 75)
-                            .padding(4)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 8)
                             .id(coin.id)
                             .onTapGesture {
                                 withAnimation(.easeIn) {
@@ -104,23 +122,72 @@ private extension EditPortfolioView {
                             .background(
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
-                                        (viewModel.selectedCoinState.selectedCoin?.id == coin.id)
+                                        (viewModel.selectedCoin?.id == coin.id)
                                             ? Color.theme.green
                                             : Color.clear
                                     )
                             )
                     }
                 }
-                .padding(.vertical, 4)
                 .padding(.leading)
             }
             .onAppear {
-                print("DEBUG! viewModel.selectedCoinState.selectedCoin?.id: \(viewModel.selectedCoinState.selectedCoin?.id)")
-                if let selectedCoinID = viewModel.selectedCoinState.selectedCoin?.id {
+                if let selectedCoinID = viewModel.selectedCoin?.id {
                     scrollView.scrollTo(selectedCoinID, anchor: .center)
                 }
             }
         }
+    }
+
+    var coinDetailStatisticsView: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(viewModel.detailStatistics) { stat in
+                    StatisticView(stat: stat)
+                }
+            }
+            .frame(maxHeight: 54)
+        }
+    }
+
+    var coinInputAmountView: some View {
+        HStack {
+            TextField(LocalizationKey.amountHolding.localizedString, text: $quantityText)
+                .font(.chakraPetch(.medium, size: 14))
+                .padding(12)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(Color.theme.accent)
+                )
+                .keyboardType(.decimalPad)
+                .focused($quantityIsFocused)
+            Text("= \(currentValue.asCurrencyWith2Decimals())")
+                .font(.chakraPetch(.medium, size: 15))
+                .padding(12)
+                .lineLimit(1)
+                .foregroundStyle(Color.theme.accent)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(Color.theme.accent)
+                )
+        }
+    }
+
+    var saveButtonView: some View {
+        Button {
+            updatePortfolio()
+        } label: {
+            Text(LocalizationKey.saveButton.localizedString)
+                .foregroundStyle(Color.theme.background)
+                .font(.chakraPetch(.bold, size: 20))
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: 40)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.theme.green)
+                )
+        }
+        .disabled(quantityText.isEmpty ? true : false)
     }
 }
 
@@ -128,7 +195,7 @@ private extension EditPortfolioView {
 
 private extension EditPortfolioView {
     func updateSelectedCoin(coin: Coin) {
-        viewModel.selectedCoinState.selectedCoin = coin
+        viewModel.selectedCoin = coin
         if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
            let amount = portfolioCoin.currentHoldings {
             quantityText = "\(amount)"
@@ -136,11 +203,28 @@ private extension EditPortfolioView {
             quantityText = ""
         }
     }
+
+    func updatePortfolio() {
+        guard let coin = viewModel.selectedCoin,
+              let amount = Double(quantityText)
+        else { return }
+        viewModel.updatePortfolio(coin: coin, amount: amount)
+        withAnimation(.easeIn) {
+            removeSelectedCoin()
+        }
+        quantityIsFocused = false
+        if singleCoinDisplay {
+            dismiss()
+        }
+    }
+
+    func removeSelectedCoin() {
+        viewModel.selectedCoin = nil
+        quantityText = ""
+        viewModel.searchText = ""
+    }
 }
 
-// TODO:  fix
-
-//#Preview {
-//    EditPortfolioView()
-//        .environmentObject(HomeViewModel())
-//}
+#Preview {
+    EditPortfolioView(singleCoin: CoinsStubs.bitcoin)
+}
