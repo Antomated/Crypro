@@ -68,7 +68,7 @@
 // MARK: - Information
 
 "information" = "Information";
-"appDescription" = "The application displays information and statistics for top crypto coins with portfolio tracking functionality.";
+"appDescription" = "Cryptocurrency tracker\n\n • SwiftUI\n • Combine \n • CoreData\n • MVVM";
 "visitGitHub" = "View GitHub";
 "settings" = "Settings";
 "darkTheme" = "Dark Appearance";

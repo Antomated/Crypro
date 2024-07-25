@@ -28,7 +28,7 @@ The app supports both dark and light modes for a comfortable viewing experience.
 
 * Market: View the top coins, latest prices and market trends.
 * Portfolio: Add, edit and track your investments and see their performance.
-* Details: Get detailed information about each cryptocurrency and quickly add or edit it to your portfolio.
+* Details: Get detailed information about each cryptocurrency and quickly add it to your portfolio.
 
 ## Demo
 
