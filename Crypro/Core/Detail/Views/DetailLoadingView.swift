@@ -9,13 +9,17 @@ import SwiftUI
 
 struct DetailLoadingView: View {
     var coin: Coin?
-    private(set) var portfolioDataService: PortfolioDataServiceProtocol
-    private(set) var networkManager: NetworkServiceProtocol
+    let portfolioDataService: PortfolioDataServiceProtocol
+    let coinImageService: CoinImageServiceProtocol
+    let coinDetailService: CoinDetailsServiceProtocol
 
     var body: some View {
         ZStack {
             if let coin = coin {
-                DetailView(coin: coin, portfolioDataService: portfolioDataService, networkManager: networkManager)
+                DetailView(coin: coin,
+                           portfolioDataService: portfolioDataService,
+                           coinDetailService: coinDetailService,
+                           coinImageService: coinImageService)
             }
         }
     }

@@ -18,21 +18,24 @@ final class HomeViewModel: ObservableObject {
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
     @Published var selectedCoin: Coin?
+    private var cancellables = Set<AnyCancellable>()
     private let coinDataService: CoinDataServiceProtocol
     private let marketDataService: MarketDataServiceProtocol
-    private(set) var portfolioDataService: PortfolioDataServiceProtocol
-    private(set) var networkManager: NetworkServiceProtocol
-    private var cancellables = Set<AnyCancellable>()
+    let portfolioDataService: PortfolioDataServiceProtocol
+    let coinImageService: CoinImageServiceProtocol
+    let coinDetailsService: CoinDetailsServiceProtocol
 
     init(
-        networkManager: NetworkServiceProtocol,
+        coinImageService: CoinImageServiceProtocol,
         coinDataService: CoinDataServiceProtocol,
         marketDataService: MarketDataServiceProtocol,
+        coinDetailsService: CoinDetailsServiceProtocol,
         portfolioDataService: PortfolioDataServiceProtocol
     ) {
-        self.networkManager = networkManager
+        self.coinImageService = coinImageService
         self.coinDataService = coinDataService
         self.marketDataService = marketDataService
+        self.coinDetailsService = coinDetailsService
         self.portfolioDataService = portfolioDataService
         addSubscribers()
         setupLoadingSubscriber()
@@ -137,8 +140,8 @@ private extension HomeViewModel {
 
         return coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
-            coin.symbol.lowercased().contains(lowerCasedText) ||
-            coin.id.lowercased().contains(lowerCasedText)
+                coin.symbol.lowercased().contains(lowerCasedText) ||
+                coin.id.lowercased().contains(lowerCasedText)
         }
     }
 

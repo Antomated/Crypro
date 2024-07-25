@@ -22,10 +22,12 @@ struct DetailView: View {
 
     init(coin: Coin,
          portfolioDataService: PortfolioDataServiceProtocol,
-         networkManager: NetworkServiceProtocol) {
+         coinDetailService: CoinDetailsServiceProtocol,
+         coinImageService: CoinImageServiceProtocol) {
         _viewModel = .init(wrappedValue: DetailViewModel(coin: coin,
                                                          portfolioDataService: portfolioDataService,
-                                                         networkManager: networkManager))
+                                                         coinDetailService: coinDetailService,
+                                                         coinImageService: coinImageService))
     }
 
     var body: some View {
@@ -74,8 +76,8 @@ struct DetailView: View {
         }
         .sheet(isPresented: $showEditPortfolioView, content: {
             EditPortfolioView(singleCoin: viewModel.coin,
-                              networkManager: viewModel.networkManager,
-                              portfolioDataService: viewModel.portfolioDataService)
+                              portfolioDataService: viewModel.portfolioDataService,
+                              coinImageService: viewModel.coinImageService)
         })
         .alert(item: $viewModel.error) { error in
             Alert(
@@ -116,7 +118,7 @@ private extension DetailView {
             Text(viewModel.coin.symbol.uppercased())
                 .font(.chakraPetch(.medium, size: 16))
                 .foregroundStyle(Color.theme.secondaryText)
-            CoinImageView(coin: viewModel.coin, networkManager: viewModel.networkManager)
+            CoinImageView(coin: viewModel.coin, coinImageService: viewModel.coinImageService)
                 .frame(width: 25, height: 25)
         }
     }
@@ -220,7 +222,9 @@ private extension DetailView {
     NavigationView {
         DetailView(coin: CoinsStubs.bitcoin,
                    portfolioDataService: PortfolioDataService(),
-                   networkManager: NetworkServiceManager())
+                   coinDetailService: CoinDetailsService(networkManager: NetworkManager()),
+                   coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                      imageDataProvider: ImageDataProvider()))
             .preferredColorScheme(.dark)
     }
 }

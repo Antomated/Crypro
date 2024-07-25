@@ -18,14 +18,18 @@ struct CryproApp: App {
     }
 
     init() {
-        let networkManager = NetworkServiceManager()
+        let networkManager = NetworkManager()
+        let imageDataProvider = ImageDataProvider()
+        let portfolioDataService = PortfolioDataService()
         let coinDataService = CoinDataService(networkManager: networkManager)
         let marketDataService = MarketDataService(networkManager: networkManager)
-        let portfolioDataService = PortfolioDataService()
+        let coinImageService = CoinImageService(networkManager: networkManager, imageDataProvider: imageDataProvider)
+        let coinDetailsService = CoinDetailsService(networkManager: networkManager)
         _homeViewModel = StateObject(wrappedValue: HomeViewModel(
-            networkManager: networkManager,
+            coinImageService: coinImageService,
             coinDataService: coinDataService,
             marketDataService: marketDataService,
+            coinDetailsService: coinDetailsService,
             portfolioDataService: portfolioDataService
         ))
     }

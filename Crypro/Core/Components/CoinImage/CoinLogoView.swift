@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CoinLogoView: View {
     let coin: Coin
-    private(set) var networkManager: NetworkServiceProtocol
+    let coinImageService: CoinImageServiceProtocol
 
     var body: some View {
         VStack {
-            CoinImageView(coin: coin, networkManager: networkManager)
+            CoinImageView(coin: coin, coinImageService: coinImageService)
                 .frame(width: 50, height: 50)
 
             Text(coin.symbol.uppercased())
@@ -32,5 +32,7 @@ struct CoinLogoView: View {
 }
 
 #Preview {
-    CoinLogoView(coin: CoinsStubs.bitcoin, networkManager: NetworkServiceManager())
+    CoinLogoView(coin: CoinsStubs.bitcoin,
+                 coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                    imageDataProvider: ImageDataProvider()))
 }

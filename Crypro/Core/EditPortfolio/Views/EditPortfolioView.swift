@@ -5,8 +5,8 @@
 //  Created by Antomated on 04.04.2024.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct EditPortfolioView: View {
     @StateObject var viewModel: EditPortfolioViewModel
@@ -31,25 +31,25 @@ struct EditPortfolioView: View {
 
     init(
         allCoins: [Coin],
-        networkManager: NetworkServiceProtocol,
-        portfolioDataService: PortfolioDataServiceProtocol
+        portfolioDataService: PortfolioDataServiceProtocol,
+        coinImageService: CoinImageServiceProtocol
     ) {
         _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: nil,
                                                                       allCoins: allCoins,
-                                                                      networkManager: networkManager,
-                                                                      portfolioDataService: portfolioDataService))
+                                                                      portfolioDataService: portfolioDataService,
+                                                                      coinImageService: coinImageService))
         singleCoinDisplay = false
     }
 
     init(
         singleCoin: Coin,
-        networkManager: NetworkServiceProtocol,
-        portfolioDataService: PortfolioDataServiceProtocol
+        portfolioDataService: PortfolioDataServiceProtocol,
+        coinImageService: CoinImageServiceProtocol
     ) {
         _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: singleCoin,
                                                                       allCoins: [singleCoin],
-                                                                      networkManager: networkManager,
-                                                                      portfolioDataService: portfolioDataService))
+                                                                      portfolioDataService: portfolioDataService,
+                                                                      coinImageService: coinImageService))
         singleCoinDisplay = true
     }
 
@@ -124,7 +124,7 @@ private extension EditPortfolioView {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 10) {
                     ForEach(searchListCoins) { coin in
-                        CoinLogoView(coin: coin, networkManager: viewModel.networkManager)
+                        CoinLogoView(coin: coin, coinImageService: viewModel.coinImageService)
                             .frame(width: 75)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 8)
@@ -140,8 +140,8 @@ private extension EditPortfolioView {
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
                                         (viewModel.selectedCoin?.id == coin.id)
-                                        ? Color.theme.green
-                                        : Color.clear
+                                            ? Color.theme.green
+                                            : Color.clear
                                     )
                             )
                     }
@@ -259,6 +259,7 @@ private extension EditPortfolioView {
 
 #Preview {
     EditPortfolioView(singleCoin: CoinsStubs.bitcoin,
-                      networkManager: NetworkServiceManager(),
-                      portfolioDataService: PortfolioDataService())
+                      portfolioDataService: PortfolioDataService(),
+                      coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                         imageDataProvider: ImageDataProvider()))
 }

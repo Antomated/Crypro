@@ -1,5 +1,5 @@
 //
-//  NetworkServiceManager.swift
+//  NetworkManager.swift
 //  Crypro
 //
 //  Created by Antomated on 02.04.2024.
@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class NetworkServiceManager: NetworkServiceProtocol {
+final class NetworkManager: NetworkManagerProtocol {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder = JSONDecoder()) {
@@ -32,7 +32,7 @@ final class NetworkServiceManager: NetworkServiceProtocol {
             .mapError { error in
                 (error as? NetworkError) ?? .unknown
             }
-            .decode(type: T.self, decoder: self.decoder)
+            .decode(type: T.self, decoder: decoder)
             .mapError { _ in .decodingError }
             .eraseToAnyPublisher()
     }

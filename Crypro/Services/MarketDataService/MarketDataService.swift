@@ -11,10 +11,10 @@ import Foundation
 final class MarketDataService {
     @Published var marketData: MarketData?
     @Published var error: NetworkError?
-    private let networkManager: NetworkServiceProtocol
+    private let networkManager: NetworkManagerProtocol
     private var marketDataSubscription: AnyCancellable?
 
-    init(networkManager: NetworkServiceProtocol) {
+    init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
         getData()
     }

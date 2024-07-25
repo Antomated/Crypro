@@ -10,5 +10,5 @@ import Combine
 protocol CoinDetailsServiceProtocol {
     var coinDetailsPublisher: Published<CoinDetails?>.Publisher { get }
     var errorPublisher: Published<NetworkError?>.Publisher { get }
-    func getCoinDetails()
+    func getCoinDetails(_: Coin)
 }

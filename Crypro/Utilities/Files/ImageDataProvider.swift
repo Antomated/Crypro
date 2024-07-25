@@ -4,14 +4,10 @@
 //
 //  Created by Antomated on 03.04.2024.
 //
-// TODO: remove singleton
 
 import Foundation
 
-final class ImageDataProvider {
-    static let shared = ImageDataProvider()
-    private init() {}
-
+final class ImageDataProvider: ImageDataProviderProtocol {
     func saveImage(data: Data, imageName: String, folderName: String) {
         createFolderIfNeeded(folderName: folderName)
         guard let url = getURLForImage(imageName: imageName, folderName: folderName) else { return }

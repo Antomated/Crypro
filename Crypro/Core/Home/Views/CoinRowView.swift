@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CoinRowView: View {
+    private let rightColumnWidthToScreenRatio: CGFloat = 3.5
     let coin: Coin
     let showHoldingsColumn: Bool
-    private let rightColumnWidthToScreenRatio: CGFloat = 3.5
-    private(set) var networkManager: NetworkServiceProtocol
+    let coinImageService: CoinImageServiceProtocol
 
     var marketCapDisplay: String {
         if let totalVolume = coin.totalVolume {
@@ -41,7 +41,7 @@ private extension CoinRowView {
                 .font(.chakraPetch(.regular, size: 12))
                 .foregroundColor(Color.theme.secondaryText)
                 .frame(minWidth: 30)
-            CoinImageView(coin: coin, networkManager: networkManager)
+            CoinImageView(coin: coin, coinImageService: coinImageService)
                 .frame(width: 30, height: 30)
             VStack(alignment: .leading, spacing: 0) {
                 Text(coin.symbol.uppercased())
@@ -96,5 +96,7 @@ private extension CoinRowView {
 }
 
 #Preview {
-    CoinRowView(coin: CoinsStubs.bitcoin, showHoldingsColumn: true, networkManager: NetworkServiceManager())
+    CoinRowView(coin: CoinsStubs.bitcoin, showHoldingsColumn: true,
+                coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                   imageDataProvider: ImageDataProvider()))
 }

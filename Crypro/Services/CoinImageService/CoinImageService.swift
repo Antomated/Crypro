@@ -11,12 +11,13 @@ import Foundation
 final class CoinImageService {
     @Published var imageDataDict: [String: Data] = [:]
     private lazy var coinImagesFolder = String(describing: type(of: self))
-    private let imageProvider = ImageDataProvider.shared
     private var imageSubscriptions: [String: AnyCancellable] = [:]
-    private let networkManager: NetworkServiceProtocol
+    private let networkManager: NetworkManagerProtocol
+    private let imageDataProvider: ImageDataProviderProtocol
 
-    init(networkManager: NetworkServiceProtocol) {
+    init(networkManager: NetworkManagerProtocol, imageDataProvider: ImageDataProviderProtocol) {
         self.networkManager = networkManager
+        self.imageDataProvider = imageDataProvider
     }
 
     deinit {
@@ -32,7 +33,7 @@ extension CoinImageService: CoinImageServiceProtocol {
     func getCoinImage(for coin: Coin) {
         let imageName = coin.id
         AppLogger.log(tag: .debug, "Attempting to get image for coin:", imageName)
-        if let imageData = imageProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
+        if let imageData = imageDataProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
             AppLogger.log(tag: .debug, "Image found in provider for coin:", imageName)
             imageDataDict[imageName] = imageData
         } else {
@@ -67,7 +68,11 @@ private extension CoinImageService {
                     case .finished:
                         AppLogger.log(tag: .debug, "Image download finished for coin:", imageName)
                     case let .failure(error):
-                        AppLogger.log(tag: .error, "Image download failed for coin:", imageName, "with error:", error.localizedDescription)
+                        AppLogger.log(tag: .error,
+                                      "Image download failed for coin:",
+                                      imageName,
+                                      "with error:",
+                                      error.localizedDescription)
                     }
                     self?.imageSubscriptions[imageName]?.cancel()
                     self?.imageSubscriptions.removeValue(forKey: imageName)
@@ -75,9 +80,9 @@ private extension CoinImageService {
                 receiveValue: { [weak self] downloadedImage in
                     guard let self = self else { return }
                     self.imageDataDict[imageName] = downloadedImage
-                    self.imageProvider.saveImage(data: downloadedImage,
-                                                 imageName: imageName,
-                                                 folderName: self.coinImagesFolder)
+                    self.imageDataProvider.saveImage(data: downloadedImage,
+                                                     imageName: imageName,
+                                                     folderName: self.coinImagesFolder)
                     AppLogger.log(tag: .debug, "Image downloaded and saved for coin:", imageName)
                 }
             )

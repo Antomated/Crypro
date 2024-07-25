@@ -5,8 +5,8 @@
 //  Created by Antomated on 23.07.2024.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 final class EditPortfolioViewModel: ObservableObject {
     @Published var searchText: String = ""
@@ -14,23 +14,23 @@ final class EditPortfolioViewModel: ObservableObject {
     @Published var portfolioCoins: [Coin] = []
     @Published var filteredCoins: [Coin] = []
     @Published var selectedCoin: Coin?
-    private(set) var networkManager: NetworkServiceProtocol
+    private var cancellables = Set<AnyCancellable>()
     private let allCoins: [Coin]
     private let portfolioDataService: PortfolioDataServiceProtocol
-    private var cancellables = Set<AnyCancellable>()
     private let maxCurrentValue: Double = 100_000_000_000
+    let coinImageService: CoinImageServiceProtocol
 
     init(
         selectedCoin: Coin?,
         allCoins: [Coin],
-        networkManager: NetworkServiceProtocol,
-        portfolioDataService: PortfolioDataServiceProtocol
+        portfolioDataService: PortfolioDataServiceProtocol,
+        coinImageService: CoinImageServiceProtocol
     ) {
         self.selectedCoin = selectedCoin
         self.allCoins = allCoins
-        self.filteredCoins = allCoins
-        self.networkManager = networkManager
+        filteredCoins = allCoins
         self.portfolioDataService = portfolioDataService
+        self.coinImageService = coinImageService
         addSubscribers()
     }
 
@@ -139,8 +139,8 @@ private extension EditPortfolioViewModel {
         let lowerCasedText = query.lowercased()
         var updatedCoins = coins.filter { coin in
             coin.name.lowercased().contains(lowerCasedText) ||
-            coin.symbol.lowercased().contains(lowerCasedText) ||
-            coin.id.lowercased().contains(lowerCasedText)
+                coin.symbol.lowercased().contains(lowerCasedText) ||
+                coin.id.lowercased().contains(lowerCasedText)
         }
         updatedCoins.sort { $0.rank < $1.rank }
         return updatedCoins
