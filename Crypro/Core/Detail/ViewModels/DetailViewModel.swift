@@ -87,7 +87,7 @@ private extension DetailViewModel {
         let priceStat = Statistic(title: LocalizationKey.detailsCurrentPrice.localizedString,
                                   value: price, percentageChange: pricePercentChange)
 
-        let marketCap = "$ " + (coin.marketCap?.formattedWithAbbreviations() ?? "")
+        let marketCap = coin.marketCap?.asCurrencyWithAbbreviations() ?? ""
         let marketCapChangePercentage = coin.marketCapChangePercentage24H
         let marketCapStat = Statistic(title: LocalizationKey.marketCapitalization.localizedString,
                                       value: marketCap, percentageChange: marketCapChangePercentage)
@@ -96,7 +96,7 @@ private extension DetailViewModel {
         let rankStat = Statistic(title: LocalizationKey.rank.localizedString,
                                  value: rank)
 
-        let volume = "$ " + (coin.totalVolume?.formattedWithAbbreviations() ?? "")
+        let volume = coin.totalVolume?.asCurrencyWithAbbreviations() ?? ""
         let volumeStat = Statistic(title: LocalizationKey.volume.localizedString,
                                    value: volume)
 
@@ -119,7 +119,7 @@ private extension DetailViewModel {
         let priceChangeStat = Statistic(title: LocalizationKey.priceChange24h.localizedString,
                                         value: priceChange, percentageChange: pricePercentChange)
 
-        let marketCapChange = "$ " + (coin.marketCapChange24H?.formattedWithAbbreviations() ?? "")
+        let marketCapChange = coin.marketCapChange24H?.asCurrencyWithAbbreviations() ?? ""
         let marketCapChangePercentage = coin.marketCapChangePercentage24H
         let marketCapChangeStat = Statistic(title: LocalizationKey.marketCapChange24h.localizedString,
                                             value: marketCapChange, percentageChange: marketCapChangePercentage)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct EditPortfolioView: View {
     @StateObject var viewModel: EditPortfolioViewModel
@@ -186,7 +187,13 @@ private extension EditPortfolioView {
                 )
                 .keyboardType(.decimalPad)
                 .focused($quantityIsFocused)
-            Text("= \(currentValue.asCurrencyWith2Decimals())")
+                .onReceive(Just(quantityText)) { newValue in
+                    let filtered = viewModel.formatQuantityText(newValue, currentValue: currentValue)
+                    if filtered != newValue {
+                        self.quantityText = filtered
+                    }
+                }
+            Text("= \(currentValue.asCurrencyWithAbbreviations())")
                 .font(.chakraPetch(.medium, size: 15))
                 .padding(12)
                 .lineLimit(1)

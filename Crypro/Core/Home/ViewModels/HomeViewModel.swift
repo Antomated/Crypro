@@ -191,7 +191,7 @@ private extension HomeViewModel {
         let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
         let portfolio = Statistic(
             title: LocalizationKey.portfolioValue.localizedString,
-            value: portfolioValue.formattedWithAbbreviations(),
+            value: portfolioValue.asCurrencyWithAbbreviations(),
             percentageChange: percentageChange
         )
 

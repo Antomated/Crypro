@@ -18,6 +18,7 @@ final class EditPortfolioViewModel: ObservableObject {
     private let allCoins: [Coin]
     private let portfolioDataService: PortfolioDataServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    private let maxCurrentValue: Double = 100_000_000_000
 
     init(
         selectedCoin: Coin?,
@@ -37,7 +38,48 @@ final class EditPortfolioViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
 
-    private func addSubscribers() {
+    func formatQuantityText(_ text: String, currentValue: Double) -> String {
+        var newText = text.replacingOccurrences(of: ",", with: ".")
+        let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+        newText = String(newText.unicodeScalars.filter { allowedCharacters.contains($0) })
+
+        // Handle multiple dots
+        let dotCount = newText.filter { $0 == "." }.count
+        if dotCount > 1 {
+            let integerPart = newText.prefix(while: { $0 != "." })
+            let fractionalPart = newText.drop(while: { $0 != "." }).dropFirst().filter { $0 != "." }
+            newText = String(integerPart) + "." + String(fractionalPart)
+        }
+
+        // Remove leading zeros, but allow "0."
+        if newText.hasPrefix("0"), newText.count > 1, newText[newText.index(after: newText.startIndex)] != "." {
+            newText = "0" + newText.drop(while: { $0 == "0" })
+        }
+
+        // Ensure string starts with "0" if it begins with a dot
+        if newText.hasPrefix(".") {
+            newText = "0" + newText
+        }
+
+        // Limit to 4 decimal places
+        if let dotIndex = newText.firstIndex(of: ".") {
+            let decimalPart = newText[dotIndex...]
+            if decimalPart.count > 5 { // including the dot itself
+                newText = String(newText.prefix(dotIndex.utf16Offset(in: newText) + 5))
+            }
+        }
+
+        // Limit to 10,000,000 in value
+        if let amount = Double(newText), currentValue > maxCurrentValue {
+            newText = String(format: "%.4f", maxCurrentValue / (selectedCoin?.currentPrice ?? 1))
+        }
+
+        return newText
+    }
+}
+
+private extension EditPortfolioViewModel {
+    func addSubscribers() {
         $selectedCoin
             .map(getCoinDetailStatistics)
             .sink { [weak self] stats in
@@ -68,9 +110,7 @@ final class EditPortfolioViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-}
 
-private extension EditPortfolioViewModel {
     func getCoinDetailStatistics(coin: Coin?) -> [Statistic] {
         guard let coin else { return [] }
         return [

@@ -15,7 +15,7 @@ struct CoinRowView: View {
 
     var marketCapDisplay: String {
         if let totalVolume = coin.totalVolume {
-            return "$ " + totalVolume.formattedWithAbbreviations()
+            return totalVolume.asCurrencyWithAbbreviations()
         } else {
             return LocalizationKey.notAvailable.localizedString
         }
@@ -64,7 +64,7 @@ private extension CoinRowView {
     var centralColumn: some View {
         VStack(alignment: .trailing) {
             if showHoldingsColumn {
-                Text(coin.currentHoldingsValue.formattedWithAbbreviations())
+                Text(coin.currentHoldingsValue.asCurrencyWithAbbreviations())
                     .font(.chakraPetch(.bold, size: 13))
                 Text(coin.formattedCurrentHoldings)
                     .font(.chakraPetch(.regular, size: 12))

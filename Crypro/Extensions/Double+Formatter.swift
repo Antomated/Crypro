@@ -118,4 +118,12 @@ extension Double {
             return "\(sign)\(self)"
         }
     }
+
+    /// Converts a Double into a Currency with abbreviation
+    ///  ```
+    ///   Convert 12345678901234 to "$ 12.34 Tr"
+    ///  ```
+    func asCurrencyWithAbbreviations() -> String {
+        return "$ " + self.formattedWithAbbreviations()
+    }
 }

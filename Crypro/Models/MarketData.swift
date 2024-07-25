@@ -23,12 +23,12 @@ struct MarketData: Decodable {
 
     var marketCap: String {
         guard let item = totalMarketCap.first(where: { $0.key == "usd" }) else { return "" }
-        return "$ " + item.value.formattedWithAbbreviations()
+        return item.value.asCurrencyWithAbbreviations()
     }
 
     var volume: String {
         guard let item = totalVolume.first(where: { $0.key == "usd" }) else { return "" }
-        return "$ " + item.value.formattedWithAbbreviations()
+        return item.value.asCurrencyWithAbbreviations()
     }
 
     var btcDominance: String {
