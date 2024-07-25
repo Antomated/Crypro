@@ -196,8 +196,6 @@
 				3A27B6C72BBB5C3200FCC327 /* HomeView.swift */,
 				3AA9EAA12C2387E400908F11 /* HeaderView.swift */,
 				3A8740082BBB71CB004D1BCB /* CoinRowView.swift */,
-				3ABA14EF2BEAE0620086056C /* LoaderView.swift */,
-				3ABA14F12BEAE08A0086056C /* BlurView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +216,7 @@
 				3A27B6CC2BBB622A00FCC327 /* CircleButton */,
 				3A9B6BDC2BBCCE1600CD40D1 /* SearchBar */,
 				3A9B6BD22BBCC22F00CD40D1 /* CoinImage */,
+				3A33E10F2C530CB1006C6786 /* Loader */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -253,6 +252,24 @@
 				3A776D9F2C13B35500B3B574 /* DetailLoadingView.swift */,
 				3A2AFB162BC0B3C40001277F /* DetailView.swift */,
 				3A85F8B72BC89C4600E18F26 /* ChartView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A33E10F2C530CB1006C6786 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				3ABA14EF2BEAE0620086056C /* LoaderView.swift */,
+				3ABA14F12BEAE08A0086056C /* BlurView.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		3A33E1102C530CF5006C6786 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A4E46682BBE1EA4002B0687 /* LaunchView.swift */,
+				3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,8 +332,7 @@
 		3A4E46672BBE1E97002B0687 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				3A4E46682BBE1EA4002B0687 /* LaunchView.swift */,
-				3ABC9F502BD480B8002D944F /* LaunchScreen.storyboard */,
+				3A33E1102C530CF5006C6786 /* Views */,
 			);
 			path = Launch;
 			sourceTree = "<group>";

@@ -53,7 +53,8 @@ struct SettingsView: View {
 private extension SettingsView {
     var appSection: some View {
         Section {
-            HStack(spacing: 16) {
+            HStack(spacing: 4) {
+                Spacer()
                 VStack(alignment: .center, content: {
                     Image(.logo)
                         .resizable()
@@ -63,6 +64,7 @@ private extension SettingsView {
                         .tracking(4)
                         .foregroundStyle(Color.launch.accent)
                 })
+                Spacer()
                 VStack(alignment: .center) {
                     Spacer()
                     Text(LocalizationKey.appDescription.localizedString)
@@ -72,7 +74,7 @@ private extension SettingsView {
                     Spacer()
                     Link(destination: personalURL) {
                         Text(LocalizationKey.visitGitHub.localizedString)
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 150)
                             .font(.chakraPetch(.bold, size: 16))
                             .tracking(2)
                             .foregroundStyle(Color.theme.accent)
@@ -80,10 +82,10 @@ private extension SettingsView {
                             .background(
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color.secondary.opacity(0.25))
-                                    .frame(maxWidth: .infinity)
                             )
                     }
                 }
+                Spacer()
             }
             .padding(.vertical)
         }
