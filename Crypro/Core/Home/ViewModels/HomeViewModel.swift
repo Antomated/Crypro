@@ -18,14 +18,14 @@ final class HomeViewModel: ObservableObject {
     @Published var showLaunchView: Bool = false
     @Published var isLoading: Bool = false
     @Published var selectedCoin: Coin?
-    private let coinDataService: CoinDataService
-    private let marketDataService: MarketDataService
-    private(set) var portfolioDataService: PortfolioDataService
-    private(set) var networkManager: NetworkManaging
+    private let coinDataService: CoinDataServiceProtocol
+    private let marketDataService: MarketDataServiceProtocol
+    private(set) var portfolioDataService: PortfolioDataServiceProtocol
+    private(set) var networkManager: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
     init(
-        networkManager: NetworkManaging,
+        networkManager: NetworkServiceProtocol,
         coinDataService: CoinDataService,
         marketDataService: MarketDataService,
         portfolioDataService: PortfolioDataService
@@ -59,7 +59,7 @@ final class HomeViewModel: ObservableObject {
 
 private extension HomeViewModel {
     func addSubscribers() {
-        coinDataService.$allCoins
+        coinDataService.allCoinsPublisher
             .combineLatest($sortOption)
             .map { coins, sortOption in
                 self.filterAndSortCoins(coins, query: self.searchText, sortOption: sortOption)
@@ -72,7 +72,7 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        coinDataService.$allCoins
+        coinDataService.allCoinsPublisher
             .combineLatest($searchText, $sortOption)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .map(filterAndSortCoins)
@@ -83,7 +83,7 @@ private extension HomeViewModel {
             .store(in: &cancellables)
 
         $allCoins
-            .combineLatest(portfolioDataService.$savedEntities)
+            .combineLatest(portfolioDataService.savedEntitiesPublisher)
             .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] coins in
                 guard let self else { return }
@@ -91,7 +91,7 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        marketDataService.$marketData
+        marketDataService.marketDataPublisher
             .combineLatest($portfolioCoins)
             .map(mapGlobalAndSecondaryMarketData)
             .sink { [weak self] stats in
@@ -101,8 +101,8 @@ private extension HomeViewModel {
             }
             .store(in: &cancellables)
 
-        coinDataService.$error
-            .merge(with: marketDataService.$error)
+        coinDataService.errorPublisher
+            .merge(with: marketDataService.errorPublisher)
             .compactMap { $0?.errorDescription }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] errorMessage in
@@ -191,7 +191,7 @@ private extension HomeViewModel {
         let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
         let portfolio = Statistic(
             title: LocalizationKey.portfolioValue.localizedString,
-            value: portfolioValue.asCurrencyWith2Decimals(),
+            value: portfolioValue.formattedWithAbbreviations(),
             percentageChange: percentageChange
         )
 

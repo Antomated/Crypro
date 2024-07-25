@@ -30,8 +30,8 @@ struct EditPortfolioView: View {
 
     init(
         allCoins: [Coin],
-        networkManager: NetworkManaging,
-        portfolioDataService: PortfolioDataService
+        networkManager: NetworkServiceProtocol,
+        portfolioDataService: PortfolioDataServiceProtocol
     ) {
         _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: nil,
                                                                       allCoins: allCoins,
@@ -42,8 +42,8 @@ struct EditPortfolioView: View {
 
     init(
         singleCoin: Coin,
-        networkManager: NetworkManaging,
-        portfolioDataService: PortfolioDataService
+        networkManager: NetworkServiceProtocol,
+        portfolioDataService: PortfolioDataServiceProtocol
     ) {
         _viewModel = StateObject(wrappedValue: EditPortfolioViewModel(selectedCoin: singleCoin,
                                                                       allCoins: [singleCoin],
@@ -69,8 +69,8 @@ struct EditPortfolioView: View {
                             coinInputAmountView
                             saveButtonView
                         }
-                            .padding()
-                            .animation(.none, value: UUID())
+                        .padding()
+                        .animation(.none, value: UUID())
                     }
                 }
                 .background(Color.theme.background.ignoresSafeArea())
@@ -139,8 +139,8 @@ private extension EditPortfolioView {
                                 RoundedRectangle(cornerRadius: 8)
                                     .strokeBorder(
                                         (viewModel.selectedCoin?.id == coin.id)
-                                            ? Color.theme.green
-                                            : Color.clear
+                                        ? Color.theme.green
+                                        : Color.clear
                                     )
                             )
                     }
@@ -252,6 +252,6 @@ private extension EditPortfolioView {
 
 #Preview {
     EditPortfolioView(singleCoin: CoinsStubs.bitcoin,
-                      networkManager: NetworkManager(),
+                      networkManager: NetworkServiceManager(),
                       portfolioDataService: PortfolioDataService())
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct DetailLoadingView: View {
     var coin: Coin?
-    private(set) var portfolioDataService: PortfolioDataService
-    private(set) var networkManager: NetworkManaging
+    private(set) var portfolioDataService: PortfolioDataServiceProtocol
+    private(set) var networkManager: NetworkServiceProtocol
 
     var body: some View {
         ZStack {

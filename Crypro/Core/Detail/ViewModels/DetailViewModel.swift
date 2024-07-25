@@ -19,12 +19,12 @@ final class DetailViewModel: ObservableObject {
     @Published var twitterURL: String?
     @Published var telegramURL: String?
     @Published var hasLoadedData: Bool = false
-    private(set) var portfolioDataService: PortfolioDataService
-    private(set) var networkManager: NetworkManaging
-    private let coinDetailService: CoinDetailsService
+    private(set) var portfolioDataService: PortfolioDataServiceProtocol
+    private(set) var networkManager: NetworkServiceProtocol
+    private let coinDetailService: CoinDetailsServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
-    init(coin: Coin, portfolioDataService: PortfolioDataService, networkManager: NetworkManaging) {
+    init(coin: Coin, portfolioDataService: PortfolioDataServiceProtocol, networkManager: NetworkServiceProtocol) {
         self.coin = coin
         self.portfolioDataService = portfolioDataService
         self.networkManager = networkManager
@@ -37,7 +37,7 @@ final class DetailViewModel: ObservableObject {
 
 private extension DetailViewModel {
     func addSubscribers() {
-        coinDetailService.$coinDetails
+        coinDetailService.coinDetailsPublisher
             .combineLatest($coin)
             .map(mapDataToStatistics)
             .sink { [weak self] returnedArrays in
@@ -47,7 +47,7 @@ private extension DetailViewModel {
             }
             .store(in: &cancellables)
 
-        coinDetailService.$coinDetails
+        coinDetailService.coinDetailsPublisher
             .sink { [weak self] coinDetail in
                 guard let self else { return }
                 coinDescription = coinDetail?.readableDescription
@@ -59,7 +59,7 @@ private extension DetailViewModel {
             }
             .store(in: &cancellables)
 
-        coinDetailService.$error
+        coinDetailService.errorPublisher
             .compactMap { $0?.errorDescription }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] errorMessage in

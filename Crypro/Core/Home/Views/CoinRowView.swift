@@ -11,7 +11,7 @@ struct CoinRowView: View {
     let coin: Coin
     let showHoldingsColumn: Bool
     private let rightColumnWidthToScreenRatio: CGFloat = 3.5
-    private(set) var networkManager: NetworkManaging
+    private(set) var networkManager: NetworkServiceProtocol
 
     var marketCapDisplay: String {
         if let totalVolume = coin.totalVolume {
@@ -64,7 +64,7 @@ private extension CoinRowView {
     var centralColumn: some View {
         VStack(alignment: .trailing) {
             if showHoldingsColumn {
-                Text(coin.currentHoldingsValue.asCurrencyWith2Decimals())
+                Text(coin.currentHoldingsValue.formattedWithAbbreviations())
                     .font(.chakraPetch(.bold, size: 13))
                 Text(coin.formattedCurrentHoldings)
                     .font(.chakraPetch(.regular, size: 12))
@@ -96,5 +96,5 @@ private extension CoinRowView {
 }
 
 #Preview {
-    CoinRowView(coin: CoinsStubs.bitcoin, showHoldingsColumn: true, networkManager: NetworkManager())
+    CoinRowView(coin: CoinsStubs.bitcoin, showHoldingsColumn: true, networkManager: NetworkServiceManager())
 }

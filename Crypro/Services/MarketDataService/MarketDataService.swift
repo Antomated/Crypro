@@ -11,13 +11,22 @@ import Foundation
 final class MarketDataService {
     @Published var marketData: MarketData?
     @Published var error: NetworkError?
-    private let networkManager: NetworkManaging
+    private let networkManager: NetworkServiceProtocol
     private var marketDataSubscription: AnyCancellable?
 
-    init(networkManager: NetworkManaging) {
+    init(networkManager: NetworkServiceProtocol) {
         self.networkManager = networkManager
         getData()
     }
+}
+
+// MARK: - MarketDataServiceProtocol
+
+extension MarketDataService: MarketDataServiceProtocol {
+    var marketDataPublisher: Published<MarketData?>.Publisher { $marketData }
+    var marketDataPublished: Published<MarketData?> { _marketData }
+    var errorPublisher: Published<NetworkError?>.Publisher { $error }
+    var errorPublished: Published<NetworkError?> { _error }
 
     func getData() {
         marketDataSubscription = networkManager.download(from: .globalData, convertTo: GlobalCryptoMarketData.self)

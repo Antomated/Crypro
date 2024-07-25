@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoinLogoView: View {
     let coin: Coin
-    private(set) var networkManager: NetworkManaging
+    private(set) var networkManager: NetworkServiceProtocol
 
     var body: some View {
         VStack {
@@ -32,5 +32,5 @@ struct CoinLogoView: View {
 }
 
 #Preview {
-    CoinLogoView(coin: CoinsStubs.bitcoin, networkManager: NetworkManager())
+    CoinLogoView(coin: CoinsStubs.bitcoin, networkManager: NetworkServiceManager())
 }

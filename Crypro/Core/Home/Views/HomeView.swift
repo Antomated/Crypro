@@ -336,9 +336,9 @@ private extension HomeView {
 
 #Preview {
     NavigationView {
-        HomeView(viewModel: HomeViewModel(networkManager: NetworkManager(),
-                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
-                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
+        HomeView(viewModel: HomeViewModel(networkManager: NetworkServiceManager(),
+                                          coinDataService: CoinDataService(networkManager: NetworkServiceManager()),
+                                          marketDataService: MarketDataService(networkManager: NetworkServiceManager()),
                                           portfolioDataService: PortfolioDataService()))
             .navigationBarHidden(true)
     }

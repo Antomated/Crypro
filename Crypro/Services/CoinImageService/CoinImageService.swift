@@ -15,24 +15,35 @@ final class CoinImageService {
     private var imageSubscription: AnyCancellable?
     private let imageName: String
     private lazy var coinImagesFolder = String(describing: type(of: self))
-    private let networkManager: NetworkManaging
+    private let networkManager: NetworkServiceProtocol
 
-    init(coin: Coin, networkManager: NetworkManaging) {
+    init(coin: Coin, networkManager: NetworkServiceProtocol) {
         self.coin = coin
         self.networkManager = networkManager
         imageName = coin.id
         getCoinImage()
     }
+}
 
-    private func getCoinImage() {
+// MARK: - CoinImageServiceProtocol
+
+extension CoinImageService: CoinImageServiceProtocol {
+    var imageDataPublisher: Published<Data?>.Publisher { $imageData }
+    var imageDataPublished: Published<Data?> { _imageData }
+
+    func getCoinImage() {
         if let imageData = imageProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
             self.imageData = imageData
         } else {
             downloadCoinImage()
         }
     }
+}
 
-    private func downloadCoinImage() {
+// MARK: - Private methods
+
+private extension CoinImageService {
+    func downloadCoinImage() {
         guard let url = URL(string: coin.image) else { return }
         imageSubscription = networkManager.download(url: url)
             .first()

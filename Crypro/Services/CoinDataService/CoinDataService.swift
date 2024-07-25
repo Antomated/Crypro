@@ -11,13 +11,22 @@ import Foundation
 final class CoinDataService {
     @Published var allCoins: [Coin] = []
     @Published var error: NetworkError?
-    private let networkManager: NetworkManaging
+    private let networkManager: NetworkServiceProtocol
     private var coinSubscription: AnyCancellable?
 
-    init(networkManager: NetworkManaging) {
+    init(networkManager: NetworkServiceProtocol) {
         self.networkManager = networkManager
         getCoins()
     }
+}
+
+// MARK: - CoinDataServiceProtocol
+
+extension CoinDataService: CoinDataServiceProtocol {
+    var allCoinsPublisher: Published<[Coin]>.Publisher { $allCoins }
+    var allCoinsPublished: Published<[Coin]> { _allCoins }
+    var errorPublisher: Published<NetworkError?>.Publisher { $error }
+    var errorPublished: Published<NetworkError?> { _error }
 
     func getCoins() {
         coinSubscription = networkManager.download(from: .allCoins, convertTo: [Coin].self)

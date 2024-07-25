@@ -14,16 +14,16 @@ final class EditPortfolioViewModel: ObservableObject {
     @Published var portfolioCoins: [Coin] = []
     @Published var filteredCoins: [Coin] = []
     @Published var selectedCoin: Coin?
-    private(set) var networkManager: NetworkManaging
+    private(set) var networkManager: NetworkServiceProtocol
     private let allCoins: [Coin]
-    private let portfolioDataService: PortfolioDataService
+    private let portfolioDataService: PortfolioDataServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
     init(
         selectedCoin: Coin?,
         allCoins: [Coin],
-        networkManager: NetworkManaging,
-        portfolioDataService: PortfolioDataService
+        networkManager: NetworkServiceProtocol,
+        portfolioDataService: PortfolioDataServiceProtocol
     ) {
         self.selectedCoin = selectedCoin
         self.allCoins = allCoins
@@ -46,7 +46,7 @@ final class EditPortfolioViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        portfolioDataService.$savedEntities
+        portfolioDataService.savedEntitiesPublisher
             .map { savedEntities in
                 self.mapAllCoinsToPortfolioCoins(allCoins: self.allCoins, portfolioEntities: savedEntities)
             }

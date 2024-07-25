@@ -8,11 +8,10 @@
 import CoreData
 
 final class PortfolioDataService {
+    @Published var savedEntities = [Portfolio]()
     private let container: NSPersistentContainer
     private let containerName = "PortfolioContainer"
     private let entityName = "Portfolio"
-
-    @Published var savedEntities = [Portfolio]()
 
     init() {
         container = NSPersistentContainer(name: containerName)
@@ -25,9 +24,12 @@ final class PortfolioDataService {
     }
 }
 
-// MARK: - Internal methods
+// MARK: - PortfolioDataServiceProtocol
 
-extension PortfolioDataService {
+extension PortfolioDataService: PortfolioDataServiceProtocol {
+    var savedEntitiesPublisher: Published<[Portfolio]>.Publisher { $savedEntities }
+    var savedEntitiesPublished: Published<[Portfolio]> { _savedEntities }
+
     func updatePortfolio(coin: Coin, amount: Double) {
         if let entity = savedEntities.first(where: { $0.coinID == coin.id }) {
             if amount > 0 {
@@ -39,11 +41,7 @@ extension PortfolioDataService {
             add(coin: coin, amount: amount)
         }
     }
-}
 
-// MARK: - Private methods
-
-private extension PortfolioDataService {
     func getPortfolio() {
         let request = NSFetchRequest<Portfolio>(entityName: entityName)
         do {
@@ -52,7 +50,11 @@ private extension PortfolioDataService {
             AppLogger.log(tag: .error, "Error Fetching Portfolio Entities: \(error)")
         }
     }
+}
 
+// MARK: - Private methods
+
+private extension PortfolioDataService {
     func add(coin: Coin, amount: Double) {
         let entity = Portfolio(context: container.viewContext)
         entity.coinID = coin.id

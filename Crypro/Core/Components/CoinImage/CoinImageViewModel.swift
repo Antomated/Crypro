@@ -14,7 +14,7 @@ final class CoinImageViewModel: ObservableObject {
     private let dataService: CoinImageService
     private var cancellables = Set<AnyCancellable>()
 
-    init(coin: Coin, networkManager: NetworkManaging) {
+    init(coin: Coin, networkManager: NetworkServiceProtocol) {
         dataService = CoinImageService(coin: coin, networkManager: networkManager)
         isLoading = true
         addSubscribers()

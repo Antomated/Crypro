@@ -18,7 +18,7 @@ struct CryproApp: App {
     }
 
     init() {
-        let networkManager = NetworkManager()
+        let networkManager = NetworkServiceManager()
         let coinDataService = CoinDataService(networkManager: networkManager)
         let marketDataService = MarketDataService(networkManager: networkManager)
         let portfolioDataService = PortfolioDataService()

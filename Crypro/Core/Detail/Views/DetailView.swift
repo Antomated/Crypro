@@ -20,7 +20,9 @@ struct DetailView: View {
     ]
     private let spacing: CGFloat = 20
 
-    init(coin: Coin, portfolioDataService: PortfolioDataService, networkManager: NetworkManaging) {
+    init(coin: Coin,
+         portfolioDataService: PortfolioDataServiceProtocol,
+         networkManager: NetworkServiceProtocol) {
         _viewModel = .init(wrappedValue: DetailViewModel(coin: coin,
                                                          portfolioDataService: portfolioDataService,
                                                          networkManager: networkManager))
@@ -218,7 +220,7 @@ private extension DetailView {
     NavigationView {
         DetailView(coin: CoinsStubs.bitcoin,
                    portfolioDataService: PortfolioDataService(),
-                   networkManager: NetworkManager())
+                   networkManager: NetworkServiceManager())
             .preferredColorScheme(.dark)
     }
 }

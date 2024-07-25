@@ -1,5 +1,5 @@
 //
-//  NetworkManager.swift
+//  NetworkServiceManager.swift
 //  Crypro
 //
 //  Created by Antomated on 02.04.2024.
@@ -8,12 +8,7 @@
 import Combine
 import Foundation
 
-protocol NetworkManaging {
-    func download<T: Decodable>(from endpoint: CoingeckoEndpoint, convertTo: T.Type) -> AnyPublisher<T, NetworkError>
-    func download(url: URL) -> AnyPublisher<Data, Error>
-}
-
-final class NetworkManager: NetworkManaging {
+final class NetworkServiceManager: NetworkServiceProtocol {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder = JSONDecoder()) {
