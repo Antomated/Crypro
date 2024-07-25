@@ -70,7 +70,7 @@ final class EditPortfolioViewModel: ObservableObject {
         }
 
         // Limit to 10,000,000 in value
-        if let amount = Double(newText), currentValue > maxCurrentValue {
+        if currentValue > maxCurrentValue {
             newText = String(format: "%.4f", maxCurrentValue / (selectedCoin?.currentPrice ?? 1))
         }
 

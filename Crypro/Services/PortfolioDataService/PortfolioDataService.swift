@@ -28,7 +28,6 @@ final class PortfolioDataService {
 
 extension PortfolioDataService: PortfolioDataServiceProtocol {
     var savedEntitiesPublisher: Published<[Portfolio]>.Publisher { $savedEntities }
-    var savedEntitiesPublished: Published<[Portfolio]> { _savedEntities }
 
     func updatePortfolio(coin: Coin, amount: Double) {
         if let entity = savedEntities.first(where: { $0.coinID == coin.id }) {

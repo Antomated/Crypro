@@ -9,41 +9,37 @@ import Combine
 import Foundation
 
 final class CoinImageService {
-    @Published var imageData: Data?
-    private let coin: Coin
+    @Published var imageDataDict: [String: Data] = [:]
+    private lazy var coinImagesFolder = String(describing: type(of: self))
     private let imageProvider = ImageDataProvider.shared
     private var imageSubscription: AnyCancellable?
-    private let imageName: String
-    private lazy var coinImagesFolder = String(describing: type(of: self))
     private let networkManager: NetworkServiceProtocol
 
-    init(coin: Coin, networkManager: NetworkServiceProtocol) {
-        self.coin = coin
+    init(networkManager: NetworkServiceProtocol) {
         self.networkManager = networkManager
-        imageName = coin.id
-        getCoinImage()
     }
+
 }
 
 // MARK: - CoinImageServiceProtocol
 
 extension CoinImageService: CoinImageServiceProtocol {
-    var imageDataPublisher: Published<Data?>.Publisher { $imageData }
-    var imageDataPublished: Published<Data?> { _imageData }
-
-    func getCoinImage() {
+    func getCoinImage(for coin: Coin) {
+        let imageName = coin.id
         if let imageData = imageProvider.getImageData(imageName: imageName, folderName: coinImagesFolder) {
-            self.imageData = imageData
+            imageDataDict[imageName] = imageData
         } else {
-            downloadCoinImage()
+            downloadCoinImage(for: coin)
         }
     }
+
+    var imageDataPublisher: Published<[String: Data]>.Publisher { $imageDataDict }
 }
 
 // MARK: - Private methods
 
 private extension CoinImageService {
-    func downloadCoinImage() {
+    func downloadCoinImage(for coin: Coin) {
         guard let url = URL(string: coin.image) else { return }
         imageSubscription = networkManager.download(url: url)
             .first()
@@ -59,9 +55,10 @@ private extension CoinImageService {
                 },
                 receiveValue: { [weak self] downloadedImage in
                     guard let self else { return }
-                    self.imageData = downloadedImage
+                    let imageName = coin.id
+                    self.imageDataDict[imageName] = downloadedImage
                     self.imageProvider.saveImage(data: downloadedImage,
-                                                 imageName: self.imageName,
+                                                 imageName: imageName,
                                                  folderName: self.coinImagesFolder)
                 }
             )

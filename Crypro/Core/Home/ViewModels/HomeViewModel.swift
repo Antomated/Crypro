@@ -26,9 +26,9 @@ final class HomeViewModel: ObservableObject {
 
     init(
         networkManager: NetworkServiceProtocol,
-        coinDataService: CoinDataService,
-        marketDataService: MarketDataService,
-        portfolioDataService: PortfolioDataService
+        coinDataService: CoinDataServiceProtocol,
+        marketDataService: MarketDataServiceProtocol,
+        portfolioDataService: PortfolioDataServiceProtocol
     ) {
         self.networkManager = networkManager
         self.coinDataService = coinDataService

@@ -9,7 +9,6 @@ import Combine
 
 protocol PortfolioDataServiceProtocol {
     var savedEntitiesPublisher: Published<[Portfolio]>.Publisher { get }
-    var savedEntitiesPublished: Published<[Portfolio]> { get }
     func updatePortfolio(coin: Coin, amount: Double)
     func getPortfolio()
 }

@@ -24,9 +24,7 @@ final class CoinDataService {
 
 extension CoinDataService: CoinDataServiceProtocol {
     var allCoinsPublisher: Published<[Coin]>.Publisher { $allCoins }
-    var allCoinsPublished: Published<[Coin]> { _allCoins }
     var errorPublisher: Published<NetworkError?>.Publisher { $error }
-    var errorPublished: Published<NetworkError?> { _error }
 
     func getCoins() {
         coinSubscription = networkManager.download(from: .allCoins, convertTo: [Coin].self)

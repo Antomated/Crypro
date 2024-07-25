@@ -8,7 +8,6 @@
 import Foundation
 
 protocol CoinImageServiceProtocol {
-    var imageDataPublisher: Published<Data?>.Publisher { get }
-    var imageDataPublished: Published<Data?> { get }
-    func getCoinImage()
+    var imageDataPublisher: Published<[String: Data]>.Publisher { get }
+    func getCoinImage(for: Coin)
 }

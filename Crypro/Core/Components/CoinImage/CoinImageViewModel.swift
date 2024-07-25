@@ -11,21 +11,29 @@ import Foundation
 final class CoinImageViewModel: ObservableObject {
     @Published var coinImageData: Data?
     @Published var isLoading: Bool = true
-    private let dataService: CoinImageService
+    private let coinImageService: CoinImageServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    private let coinID: String
 
     init(coin: Coin, networkManager: NetworkServiceProtocol) {
-        dataService = CoinImageService(coin: coin, networkManager: networkManager)
+        self.coinID = coin.id
+        // TODO: move to root composition
+        coinImageService = CoinImageService(networkManager: networkManager)
         isLoading = true
         addSubscribers()
+        coinImageService.getCoinImage(for: coin)
     }
 
     private func addSubscribers() {
-        dataService.$imageData
-            .sink(receiveValue: { [weak self] image in
-                guard let self else { return }
-                isLoading = false
-                coinImageData = image
+        coinImageService.imageDataPublisher
+            .map { [weak self] imageDataDict -> Data? in
+                guard let self = self else { return nil }
+                return imageDataDict[self.coinID]
+            }
+            .sink(receiveValue: { [weak self] imageData in
+                guard let self = self else { return }
+                self.isLoading = false
+                self.coinImageData = imageData
             })
             .store(in: &cancellables)
     }

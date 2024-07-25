@@ -24,9 +24,7 @@ final class MarketDataService {
 
 extension MarketDataService: MarketDataServiceProtocol {
     var marketDataPublisher: Published<MarketData?>.Publisher { $marketData }
-    var marketDataPublished: Published<MarketData?> { _marketData }
     var errorPublisher: Published<NetworkError?>.Publisher { $error }
-    var errorPublished: Published<NetworkError?> { _error }
 
     func getData() {
         marketDataSubscription = networkManager.download(from: .globalData, convertTo: GlobalCryptoMarketData.self)

@@ -9,8 +9,6 @@ import Combine
 
 protocol MarketDataServiceProtocol {
     var marketDataPublisher: Published<MarketData?>.Publisher { get }
-    var marketDataPublished: Published<MarketData?> { get }
     var errorPublisher: Published<NetworkError?>.Publisher { get }
-    var errorPublished: Published<NetworkError?> { get }
     func getData()
 }
