@@ -22,16 +22,16 @@ struct HomeView: View {
                     .ignoresSafeArea()
                     .sheet(isPresented: $showEditPortfolioView,
                            content: {
-                               if let selectedCoin = viewModel.selectedCoin {
-                                   EditPortfolioView(singleCoin: selectedCoin,
-                                                     portfolioDataService: viewModel.portfolioDataService,
-                                                     coinImageService: viewModel.coinImageService)
-                               } else {
-                                   EditPortfolioView(allCoins: viewModel.allCoins,
-                                                     portfolioDataService: viewModel.portfolioDataService,
-                                                     coinImageService: viewModel.coinImageService)
-                               }
-                           })
+                        if let selectedCoin = viewModel.selectedCoin {
+                            EditPortfolioView(singleCoin: selectedCoin,
+                                              portfolioDataService: viewModel.portfolioDataService,
+                                              coinImageService: viewModel.coinImageService)
+                        } else {
+                            EditPortfolioView(allCoins: viewModel.allCoins,
+                                              portfolioDataService: viewModel.portfolioDataService,
+                                              coinImageService: viewModel.coinImageService)
+                        }
+                    })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding()
@@ -147,83 +147,102 @@ private extension HomeView {
     }
 
     var allCoinsList: some View {
-        List {
-            ForEach(viewModel.allCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: false, coinImageService: viewModel.coinImageService)
-                    .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
-                    .padding(12)
-                    .onTapGesture {
-                        HapticManager.triggerSelection()
-                        segue(coin: coin)
-                    }
-                    .listRowBackground(Color.theme.background)
-                    .swipeActions {
-                        Button {
-                            selectCoinAndShowEditView(coin: coin)
-                        } label: {
-                            SystemImage.filledPlus.image
-                                .tint(Color.theme.background)
+        ScrollViewReader { proxy in
+            List {
+                ForEach(viewModel.allCoins, id: \.id) { coin in
+                    CoinRowView(coin: coin, showHoldingsColumn: false, coinImageService: viewModel.coinImageService)
+                        .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
+                        .padding(12)
+                        .onTapGesture {
+                            HapticManager.triggerSelection()
+                            segue(coin: coin)
                         }
-                        .tint(Color.theme.green)
+                        .listRowBackground(Color.theme.background)
+                        .swipeActions {
+                            Button {
+                                selectCoinAndShowEditView(coin: coin)
+                            } label: {
+                                SystemImage.filledPlus.image
+                                    .tint(Color.theme.background)
+                            }
+                            .tint(Color.theme.green)
+                        }
+                }
+            }
+            .refreshable {
+                viewModel.reloadData()
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                Spacer()
+                    .frame(height: 100)
+            }
+            .listStyle(.plain)
+            .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
+                                                             .theme.black,
+                                                             .theme.black,
+                                                             .clear]),
+                                 startPoint: .top, endPoint: .bottom))
+            .ignoresSafeArea()
+            .onReceive(viewModel.$allCoins) { _ in
+                withAnimation {
+                    if let firstCoin = viewModel.allCoins.first {
+                        proxy.scrollTo(firstCoin.id, anchor: .top)
                     }
+                }
             }
         }
-        .refreshable {
-            viewModel.reloadData()
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            Spacer()
-                .frame(height: 100)
-        }
-        .listStyle(.plain)
-        .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
-                                                         .theme.black,
-                                                         .theme.black,
-                                                         .clear]),
-                             startPoint: .top, endPoint: .bottom))
-        .ignoresSafeArea()
     }
 
     var allPortfolioCoinsList: some View {
-        List {
-            ForEach(viewModel.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true, coinImageService: viewModel.coinImageService)
-                    .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
-                    .padding(12)
-                    .onTapGesture {
-                        segue(coin: coin)
-                    }
-                    .listRowBackground(Color.theme.background)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            viewModel.deleteCoin(coin)
-                        } label: {
-                            SystemImage.thrash.image
-                                .tint(Color.theme.background)
+        ScrollViewReader { proxy in
+
+            List {
+                ForEach(viewModel.portfolioCoins, id: \.id) { coin in
+                    CoinRowView(coin: coin, showHoldingsColumn: true, coinImageService: viewModel.coinImageService)
+                        .listRowInsets(.init(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)))
+                        .padding(12)
+                        .onTapGesture {
+                            segue(coin: coin)
                         }
-                        Button {
-                            selectCoinAndShowEditView(coin: coin)
-                        } label: {
-                            SystemImage.filledPlus.image
-                                .tint(Color.theme.background)
+                        .listRowBackground(Color.theme.background)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                viewModel.deleteCoin(coin)
+                            } label: {
+                                SystemImage.thrash.image
+                                    .tint(Color.theme.background)
+                            }
+                            Button {
+                                selectCoinAndShowEditView(coin: coin)
+                            } label: {
+                                SystemImage.filledPlus.image
+                                    .tint(Color.theme.background)
+                            }
+                            .tint(Color.theme.green)
                         }
-                        .tint(Color.theme.green)
+                }
+            }
+            .refreshable {
+                viewModel.reloadData()
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                Spacer()
+                    .frame(height: 100)
+            }
+            .listStyle(.plain)
+            .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
+                                                             .theme.black,
+                                                             .theme.black,
+                                                             .clear]),
+                                 startPoint: .top, endPoint: .bottom))
+            .onReceive(viewModel.$portfolioCoins) { _ in
+                withAnimation {
+                    if let firstCoin = viewModel.portfolioCoins.first {
+                        proxy.scrollTo(firstCoin.id, anchor: .top)
                     }
+                }
             }
         }
-        .refreshable {
-            viewModel.reloadData()
-        }
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            Spacer()
-                .frame(height: 100)
-        }
-        .listStyle(.plain)
-        .mask(LinearGradient(gradient: Gradient(colors: [.theme.black,
-                                                         .theme.black,
-                                                         .theme.black,
-                                                         .clear]),
-                             startPoint: .top, endPoint: .bottom))
     }
 
     var columnTitles: some View {
@@ -236,8 +255,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                ? Color.theme.green
-                : Color.theme.secondaryText)
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
@@ -253,8 +272,8 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                    ? Color.theme.green
-                    : Color.theme.secondaryText)
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
@@ -268,14 +287,14 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .totalVolume
-                    || viewModel.sortOption == .totalVolumeDescending
-                    ? Color.theme.green
-                    : Color.theme.secondaryText)
+                                 || viewModel.sortOption == .totalVolumeDescending
+                                 ? Color.theme.green
+                                 : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
-                            ? .totalVolumeDescending
-                            : .totalVolume
+                        ? .totalVolumeDescending
+                        : .totalVolume
                     }
                 }
             }
@@ -287,8 +306,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                ? Color.theme.green
-                : Color.theme.secondaryText)
+                             ? Color.theme.green
+                             : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price
@@ -343,6 +362,6 @@ private extension HomeView {
                                           marketDataService: MarketDataService(networkManager: NetworkManager()),
                                           coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
                                           portfolioDataService: PortfolioDataService()))
-            .navigationBarHidden(true)
+        .navigationBarHidden(true)
     }
 }
