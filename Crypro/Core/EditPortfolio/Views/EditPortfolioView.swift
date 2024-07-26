@@ -109,6 +109,9 @@ struct EditPortfolioView: View {
                 viewModel.searchText = coin.name
                 searchIsFocused = false
             }
+            if singleCoinDisplay {
+                quantityIsFocused = true
+            }
         }
         .onDisappear {
             viewModel.searchText = ""
