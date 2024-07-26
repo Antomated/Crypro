@@ -16,7 +16,7 @@ final class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var sortOption: SortOption = .rank
     @Published var showLaunchView: Bool = false
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var selectedCoin: Coin?
     private var cancellables = Set<AnyCancellable>()
     private let coinDataService: CoinDataServiceProtocol
@@ -71,7 +71,6 @@ private extension HomeViewModel {
             .sink { [weak self] sortedCoins in
                 guard let self else { return }
                 allCoins = sortedCoins
-                isLoading = false
             }
             .store(in: &cancellables)
 
@@ -100,7 +99,16 @@ private extension HomeViewModel {
             .sink { [weak self] stats in
                 guard let self else { return }
                 statistics = stats
-                isLoading = false
+            }
+            .store(in: &cancellables)
+
+        marketDataService.marketDataPublisher
+            .combineLatest(coinDataService.allCoinsPublisher)
+            .sink { [weak self] marketData, allCoinsData in
+                if marketData != nil, !allCoinsData.isEmpty {
+                    guard let self else { return }
+                    isLoading = false
+                }
             }
             .store(in: &cancellables)
 

@@ -34,8 +34,8 @@ final class DetailViewModel: ObservableObject {
         self.portfolioDataService = portfolioDataService
         self.coinDetailService = coinDetailService
         self.coinImageService = coinImageService
-        addSubscribers()
         coinDetailService.getCoinDetails(coin)
+        addSubscribers()
     }
 }
 

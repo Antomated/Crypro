@@ -26,6 +26,7 @@ extension CoinDetailsService: CoinDetailsServiceProtocol {
     var errorPublisher: Published<NetworkError?>.Publisher { $error }
 
     func getCoinDetails(_ coin: Coin) {
+        coinDetails = nil
         coinSubscription = networkManager.download(from: .coinDetails(id: coin.id), convertTo: CoinDetails.self)
             .first()
             .receive(on: DispatchQueue.main)
