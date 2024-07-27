@@ -219,7 +219,7 @@ private extension DetailView {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         DetailView(coin: CoinsStubs.bitcoin,
                    portfolioDataService: PortfolioDataService(),
                    coinDetailService: CoinDetailsService(networkManager: NetworkManager()),

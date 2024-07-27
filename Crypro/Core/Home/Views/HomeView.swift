@@ -34,7 +34,7 @@ struct HomeView: View {
                     })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
-                        .padding()
+                        .padding(.horizontal)
                     homeStatisticsView
                         .frame(height: 130)
                     Divider()
@@ -355,7 +355,7 @@ private extension HomeView {
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
                                                                              imageDataProvider: ImageDataProvider()),
                                           coinDataService: CoinDataService(networkManager: NetworkManager()),

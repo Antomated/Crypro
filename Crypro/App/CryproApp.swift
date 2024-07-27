@@ -37,7 +37,7 @@ struct CryproApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                NavigationView {
+                NavigationStack {
                     HomeView(viewModel: homeViewModel)
                 }
                 .navigationViewStyle(.stack)
