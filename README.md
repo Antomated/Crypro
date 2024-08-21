@@ -6,6 +6,8 @@ Crypro is a comprehensive cryptocurrency tracking application designed for iOS u
 
 It provides real-time data on top cryptocurrencies, including prices, market trends, and detailed coin information. 
 
+The data is sourced from the [CoinGecko API](https://www.coingecko.com/en/api), ensuring accurate and up-to-date information.
+
 Users can manage their portfolios, track investments, and analyze performance, all within a sleek and intuitive interface. 
 
 The app supports both dark and light modes for a comfortable viewing experience.
