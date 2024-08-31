@@ -61,14 +61,21 @@ struct DetailView: View {
         }
         .overlay(
             Group {
-                detailFooter
+                CircleButtonView(icon: .plus)
+                    .onTapGesture {
+                        HapticManager.triggerSelection()
+                        showEditPortfolioView.toggle()
+                    }
+                    .frame(width: 60, height: 60)
+                    .padding(24)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 if showLoader {
                     LoaderView()
-                        .ignoresSafeArea()
                 }
             }
             .animation(.easeInOut, value: showLoader)
             .transition(.opacity)
+            .ignoresSafeArea()
         )
         .onReceive(viewModel.$hasLoadedData) { hasLoadedData in
             showLoader = !hasLoadedData
@@ -171,26 +178,6 @@ private extension DetailView {
                 Spacer()
             }
         }
-    }
-
-    var detailFooter: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                ZStack {
-                    CircleButtonView(icon: .plus)
-                        .animation(.none, value: showEditPortfolioView)
-                        .onTapGesture {
-                            HapticManager.triggerSelection()
-                            showEditPortfolioView.toggle()
-                        }
-                }
-                .frame(maxWidth: 60, maxHeight: 60)
-            }
-            .padding(24)
-        }
-        .ignoresSafeArea()
     }
 }
 

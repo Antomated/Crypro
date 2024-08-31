@@ -71,10 +71,12 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(isPresented: $showDetailView) {
-                DetailLoadingView(coin: viewModel.selectedCoin,
-                                  portfolioDataService: viewModel.portfolioDataService,
-                                  coinImageService: viewModel.coinImageService,
-                                  coinDetailService: viewModel.coinDetailsService)
+                if let coin = viewModel.selectedCoin {
+                    DetailView(coin: coin,
+                               portfolioDataService: viewModel.portfolioDataService,
+                               coinDetailService: viewModel.coinDetailsService,
+                               coinImageService: viewModel.coinImageService)
+                }
             }
             .alert(item: $viewModel.error) { error in
                 Alert(
@@ -115,34 +117,29 @@ private extension HomeView {
     }
 
     var homeFooter: some View {
-        VStack {
-            Spacer()
-            HStack {
-                ZStack {
-                    CircleButtonView(icon: showPortfolio ? .plus : .info)
-                        .animation(.none, value: showPortfolio)
-                        .onTapGesture {
-                            HapticManager.triggerSelection()
-                            if showPortfolio {
-                                showEditView()
-                            } else {
-                                showSettingsView.toggle()
-                            }
-                        }
-                }
-                .frame(maxWidth: 60, maxHeight: 60)
-                Spacer()
-                CircleButtonView(icon: .chevronRight)
-                    .rotationEffect(.radians(showPortfolio ? .pi : 0))
-                    .onTapGesture {
-                        HapticManager.triggerSelection()
-                        withAnimation(.spring()) {
-                            showPortfolio.toggle()
-                        }
+        HStack {
+            CircleButtonView(icon: showPortfolio ? .plus : .info)
+                .animation(.none, value: showPortfolio)
+                .onTapGesture {
+                    HapticManager.triggerSelection()
+                    if showPortfolio {
+                        showEditView()
+                    } else {
+                        showSettingsView.toggle()
                     }
-            }
-            .padding(24)
+                }
+            Spacer()
+            CircleButtonView(icon: .chevronRight)
+                .rotationEffect(.radians(showPortfolio ? .pi : 0))
+                .onTapGesture {
+                    HapticManager.triggerSelection()
+                    withAnimation(.spring()) {
+                        showPortfolio.toggle()
+                    }
+                }
         }
+        .padding(24)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
     }
 
@@ -354,14 +351,14 @@ private extension HomeView {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
-//                                                                             imageDataProvider: ImageDataProvider()),
-//                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
-//                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
-//                                          coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
-//                                          portfolioDataService: PortfolioDataService()))
-//        .navigationBarHidden(true)
-//    }
-//}
+#Preview {
+    NavigationStack {
+        HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                                             imageDataProvider: ImageDataProvider()),
+                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
+                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
+                                          coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
+                                          portfolioDataService: PortfolioDataService()))
+        .navigationBarHidden(true)
+    }
+}
