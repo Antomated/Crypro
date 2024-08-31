@@ -83,6 +83,7 @@
 "unknownErrorOccurredError" = "Unknown error occurred";
 "invalidEndpointError" = "Invalid endpoint";
 "decodingResponseError" = "Error decoding response";
+"longLoadingMessage" = "Decrypting the blockchain…";
 
 // MARK: - Abbreviations 
 

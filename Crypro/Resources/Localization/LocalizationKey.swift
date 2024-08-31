@@ -80,6 +80,7 @@ enum LocalizationKey: String {
     case unknownErrorOccurredError
     case invalidEndpointError
     case decodingResponseError
+    case longLoadingMessage
 
     // MARK: - Abbreviations
 

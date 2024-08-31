@@ -12,10 +12,14 @@ struct LaunchView: View {
     @State private var showLoadingText: Bool = false
     @State private var counter: Int = 0
     @State private var loops: Int = 0
+    @State private var showSlowLoadingMessage: Bool = false
+    @State private var visibleChars: Int = 0
     @Binding var showLaunchView: Bool
     @Binding var loadingData: Bool
 
     private let timer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    private let disappearanceTimer = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+    private let slowLoadingTimer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ZStack {
@@ -38,6 +42,23 @@ struct LaunchView: View {
                 }
             }
             .offset(y: 70)
+
+            if showSlowLoadingMessage {
+                HStack(spacing: 2) {
+                    ForEach(0..<LocalizationKey.longLoadingMessage.localizedString.count, id: \.self) { index in
+                        let char = Array(LocalizationKey.longLoadingMessage.localizedString)[index]
+                        Text(String(char))
+                            .font(.chakraPetch(.medium, size: 14))
+                            .foregroundColor(ColorTheme().secondaryText)
+                            .opacity(visibleChars <= index && char != " " ? 0 : 1)
+                    }
+                }
+                .padding()
+                .background(Color.black.opacity(0.7))
+                .cornerRadius(10)
+                .padding(.top, 100)
+                .offset(y: UIScreen.main.bounds.height / 3)
+            }
         }
         .ignoresSafeArea()
         .onAppear {
@@ -45,6 +66,12 @@ struct LaunchView: View {
         }
         .onReceive(timer) { _ in
             updateCounterAndLoops()
+        }
+        .onReceive(disappearanceTimer) { _ in
+            updateVisibleChars()
+        }
+        .onReceive(slowLoadingTimer) { _ in
+            showSlowLoadingMessage = true
         }
     }
 
@@ -60,6 +87,16 @@ struct LaunchView: View {
                 } else {
                     counter += 1
                 }
+            }
+        }
+    }
+
+    private func updateVisibleChars() {
+        if showSlowLoadingMessage {
+            if visibleChars > 0 {
+                visibleChars -= 1
+            } else {
+                visibleChars = LocalizationKey.longLoadingMessage.localizedString.count
             }
         }
     }
