@@ -16,7 +16,7 @@ final class NetworkManager: NetworkManagerProtocol {
         self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
-    func download<T>(from endpoint: CoingeckoEndpoint,
+    func download<T>(from endpoint: APIEndpoint,
                      convertTo _: T.Type) -> AnyPublisher<T, NetworkError> where T: Decodable {
         guard let url = endpoint.url else {
             return Fail(error: .invalidEndpoint).eraseToAnyPublisher()

@@ -15,7 +15,7 @@ enum CoingeckoEndpoint {
 
 // MARK: - Computed properties
 
-extension CoingeckoEndpoint {
+extension CoingeckoEndpoint: APIEndpoint {
     var baseURL: String { Constants.apiBaseURL }
 
     var method: HTTPMethod {

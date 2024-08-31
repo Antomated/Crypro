@@ -44,6 +44,7 @@
 		3A5264822C83612700A1A116 /* light_mode_portfolio.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264732C83612700A1A116 /* light_mode_portfolio.png */; };
 		3A5264832C83612700A1A116 /* light_mode_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264742C83612700A1A116 /* light_mode_settings.png */; };
 		3A5264842C83612700A1A116 /* light_mode_transaction.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264752C83612700A1A116 /* light_mode_transaction.png */; };
+		3A5264882C836D5200A1A116 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5264872C836D5200A1A116 /* APIEndpoint.swift */; };
 		3A5C97C72C0A087F00A15AB8 /* LogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */; };
 		3A765FB52C20EDF900012CFD /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3A765FB42C20EDF900012CFD /* LICENSE */; };
 		3A765FB72C20EE8D00012CFD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A765FB62C20EE8D00012CFD /* README.md */; };
@@ -132,6 +133,7 @@
 		3A5264732C83612700A1A116 /* light_mode_portfolio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_portfolio.png; sourceTree = "<group>"; };
 		3A5264742C83612700A1A116 /* light_mode_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_settings.png; sourceTree = "<group>"; };
 		3A5264752C83612700A1A116 /* light_mode_transaction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_transaction.png; sourceTree = "<group>"; };
+		3A5264872C836D5200A1A116 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogConfiguration.swift; sourceTree = "<group>"; };
 		3A765FB42C20EDF900012CFD /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3A765FB62C20EE8D00012CFD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				3A76D2AF2C5282F800711B79 /* NetworkManagerProtocol.swift */,
 				3A76D2AD2C51BEC500711B79 /* NetworkManager.swift */,
 				3A9B6BCF2BBCB68600CD40D1 /* HTTPMethod.swift */,
+				3A5264872C836D5200A1A116 /* APIEndpoint.swift */,
 				3A9B6BC72BBCAA3F00CD40D1 /* CoingeckoEndpoint.swift */,
 				3A9B6BCB2BBCAADB00CD40D1 /* NetworkError.swift */,
 			);
@@ -751,6 +754,7 @@
 				3A3689092BE445C900C3B652 /* LocalizationKey.swift in Sources */,
 				3A9B6BD62BBCC25F00CD40D1 /* CoinImageViewModel.swift in Sources */,
 				3A76D2BE2C528DCA00711B79 /* PortfolioDataServiceProtocol.swift in Sources */,
+				3A5264882C836D5200A1A116 /* APIEndpoint.swift in Sources */,
 				3A9B6BDE2BBCCE4600CD40D1 /* SearchBarView.swift in Sources */,
 				3A9B6BD02BBCB68600CD40D1 /* HTTPMethod.swift in Sources */,
 				3A33E10C2C52FC61006C6786 /* ImageDataProviderProtocol.swift in Sources */,

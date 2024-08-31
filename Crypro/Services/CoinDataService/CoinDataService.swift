@@ -27,7 +27,8 @@ extension CoinDataService: CoinDataServiceProtocol {
     var errorPublisher: Published<NetworkError?>.Publisher { $error }
 
     func getCoins() {
-        coinSubscription = networkManager.download(from: .allCoins, convertTo: [Coin].self)
+        coinSubscription = networkManager.download(from: CoingeckoEndpoint.allCoins,
+                                                   convertTo: [Coin].self)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(

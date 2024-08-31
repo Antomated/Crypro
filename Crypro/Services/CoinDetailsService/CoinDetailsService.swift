@@ -27,7 +27,8 @@ extension CoinDetailsService: CoinDetailsServiceProtocol {
 
     func getCoinDetails(_ coin: Coin) {
         coinDetails = nil
-        coinSubscription = networkManager.download(from: .coinDetails(id: coin.id), convertTo: CoinDetails.self)
+        coinSubscription = networkManager.download(from: CoingeckoEndpoint.coinDetails(id: coin.id),
+                                                   convertTo: CoinDetails.self)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(

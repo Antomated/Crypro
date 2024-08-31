@@ -27,7 +27,8 @@ extension MarketDataService: MarketDataServiceProtocol {
     var errorPublisher: Published<NetworkError?>.Publisher { $error }
 
     func getData() {
-        marketDataSubscription = networkManager.download(from: .globalData, convertTo: GlobalCryptoMarketData.self)
+        marketDataSubscription = networkManager.download(from: CoingeckoEndpoint.globalData,
+                                                         convertTo: GlobalCryptoMarketData.self)
             .first()
             .receive(on: DispatchQueue.main)
             .sink(
