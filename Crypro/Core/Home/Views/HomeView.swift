@@ -35,12 +35,17 @@ struct HomeView: View {
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding(.horizontal)
-                    homeStatisticsView
+
+                    HomeStatisticsView(showPortfolio: $showPortfolio, statistics: viewModel.statistics)
                         .frame(height: 130)
+
                     Divider()
+
                     SearchBarView(searchText: $viewModel.searchText)
                         .padding(.horizontal)
+
                     columnTitles
+
                     ZStack {
                         if !showPortfolio {
                             allCoinsList
@@ -55,9 +60,12 @@ struct HomeView: View {
                             }
                             .transition(.move(edge: .trailing))
                         }
-                        homeFooter
-                            .zIndex(1)
-                            .shadow(color: .theme.background, radius: 20)
+
+                        HomeFooterView(showPortfolio: $showPortfolio,
+                                       showEditView: $showEditPortfolioView,
+                                       showSettingsView: $showSettingsView)
+                        .zIndex(1)
+                        .shadow(color: .theme.background, radius: 20)
                     }
                 }
                 .sheet(isPresented: $showSettingsView, content: {
@@ -95,54 +103,6 @@ struct HomeView: View {
 // MARK: - UI Components
 
 private extension HomeView {
-    var homeStatisticsView: some View {
-        GeometryReader { geometry in
-            HStack {
-                ForEach(viewModel.statistics) { statPair in
-                    VStack(alignment: .leading, spacing: 12) {
-                        StatisticView(stat: statPair.top)
-                        Divider()
-                            .frame(width: 70)
-                        StatisticView(stat: statPair.bottom)
-                    }
-                    .frame(width: (geometry.size.width - 12) / 3)
-                    .offset(x: showPortfolio ? 0 : -12)
-                }
-            }
-            .frame(
-                width: geometry.size.width,
-                alignment: showPortfolio ? .trailing : .leading
-            )
-        }
-    }
-
-    var homeFooter: some View {
-        HStack {
-            CircleButtonView(icon: showPortfolio ? .plus : .info)
-                .animation(.none, value: showPortfolio)
-                .onTapGesture {
-                    HapticManager.triggerSelection()
-                    if showPortfolio {
-                        showEditView()
-                    } else {
-                        showSettingsView.toggle()
-                    }
-                }
-            Spacer()
-            CircleButtonView(icon: .chevronRight)
-                .rotationEffect(.radians(showPortfolio ? .pi : 0))
-                .onTapGesture {
-                    HapticManager.triggerSelection()
-                    withAnimation(.spring()) {
-                        showPortfolio.toggle()
-                    }
-                }
-        }
-        .padding(24)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        .ignoresSafeArea()
-    }
-
     var allCoinsList: some View {
         ScrollViewReader { proxy in
             List {
