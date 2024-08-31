@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
+    @AppStorage(Constants.selectedThemeKey) private var darkThemeIsOn: Bool = defaultDarkMode
     @Binding var isPresented: Bool
 
     private let personalURL = URL(string: Constants.gitHubURL)!

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CryproApp: App {
-    @AppStorage(Constants.selectedTheme) private var darkThemeIsOn: Bool = defaultDarkMode
+    @AppStorage(Constants.selectedThemeKey) private var darkThemeIsOn: Bool = defaultDarkMode
     @StateObject private var homeViewModel: HomeViewModel
     @State private var showLaunchView = true
 
