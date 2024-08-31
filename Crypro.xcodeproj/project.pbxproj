@@ -30,6 +30,20 @@
 		3A4E46622BBE0EAE002B0687 /* CoinLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46612BBE0EAE002B0687 /* CoinLogoView.swift */; };
 		3A4E46662BBE1568002B0687 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46652BBE1568002B0687 /* SortOption.swift */; };
 		3A4E46692BBE1EA4002B0687 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E46682BBE1EA4002B0687 /* LaunchView.swift */; };
+		3A5264772C83612700A1A116 /* dark_mode_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264682C83612700A1A116 /* dark_mode_details.png */; };
+		3A5264782C83612700A1A116 /* dark_mode_market.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264692C83612700A1A116 /* dark_mode_market.png */; };
+		3A5264792C83612700A1A116 /* dark_mode_portfolio.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646A2C83612700A1A116 /* dark_mode_portfolio.png */; };
+		3A52647A2C83612700A1A116 /* dark_mode_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646B2C83612700A1A116 /* dark_mode_settings.png */; };
+		3A52647B2C83612700A1A116 /* dark_mode_transaction.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646C2C83612700A1A116 /* dark_mode_transaction.png */; };
+		3A52647C2C83612700A1A116 /* demo_details.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646D2C83612700A1A116 /* demo_details.gif */; };
+		3A52647D2C83612700A1A116 /* demo_market.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646E2C83612700A1A116 /* demo_market.gif */; };
+		3A52647E2C83612700A1A116 /* demo_portfolio.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A52646F2C83612700A1A116 /* demo_portfolio.gif */; };
+		3A52647F2C83612700A1A116 /* header_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264702C83612700A1A116 /* header_image.png */; };
+		3A5264802C83612700A1A116 /* light_mode_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264712C83612700A1A116 /* light_mode_details.png */; };
+		3A5264812C83612700A1A116 /* light_mode_market.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264722C83612700A1A116 /* light_mode_market.png */; };
+		3A5264822C83612700A1A116 /* light_mode_portfolio.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264732C83612700A1A116 /* light_mode_portfolio.png */; };
+		3A5264832C83612700A1A116 /* light_mode_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264742C83612700A1A116 /* light_mode_settings.png */; };
+		3A5264842C83612700A1A116 /* light_mode_transaction.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5264752C83612700A1A116 /* light_mode_transaction.png */; };
 		3A5C97C72C0A087F00A15AB8 /* LogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */; };
 		3A765FB52C20EDF900012CFD /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3A765FB42C20EDF900012CFD /* LICENSE */; };
 		3A765FB72C20EE8D00012CFD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A765FB62C20EE8D00012CFD /* README.md */; };
@@ -104,6 +118,20 @@
 		3A4E46612BBE0EAE002B0687 /* CoinLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinLogoView.swift; sourceTree = "<group>"; };
 		3A4E46652BBE1568002B0687 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 		3A4E46682BBE1EA4002B0687 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		3A5264682C83612700A1A116 /* dark_mode_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_mode_details.png; sourceTree = "<group>"; };
+		3A5264692C83612700A1A116 /* dark_mode_market.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_mode_market.png; sourceTree = "<group>"; };
+		3A52646A2C83612700A1A116 /* dark_mode_portfolio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_mode_portfolio.png; sourceTree = "<group>"; };
+		3A52646B2C83612700A1A116 /* dark_mode_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_mode_settings.png; sourceTree = "<group>"; };
+		3A52646C2C83612700A1A116 /* dark_mode_transaction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_mode_transaction.png; sourceTree = "<group>"; };
+		3A52646D2C83612700A1A116 /* demo_details.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo_details.gif; sourceTree = "<group>"; };
+		3A52646E2C83612700A1A116 /* demo_market.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo_market.gif; sourceTree = "<group>"; };
+		3A52646F2C83612700A1A116 /* demo_portfolio.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo_portfolio.gif; sourceTree = "<group>"; };
+		3A5264702C83612700A1A116 /* header_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header_image.png; sourceTree = "<group>"; };
+		3A5264712C83612700A1A116 /* light_mode_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_details.png; sourceTree = "<group>"; };
+		3A5264722C83612700A1A116 /* light_mode_market.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_market.png; sourceTree = "<group>"; };
+		3A5264732C83612700A1A116 /* light_mode_portfolio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_portfolio.png; sourceTree = "<group>"; };
+		3A5264742C83612700A1A116 /* light_mode_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_settings.png; sourceTree = "<group>"; };
+		3A5264752C83612700A1A116 /* light_mode_transaction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_mode_transaction.png; sourceTree = "<group>"; };
 		3A5C97C62C0A087F00A15AB8 /* LogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogConfiguration.swift; sourceTree = "<group>"; };
 		3A765FB42C20EDF900012CFD /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3A765FB62C20EE8D00012CFD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -337,6 +365,27 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		3A5264762C83612700A1A116 /* ReadmeAssets */ = {
+			isa = PBXGroup;
+			children = (
+				3A5264682C83612700A1A116 /* dark_mode_details.png */,
+				3A5264692C83612700A1A116 /* dark_mode_market.png */,
+				3A52646A2C83612700A1A116 /* dark_mode_portfolio.png */,
+				3A52646B2C83612700A1A116 /* dark_mode_settings.png */,
+				3A52646C2C83612700A1A116 /* dark_mode_transaction.png */,
+				3A52646D2C83612700A1A116 /* demo_details.gif */,
+				3A52646E2C83612700A1A116 /* demo_market.gif */,
+				3A52646F2C83612700A1A116 /* demo_portfolio.gif */,
+				3A5264702C83612700A1A116 /* header_image.png */,
+				3A5264712C83612700A1A116 /* light_mode_details.png */,
+				3A5264722C83612700A1A116 /* light_mode_market.png */,
+				3A5264732C83612700A1A116 /* light_mode_portfolio.png */,
+				3A5264742C83612700A1A116 /* light_mode_settings.png */,
+				3A5264752C83612700A1A116 /* light_mode_transaction.png */,
+			);
+			path = ReadmeAssets;
+			sourceTree = "<group>";
+		};
 		3A76D2B32C5289FA00711B79 /* CoinDataService */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,9 +591,10 @@
 		3AC51A0E2BBB539A004E643B = {
 			isa = PBXGroup;
 			children = (
-				3A765FB42C20EDF900012CFD /* LICENSE */,
-				3A765FB62C20EE8D00012CFD /* README.md */,
 				3AC51A192BBB539A004E643B /* Crypro */,
+				3A5264762C83612700A1A116 /* ReadmeAssets */,
+				3A765FB62C20EE8D00012CFD /* README.md */,
+				3A765FB42C20EDF900012CFD /* LICENSE */,
 				3AC51A182BBB539A004E643B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -641,14 +691,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A765FB72C20EE8D00012CFD /* README.md in Resources */,
+				3A5264792C83612700A1A116 /* dark_mode_portfolio.png in Resources */,
+				3A52647F2C83612700A1A116 /* header_image.png in Resources */,
 				3AA9EAAD2C245B0F00908F11 /* ChakraPetch-Medium.ttf in Resources */,
+				3A5264832C83612700A1A116 /* light_mode_settings.png in Resources */,
 				3ABC9F512BD480B8002D944F /* LaunchScreen.storyboard in Resources */,
 				3AA9EAAC2C245B0F00908F11 /* ChakraPetch-Regular.ttf in Resources */,
+				3A52647E2C83612700A1A116 /* demo_portfolio.gif in Resources */,
+				3A5264812C83612700A1A116 /* light_mode_market.png in Resources */,
+				3A5264802C83612700A1A116 /* light_mode_details.png in Resources */,
 				3A36890C2BE4489200C3B652 /* Localizable.strings in Resources */,
 				3AC51A222BBB539B004E643B /* Preview Assets.xcassets in Resources */,
+				3A5264782C83612700A1A116 /* dark_mode_market.png in Resources */,
 				3AA9EAAA2C245B0F00908F11 /* ChakraPetch-Bold.ttf in Resources */,
 				3AC51A1F2BBB539B004E643B /* Assets.xcassets in Resources */,
+				3A52647C2C83612700A1A116 /* demo_details.gif in Resources */,
+				3A52647D2C83612700A1A116 /* demo_market.gif in Resources */,
+				3A52647A2C83612700A1A116 /* dark_mode_settings.png in Resources */,
 				3A765FB52C20EDF900012CFD /* LICENSE in Resources */,
+				3A5264822C83612700A1A116 /* light_mode_portfolio.png in Resources */,
+				3A5264842C83612700A1A116 /* light_mode_transaction.png in Resources */,
+				3A5264772C83612700A1A116 /* dark_mode_details.png in Resources */,
+				3A52647B2C83612700A1A116 /* dark_mode_transaction.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
