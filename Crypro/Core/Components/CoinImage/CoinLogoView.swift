@@ -13,7 +13,8 @@ struct CoinLogoView: View {
 
     var body: some View {
         VStack {
-            CoinImageView(coin: coin, coinImageService: coinImageService)
+            CoinImageView(viewModel: CoinImageViewModel(coin: coin,
+                                                        coinImageService: coinImageService))
                 .frame(width: 50, height: 50)
 
             Text(coin.symbol.uppercased())

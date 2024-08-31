@@ -30,12 +30,10 @@ struct StatisticView: View {
                 }
                 .foregroundStyle(statPercentageChange >= 0 ? Color.theme.green : Color.theme.red)
             } else {
-                HStack {
-                    Text(LocalizationKey.zeroStatChange.localizedString)
-                        .multilineTextAlignment(.center)
-                        .font(.chakraPetch(.regular, size: 12))
-                        .bold()
-                }
+                Text(LocalizationKey.zeroStatChange.localizedString)
+                    .multilineTextAlignment(.center)
+                    .font(.chakraPetch(.regular, size: 12))
+                    .bold()
                 .foregroundStyle(Color.theme.secondaryText)
             }
         }

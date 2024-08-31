@@ -41,7 +41,8 @@ private extension CoinRowView {
                 .font(.chakraPetch(.regular, size: 12))
                 .foregroundColor(Color.theme.secondaryText)
                 .frame(minWidth: 30)
-            CoinImageView(coin: coin, coinImageService: coinImageService)
+            CoinImageView(viewModel: CoinImageViewModel(coin: coin,
+                                                        coinImageService: coinImageService))
                 .frame(width: 30, height: 30)
             VStack(alignment: .leading, spacing: 0) {
                 Text(coin.symbol.uppercased())

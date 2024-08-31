@@ -118,7 +118,8 @@ private extension DetailView {
             Text(viewModel.coin.symbol.uppercased())
                 .font(.chakraPetch(.medium, size: 16))
                 .foregroundStyle(Color.theme.secondaryText)
-            CoinImageView(coin: viewModel.coin, coinImageService: viewModel.coinImageService)
+            CoinImageView(viewModel: CoinImageViewModel(coin: viewModel.coin,
+                                                        coinImageService: viewModel.coinImageService))
                 .frame(width: 25, height: 25)
         }
     }

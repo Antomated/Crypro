@@ -10,8 +10,8 @@ import SwiftUI
 struct CoinImageView: View {
     @ObservedObject var viewModel: CoinImageViewModel
 
-    init(coin: Coin, coinImageService: CoinImageServiceProtocol) {
-        viewModel = CoinImageViewModel(coin: coin, coinImageService: coinImageService)
+    init(viewModel: CoinImageViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -31,7 +31,7 @@ struct CoinImageView: View {
 }
 
 #Preview {
-    CoinImageView(coin: CoinsStubs.bitcoin,
-                  coinImageService: CoinImageService(networkManager: NetworkManager(),
-                                                     imageDataProvider: ImageDataProvider()))
+    CoinImageView(viewModel: CoinImageViewModel(coin: CoinsStubs.bitcoin,
+                                   coinImageService: CoinImageService(networkManager: NetworkManager(),
+                                                                      imageDataProvider: ImageDataProvider())))
 }

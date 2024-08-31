@@ -354,14 +354,14 @@ private extension HomeView {
     }
 }
 
-#Preview {
-    NavigationStack {
-        HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
-                                                                             imageDataProvider: ImageDataProvider()),
-                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
-                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
-                                          coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
-                                          portfolioDataService: PortfolioDataService()))
-        .navigationBarHidden(true)
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
+//                                                                             imageDataProvider: ImageDataProvider()),
+//                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
+//                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
+//                                          coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
+//                                          portfolioDataService: PortfolioDataService()))
+//        .navigationBarHidden(true)
+//    }
+//}
