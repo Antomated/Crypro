@@ -34,7 +34,7 @@ struct StatisticView: View {
                     .multilineTextAlignment(.center)
                     .font(.chakraPetch(.regular, size: 12))
                     .bold()
-                .foregroundStyle(Color.theme.secondaryText)
+                    .foregroundStyle(Color.theme.secondaryText)
             }
         }
     }

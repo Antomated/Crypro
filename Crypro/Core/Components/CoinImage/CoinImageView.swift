@@ -32,6 +32,7 @@ struct CoinImageView: View {
 
 #Preview {
     CoinImageView(viewModel: CoinImageViewModel(coin: CoinsStubs.bitcoin,
-                                   coinImageService: CoinImageService(networkManager: NetworkManager(),
-                                                                      imageDataProvider: ImageDataProvider())))
+                                                coinImageService: CoinImageService(
+                                                    networkManager: NetworkManager(),
+                                                    imageDataProvider: ImageDataProvider())))
 }

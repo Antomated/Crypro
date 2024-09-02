@@ -30,10 +30,10 @@ final class HomeViewModel: ObservableObject {
         imageDataProvider: ImageDataProvider = ImageDataProvider(),
         portfolioDataService: PortfolioDataService = PortfolioDataService()
     ) {
-        self.coinDataService = CoinDataService(networkManager: networkManager)
-        self.marketDataService = MarketDataService(networkManager: networkManager)
-        self.coinImageService = CoinImageService(networkManager: networkManager, imageDataProvider: imageDataProvider)
-        self.coinDetailsService = CoinDetailsService(networkManager: networkManager)
+        coinDataService = CoinDataService(networkManager: networkManager)
+        marketDataService = MarketDataService(networkManager: networkManager)
+        coinImageService = CoinImageService(networkManager: networkManager, imageDataProvider: imageDataProvider)
+        coinDetailsService = CoinDetailsService(networkManager: networkManager)
         self.portfolioDataService = portfolioDataService
         addSubscribers()
         setupLoadingSubscriber()
@@ -121,7 +121,7 @@ private extension HomeViewModel {
             .store(in: &cancellables)
     }
 
-    private func setupLoadingSubscriber() {
+    func setupLoadingSubscriber() {
         $isLoading
             .flatMap { isLoading -> AnyPublisher<Bool, Never> in
                 Just(isLoading)

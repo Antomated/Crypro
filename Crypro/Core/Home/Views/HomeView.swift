@@ -22,16 +22,16 @@ struct HomeView: View {
                     .ignoresSafeArea()
                     .sheet(isPresented: $showEditPortfolioView,
                            content: {
-                        if let selectedCoin = viewModel.selectedCoin {
-                            EditPortfolioView(singleCoin: selectedCoin,
-                                              portfolioDataService: viewModel.portfolioDataService,
-                                              coinImageService: viewModel.coinImageService)
-                        } else {
-                            EditPortfolioView(allCoins: viewModel.allCoins,
-                                              portfolioDataService: viewModel.portfolioDataService,
-                                              coinImageService: viewModel.coinImageService)
-                        }
-                    })
+                               if let selectedCoin = viewModel.selectedCoin {
+                                   EditPortfolioView(singleCoin: selectedCoin,
+                                                     portfolioDataService: viewModel.portfolioDataService,
+                                                     coinImageService: viewModel.coinImageService)
+                               } else {
+                                   EditPortfolioView(allCoins: viewModel.allCoins,
+                                                     portfolioDataService: viewModel.portfolioDataService,
+                                                     coinImageService: viewModel.coinImageService)
+                               }
+                           })
                 VStack {
                     HeaderView(showPortfolio: $showPortfolio)
                         .padding(.horizontal)
@@ -64,8 +64,8 @@ struct HomeView: View {
                         HomeFooterView(showPortfolio: $showPortfolio,
                                        showEditView: $showEditPortfolioView,
                                        showSettingsView: $showSettingsView)
-                        .zIndex(1)
-                        .shadow(color: .theme.background, radius: 20)
+                            .zIndex(1)
+                            .shadow(color: .theme.background, radius: 20)
                     }
                 }
                 .sheet(isPresented: $showSettingsView, content: {
@@ -209,8 +209,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .rank ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .rank || viewModel.sortOption == .rankDescending
-                             ? Color.theme.green
-                             : Color.theme.secondaryText)
+                ? Color.theme.green
+                : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .rank ? .rankDescending : .rank
@@ -226,8 +226,8 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .holdings ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .holdings || viewModel.sortOption == .holdingsDescending
-                                 ? Color.theme.green
-                                 : Color.theme.secondaryText)
+                    ? Color.theme.green
+                    : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .holdings ? .holdingsDescending : .holdings
@@ -241,14 +241,14 @@ private extension HomeView {
                         .rotationEffect(.radians(viewModel.sortOption == .totalVolume ? 0 : .pi))
                 }
                 .foregroundStyle(viewModel.sortOption == .totalVolume
-                                 || viewModel.sortOption == .totalVolumeDescending
-                                 ? Color.theme.green
-                                 : Color.theme.secondaryText)
+                    || viewModel.sortOption == .totalVolumeDescending
+                    ? Color.theme.green
+                    : Color.theme.secondaryText)
                 .onTapGesture {
                     withAnimation(.default) {
                         viewModel.sortOption = viewModel.sortOption == .totalVolume
-                        ? .totalVolumeDescending
-                        : .totalVolume
+                            ? .totalVolumeDescending
+                            : .totalVolume
                     }
                 }
             }
@@ -260,8 +260,8 @@ private extension HomeView {
                     .rotationEffect(.radians(viewModel.sortOption == .price ? 0 : .pi))
             }
             .foregroundStyle(viewModel.sortOption == .price || viewModel.sortOption == .priceDescending
-                             ? Color.theme.green
-                             : Color.theme.secondaryText)
+                ? Color.theme.green
+                : Color.theme.secondaryText)
             .onTapGesture {
                 withAnimation(.default) {
                     viewModel.sortOption = viewModel.sortOption == .price ? .priceDescending : .price
@@ -298,11 +298,7 @@ private extension HomeView {
         showDetailView.toggle()
     }
 
-    private func showEditView() {
-        selectCoinAndShowEditView(coin: nil)
-    }
-
-    private func selectCoinAndShowEditView(coin: Coin?) {
+    func selectCoinAndShowEditView(coin: Coin?) {
         viewModel.selectedCoin = coin
         showEditPortfolioView = true
     }
@@ -311,6 +307,6 @@ private extension HomeView {
 #Preview {
     NavigationStack {
         HomeView(viewModel: HomeViewModel())
-        .navigationBarHidden(true)
+            .navigationBarHidden(true)
     }
 }

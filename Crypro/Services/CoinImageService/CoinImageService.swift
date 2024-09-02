@@ -37,7 +37,8 @@ extension CoinImageService: CoinImageServiceProtocol {
         if let cachedData = imageCache.object(forKey: imageName) {
             AppLogger.log(tag: .debug, "Image found in cache for coin:", imageName as String)
             imageDataDict[imageName as String] = cachedData as Data
-        } else if let imageData = imageDataProvider.getImageData(imageName: imageName as String, folderName: coinImagesFolder) {
+        } else if let imageData = imageDataProvider.getImageData(imageName: imageName as String,
+                                                                 folderName: coinImagesFolder) {
             AppLogger.log(tag: .debug, "Image found in provider for coin:", imageName as String)
             imageCache.setObject(imageData as NSData, forKey: imageName)
             imageDataDict[imageName as String] = imageData

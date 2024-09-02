@@ -28,7 +28,7 @@ enum SystemImage: String {
 
     func uiImage(withColor color: Color) -> UIImage? {
         let uiColor = UIColor(color)
-        let image = UIImage(systemName: self.rawValue)
+        let image = UIImage(systemName: rawValue)
         return image?.withTintColor(uiColor, renderingMode: .alwaysOriginal)
     }
 
@@ -36,7 +36,7 @@ enum SystemImage: String {
         if let uiImage = uiImage(withColor: color) {
             return Image(uiImage: uiImage)
         } else {
-            return Image(systemName: self.rawValue)
+            return Image(systemName: rawValue)
         }
     }
 }

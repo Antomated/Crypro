@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeStatisticsView: View {
     @Binding var showPortfolio: Bool
     var statistics: [StatisticPair]
-    
+
     var body: some View {
         GeometryReader { geometry in
             HStack {

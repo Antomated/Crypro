@@ -45,7 +45,7 @@ struct LaunchView: View {
 
             if showSlowLoadingMessage {
                 HStack(spacing: 2) {
-                    ForEach(0..<LocalizationKey.longLoadingMessage.localizedString.count, id: \.self) { index in
+                    ForEach(0 ..< LocalizationKey.longLoadingMessage.localizedString.count, id: \.self) { index in
                         let char = Array(LocalizationKey.longLoadingMessage.localizedString)[index]
                         Text(String(char))
                             .font(.chakraPetch(.medium, size: 14))
