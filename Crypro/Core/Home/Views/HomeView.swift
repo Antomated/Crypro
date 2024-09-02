@@ -313,12 +313,7 @@ private extension HomeView {
 
 #Preview {
     NavigationStack {
-        HomeView(viewModel: HomeViewModel(coinImageService: CoinImageService(networkManager: NetworkManager(),
-                                                                             imageDataProvider: ImageDataProvider()),
-                                          coinDataService: CoinDataService(networkManager: NetworkManager()),
-                                          marketDataService: MarketDataService(networkManager: NetworkManager()),
-                                          coinDetailsService: CoinDetailsService(networkManager: NetworkManager()),
-                                          portfolioDataService: PortfolioDataService()))
+        HomeView(viewModel: HomeViewModel())
         .navigationBarHidden(true)
     }
 }

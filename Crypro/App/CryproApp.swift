@@ -10,28 +10,11 @@ import SwiftUI
 @main
 struct CryproApp: App {
     @AppStorage(Constants.selectedThemeKey) private var darkThemeIsOn: Bool = defaultDarkMode
-    @StateObject private var homeViewModel: HomeViewModel
+    @StateObject private var homeViewModel = HomeViewModel()
     @State private var showLaunchView = true
 
     private static var defaultDarkMode: Bool {
         UITraitCollection.current.userInterfaceStyle == .dark
-    }
-
-    init() {
-        let networkManager = NetworkManager()
-        let imageDataProvider = ImageDataProvider()
-        let portfolioDataService = PortfolioDataService()
-        let coinDataService = CoinDataService(networkManager: networkManager)
-        let marketDataService = MarketDataService(networkManager: networkManager)
-        let coinImageService = CoinImageService(networkManager: networkManager, imageDataProvider: imageDataProvider)
-        let coinDetailsService = CoinDetailsService(networkManager: networkManager)
-        _homeViewModel = StateObject(wrappedValue: HomeViewModel(
-            coinImageService: coinImageService,
-            coinDataService: coinDataService,
-            marketDataService: marketDataService,
-            coinDetailsService: coinDetailsService,
-            portfolioDataService: portfolioDataService
-        ))
     }
 
     var body: some Scene {

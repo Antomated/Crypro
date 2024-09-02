@@ -26,16 +26,14 @@ final class HomeViewModel: ObservableObject {
     let coinDetailsService: CoinDetailsServiceProtocol
 
     init(
-        coinImageService: CoinImageServiceProtocol,
-        coinDataService: CoinDataServiceProtocol,
-        marketDataService: MarketDataServiceProtocol,
-        coinDetailsService: CoinDetailsServiceProtocol,
-        portfolioDataService: PortfolioDataServiceProtocol
+        networkManager: NetworkManager = NetworkManager(),
+        imageDataProvider: ImageDataProvider = ImageDataProvider(),
+        portfolioDataService: PortfolioDataService = PortfolioDataService()
     ) {
-        self.coinImageService = coinImageService
-        self.coinDataService = coinDataService
-        self.marketDataService = marketDataService
-        self.coinDetailsService = coinDetailsService
+        self.coinDataService = CoinDataService(networkManager: networkManager)
+        self.marketDataService = MarketDataService(networkManager: networkManager)
+        self.coinImageService = CoinImageService(networkManager: networkManager, imageDataProvider: imageDataProvider)
+        self.coinDetailsService = CoinDetailsService(networkManager: networkManager)
         self.portfolioDataService = portfolioDataService
         addSubscribers()
         setupLoadingSubscriber()
