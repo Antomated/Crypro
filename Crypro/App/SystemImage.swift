@@ -19,10 +19,24 @@ enum SystemImage: String {
     case chevronDown = "chevron.down"
     case goForward = "goforward"
     case xMark = "xmark"
-    case thrash = "trash.circle.fill"
-    case filledPlus = "plus.circle.fill"
+    case thrash = "trash.fill"
+    case plusCircle = "plus.circle.fill"
 
     var image: Image {
         Image(systemName: rawValue)
+    }
+
+    func uiImage(withColor color: Color) -> UIImage? {
+        let uiColor = UIColor(color)
+        let image = UIImage(systemName: self.rawValue)
+        return image?.withTintColor(uiColor, renderingMode: .alwaysOriginal)
+    }
+
+    func image(withColor color: Color) -> Image {
+        if let uiImage = uiImage(withColor: color) {
+            return Image(uiImage: uiImage)
+        } else {
+            return Image(systemName: self.rawValue)
+        }
     }
 }

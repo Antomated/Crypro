@@ -201,6 +201,7 @@ private extension EditPortfolioView {
                 .padding(12)
                 .lineLimit(1)
                 .foregroundStyle(Color.theme.accent)
+                .frame(minWidth: 120)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
                         .strokeBorder(Color.theme.accent)

@@ -119,10 +119,9 @@ private extension HomeView {
                             Button {
                                 selectCoinAndShowEditView(coin: coin)
                             } label: {
-                                SystemImage.filledPlus.image
+                                SystemImage.plusCircle.image(withColor: Color.theme.green)
                                     .tint(Color.theme.background)
                             }
-                            .tint(Color.theme.green)
                         }
                 }
             }
@@ -152,7 +151,6 @@ private extension HomeView {
 
     var allPortfolioCoinsList: some View {
         ScrollViewReader { proxy in
-
             List {
                 ForEach(viewModel.portfolioCoins, id: \.id) { coin in
                     CoinRowView(coin: coin, showHoldingsColumn: true, coinImageService: viewModel.coinImageService)
@@ -166,16 +164,15 @@ private extension HomeView {
                             Button(role: .destructive) {
                                 viewModel.deleteCoin(coin)
                             } label: {
-                                SystemImage.thrash.image
+                                SystemImage.thrash.image(withColor: Color.theme.red)
                                     .tint(Color.theme.background)
                             }
                             Button {
                                 selectCoinAndShowEditView(coin: coin)
                             } label: {
-                                SystemImage.filledPlus.image
+                                SystemImage.plusCircle.image(withColor: Color.theme.green)
                                     .tint(Color.theme.background)
                             }
-                            .tint(Color.theme.green)
                         }
                 }
             }
